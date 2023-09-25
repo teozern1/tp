@@ -46,7 +46,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 <box type="info" seamless>
 
-**Notes about the command format:**<br>
+**Notes about the command format:**
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -172,6 +172,36 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 </box>
 
 ### Archiving data files `[coming in v2.0]`
+
+### Editing a Student's name : `editName` 
+
+Changes the name of the student at the specified INDEX to NEW_NAME. INDEX specified must be within the boundaries of the
+current displayed list.
+
+Format: `editName INDEX NEW_NAME`
+
+Example: `editName 3 Ken Masters`
+
+### Editing a Student's student number: `editStudentNumber`
+
+Changes the student number of the student at the specified INDEX to NEW_NUMBER.
+INDEX must be within the boundaries on the current displayed list.
+
+Format: 'editStudentNumber INDEX NEW_NUMBER'
+
+Example: 'editStudentNumber 2 A0203032J'
+
+### Editing a Student's details: `editDetail`
+
+Allows the user to change less important details such as the telegram handle and
+email to new values. For this version the details are limited to `/TELEGRAM` and `/EMAIL`.
+
+Format: `editDetail INDEX /DETAIL NEW_DETAIL`
+
+Example: `editDetail 1 /TELEGRAM @johannpetrovich`
+
+
+
 
 _Details coming soon ..._
 
