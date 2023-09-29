@@ -29,14 +29,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Yuan Tianci Jackson
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jacksonyuan256.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/jacksonyuan256)] [[portfolio](team/jackson.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Module Management & Code Quality
 
 ### Jean Doe
 
