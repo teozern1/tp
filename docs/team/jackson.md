@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Jackson 's Project Portfolio Page
+title: Jackson's Project Portfolio Page
 ---
 
 ### Project: TASsistant
@@ -33,3 +33,4 @@ Given below are my contributions to the project.
 
 * **Community**:
     * To be added
+
