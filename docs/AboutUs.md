@@ -30,14 +30,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Student Management Features
 
-### Johnny Doe
+### Yuan Tianci Jackson
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jacksonyuan256.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/jacksonyuan256)] [[portfolio](team/jackson.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Module Management & Code Quality
 
 ### Alvis Ng
 
