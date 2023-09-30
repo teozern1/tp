@@ -18,7 +18,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/cbj252)]
 [[portfolio](team/cbj252.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Team Lead
 
 ### Teo Zern
 
