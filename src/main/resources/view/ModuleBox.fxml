@@ -7,12 +7,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
 <HBox id="modulePane" fx:id="modulePane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <VBox alignment="CENTER_LEFT" minHeight="105" >
-      <padding>
-        <Insets top="5" right="5" bottom="5" left="15" />
-      </padding>
-      <Label text="CS2100" />
+    <VBox alignment="CENTER_LEFT">
+      <Text fx:id="modulesTaken" />
     </VBox>
 </HBox>

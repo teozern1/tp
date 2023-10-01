@@ -125,12 +125,11 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
+        ModuleBox moduleBox = new ModuleBox();
+        moduleBoxPlaceholder.getChildren().add(moduleBox.getRoot());
+
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-
-        moduleBox = new ModuleBox();
-        // TOOD: Figure out how to add a box for Modules
-        // moduleBoxPlaceholder.getChildren().add(moduleBox.getRoot());
     }
 
     /**
