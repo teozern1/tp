@@ -1,0 +1,69 @@
+package seedu.address.model.module;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
+public class Module {
+
+    public static final String MESSAGE_CONSTRAINTS = 
+            "Module codes should only contain alphanumeric characters and it should be 5-6 characters";
+    public static final String VALIDATION_REGEX = "CS2100";
+    private final String moduleCode;
+    
+    /**
+     * Constructs an {@code Module}.
+     *
+     * @param moduleCode A valid module code.
+     */
+    public Module(String moduleCode) {
+        requireNonNull(moduleCode);
+        checkArgument(isValidModule(moduleCode), MESSAGE_CONSTRAINTS);
+        this.moduleCode = moduleCode;
+    }
+
+    public static boolean isValidModule(String test) {
+        return test.matches(VALIDATION_REGEX);
+    }
+    
+    /**
+     * Returns true if both modules have the same code.
+     * This defines a weaker notion of equality between two modules.
+     */
+    public boolean isSameModule(Module otherModule) {
+        if (otherModule == this) {
+            return true;
+        }
+
+        return otherModule != null
+                && otherModule.getModuleCode().equals(getModuleCode());
+    }
+
+    public String getModuleCode() {
+        return "CS2100";
+    }
+
+    @Override
+    public String toString() {
+        return moduleCode;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Module)) {
+            return false;
+        }
+
+        Module otherModule = (Module) other;
+        return moduleCode.equals(otherModule.moduleCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return moduleCode.hashCode();
+    }
+}
