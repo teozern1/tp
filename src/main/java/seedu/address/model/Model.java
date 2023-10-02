@@ -91,5 +91,7 @@ public interface Model {
 
     void deleteModule(Module module);
 
+    boolean hasModule(Module module);
+
     ObservableList<Module> getModuleList();
 }

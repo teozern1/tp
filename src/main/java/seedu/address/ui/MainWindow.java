@@ -125,7 +125,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        ModuleBox moduleBox = new ModuleBox();
+        ModuleBox moduleBox = new ModuleBox(logic.getModuleList());
         moduleBoxPlaceholder.getChildren().add(moduleBox.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -194,6 +194,9 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
+
+            ModuleBox moduleBox = new ModuleBox(logic.getModuleList());
+            moduleBoxPlaceholder.getChildren().add(moduleBox.getRoot());
 
             return commandResult;
         } catch (CommandException | ParseException e) {

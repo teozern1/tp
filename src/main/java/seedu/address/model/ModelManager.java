@@ -135,12 +135,18 @@ public class ModelManager implements Model {
 
     @Override
     public void addModule(Module module) {
-        modules.add(module);
+        addressBook.addModule(module);
     }
 
     @Override
     public void deleteModule(Module module) {
+        addressBook.removeModule(module);
+    }
 
+    @Override
+    public boolean hasModule(Module module) {
+        requireNonNull(module);
+        return addressBook.hasModule(module);
     }
 
     /**

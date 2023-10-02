@@ -108,6 +108,22 @@ public class AddressBook implements ReadOnlyAddressBook {
         modules.add(module);
     }
 
+    /**
+     * Delete a module to the address book.
+     * The module must already exist in the address book.
+     */
+    public void removeModule(Module module) {
+        modules.remove(module);
+    }
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    public boolean hasModule(Module module) {
+        requireNonNull(module);
+        return modules.contains(module);
+    }
+
     //// util methods
 
     @Override

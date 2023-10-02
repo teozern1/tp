@@ -2,12 +2,21 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
+
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 
 public class AddModuleCommand extends Command {
 
     public static final String COMMAND_WORD = "addModule";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a module to the list\n"
+            + "Parameters: "
+            + PREFIX_MODULE + "MODULE";
+
+    public static final String MESSAGE_SUCCESS = "New module added: %s";
 
     public static final String MESSAGE_DUPLICATE_MODULE= "This module already exists in the address book";
 
@@ -22,11 +31,14 @@ public class AddModuleCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        model.addModule(toAdd);
+        if (model.hasModule(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_MODULE);
+        }
 
-        return new CommandResult("SUCCESS!");
+        model.addModule(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 }

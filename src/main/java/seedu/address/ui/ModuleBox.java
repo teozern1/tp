@@ -1,9 +1,10 @@
 package seedu.address.ui;
 
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
@@ -15,6 +16,8 @@ public class ModuleBox extends UiPart<Region> {
 
     private static final String FXML = "ModuleBox.fxml";
 
+    private List<Module> moduleList;
+
     public Module module;
 
     @FXML
@@ -23,9 +26,19 @@ public class ModuleBox extends UiPart<Region> {
     @FXML
     private Text modulesTaken;
     
-    public ModuleBox() {
+    public ModuleBox(ObservableList<Module> modules) {
         super(FXML);
-        modulesTaken.setText("Modules taken: CS2100");
+        this.moduleList = modules;
+        // modulesTaken.setText("Modules taken: ");
+        setDisplayText();
         modulesTaken.setStroke(Color.WHITE);
+    }
+
+    public void setDisplayText() {
+        String toBeDisplayed = "Modules taken: ";
+        for (Module module : moduleList) {
+            toBeDisplayed += (module + " ");
+        }
+        modulesTaken.setText(toBeDisplayed);
     }
 }
