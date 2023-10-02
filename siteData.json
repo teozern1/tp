@@ -7,10 +7,10 @@
       "headings": {
         "about-us": "About Us",
         "project-team": "Project team",
-        "john-doe": "John Doe",
+        "chua-bing-jian": "Chua Bing Jian",
         "teo-zern": "Teo Zern",
-        "johnny-doe": "Johnny Doe",
-        "jean-doe": "Jean Doe",
+        "yuan-tianci-jackson": "Yuan Tianci Jackson",
+        "alvis-ng": "Alvis Ng",
         "james-doe": "James Doe"
       },
       "headingKeywords": {}
@@ -139,10 +139,48 @@
       "headingKeywords": {}
     },
     {
+      "src": "team/alvisng.md",
+      "title": "John Doe's Project Portfolio Page",
+      "headings": {
+        "project-island-showdown": "Project: Island Showdown"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/cbj252.md",
+      "title": "Bing Jian's Project Portfolio Page",
+      "headings": {
+        "project-tassistant": "Project: TASsistant"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/jackson.md",
+      "headings": {},
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/jacksonyuan256.md",
+      "title": "Jackson's Project Portfolio Page",
+      "headings": {
+        "project-tassistant": "Project: TASsistant"
+      },
+      "headingKeywords": {}
+    },
+    {
       "src": "team/johndoe.md",
       "title": "John Doe's Project Portfolio Page",
       "headings": {
         "project-addressbook-level-3": "Project: AddressBook Level 3"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/teozern1.md",
+      "headings": {
+        "teozern1-s-project-portfolio-page": "teozern1's Project Portfolio Page",
+        "project-tassistant": "Project: TASsistant",
+        "documentation": "Documentation:"
       },
       "headingKeywords": {}
     },
