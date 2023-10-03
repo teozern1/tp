@@ -74,7 +74,6 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-
 ### Adding a person: `add`
 
 Adds a person to the address book.
@@ -96,24 +95,6 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -126,7 +107,6 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
@@ -183,10 +163,55 @@ Format: `editDetail INDEX /DETAIL NEW_DETAIL`
 
 Example: `editDetail 1 /TELEGRAM @johannpetrovich`
 
+### Adding a user to a given module: `addToModule`
 
+Adds the user at the specified INDEX displayed on the GUI to a given module. 
+The index refers to the index number shown in the displayed user list. 
+Users are added with “none” status. The index must be a positive integer.
+Will give an error message if the module given has not been made.
 
+Format: `addToModule INDEX MODULE`
 
-_Details coming soon ..._
+Example: `addToModule 2 CS2103T`
+
+### Removes a user from a given module: `removeFromModule`
+
+Removes the user at the specified INDEX displayed on the GUI from a given module. 
+The index refers to the index number shown in the displayed user list. 
+Users are added with “none” status. The index must be a positive integer.
+Will give an error message if the module given has not been made or if the user is not part of the given module.
+
+Format: `removeFromModule INDEX MODULE`
+
+Example: `removeFromModule 2 CS2103T`
+
+### Adds a tutorial to a given module: `addTutorial` 
+Adds a tutorial with a specific tutorial name to a given module. 
+Different modules can have different tutorials with the same name.
+Will give an error message if the module does not exist or a tutorial with the same name 
+has already been made for the module.
+
+Format: `addTutorial TUTORIALNAME MODULE`
+
+Example: `addTutorial c12 CS2103T`
+
+### Removes a tutorial to a given module: `removeTutorial`
+Removes a tutorial with a specific tutorial name to a given module.
+Will give an error message if the module given has not been made, or if the tutorial does not exist.
+
+Format: `removeTutorial TUTORIALNAME MODULE`
+
+Example: `removeTutorial c12 CS2103T`
+
+### Gives a specific user a given status: `changeStatus`
+Changes the status of the user at the specified INDEX for a given module, 
+whether they are a professor, teaching assistant, user or none, a placeholder value. 
+The index refers to the index number shown in the displayed user list. It must be a positive integer. 
+The letter represents the status to change the user to: “p” for professor, “t” for TA, “s” for student and “n” for none.
+
+Format: `changeStatus INDEX MODULE (LETTER: p/t/s/n)`
+
+Example: `changeStatus 2 CS2103T t`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -211,6 +236,10 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
+**addToModule** | `addToModule INDEX MODULE` <br> e.g., `addToModule 2 CS2103T`
+**removeFromModule** | `removeFromModule INDEX MODULE` <br> e.g., `removeFromModule 2 CS2103T`
+**addTutorial** | `addTutorial TUTORIALNAME MODULE` <br> e.g., `addTutorial c12 CS2103T`
+**removeTutorial** | `removeTutorial TUTORIALNAME MODULE` <br> e.g., `removeTutorial c12 CS2103T`
+**changeStatus** | `changeStatus INDEX MODULE (LETTER: p/t/s/n)` <br> e.g., `changeStatus 2 CS2103T t`
