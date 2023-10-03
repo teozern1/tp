@@ -5,12 +5,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class Module {
 
-    public static final String MESSAGE_CONSTRAINTS = 
+    public static final String MESSAGE_CONSTRAINTS =
             "Module codes should only contain alphanumeric characters and it should be 5-6 characters";
     public static final String VALIDATION_REGEX = "[A-Z0-9]*";
     public static final int VALIDATION_LENGTH = 5;
     private final String moduleCode;
-    
+
     /**
      * Constructs an {@code Module}.
      *
@@ -26,7 +26,7 @@ public class Module {
     public static boolean isValidModule(String test) {
         return test.matches(VALIDATION_REGEX) && test.length() >= VALIDATION_LENGTH;
     }
-    
+
     /**
      * Returns true if both modules have the same code.
      * This defines a weaker notion of equality between two modules.

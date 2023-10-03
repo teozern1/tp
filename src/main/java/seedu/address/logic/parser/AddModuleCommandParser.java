@@ -11,8 +11,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 import seedu.address.model.module.Module;
 
-import java.util.stream.Stream;
-
 public class AddModuleCommandParser implements Parser<AddModuleCommand> {
 
     /**

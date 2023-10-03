@@ -25,7 +25,7 @@ public class ModuleBox extends UiPart<Region> {
 
     @FXML
     private Text modulesTaken;
-    
+
     public ModuleBox(ObservableList<Module> modules) {
         super(FXML);
         this.moduleList = modules;
