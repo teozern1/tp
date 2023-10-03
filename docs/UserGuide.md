@@ -136,7 +136,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 ### Archiving data files `[coming in v2.0]`
 
-### Editing a Student's name : `editName` 
+### Editing a Student's name : `editName`
 
 Changes the name of the student at the specified INDEX to NEW_NAME. INDEX specified must be within the boundaries of the
 current displayed list.
@@ -165,8 +165,8 @@ Example: `editDetail 1 /TELEGRAM @johannpetrovich`
 
 ### Adding a user to a given module: `addToModule`
 
-Adds the user at the specified INDEX displayed on the GUI to a given module. 
-The index refers to the index number shown in the displayed user list. 
+Adds the user at the specified INDEX displayed on the GUI to a given module.
+The index refers to the index number shown in the displayed user list.
 Users are added with “none” status. The index must be a positive integer.
 Will give an error message if the module given has not been made.
 
@@ -176,8 +176,8 @@ Example: `addToModule 2 CS2103T`
 
 ### Removes a user from a given module: `removeFromModule`
 
-Removes the user at the specified INDEX displayed on the GUI from a given module. 
-The index refers to the index number shown in the displayed user list. 
+Removes the user at the specified INDEX displayed on the GUI from a given module.
+The index refers to the index number shown in the displayed user list.
 Users are added with “none” status. The index must be a positive integer.
 Will give an error message if the module given has not been made or if the user is not part of the given module.
 
@@ -185,10 +185,10 @@ Format: `removeFromModule INDEX MODULE`
 
 Example: `removeFromModule 2 CS2103T`
 
-### Adds a tutorial to a given module: `addTutorial` 
-Adds a tutorial with a specific tutorial name to a given module. 
+### Adds a tutorial to a given module: `addTutorial`
+Adds a tutorial with a specific tutorial name to a given module.
 Different modules can have different tutorials with the same name.
-Will give an error message if the module does not exist or a tutorial with the same name 
+Will give an error message if the module does not exist or a tutorial with the same name
 has already been made for the module.
 
 Format: `addTutorial TUTORIALNAME MODULE`
@@ -204,9 +204,9 @@ Format: `removeTutorial TUTORIALNAME MODULE`
 Example: `removeTutorial c12 CS2103T`
 
 ### Gives a specific user a given status: `changeStatus`
-Changes the status of the user at the specified INDEX for a given module, 
-whether they are a professor, teaching assistant, user or none, a placeholder value. 
-The index refers to the index number shown in the displayed user list. It must be a positive integer. 
+Changes the status of the user at the specified INDEX for a given module,
+whether they are a professor, teaching assistant, user or none, a placeholder value.
+The index refers to the index number shown in the displayed user list. It must be a positive integer.
 The letter represents the status to change the user to: “p” for professor, “t” for TA, “s” for student and “n” for none.
 
 Format: `changeStatus INDEX MODULE (LETTER: p/t/s/n)`
