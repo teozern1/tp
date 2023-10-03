@@ -1,7 +1,9 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
+
+# About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
@@ -9,25 +11,25 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Chua Bing Jian
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/cbj252.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/cbj252)]
+[[portfolio](team/cbj252.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Team Lead
 
-### Jane Doe
+### Teo Zern
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/teozern1.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/teozern1)]
+[[portfolio](team/teozern1.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Student Management Features
 
 ### Yuan Tianci Jackson
 
@@ -38,15 +40,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Module Management & Code Quality
 
-### Jean Doe
+### Alvis Ng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/supermii2.jpg" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/supermii2)]
+[[portfolio](team/supermii2.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Documentation & Testing
 
 ### James Doe
 
