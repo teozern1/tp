@@ -5,11 +5,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 
 import java.util.List;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.module.Module;
 
+/**
+ * Deletes a module identified using its index from the address book.
+ */
 public class DeleteModuleCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteModule";

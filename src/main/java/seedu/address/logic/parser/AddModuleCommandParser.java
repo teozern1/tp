@@ -1,16 +1,16 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 
 import seedu.address.logic.commands.AddModuleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
 import seedu.address.model.module.Module;
 
+/**
+ * Parses input arguments and creates a new AddModuleCommand object
+ */
 public class AddModuleCommandParser implements Parser<AddModuleCommand> {
 
     /**

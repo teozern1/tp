@@ -6,10 +6,15 @@ import java.util.Iterator;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import seedu.address.model.module.exceptions.DuplicateModuleException;
 import seedu.address.model.module.exceptions.ModuleNotFoundException;
 
+/**
+ * A list of modules that enforces uniqueness between its elements and does not allow nulls.
+ * Supports a minimal set of list operations.
+ *
+ * @see Module#isSameModule(Module)
+ */
 public class UniqueModuleList implements Iterable<Module> {
 
     private ObservableList<Module> internalList = FXCollections.observableArrayList();
@@ -52,7 +57,7 @@ public class UniqueModuleList implements Iterable<Module> {
         return internalUnmodifiableList;
     }
 
-     @Override
+    @Override
     public Iterator<Module> iterator() {
         return internalList.iterator();
     }
