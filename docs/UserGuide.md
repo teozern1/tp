@@ -108,6 +108,21 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 
+### Search : `search`
+
+Lists out all students with the given condition.
+
+Format: `search CONDITION1, CONDITION2, …`
+
+* Condition is given in the format keyword: value.
+* Accepted condition keywords are module, classNum, and studentName.
+* Unrecognised keywords cause this method to fail.
+
+Examples:
+* `search module: CS2103T` returns all students in the module CS2103T
+* `search classNum: T03` returns all students in the class T03
+* `search studentName:` John Doe' returns all students with the name John Doe
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -250,19 +265,20 @@ Example: `changeStatus 2 CS2103T t`
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
-**addModule** | `addModule m/MODULE_NAME` <br> e.g., `addModule m/CS2100`
-**deleteModule** | `deleteModule INDEX` <br> e.g., `deleteModule 1`
-**addToModule** | `addToModule INDEX MODULE` <br> e.g., `addToModule 2 CS2103T`
-**removeFromModule** | `removeFromModule INDEX MODULE` <br> e.g., `removeFromModule 2 CS2103T`
-**addTutorial** | `addTutorial TUTORIALNAME MODULE` <br> e.g., `addTutorial c12 CS2103T`
-**removeTutorial** | `removeTutorial TUTORIALNAME MODULE` <br> e.g., `removeTutorial c12 CS2103T`
-**changeStatus** | `changeStatus INDEX MODULE (LETTER: p/t/s/n)` <br> e.g., `changeStatus 2 CS2103T t`
+| Action               | Format, Examples                                                                                                                                                      |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**              | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**            | `clear`                                                                                                                                                               |
+| **Delete**           | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Edit**             | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Find**             | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
+| **List**             | `list`                                                                                                                                                                |
+| **Search**           | `search CONDITION1, CONDITION2`<br> e.g., `search module: CS2103T`                                                                                                    |
+| **Help**             | `help`                                                                                                                                                                |
+| **addModule**        | `addModule m/MODULE_NAME` <br> e.g., `addModule m/CS2100`                                                                                                             |
+| **deleteModule**     | `deleteModule INDEX` <br> e.g., `deleteModule 1`                                                                                                                      |
+| **addToModule**      | `addToModule INDEX MODULE` <br> e.g., `addToModule 2 CS2103T`                                                                                                         |
+| **removeFromModule** | `removeFromModule INDEX MODULE` <br> e.g., `removeFromModule 2 CS2103T`                                                                                               |
+| **addTutorial**      | `addTutorial TUTORIALNAME MODULE` <br> e.g., `addTutorial c12 CS2103T`                                                                                                |
+| **removeTutorial**   | `removeTutorial TUTORIALNAME MODULE` <br> e.g., `removeTutorial c12 CS2103T`                                                                                          |
+| **changeStatus**     | `changeStatus INDEX MODULE (LETTER: p/t/s/n)` <br> e.g., `changeStatus 2 CS2103T t`                                                                                   |
