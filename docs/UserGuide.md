@@ -1,12 +1,15 @@
 ---
-layout: page
-title: User Guide
+  layout: default.md
+  title: "User Guide"
+  pageNav: 3
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+# AB-3 User Guide
 
-* Table of Contents
-{:toc}
+AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+
+<!-- * Table of Contents -->
+<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -41,9 +44,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
+<box type="info" seamless>
 
-**:information_source: Notes about the command format:**<br>
+**Notes about the command format:**
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -61,7 +64,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
+</box>
 
 ### Viewing help : `help`
 
@@ -71,16 +74,16 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-
 ### Adding a person: `add`
 
 Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+<box type="tip" seamless>
+
+**Tip:** A person can have any number of tags (including 0)
+</box>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -91,41 +94,6 @@ Examples:
 Shows a list of all persons in the address book.
 
 Format: `list`
-
-### Editing a person : `edit`
-
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
 
@@ -139,7 +107,6 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
@@ -161,9 +128,11 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
-</div>
+<box type="warning" seamless>
+
+**Caution:**
+If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+</box>
 
 ### Archiving data files `[coming in v2.0]`
 
@@ -187,6 +156,83 @@ Format: `deleteModule INDEX`
 
 Example: `deleteModule 1`
 
+### Editing a Student's name : `editName` 
+
+Changes the name of the student at the specified INDEX to NEW_NAME. INDEX specified must be within the boundaries of the
+current displayed list.
+
+Format: `editName INDEX NEW_NAME`
+
+Example: `editName 3 Ken Masters`
+
+### Editing a Student's student number: `editStudentNumber`
+
+Changes the student number of the student at the specified INDEX to NEW_NUMBER.
+INDEX must be within the boundaries on the current displayed list.
+
+Format: `editStudentNumber INDEX NEW_NUMBER`
+
+Example: `editStudentNumber 2 A0203032J`
+
+### Editing a Student's details: `editDetail`
+
+Allows the user to change less important details such as the telegram handle and
+email to new values. For this version the details are limited to `/TELEGRAM` and `/EMAIL`.
+
+Format: `editDetail INDEX /DETAIL NEW_DETAIL`
+
+Example: `editDetail 1 /TELEGRAM @johannpetrovich`
+
+### Adding a user to a given module: `addToModule`
+
+Adds the user at the specified INDEX displayed on the GUI to a given module. 
+The index refers to the index number shown in the displayed user list. 
+Users are added with “none” status. The index must be a positive integer.
+Will give an error message if the module given has not been made.
+
+Format: `addToModule INDEX MODULE`
+
+Example: `addToModule 2 CS2103T`
+
+### Removes a user from a given module: `removeFromModule`
+
+Removes the user at the specified INDEX displayed on the GUI from a given module. 
+The index refers to the index number shown in the displayed user list. 
+Users are added with “none” status. The index must be a positive integer.
+Will give an error message if the module given has not been made or if the user is not part of the given module.
+
+Format: `removeFromModule INDEX MODULE`
+
+Example: `removeFromModule 2 CS2103T`
+
+### Adds a tutorial to a given module: `addTutorial` 
+Adds a tutorial with a specific tutorial name to a given module. 
+Different modules can have different tutorials with the same name.
+Will give an error message if the module does not exist or a tutorial with the same name 
+has already been made for the module.
+
+Format: `addTutorial TUTORIALNAME MODULE`
+
+Example: `addTutorial c12 CS2103T`
+
+### Removes a tutorial to a given module: `removeTutorial`
+Removes a tutorial with a specific tutorial name to a given module.
+Will give an error message if the module given has not been made, or if the tutorial does not exist.
+
+Format: `removeTutorial TUTORIALNAME MODULE`
+
+Example: `removeTutorial c12 CS2103T`
+
+### Gives a specific user a given status: `changeStatus`
+Changes the status of the user at the specified INDEX for a given module, 
+whether they are a professor, teaching assistant, user or none, a placeholder value. 
+The index refers to the index number shown in the displayed user list. It must be a positive integer. 
+The letter represents the status to change the user to: “p” for professor, “t” for TA, “s” for student and “n” for none.
+
+Format: `changeStatus INDEX MODULE (LETTER: p/t/s/n)`
+
+Example: `changeStatus 2 CS2103T t`
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -204,10 +250,10 @@ Example: `deleteModule 1`
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
+Action     | Format, Examples
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
@@ -215,3 +261,8 @@ Action | Format, Examples
 **Help** | `help`
 **addModule** | `addModule m/MODULE_NAME` <br> e.g., `addModule m/CS2100`
 **deleteModule** | `deleteModule INDEX` <br> e.g., `deleteModule 1`
+**addToModule** | `addToModule INDEX MODULE` <br> e.g., `addToModule 2 CS2103T`
+**removeFromModule** | `removeFromModule INDEX MODULE` <br> e.g., `removeFromModule 2 CS2103T`
+**addTutorial** | `addTutorial TUTORIALNAME MODULE` <br> e.g., `addTutorial c12 CS2103T`
+**removeTutorial** | `removeTutorial TUTORIALNAME MODULE` <br> e.g., `removeTutorial c12 CS2103T`
+**changeStatus** | `changeStatus INDEX MODULE (LETTER: p/t/s/n)` <br> e.g., `changeStatus 2 CS2103T t`
