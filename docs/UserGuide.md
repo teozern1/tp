@@ -167,7 +167,25 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 ### Archiving data files `[coming in v2.0]`
 
-_Details coming soon ..._
+### Adds a module to the addressBook: `addModule`
+Adds the module to the addressBook and is displayed on the GUI.
+The module name must consist of only alphanumeric characters, no shorter than 5 characters.
+Will give an error message if the module already exists in the addressBook,
+further prompts are given for incorrect inputs.
+
+Format: `addModule m/MODULE_NAME`
+
+Example: `addModule m/CS2100`
+
+### Deletes a module from the addressBook: `deleteModule`
+Deletes the module from the addressBook and the GUI will change to reflect this.
+The index refers to the position of the module displayed on the GUI.
+Will give an error message if the module does not exist in the addressBook,
+further prompts are given for incorrect inputs.
+
+Format: `deleteModule INDEX`
+
+Example: `deleteModule 1`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -195,3 +213,5 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**addModule** | `addModule m/MODULE_NAME` <br> e.g., `addModule m/CS2100`
+**deleteModule** | `deleteModule INDEX` <br> e.g., `deleteModule 1`
