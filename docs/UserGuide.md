@@ -1,10 +1,10 @@
 ---
   layout: default.md
-  title: "User Guide"
-  pageNav: 3
+    title: "User Guide"
+    pageNav: 3
 ---
 
-# AB-3 User Guide
+# TASsistant User Guide
 
 TASsistant is a desktop app for Teaching Assistants (TAs) in NUS to track information about the students and professors
 involved in tutoring. It is optimised for users that have experience with a Command Line Interface (CLI) and aims to be
@@ -28,13 +28,13 @@ able to handle contact organisation faster than GUI apps if the user can type qu
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list` : Lists all contacts.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+    * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
+    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -62,7 +62,7 @@ able to handle contact organisation faster than GUI apps if the user can type qu
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
+  </box>
 
 ### Viewing help : `help`
 
@@ -209,8 +209,8 @@ Example: `addToModule 2 CS2103T`
 
 ### Removes a user from a given module: `removeFromModule`
 
-Removes the user at the specified INDEX displayed on the GUI from a given module. 
-The index refers to the index number shown in the displayed user list. 
+Removes the user at the specified INDEX displayed on the GUI from a given module.
+The index refers to the index number shown in the displayed user list.
 Users are added with “none” status. The index must be a positive integer.
 Will give an error message if the module given has not been made or if the user is not part of the given module.
 
@@ -218,8 +218,8 @@ Format: `removeFromModule INDEX MODULE`
 
 Example: `removeFromModule 2 CS2103T`
 
-### Adds a tutorial to a given module: `addTutorial` 
-Adds a tutorial with a specific tutorial name to a given module. 
+### Adds a tutorial to a given module: `addTutorial`
+Adds a tutorial with a specific tutorial name to a given module.
 Different modules can have different tutorials with the same name.
 Will give an error message if the module does not exist or a tutorial with the same name
 has already been made for the module.
@@ -228,7 +228,7 @@ Format: `addTutorial TUTORIALNAME MODULE`
 
 Example: `addTutorial c12 CS2103T`
 
-### Removes a tutorial to a given module: `removeTutorial`
+### Removes a tutorial from a given module: `removeTutorial`
 Removes a tutorial with a specific tutorial name to a given module.
 Will give an error message if the module given has not been made, or if the tutorial does not exist.
 
@@ -237,14 +237,49 @@ Format: `removeTutorial TUTORIALNAME MODULE`
 Example: `removeTutorial c12 CS2103T`
 
 ### Gives a specific user a given status: `changeStatus`
-Changes the status of the user at the specified INDEX for a given module, 
-whether they are a professor, teaching assistant, user or none, a placeholder value. 
+Changes the status of the user at the specified INDEX for a given module,
+whether they are a professor, teaching assistant, user or none, a placeholder value.
 The index refers to the index number shown in the displayed user list. It must be a positive integer.
 The letter represents the status to change the user to: “p” for professor, “t” for TA, “s” for student and “n” for none.
 
 Format: `changeStatus INDEX MODULE (LETTER: p/t/s/n)`
 
 Example: `changeStatus 2 CS2103T t`
+
+### Adds a student to current Tutorial: `addStudent`
+Add a new student to the current tutorial’s student list
+Fails if the student is null.
+Fails and gives an error message if the student already has a tutorial.
+
+Format: `addStudent STUDENT_NUMBER`
+
+Example: `addStudent A0203032J`
+
+### Removes a student from current Tutorial: `removeStudent`
+Remove a new student to the current tutorial’s student list.
+Fails if the student is null.
+Fails if the student is not in the list.
+
+Format: `removeStudent STUDENT_NUMBER`
+
+Example: `removeStudent A0203032J`
+
+### Edit the name of the current Tutorial: `editName`
+Edit the name of the current Tutorial.
+Fails if NEW_NAME is in invalid format.
+
+Format: `editName NEW_NAME`
+
+Example: `editName T12`
+
+### Edit the time of the current Tutorial: `editTime`
+Will replace the old time with the new time.
+Will be assigned to field “time” if it is not initialised.
+Fails if NEW_TIME is in invalid format.
+
+Format: `editTime NEW_TIME`
+
+Example: `editTime Wed`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -273,3 +308,7 @@ Example: `changeStatus 2 CS2103T t`
 | **addTutorial**      | `addTutorial TUTORIALNAME MODULE` <br> e.g., `addTutorial c12 CS2103T`                                                                                                |
 | **removeTutorial**   | `removeTutorial TUTORIALNAME MODULE` <br> e.g., `removeTutorial c12 CS2103T`                                                                                          |
 | **changeStatus**     | `changeStatus INDEX MODULE (LETTER: p/t/s/n)` <br> e.g., `changeStatus 2 CS2103T t`                                                                                   |
+| **addTutorial**      | `addTutorial TUTORIALNAME MODULE` <br> e.g., `addTutorial c12 CS2103T`                                                                                                |
+| **removeStudent**    | `removeStudent STUDENT_NUMBER` <br> e.g., `removeStudent c12 CS2103T`                                                                                                 |
+| **editName**         | `editName NEW_NAME` <br> e.g., `editName T12`                                                                                                                         |
+| **editName**         | `editTime NEW_TIME` <br> e.g., `editTime Wed`                                                                                                                         |
