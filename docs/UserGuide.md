@@ -6,7 +6,9 @@
 
 # AB-3 User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+TASsistant is a desktop app for Teaching Assistants (TAs) in NUS to track information about the students and professors
+involved in tutoring. It is optimised for users that have experience with a Command Line Interface (CLI) and aims to be
+able to handle contact organisation faster than GUI apps if the user can type quickly.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,20 +19,16 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `TASsistant.jar` from [here]().
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your TASsistant.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TASsistant.jar` command to run the application.<br>
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
-
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -76,7 +74,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to TASsistant.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -91,13 +89,13 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in TASsistant.
 
 Format: `list`
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from TASsistant.
 
 Format: `delete INDEX`
 
@@ -106,7 +104,7 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd person in TASsistant.
 
 ### Search : `search`
 
@@ -125,7 +123,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from TASsistant.
 
 Format: `clear`
 
@@ -137,41 +135,41 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TASsistant data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+TASsistant data are saved automatically as a JSON file `[JAR file location]/data/TASsistant.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, TASsistant will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
 
-### Adds a module to the addressBook: `addModule`
-Adds the module to the addressBook and is displayed on the GUI.
+### Adds a module to TASsistant: `addModule`
+Adds the module to TASsistant, displaying it on the GUI.
 The module name must consist of only alphanumeric characters, no shorter than 5 characters.
-Will give an error message if the module already exists in the addressBook,
+Will give an error message if the module already exists in TASsistant,
 further prompts are given for incorrect inputs.
 
 Format: `addModule m/MODULE_NAME`
 
 Example: `addModule m/CS2100`
 
-### Deletes a module from the addressBook: `deleteModule`
-Deletes the module from the addressBook and the GUI will change to reflect this.
+### Deletes a module from TASsistant: `deleteModule`
+Deletes the module from TASsistant and the GUI will change to reflect this.
 The index refers to the position of the module displayed on the GUI.
-Will give an error message if the module does not exist in the addressBook,
+Will give an error message if the module does not exist in TASsistant,
 further prompts are given for incorrect inputs.
 
 Format: `deleteModule INDEX`
 
 Example: `deleteModule 1`
 
-### Editing a Student's name : `editName` 
+### Editing a Student's name : `editName`
 
 Changes the name of the student at the specified INDEX to NEW_NAME. INDEX specified must be within the boundaries of the
 current displayed list.
@@ -200,8 +198,8 @@ Example: `editDetail 1 /TELEGRAM @johannpetrovich`
 
 ### Adding a user to a given module: `addToModule`
 
-Adds the user at the specified INDEX displayed on the GUI to a given module. 
-The index refers to the index number shown in the displayed user list. 
+Adds the user at the specified INDEX displayed on the GUI to a given module.
+The index refers to the index number shown in the displayed user list.
 Users are added with “none” status. The index must be a positive integer.
 Will give an error message if the module given has not been made.
 
@@ -223,7 +221,7 @@ Example: `removeFromModule 2 CS2103T`
 ### Adds a tutorial to a given module: `addTutorial` 
 Adds a tutorial with a specific tutorial name to a given module. 
 Different modules can have different tutorials with the same name.
-Will give an error message if the module does not exist or a tutorial with the same name 
+Will give an error message if the module does not exist or a tutorial with the same name
 has already been made for the module.
 
 Format: `addTutorial TUTORIALNAME MODULE`
@@ -241,7 +239,7 @@ Example: `removeTutorial c12 CS2103T`
 ### Gives a specific user a given status: `changeStatus`
 Changes the status of the user at the specified INDEX for a given module, 
 whether they are a professor, teaching assistant, user or none, a placeholder value. 
-The index refers to the index number shown in the displayed user list. It must be a positive integer. 
+The index refers to the index number shown in the displayed user list. It must be a positive integer.
 The letter represents the status to change the user to: “p” for professor, “t” for TA, “s” for student and “n” for none.
 
 Format: `changeStatus INDEX MODULE (LETTER: p/t/s/n)`
@@ -250,16 +248,9 @@ Example: `changeStatus 2 CS2103T t`
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
-
---------------------------------------------------------------------------------------------------------------------
-
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. To resolve this, delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
