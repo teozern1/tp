@@ -246,40 +246,40 @@ Format: `changeStatus INDEX MODULE (LETTER: p/t/s/n)`
 
 Example: `changeStatus 2 CS2103T t`
 
-### Adds a student to current Tutorial: `addStudent`
-Add a new student to the current tutorial’s student list
+### Adds a student to stated Tutorial: `addStudent`
+Add a new student to the stated tutorial’s student list
 Fails if the student is null.
 Fails and gives an error message if the student already has a tutorial.
 
-Format: `addStudent STUDENT_NUMBER`
+Format: `addStudent MODULE_NAME TUTORIAL_NAME STUDENT_NUMBER`
 
-Example: `addStudent A0203032J`
+Example: `addStudent CS2103T T11 A0203032J`
 
-### Removes a student from current Tutorial: `removeStudent`
-Remove a new student to the current tutorial’s student list.
+### Removes a student from stated Tutorial: `removeStudent`
+Remove a new student to the stated tutorial’s student list.
 Fails if the student is null.
 Fails if the student is not in the list.
 
-Format: `removeStudent STUDENT_NUMBER`
+Format: `removeStudent MODULE_NAME TUTORIAL_NAME STUDENT_NUMBER`
 
-Example: `removeStudent A0203032J`
+Example: `removeStudent CS2103T T11 A0203032J`
 
-### Edit the name of the current Tutorial: `editName`
-Edit the name of the current Tutorial.
+### Edit the name of the stated Tutorial: `editName`
+Edit the name of the stated Tutorial.
 Fails if NEW_NAME is in invalid format.
 
-Format: `editName NEW_NAME`
+Format: `editName MODULE_NAME TUTORIAL_NAME NEW_NAME`
 
-Example: `editName T12`
+Example: `editName CS2103T T11 T12`
 
-### Edit the time of the current Tutorial: `editTime`
+### Edit the time of the stated Tutorial: `editTime`
 Will replace the old time with the new time.
 Will be assigned to field “time” if it is not initialised.
 Fails if NEW_TIME is in invalid format.
 
-Format: `editTime NEW_TIME`
+Format: `editTime MODULE_NAME TUTORIAL_NAME NEW_TIME`
 
-Example: `editTime Wed`
+Example: `editTime CS2103T T11 Wed`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -308,7 +308,7 @@ Example: `editTime Wed`
 | **addTutorial**      | `addTutorial TUTORIALNAME MODULE` <br> e.g., `addTutorial c12 CS2103T`                                                                                                |
 | **removeTutorial**   | `removeTutorial TUTORIALNAME MODULE` <br> e.g., `removeTutorial c12 CS2103T`                                                                                          |
 | **changeStatus**     | `changeStatus INDEX MODULE (LETTER: p/t/s/n)` <br> e.g., `changeStatus 2 CS2103T t`                                                                                   |
-| **addTutorial**      | `addTutorial TUTORIALNAME MODULE` <br> e.g., `addTutorial c12 CS2103T`                                                                                                |
-| **removeStudent**    | `removeStudent STUDENT_NUMBER` <br> e.g., `removeStudent c12 CS2103T`                                                                                                 |
-| **editName**         | `editName NEW_NAME` <br> e.g., `editName T12`                                                                                                                         |
-| **editName**         | `editTime NEW_TIME` <br> e.g., `editTime Wed`                                                                                                                         |
+| **addStudent**       | `addStudent MODULE_NAME TUTORIAL_NAME STUDENT_NUMBER` <br> e.g., `addStudent CS2103T T11 A0203032J`                                                                   |
+| **removeStudent**    | `removeStudent MODULE_NAME TUTORIAL_NAME STUDENT_NUMBER` <br> e.g., `removeStudent CS2103T T11 A0203032J`                                                             |
+| **editName**         | `editName MODULE_NAME TUTORIAL_NAME NEW_NAME` <br> e.g., `editName CS2103T T11 T12`                                                                                   |
+| **editTime**         | `editTime MODULE_NAME TUTORIAL_NAME NEW_TIME` <br> e.g., `editTime CS2103T T11 Wed`                                                                                   |
