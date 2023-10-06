@@ -1,6 +1,7 @@
 package seedu.address.model.tutorial;
 
 import seedu.address.model.person.Person;
+import seedu.address.model.tutorial.exceptions.StudentExistException;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -21,18 +22,36 @@ public class Tutorial {
     }
 
     /* Methods */
-    public Person addStudent(Person p) throws Exception {
-        if (stuList.contains(p)) {
-            throw new Exception();
+
+    /**
+     * Add a new student to current tutorial’s student list.
+     * @param newStu the new student to be added
+     * @return the newStu
+     * @throws NullPointerException if newStu is null
+     * @throws StudentExistException if newStu is already in the tutorial
+     */
+    public Person addStudent(Person newStu) {
+        if (newStu == null) {
+            throw new NullPointerException();
+        } else if (stuList.contains(newStu)) {
+            throw new StudentExistException();
         }
-        stuList.add(p);
-        return p;
+
+        stuList.add(newStu);
+        return newStu;
     }
 
-    public Person removeStudent(int index) throws Exception {
+    /**
+     * Remove a student from current tutorial's student list
+     * @param index the index of the student
+     * @return the removed student
+     * @throws IndexOutOfBoundsException if index is out of bounds
+     */
+    public Person removeStudent(int index) throws IndexOutOfBoundsException {
         if (index >= population) {
-            throw new Exception();
+            throw new IndexOutOfBoundsException();
         }
+
         Person removedStu = stuList.remove(index);
         return removedStu;
     }
