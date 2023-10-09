@@ -1,10 +1,10 @@
 package seedu.address.model.tutorial;
 
-import seedu.address.model.person.Person;
-import seedu.address.model.tutorial.exceptions.StudentExistException;
-
 import java.util.ArrayList;
 import java.util.Objects;
+
+import seedu.address.model.person.Person;
+import seedu.address.model.tutorial.exceptions.StudentExistException;
 
 public class Tutorial {
     /* Fields */
