@@ -248,20 +248,21 @@ Example: `changeStatus 2 CS2103T t`
 
 ### Adds a student to stated Tutorial: `addStudent`
 Add a new student to the stated tutorial’s student list
-Fail if the student is null.
-Fail if the student is already in the tutorial
+Fails if the student is null.
+Fails and gives an error message if the student already has a tutorial.
 
 Format: `addStudent MODULE_NAME TUTORIAL_NAME STUDENT_NUMBER`
 
 Example: `addStudent CS2103T T11 A0203032J`
 
 ### Removes a student from stated Tutorial: `removeStudent`
-Remove a student to the stated tutorial’s student list.
-Fail if the index is out of bounds.
+Remove a new student to the stated tutorial’s student list.
+Fails if the student is null.
+Fails if the student is not in the list.
 
-Format: `removeStudent MODULE_NAME TUTORIAL_NAME INDEX`
+Format: `removeStudent MODULE_NAME TUTORIAL_NAME STUDENT_NUMBER`
 
-Example: `removeStudent CS2103T T11 1`
+Example: `removeStudent CS2103T T11 A0203032J`
 
 ### Edit the name of the stated Tutorial: `editName`
 Edit the name of the stated Tutorial.
@@ -308,6 +309,6 @@ Example: `editTime CS2103T T11 Wed`
 | **removeTutorial**   | `removeTutorial TUTORIALNAME MODULE` <br> e.g., `removeTutorial c12 CS2103T`                                                                                          |
 | **changeStatus**     | `changeStatus INDEX MODULE (LETTER: p/t/s/n)` <br> e.g., `changeStatus 2 CS2103T t`                                                                                   |
 | **addStudent**       | `addStudent MODULE_NAME TUTORIAL_NAME STUDENT_NUMBER` <br> e.g., `addStudent CS2103T T11 A0203032J`                                                                   |
-| **removeStudent**    | `removeStudent MODULE_NAME TUTORIAL_NAME INDEX` <br> e.g., `removeStudent CS2103T T11 1`                                                                              |
+| **removeStudent**    | `removeStudent MODULE_NAME TUTORIAL_NAME STUDENT_NUMBER` <br> e.g., `removeStudent CS2103T T11 A0203032J`                                                             |
 | **editName**         | `editName MODULE_NAME TUTORIAL_NAME NEW_NAME` <br> e.g., `editName CS2103T T11 T12`                                                                                   |
 | **editTime**         | `editTime MODULE_NAME TUTORIAL_NAME NEW_TIME` <br> e.g., `editTime CS2103T T11 Wed`                                                                                   |
