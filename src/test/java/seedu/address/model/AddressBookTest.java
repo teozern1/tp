@@ -18,13 +18,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import seedu.address.model.module.Module;
-import seedu.address.model.module.UniqueModuleList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.tutorial.Tutorial;
-import seedu.address.model.tutorial.UniqueTutorialList;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -107,18 +102,6 @@ public class AddressBookTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
-        }
-
-        // TODO: Implement a working test later!
-        @Override
-        public ObservableList<Module> getModuleList() {
-            return new FilteredList<>(new UniqueModuleList().asUnmodifiableObservableList());
-        }
-
-        // TODO: Implement a working test later!
-        @Override
-        public ObservableList<Tutorial> getTutorialList() {
-            return new FilteredList<>(new UniqueTutorialList().asUnmodifiableObservableList());
         }
     }
 

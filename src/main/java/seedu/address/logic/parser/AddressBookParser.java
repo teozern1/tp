@@ -9,20 +9,14 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AddModuleCommand;
-import seedu.address.logic.commands.AddToModuleCommand;
-import seedu.address.logic.commands.AddTutorialCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.DeleteModuleCommand;
-import seedu.address.logic.commands.DeleteTutorialCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.RemoveFromModuleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -82,24 +76,6 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-
-        case AddModuleCommand.COMMAND_WORD:
-            return new AddModuleCommandParser().parse(arguments);
-
-        case DeleteModuleCommand.COMMAND_WORD:
-            return new DeleteModuleCommandParser().parse(arguments);
-
-        case AddToModuleCommand.COMMAND_WORD:
-            return new AddToModuleCommandParser().parse(arguments);
-
-        case RemoveFromModuleCommand.COMMAND_WORD:
-            return new RemoveFromModuleCommandParser().parse(arguments);
-
-        case AddTutorialCommand.COMMAND_WORD:
-            return new AddTutorialCommandParser().parse(arguments);
-
-        case DeleteTutorialCommand.COMMAND_WORD:
-            return new DeleteTutorialCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
