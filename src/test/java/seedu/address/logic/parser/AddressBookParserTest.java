@@ -14,8 +14,10 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddModuleCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteModuleCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -23,9 +25,11 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.ModuleBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -41,6 +45,14 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_addModule() throws Exception {
+        Module module = new ModuleBuilder().build();
+        String inputCmd = AddModuleCommand.COMMAND_WORD + " m/" + module;
+        AddModuleCommand command = (AddModuleCommand) parser.parseCommand(inputCmd);
+        assertEquals(new AddModuleCommand(module), command);
+    }
+
+    @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
@@ -51,6 +63,17 @@ public class AddressBookParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_deleteModule() throws Exception {
+        Module module = new ModuleBuilder().build();
+
+        String inputCmd = DeleteModuleCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased();
+        DeleteModuleCommand command = (DeleteModuleCommand) parser.parseCommand(inputCmd);
+
+
+        assertEquals(new DeleteModuleCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test

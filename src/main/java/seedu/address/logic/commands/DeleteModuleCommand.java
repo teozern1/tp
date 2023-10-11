@@ -19,7 +19,7 @@ public class DeleteModuleCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a module from the list\n"
             + "Parameters: "
-            + PREFIX_MODULE + "MODULE";
+            + PREFIX_MODULE + "INDEX";
 
     public static final String MESSAGE_SUCCESS = "Deleted module: %s";
 
@@ -46,5 +46,20 @@ public class DeleteModuleCommand extends Command {
         Module toDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteModule(toDelete);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toDelete));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof DeleteModuleCommand)) {
+            return false;
+        }
+
+        DeleteModuleCommand otherDeleteModuleCommand = (DeleteModuleCommand) other;
+        return targetIndex.equals(otherDeleteModuleCommand.targetIndex);
     }
 }
