@@ -7,9 +7,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddToModuleCommand;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.model.module.Module;
 public class AddToModuleCommandParserTest {
     private final AddToModuleCommandParser parser = new AddToModuleCommandParser();

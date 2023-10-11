@@ -7,10 +7,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddTutorialCommand;
 import seedu.address.logic.commands.DeleteTutorialCommand;
-import seedu.address.model.module.Module;
-import seedu.address.model.tutorial.Tutorial;
 
 public class DeleteTutorialCommandParserTest {
     private DeleteTutorialCommandParser parser = new DeleteTutorialCommandParser();
