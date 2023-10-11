@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
+import seedu.address.model.tutorial.Tutorial;
 
 /**
  * The API of the Model component.
@@ -93,4 +94,12 @@ public interface Model {
     boolean hasModule(Module module);
 
     ObservableList<Module> getModuleList();
+
+    void addTutorial(Tutorial tutorial);
+
+    void deleteTutorial(Tutorial tutorial);
+
+    boolean hasTutorial(Tutorial tutorial);
+
+    ObservableList<Tutorial> getTutorialList();
 }

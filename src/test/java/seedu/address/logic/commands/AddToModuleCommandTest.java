@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -24,16 +23,13 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 public class AddToModuleCommandTest {
     @Test
     public void execute_indexTooBig_errorMessage() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        model.addModule(new Module("CS1000"));
 
-        assertCommandFailure(new AddToModuleCommand(Index.fromZeroBased(999),
+        assertCommandFailure(new AddToModuleCommand(Index.fromZeroBased(999999),
                 new Module("CS1000")), model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
     @Test
@@ -59,7 +55,8 @@ public class AddToModuleCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getAddressBook().getPersonList().get(0), editedPerson);
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.addModule(testModule);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

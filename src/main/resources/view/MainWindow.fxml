@@ -40,6 +40,12 @@
           </padding>
         </StackPane>
 
+        <StackPane VBox.vgrow="NEVER" fx:id="tutorialBoxPlaceholder" styleClass="pane-with-border">
+          <padding>
+            <Insets top="1" right="10" bottom="1" left="10" />
+          </padding>
+        </StackPane>
+
         <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
           <padding>
             <Insets top="5" right="10" bottom="5" left="10" />

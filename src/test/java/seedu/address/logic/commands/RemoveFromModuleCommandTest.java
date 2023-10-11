@@ -29,7 +29,6 @@ public class RemoveFromModuleCommandTest {
     @Test
     public void execute_indexTooBig_errorMessage() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        model.addModule(new Module("CS1000"));
 
         assertCommandFailure(new RemoveFromModuleCommand(Index.fromZeroBased(999),
                 new Module("CS1000")), model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

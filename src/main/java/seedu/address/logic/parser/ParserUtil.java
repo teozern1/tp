@@ -137,4 +137,24 @@ public class ParserUtil {
         }
         return new Module(trimmedModuleCode);
     }
+
+    /**
+     * Parses a {@code String tutorialName} by trimming leading and trailing whitespaces.
+     * @return The tutorialName.
+     */
+    public static String parseTutorialName(String tutorialName) {
+        requireNonNull(tutorialName);
+        String trimmedName = tutorialName.trim();
+        return trimmedName;
+    }
+
+    /**
+     * Parses a {@code String tutorialTime} by trimming leading and trailing whitespaces.
+     * @return The tutorialTime.
+     */
+    public static String parseTutorialTime(String tutorialTime) {
+        requireNonNull(tutorialTime);
+        String trimmedTime = tutorialTime.trim();
+        return trimmedTime;
+    }
 }

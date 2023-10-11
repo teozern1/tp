@@ -3,20 +3,31 @@ package seedu.address.model.tutorial;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.exceptions.StudentExistException;
 
+/**
+ * Placeholder comment.
+ */
 public class Tutorial {
     /* Fields */
-    private String moduleName;
+    private Module module;
     private String tutName;
     private String time;
     private ArrayList<Person> stuList = new ArrayList<>();
     private int population = stuList.size();
 
     /* Constructors */
-    public Tutorial(String moduleName, String tutName, String time) {
-        this.moduleName = moduleName;
+
+    /**
+     * Placeholder comment.
+     * @param module
+     * @param tutName
+     * @param time
+     */
+    public Tutorial(Module module, String tutName, String time) {
+        this.module = module;
         this.tutName = tutName;
         this.time = time;
     }
@@ -56,18 +67,28 @@ public class Tutorial {
         return removedStu;
     }
 
+    /**
+     * Placeholder comment.
+     * @param newName
+     * @return
+     */
     public String editName(String newName) {
         this.tutName = newName;
         return newName;
     }
 
+    /**
+     * Placeholder comment.
+     * @param newTime
+     * @return
+     */
     public String editTime(String newTime) {
         this.time = newTime;
         return newTime;
     }
 
     public String getModuleName() {
-        return moduleName;
+        return module.getModuleCode();
     }
 
     public String getTutName() {
@@ -84,20 +105,41 @@ public class Tutorial {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Tutorial tutorial = (Tutorial) o;
-        return Objects.equals(moduleName, tutorial.moduleName) && Objects.equals(tutName, tutorial.tutName);
+        return Objects.equals(module, tutorial.module) && Objects.equals(tutName, tutorial.tutName);
     }
 
     @Override
     public String toString() {
         StringBuffer res = new StringBuffer("");
+        res.append(module.getModuleCode() + " ");
+        res.append(this.getTutName() + " ");
+        res.append(this.getTime() + " ");
         Person p;
         for (int i = 0; i < population; i++) {
             p = stuList.get(i);
             res.append(p.toString() + "\n");
         }
         return res.toString();
+    }
+
+    /**
+     * Placeholder comment.
+     * @param otherTutorial
+     * @return
+     */
+    public boolean isSameTutorial(Tutorial otherTutorial) {
+        if (otherTutorial == this) {
+            return true;
+        }
+
+        // Placeholder.
+        return true;
     }
 }

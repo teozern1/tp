@@ -10,6 +10,8 @@ import seedu.address.model.module.Module;
 import seedu.address.model.module.UniqueModuleList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.tutorial.Tutorial;
+import seedu.address.model.tutorial.UniqueTutorialList;
 
 /**
  * Wraps all data at the address-book level
@@ -19,6 +21,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueModuleList modules;
+    private final UniqueTutorialList tutorials;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -30,6 +33,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         modules = new UniqueModuleList();
+        tutorials = new UniqueTutorialList();
     }
 
     public AddressBook() {}
@@ -124,6 +128,32 @@ public class AddressBook implements ReadOnlyAddressBook {
         return modules.contains(module);
     }
 
+    //// tutorial-level operations
+
+    /**
+     * Adds a tutorial to the address book.
+     * The module must not already exist in the address book.
+     */
+    public void addTutorial(Tutorial tutorial) {
+        tutorials.add(tutorial);
+    }
+
+    /**
+     * Delete a tutorial from the address book.
+     * The module must already exist in the address book.
+     */
+    public void removeTutorial(Tutorial tutorial) {
+        tutorials.remove(tutorial);
+    }
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    public boolean hasTutorial(Tutorial tutorial) {
+        requireNonNull(tutorial);
+        return tutorials.contains(tutorial);
+    }
+
     //// util methods
 
     @Override
@@ -144,6 +174,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<Tutorial> getTutorialList() {
+        return tutorials.asUnmodifiableObservableList();
+    }
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -155,7 +189,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return persons.equals(otherAddressBook.persons) && modules.equals(otherAddressBook.modules)
+                && tutorials.equals(otherAddressBook.tutorials);
     }
 
     @Override
