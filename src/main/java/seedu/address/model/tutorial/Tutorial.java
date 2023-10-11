@@ -139,7 +139,6 @@ public class Tutorial {
             return true;
         }
 
-        // Placeholder.
-        return true;
+        return this.module.equals(otherTutorial.module) && this.tutName.equals(otherTutorial.tutName);
     }
 }

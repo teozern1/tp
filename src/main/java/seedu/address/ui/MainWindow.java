@@ -201,9 +201,11 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             ModuleBox moduleBox = new ModuleBox(logic.getModuleList());
+            moduleBoxPlaceholder.getChildren().clear();
             moduleBoxPlaceholder.getChildren().add(moduleBox.getRoot());
 
             TutorialBox tutorialBox = new TutorialBox(logic.getTutorialList());
+            tutorialBoxPlaceholder.getChildren().clear();
             tutorialBoxPlaceholder.getChildren().add(tutorialBox.getRoot());
 
             return commandResult;

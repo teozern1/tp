@@ -52,4 +52,19 @@ public class AddTutorialCommand extends Command {
         model.addTutorial(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddTutorialCommand)) {
+            return false;
+        }
+
+        AddTutorialCommand otherAddTutorialCommand = (AddTutorialCommand) other;
+        return toAdd.equals(otherAddTutorialCommand.toAdd);
+    }
 }
