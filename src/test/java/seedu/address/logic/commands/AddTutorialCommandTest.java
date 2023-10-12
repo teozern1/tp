@@ -50,7 +50,7 @@ public class AddTutorialCommandTest {
 
         AddTutorialCommand addTutorialCommand = new AddTutorialCommand(testTutorial);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.addModule(testModule);
         expectedModel.addTutorial(testTutorial);
 
