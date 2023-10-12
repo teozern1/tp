@@ -23,7 +23,6 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.ModuleBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 public class AddModuleCommandTest {
 
@@ -45,19 +44,19 @@ public class AddModuleCommandTest {
 
     @Test
     public void equals() {
-        Module module_CS2100 = new ModuleBuilder().build("CS2100");
-        Module module_CS2030 = new ModuleBuilder().build("CS2030");
+        Module moduleCS2100 = new ModuleBuilder().build("CS2100");
+        Module moduleCS2030 = new ModuleBuilder().build("CS2030");
 
-        AddModuleCommand addCS2100 = new AddModuleCommand(module_CS2100);
-        AddModuleCommand addCS2030 = new AddModuleCommand(module_CS2030);
+        AddModuleCommand addCS2100 = new AddModuleCommand(moduleCS2100);
+        AddModuleCommand addCS2030 = new AddModuleCommand(moduleCS2030);
 
 
         // same object -> returns true
         assertTrue(addCS2100.equals(addCS2100));
 
         // same values -> returns true
-        AddModuleCommand addCS2100_CommandCopy = new AddModuleCommand(module_CS2100);
-        assertTrue(addCS2100.equals(addCS2100_CommandCopy));
+        AddModuleCommand addCS2100CommandCopy = new AddModuleCommand(moduleCS2100);
+        assertTrue(addCS2100.equals(addCS2100CommandCopy));
 
         // different types -> returns false
         assertFalse(addCS2100.equals(1));

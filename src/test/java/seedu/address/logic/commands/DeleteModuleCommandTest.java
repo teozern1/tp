@@ -12,8 +12,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.module.Module;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.ModuleBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
