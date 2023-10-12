@@ -27,8 +27,7 @@ public class DeleteTutorialCommandTest {
         model.addTutorial(testTutorial);
         DeleteTutorialCommand deleteTutorialCommand = new DeleteTutorialCommand(Index.fromOneBased(999));
 
-        assertCommandFailure(deleteTutorialCommand, model, DeleteTutorialCommand.MESSAGE_NO_TUTORIAL_FOUND);
-        */
+        assertCommandFailure(deleteTutorialCommand, model, DeleteTutorialCommand.MESSAGE_NO_TUTORIAL_FOUND);*/
     }
 
     @Test
@@ -40,7 +39,7 @@ public class DeleteTutorialCommandTest {
         model.addTutorial(testTutorial);
         DeleteTutorialCommand deleteTutorialCommand = new DeleteTutorialCommand(INDEX_FIRST_PERSON);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.addModule(testModule);
 
         assertCommandSuccess(deleteTutorialCommand, model,
