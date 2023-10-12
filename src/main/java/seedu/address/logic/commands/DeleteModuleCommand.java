@@ -45,4 +45,19 @@ public class DeleteModuleCommand extends Command {
         model.deleteModule(toDelete);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toDelete));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof DeleteModuleCommand)) {
+            return false;
+        }
+
+        DeleteModuleCommand otherDeleteModuleCommand = (DeleteModuleCommand) other;
+        return targetIndex.equals(otherDeleteModuleCommand.targetIndex);
+    }
 }

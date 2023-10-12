@@ -42,4 +42,19 @@ public class AddModuleCommand extends Command {
         model.addModule(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddModuleCommand)) {
+            return false;
+        }
+
+        AddModuleCommand otherAddModuleCommand = (AddModuleCommand) other;
+        return toAdd.equals(otherAddModuleCommand.toAdd);
+    }
 }

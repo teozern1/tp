@@ -1,8 +1,10 @@
 package seedu.address.model.module;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -51,6 +53,16 @@ public class UniqueModuleList implements Iterable<Module> {
         if (!internalList.remove(toRemove)) {
             throw new ModuleNotFoundException();
         }
+    }
+
+    /**
+     * Replaces the contents of this list with {@code modules}.
+     * {@code persons} must not contain duplicate modules.
+     */
+    public void setModules(List<Module> modules) {
+        requireAllNonNull(modules);
+
+        internalList.setAll(modules);
     }
 
     public ObservableList<Module> asUnmodifiableObservableList() {
