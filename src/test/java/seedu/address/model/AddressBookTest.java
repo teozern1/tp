@@ -26,6 +26,7 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tutorial.Tutorial;
 import seedu.address.model.tutorial.UniqueTutorialList;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TypicalPersons;
 
 public class AddressBookTest {
 
@@ -94,6 +95,15 @@ public class AddressBookTest {
         assertEquals(expected, addressBook.toString());
     }
 
+    @Test
+    public void equals() {
+        AddressBook test = TypicalPersons.getTypicalAddressBook();
+
+        assertTrue(test.equals(test));
+        assertFalse(test.equals(1));
+        assertFalse(test.equals(null));
+    }
+
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
@@ -109,13 +119,11 @@ public class AddressBookTest {
             return persons;
         }
 
-        // TODO: Implement a working test later!
         @Override
         public ObservableList<Module> getModuleList() {
             return new FilteredList<>(new UniqueModuleList().asUnmodifiableObservableList());
         }
 
-        // TODO: Implement a working test later!
         @Override
         public ObservableList<Tutorial> getTutorialList() {
             return new FilteredList<>(new UniqueTutorialList().asUnmodifiableObservableList());
