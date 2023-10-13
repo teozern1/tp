@@ -1,8 +1,10 @@
 package seedu.address.model.tutorial;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -51,6 +53,16 @@ public class UniqueTutorialList implements Iterable<Tutorial> {
         if (!internalList.remove(toRemove)) {
             throw new TutorialNotFoundException();
         }
+    }
+
+
+    /**
+     * Replaces the contents of this list with {@code tutorials}.
+     */
+    public void setTutorials(List<Tutorial> tutorials) {
+        requireAllNonNull(tutorials);
+
+        internalList.setAll(tutorials);
     }
 
     public ObservableList<Tutorial> asUnmodifiableObservableList() {
