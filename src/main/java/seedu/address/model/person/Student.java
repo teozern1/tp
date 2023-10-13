@@ -1,10 +1,13 @@
 package seedu.address.model.person;
 
-import seedu.address.model.tag.Tag;
-
 import java.util.Set;
 
-public class Student extends Person{
+import seedu.address.model.tag.Tag;
+
+/**
+ * Represents a Student in the address book.
+ */
+public class Student extends Person {
     /**
      * Every field must be present and not null.
      */

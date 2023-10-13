@@ -1,10 +1,13 @@
 package seedu.address.model.person;
 
-import seedu.address.model.tag.Tag;
-
 import java.util.Set;
 
-public class Professor extends Person{
+import seedu.address.model.tag.Tag;
+
+/**
+ * Represents a Professor in the address book.
+ */
+public class Professor extends Person {
     /**
      * Every field must be present and not null.
      */
