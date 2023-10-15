@@ -32,6 +32,8 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private ModuleBox moduleBox;
+    private TutorialBox tutorialBox;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -43,6 +45,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane moduleBoxPlaceholder;
+
+    @FXML
+    private StackPane tutorialBoxPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -119,6 +127,12 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
+        ModuleBox moduleBox = new ModuleBox(logic.getModuleList());
+        moduleBoxPlaceholder.getChildren().add(moduleBox.getRoot());
+
+        TutorialBox tutorialBox = new TutorialBox(logic.getTutorialList());
+        tutorialBoxPlaceholder.getChildren().add(tutorialBox.getRoot());
+
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
@@ -185,6 +199,14 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
+
+            ModuleBox moduleBox = new ModuleBox(logic.getModuleList());
+            moduleBoxPlaceholder.getChildren().clear();
+            moduleBoxPlaceholder.getChildren().add(moduleBox.getRoot());
+
+            TutorialBox tutorialBox = new TutorialBox(logic.getTutorialList());
+            tutorialBoxPlaceholder.getChildren().clear();
+            tutorialBoxPlaceholder.getChildren().add(tutorialBox.getRoot());
 
             return commandResult;
         } catch (CommandException | ParseException e) {

@@ -5,7 +5,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
+import seedu.address.model.tutorial.Tutorial;
 
 /**
  * The API of the Model component.
@@ -84,4 +86,20 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    void addModule(Module module);
+
+    void deleteModule(Module module);
+
+    boolean hasModule(Module module);
+
+    ObservableList<Module> getModuleList();
+
+    void addTutorial(Tutorial tutorial);
+
+    void deleteTutorial(Tutorial tutorial);
+
+    boolean hasTutorial(Tutorial tutorial);
+
+    ObservableList<Tutorial> getTutorialList();
 }

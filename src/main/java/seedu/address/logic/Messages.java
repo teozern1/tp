@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
 
 /**
@@ -18,6 +19,8 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_MODULE = "Module does not exist";
+    public static final String MESSAGE_ADD_MODULE_CHECK = "New module added: ";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -46,6 +49,13 @@ public class Messages {
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
+    }
+
+    /**
+     * Formats the {@code module} for display to the user.
+     */
+    public static String moduleFormat(Module module) {
+        return MESSAGE_ADD_MODULE_CHECK + module;
     }
 
 }
