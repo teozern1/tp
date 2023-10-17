@@ -269,27 +269,28 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* NUS SoC teaching assistants
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: manage the students, fellow tutors and professors involved in tutoring faster than a typical mouse/GUI driven app
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​ | I want to …​                                                      | So that I can…​                                                                       |
+|----------|--------|------------------------------------------------------------------|--------------------------------------------------------------------------------------|
+| `* * *`  | user   | search for professors for a module                               | quickly search for the professor that is conducting the module I am TAing for        |
+| `* * *`  | user   | search for all my students in a module                           | manage them more easily                                                              |
+| `* * *`  | user   | read information about students, modules and classes from a file | keep any students added or closed even after closing the program                     |
+| `* * *`  | user   | view my students school email and telegram handle                | contact them if needed                                                               |
+| `* * *`  | user   | sign up as a TA of module(s)                                     | manage what modules I am part of                                                     |
+| `* * *`  | user   | add and delete lessons                                           | it is easier for me to organise my schedule.                                         |
+| `* * *`  | user   | filter students by class and module                              | I can make preparations based on upcoming classes, like marking their work           |
+| `* * *`  | user   | add and remove students to classes	                             | it is easier for me to organise my schedule.                                         |
 
 *{More to be added}*
 
@@ -297,28 +298,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Search for a student within a module**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list persons in the module.
+2.  System shows the persons in the module.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The module does not exist.
+
+  * 3a1. AddressBook shows an error message informing the user.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The module exists, but no one is part of the module.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. No one is displayed.
+    * 3a2. The display states that "No users are found".
 
-      Use case resumes at step 2.
+      Use case ends.
 
 *{More to be added}*
 
@@ -327,13 +329,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  The product is meant for a single Teaching Assistant that makes all changes to the AddressBook themselves.
+5.  Data will be stored in a .txt file to allow for advanced users to manipulate the data directly.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Teaching Assistant (TA)**: A non-professor tutor which helps the professors of a module by teaching one or more classes.
+* **Module**: A unit of study in a specific field set by NUS, such as CS2103T focusing on Software Engineering.
+* **Class**: Lessons that are part of a module. Includes laboratries, recitations, tutorials and any form of lesson that includes a TA.
 
 --------------------------------------------------------------------------------------------------------------------
 

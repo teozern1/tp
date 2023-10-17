@@ -21,11 +21,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -100,8 +96,10 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        StudentNumber updatedStudentNumber = editPersonDescriptor.getStudentNumber().
+                orElse(personToEdit.getStudentNumber());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedStudentNumber);
     }
 
     @Override
@@ -139,6 +137,8 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
 
+        private StudentNumber studentNumber;
+
         public EditPersonDescriptor() {}
 
         /**
@@ -151,13 +151,15 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setStudentNumber(toCopy.studentNumber);
+
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, studentNumber);
         }
 
         public void setName(Name name) {
@@ -192,6 +194,13 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setStudentNumber(StudentNumber studentNumber) {
+            this.studentNumber = studentNumber;
+        }
+
+        public Optional<StudentNumber> getStudentNumber() {
+            return Optional.ofNullable(studentNumber);
+        }
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -225,7 +234,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(studentNumber, otherEditPersonDescriptor.studentNumber);
         }
 
         @Override
@@ -236,6 +246,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("studentNumber", studentNumber)
                     .toString();
         }
     }

@@ -42,7 +42,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Alvis Ng
 
-<img src="images/supermii2.jpg" width="200px">
+<img src="images/supermii2.png" width="200px">
 
 [[github](http://github.com/supermii2)]
 [[portfolio](team/supermii2.md)]
@@ -50,12 +50,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Documentation & Testing
 
-### James Doe
+### Song Bingxi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/propene-dan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/propene-dan)]
+[[portfolio](team/propene-dan.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: In charge of Tutorial
