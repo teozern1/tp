@@ -1,12 +1,14 @@
 ---
   layout: default.md
-  title: "User Guide"
-  pageNav: 3
+    title: "User Guide"
+    pageNav: 3
 ---
 
-# AB-3 User Guide
+# TASsistant User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+TASsistant is a desktop app for Teaching Assistants (TAs) in NUS to track information about the students and professors
+involved in tutoring. It is optimised for users that have experience with a Command Line Interface (CLI) and aims to be
+able to handle contact organisation faster than GUI apps if the user can type quickly.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,26 +19,22 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `TASsistant.jar` from [here]().
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your TASsistant.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TASsistant.jar` command to run the application.<br>
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `clear` : Deletes all contacts.
 
-   * `clear` : Deletes all contacts.
-
-   * `exit` : Exits the app.
+    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -64,7 +62,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
+  </box>
 
 ### Viewing help : `help`
 
@@ -74,10 +72,9 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to TASsistant.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STUDENT_NUMBER [t/TAG]…​`
 
@@ -93,9 +90,10 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in TASsistant.
 
 Format: `list`
+
 
 ### Editing a person : `edit`
 
@@ -116,25 +114,10 @@ Examples:
 *  `edit 3 s/A0514624K` Edits the student number of the 2nd person to be 'A0514624K'
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+
+Deletes the specified person from TASsistant.
 
 Format: `delete INDEX`
 
@@ -143,12 +126,26 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd person in TASsistant.
+
+### Search : `search`
+
+Lists out all students with the given condition.
+
+Format: `search CONDITION1, CONDITION2, …`
+
+* Condition is given in the format keyword: value.
+* Accepted condition keywords are module, classNum, and studentName.
+* Unrecognised keywords cause this method to fail.
+
+Examples:
+* `search module: CS2103T` returns all students in the module CS2103T
+* `search classNum: T03` returns all students in the class T03
+* `search studentName:` John Doe' returns all students with the name John Doe
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from TASsistant.
 
 Format: `clear`
 
@@ -160,19 +157,40 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TASsistant data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+TASsistant data are saved automatically as a JSON file `[JAR file location]/data/TASsistant.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, TASsistant will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
+
+
+### Adds a module to TASsistant: `addModule`
+Adds the module to TASsistant, displaying it on the GUI.
+The module name must consist of only alphanumeric characters, no shorter than 5 characters.
+Will give an error message if the module already exists in TASsistant,
+further prompts are given for incorrect inputs.
+
+Format: `addModule m/MODULE_NAME`
+
+Example: `addModule m/CS2100`
+
+### Deletes a module from TASsistant: `deleteModule`
+Deletes the module from TASsistant and the GUI will change to reflect this.
+The index refers to the position of the module displayed on the GUI.
+Will give an error message if the module does not exist in TASsistant,
+further prompts are given for incorrect inputs.
+
+Format: `deleteModule INDEX`
+
+Example: `deleteModule 1`
 
 
 ### Editing a Student's details: `editDetail` '[coming soon]'
@@ -184,34 +202,119 @@ Format: `editDetail INDEX /DETAIL NEW_DETAIL`
 
 Example: `editDetail 1 /TELEGRAM @johannpetrovich`
 
+### Adding a user to a given module: `addToModule`
 
+Adds the user at the specified INDEX displayed on the GUI to a given module.
+The index refers to the index number shown in the displayed user list.
+Users are added with “none” status. The index must be a positive integer.
+Will give an error message if the module given has not been made.
 
+Format: `addToModule INDEX MODULE`
 
-_Details coming soon ..._
+Example: `addToModule 2 CS2103T`
 
---------------------------------------------------------------------------------------------------------------------
+### Removes a user from a given module: `removeFromModule`
 
-## FAQ
+Removes the user at the specified INDEX displayed on the GUI from a given module.
+The index refers to the index number shown in the displayed user list.
+Users are added with “none” status. The index must be a positive integer.
+Will give an error message if the module given has not been made or if the user is not part of the given module.
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+Format: `removeFromModule INDEX MODULE`
+
+Example: `removeFromModule 2 CS2103T`
+
+### Adds a tutorial to a given module: `addTutorial`
+Adds a tutorial with a specific tutorial name to a given module.
+Different modules can have different tutorials with the same name.
+Will give an error message if the module does not exist or a tutorial with the same name
+has already been made for the module.
+
+Format: `addTutorial TUTORIALNAME MODULE`
+
+Example: `addTutorial c12 CS2103T`
+
+### Removes a tutorial from a given module: `removeTutorial`
+Removes a tutorial with a specific tutorial name to a given module.
+Will give an error message if the module given has not been made, or if the tutorial does not exist.
+
+Format: `removeTutorial TUTORIALNAME MODULE`
+
+Example: `removeTutorial c12 CS2103T`
+
+### Gives a specific user a given status: `changeStatus`
+Changes the status of the user at the specified INDEX for a given module,
+whether they are a professor, teaching assistant, user or none, a placeholder value.
+The index refers to the index number shown in the displayed user list. It must be a positive integer.
+The letter represents the status to change the user to: “p” for professor, “t” for TA, “s” for student and “n” for none.
+
+Format: `changeStatus INDEX MODULE (LETTER: p/t/s/n)`
+
+Example: `changeStatus 2 CS2103T t`
+
+### Adds a student to stated Tutorial: `addStudent`
+Add a new student to the stated tutorial’s student list
+Fails if the student is null.
+Fails and gives an error message if the student already has a tutorial.
+
+Format: `addStudent MODULE_NAME TUTORIAL_NAME STUDENT_NUMBER`
+
+Example: `addStudent CS2103T T11 A0203032J`
+
+### Removes a student from stated Tutorial: `removeStudent`
+Remove a new student to the stated tutorial’s student list.
+Fails if the student is null.
+Fails if the student is not in the list.
+
+Format: `removeStudent MODULE_NAME TUTORIAL_NAME STUDENT_NUMBER`
+
+Example: `removeStudent CS2103T T11 A0203032J`
+
+### Edit the name of the stated Tutorial: `editName`
+Edit the name of the stated Tutorial.
+Fails if NEW_NAME is in invalid format.
+
+Format: `editName MODULE_NAME TUTORIAL_NAME NEW_NAME`
+
+Example: `editName CS2103T T11 T12`
+
+### Edit the time of the stated Tutorial: `editTime`
+Will replace the old time with the new time.
+Will be assigned to field “time” if it is not initialised.
+Fails if NEW_TIME is in invalid format.
+
+Format: `editTime MODULE_NAME TUTORIAL_NAME NEW_TIME`
+
+Example: `editTime CS2103T T11 Wed`
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. To resolve this, delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+| Action               | Format, Examples                                                                                                                                                      |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**              | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**            | `clear`                                                                                                                                                               |
+| **Delete**           | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Edit**             | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Find**             | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
+| **List**             | `list`                                                                                                                                                                |
+| **Search**           | `search CONDITION1, CONDITION2`<br> e.g., `search module: CS2103T`                                                                                                    |
+| **Help**             | `help`                                                                                                                                                                |
+| **addModule**        | `addModule m/MODULE_NAME` <br> e.g., `addModule m/CS2100`                                                                                                             |
+| **deleteModule**     | `deleteModule INDEX` <br> e.g., `deleteModule 1`                                                                                                                      |
+| **addToModule**      | `addToModule INDEX MODULE` <br> e.g., `addToModule 2 CS2103T`                                                                                                         |
+| **removeFromModule** | `removeFromModule INDEX MODULE` <br> e.g., `removeFromModule 2 CS2103T`                                                                                               |
+| **addTutorial**      | `addTutorial TUTORIALNAME MODULE` <br> e.g., `addTutorial c12 CS2103T`                                                                                                |
+| **removeTutorial**   | `removeTutorial TUTORIALNAME MODULE` <br> e.g., `removeTutorial c12 CS2103T`                                                                                          |
+| **changeStatus**     | `changeStatus INDEX MODULE (LETTER: p/t/s/n)` <br> e.g., `changeStatus 2 CS2103T t`                                                                                   |
+| **addStudent**       | `addStudent MODULE_NAME TUTORIAL_NAME STUDENT_NUMBER` <br> e.g., `addStudent CS2103T T11 A0203032J`                                                                   |
+| **removeStudent**    | `removeStudent MODULE_NAME TUTORIAL_NAME STUDENT_NUMBER` <br> e.g., `removeStudent CS2103T T11 A0203032J`                                                             |
+| **editName**         | `editName MODULE_NAME TUTORIAL_NAME NEW_NAME` <br> e.g., `editName CS2103T T11 T12`                                                                                   |
+| **editTime**         | `editTime MODULE_NAME TUTORIAL_NAME NEW_TIME` <br> e.g., `editTime CS2103T T11 Wed`                                                                                   |

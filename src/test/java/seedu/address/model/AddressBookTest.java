@@ -18,9 +18,15 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.UniqueModuleList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.tutorial.Tutorial;
+import seedu.address.model.tutorial.UniqueTutorialList;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TypicalPersons;
 
 public class AddressBookTest {
 
@@ -89,6 +95,15 @@ public class AddressBookTest {
         assertEquals(expected, addressBook.toString());
     }
 
+    @Test
+    public void equals() {
+        AddressBook test = TypicalPersons.getTypicalAddressBook();
+
+        assertTrue(test.equals(test));
+        assertFalse(test.equals(1));
+        assertFalse(test.equals(null));
+    }
+
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
@@ -102,6 +117,16 @@ public class AddressBookTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<Module> getModuleList() {
+            return new FilteredList<>(new UniqueModuleList().asUnmodifiableObservableList());
+        }
+
+        @Override
+        public ObservableList<Tutorial> getTutorialList() {
+            return new FilteredList<>(new UniqueTutorialList().asUnmodifiableObservableList());
         }
     }
 
