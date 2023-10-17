@@ -7,4 +7,3 @@ Given below are my contributions to the project.
 - **Project management:**
 - **Enhancements to existing features:**
 - **Documentation:**
-
