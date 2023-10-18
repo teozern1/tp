@@ -1,7 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.model.Model;
@@ -14,22 +17,28 @@ import seedu.address.model.tag.Tag;
  */
 public class SearchCommand extends Command {
     public static final String COMMAND_WORD = "search";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds user based on given module. ";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds people with the given conditions "
+            + "Parameters: CONDITION1, CONDITION2, ..."
+            + "[" + PREFIX_NAME + "NAME] OR [" + PREFIX_MODULE + "MODULE] \n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_MODULE + "CS1000 ";
     public static final String MESSAGE_SUCCESS = "Found the following people.";
 
-    private final Name personNameToSearch;
-    private final Tag moduleTagToSearch;
+    private final List<Name> personNameToSearch;
+    private final List<Tag> moduleTagToSearch;
     /**
      * Creates an SearchByModuleCommand to add the specified {@code Person}
      */
-    public SearchCommand(Name personName, Tag module) {
+    public SearchCommand(List<Name> personName, List<Tag> module) {
         personNameToSearch = personName;
         moduleTagToSearch = module;
     }
 
     private Predicate<Person> getPersonPredicateFromModule() {
-        return (person -> (personNameToSearch == null || personNameToSearch.equals(person.getName()))
-                && (moduleTagToSearch == null || person.getTags().contains(moduleTagToSearch)));
+        return (person -> personNameToSearch.stream()
+                .allMatch(name -> person.getName().equals(name)) &&
+        moduleTagToSearch.stream()
+                .allMatch(moduleTag -> person.getTags().contains(moduleTag)));
     }
 
     @Override

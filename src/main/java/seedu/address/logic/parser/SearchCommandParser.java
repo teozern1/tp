@@ -1,13 +1,15 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Parses input arguments and creates a new SearchCommand object
@@ -21,25 +23,18 @@ public class SearchCommandParser implements Parser<SearchCommand> {
     public SearchCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_MODULE);
-        if (!argMultimap.getPreamble().isEmpty()) {
+        if (!argMultimap.getPreamble().isEmpty() || argMultimap.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
         }
 
-        final String personNameString = argMultimap.getValue(PREFIX_NAME).orElse(null);
-        final Name personName;
-        if (personNameString == null) {
-            personName = null;
-        } else {
-            personName = new Name(personNameString);
-        }
-        final String moduleCode = argMultimap.getValue(PREFIX_MODULE).orElse(null);
-        final Tag moduleTag;
-        if (moduleCode == null) {
-            moduleTag = null;
-        } else {
-            moduleTag = new Tag(moduleCode);
-        }
-
-        return new SearchCommand(personName, moduleTag);
+        final List<Name> personNameList = argMultimap.getAllValues(PREFIX_NAME)
+                .stream()
+                .map(nameString -> new Name(nameString))
+                .collect(Collectors.toList());
+        final List<Tag> moduleTagList = argMultimap.getAllValues(PREFIX_TAG)
+                .stream()
+                .map(moduleCode -> new Tag(moduleCode))
+                .collect(Collectors.toList());
+        return new SearchCommand(personNameList, moduleTagList);
     }
 }
