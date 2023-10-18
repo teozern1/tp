@@ -13,7 +13,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddTutorialCommand;
 import seedu.address.logic.commands.SearchCommand;
 import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
