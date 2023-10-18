@@ -246,40 +246,30 @@ Format: `changeStatus INDEX MODULE (LETTER: p/t/s/n)`
 
 Example: `changeStatus 2 CS2103T t`
 
-### Adds a student to stated Tutorial: `addStudent`
-Add a new student to the stated tutorial’s student list
-Fails if the student is null.
+### Adds a student to stated Tutorial: `addToTutorial`
+Add a new student to the stated tutorial’s student list.
+Fails if the index is not valid.
 Fails and gives an error message if the student already has a tutorial.
 
-Format: `addStudent MODULE_NAME TUTORIAL_NAME STUDENT_NUMBER`
+Format: `addToTutorial INDEX [m/MODULE_NAME] [tn/TUTORIAL_NAME]`
 
-Example: `addStudent CS2103T T11 A0203032J`
+Example: `addToTutorial 1 m/CS2103T tn/T11`
 
-### Removes a student from stated Tutorial: `removeStudent`
+### Removes a student from stated Tutorial: `removeFromTutorial`
 Remove a new student to the stated tutorial’s student list.
-Fails if the student is null.
-Fails if the student is not in the list.
+Fails if the index is not valid.
 
-Format: `removeStudent MODULE_NAME TUTORIAL_NAME STUDENT_NUMBER`
+Format: `removeFromTutorial INDEX [m/MODULE_NAME] [tn/TUTORIAL_NAME]`
 
-Example: `removeStudent CS2103T T11 A0203032J`
+Example: `removeFromTutorial 1 m/CS2103T tn/T11`
 
-### Edit the name of the stated Tutorial: `editName`
-Edit the name of the stated Tutorial.
-Fails if NEW_NAME is in invalid format.
+### Edit the details of the stated Tutorial: `editTutorial`
+Edit the name and/or the time of the stated Tutorial.
+Fails if NEW_NAME or NEW_TIME is in invalid format.
 
-Format: `editName MODULE_NAME TUTORIAL_NAME NEW_NAME`
+Format: `editTutorial INDEX [tn/NEW_NAME] [tt/NEW_TIME]`
 
-Example: `editName CS2103T T11 T12`
-
-### Edit the time of the stated Tutorial: `editTime`
-Will replace the old time with the new time.
-Will be assigned to field “time” if it is not initialised.
-Fails if NEW_TIME is in invalid format.
-
-Format: `editTime MODULE_NAME TUTORIAL_NAME NEW_TIME`
-
-Example: `editTime CS2103T T11 Wed`
+Example: `editTutorial 1 tn/T11 tt/Mon`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -291,24 +281,23 @@ Example: `editTime CS2103T T11 Wed`
 
 ## Command summary
 
-| Action               | Format, Examples                                                                                                                                                      |
-|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**              | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**            | `clear`                                                                                                                                                               |
-| **Delete**           | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**             | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**             | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **List**             | `list`                                                                                                                                                                |
-| **Search**           | `search CONDITION1, CONDITION2`<br> e.g., `search module: CS2103T`                                                                                                    |
-| **Help**             | `help`                                                                                                                                                                |
-| **addModule**        | `addModule m/MODULE_NAME` <br> e.g., `addModule m/CS2100`                                                                                                             |
-| **deleteModule**     | `deleteModule INDEX` <br> e.g., `deleteModule 1`                                                                                                                      |
-| **addToModule**      | `addToModule INDEX MODULE` <br> e.g., `addToModule 2 CS2103T`                                                                                                         |
-| **removeFromModule** | `removeFromModule INDEX MODULE` <br> e.g., `removeFromModule 2 CS2103T`                                                                                               |
-| **addTutorial**      | `addTutorial TUTORIALNAME MODULE` <br> e.g., `addTutorial c12 CS2103T`                                                                                                |
-| **removeTutorial**   | `removeTutorial TUTORIALNAME MODULE` <br> e.g., `removeTutorial c12 CS2103T`                                                                                          |
-| **changeStatus**     | `changeStatus INDEX MODULE (LETTER: p/t/s/n)` <br> e.g., `changeStatus 2 CS2103T t`                                                                                   |
-| **addStudent**       | `addStudent MODULE_NAME TUTORIAL_NAME STUDENT_NUMBER` <br> e.g., `addStudent CS2103T T11 A0203032J`                                                                   |
-| **removeStudent**    | `removeStudent MODULE_NAME TUTORIAL_NAME STUDENT_NUMBER` <br> e.g., `removeStudent CS2103T T11 A0203032J`                                                             |
-| **editName**         | `editName MODULE_NAME TUTORIAL_NAME NEW_NAME` <br> e.g., `editName CS2103T T11 T12`                                                                                   |
-| **editTime**         | `editTime MODULE_NAME TUTORIAL_NAME NEW_TIME` <br> e.g., `editTime CS2103T T11 Wed`                                                                                   |
+| Action                 | Format, Examples                                                                                                                                                      |
+|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**              | `clear`                                                                                                                                                               |
+| **Delete**             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
+| **List**               | `list`                                                                                                                                                                |
+| **Search**             | `search CONDITION1, CONDITION2`<br> e.g., `search module: CS2103T`                                                                                                    |
+| **Help**               | `help`                                                                                                                                                                |
+| **addModule**          | `addModule m/MODULE_NAME` <br> e.g., `addModule m/CS2100`                                                                                                             |
+| **deleteModule**       | `deleteModule INDEX` <br> e.g., `deleteModule 1`                                                                                                                      |
+| **addToModule**        | `addToModule INDEX MODULE` <br> e.g., `addToModule 2 CS2103T`                                                                                                         |
+| **removeFromModule**   | `removeFromModule INDEX MODULE` <br> e.g., `removeFromModule 2 CS2103T`                                                                                               |
+| **addTutorial**        | `addTutorial TUTORIALNAME MODULE` <br> e.g., `addTutorial c12 CS2103T`                                                                                                |
+| **removeTutorial**     | `removeTutorial TUTORIALNAME MODULE` <br> e.g., `removeTutorial c12 CS2103T`                                                                                          |
+| **changeStatus**       | `changeStatus INDEX MODULE (LETTER: p/t/s/n)` <br> e.g., `changeStatus 2 CS2103T t`                                                                                   |
+| **addToTutorial**      | `addToTutorial INDEX [m/MODULE_NAME] [tn/TUTORIAL_NAME]` <br> e.g., `addToTutorial 1 m/CS2103T tn/T11`                                                                |
+| **removeFromTutorial** | `removeFromTutorial INDEX [m/MODULE_NAME] [tn/TUTORIAL_NAME]` <br> e.g., `removeFromTutorial 1 m/CS2103T tn/T11`                                                      |
+| **editTutorial**       | `editTutorial INDEX [tn/NEW_NAME] [tt/NEW_TIME]` <br> e.g., `editTutorial 1 tn/T11 tt/Mon`                                                                            |
