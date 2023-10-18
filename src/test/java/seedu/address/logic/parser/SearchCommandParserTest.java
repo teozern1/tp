@@ -1,0 +1,39 @@
+package seedu.address.logic.parser;
+
+import org.junit.jupiter.api.Test;
+import seedu.address.logic.commands.SearchCommand;
+import seedu.address.model.person.Name;
+import seedu.address.model.tag.Tag;
+import seedu.address.testutil.PersonBuilder;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static seedu.address.logic.commands.CommandTestUtil.MODULE_CS2100;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalPersons.BOB;
+
+public class SearchCommandParserTest {
+    private SearchCommandParser parser = new SearchCommandParser();
+
+    @Test
+    public void parse_namesPresentSuccess() {
+        Name expectedName = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build().getName();
+        List<Name> expectedNameList = new ArrayList<>(Arrays.asList(expectedName));
+        List<Tag> expectedModuleList = new ArrayList<>();
+        assertParseSuccess(parser, " n/" + BOB.getName(),
+                new SearchCommand(expectedNameList, expectedModuleList));
+    }
+
+    @Test
+    public void parse_modulesPresentSuccess() {
+        List<Name> expectedNameList = new ArrayList<>();
+        Tag testModuleTag = new Tag(MODULE_CS2100);
+        List<Tag> expectedModuleList = new ArrayList<>(Arrays.asList(testModuleTag));
+        assertParseSuccess(parser, " m/" + MODULE_CS2100,
+                new SearchCommand(expectedNameList, expectedModuleList));
+    }
+}
+

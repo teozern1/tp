@@ -16,12 +16,15 @@ import seedu.address.model.tag.Tag;
  * Searches for all persons in the address book that fit the given parameters.
  */
 public class SearchCommand extends Command {
+
     public static final String COMMAND_WORD = "search";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds people with the given conditions "
             + "Parameters: CONDITION1, CONDITION2, ..."
             + "[" + PREFIX_NAME + "NAME] OR [" + PREFIX_MODULE + "MODULE] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_MODULE + "CS1000 ";
+
     public static final String MESSAGE_SUCCESS = "Found the following people.";
 
     private final List<Name> personNameToSearch;
@@ -46,5 +49,20 @@ public class SearchCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(getPersonPredicateFromModule());
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SearchCommand)) {
+            return false;
+        }
+        List<Name> otherPersonNameToSearch = ((SearchCommand) other).personNameToSearch;
+        List<Tag> otherModuleTagToSearch = ((SearchCommand) other).moduleTagToSearch;
+        return this.personNameToSearch.equals(otherPersonNameToSearch) &&
+                this.moduleTagToSearch.equals(otherModuleTagToSearch);
     }
 }

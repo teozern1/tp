@@ -1,7 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
 
 import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -31,7 +33,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
                 .stream()
                 .map(nameString -> new Name(nameString))
                 .collect(Collectors.toList());
-        final List<Tag> moduleTagList = argMultimap.getAllValues(PREFIX_TAG)
+        final List<Tag> moduleTagList = argMultimap.getAllValues(PREFIX_MODULE)
                 .stream()
                 .map(moduleCode -> new Tag(moduleCode))
                 .collect(Collectors.toList());
