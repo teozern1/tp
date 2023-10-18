@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_CS2100;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -16,7 +18,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for SearchCommand.
@@ -52,5 +56,37 @@ public class SearchCommandTest {
         expectedModel.updateFilteredPersonList(person -> person.getTags().contains(module));
         assertCommandSuccess(new SearchCommand(nameList, moduleList), model,
                 SearchCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        List<Name> aliceNameList = new ArrayList<>(Arrays.asList(new Name("Alice")));
+        List<Name> bobNameList = new ArrayList<>(Arrays.asList(new Name("Bob")));
+
+        List<Tag> cs2100ModuleList = new ArrayList<>(Arrays.asList(new Tag("CS2100")));
+        List<Tag> cs2040ModuleList = new ArrayList<>(Arrays.asList(new Tag("CS2040")));
+
+        SearchCommand baseSearchCommand = new SearchCommand(aliceNameList, cs2100ModuleList);
+        SearchCommand baseSearchCommandAlt = new SearchCommand(aliceNameList, cs2100ModuleList);
+        SearchCommand diffNameSearchCommand = new SearchCommand(bobNameList, cs2100ModuleList);
+        SearchCommand diffModSearchCommand = new SearchCommand(aliceNameList, cs2040ModuleList);
+        SearchCommand diffNameDiffModSearchCommand = new SearchCommand(bobNameList, cs2040ModuleList);
+
+        // same object -> returns true
+        assertTrue(baseSearchCommand.equals(baseSearchCommand));
+
+        // same values -> returns true
+        assertTrue(baseSearchCommand.equals(baseSearchCommandAlt));
+
+        // different types -> returns false
+        assertFalse(baseSearchCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(baseSearchCommand.equals(null));
+
+        // different name or mod
+        assertFalse(baseSearchCommand.equals(diffNameSearchCommand));
+        assertFalse(baseSearchCommand.equals(diffModSearchCommand));
+        assertFalse(baseSearchCommand.equals(diffNameDiffModSearchCommand));
     }
 }

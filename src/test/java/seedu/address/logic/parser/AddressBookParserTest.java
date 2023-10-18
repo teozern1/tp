@@ -4,34 +4,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_TIME;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AddModuleCommand;
-import seedu.address.logic.commands.AddTutorialCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.DeleteModuleCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Module;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.ModuleBuilder;
@@ -128,6 +119,17 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
+    @Test
+    public void parseCommand_search() throws Exception {
+        String testModuleString = "CS1000";
+        String testName = "test name";
+        SearchCommand command = (SearchCommand) parser.parseCommand(SearchCommand.COMMAND_WORD + " "
+                + PREFIX_NAME + testName + " " + PREFIX_MODULE + testModuleString);
+
+        List<Name> nameList = new ArrayList<>(Arrays.asList(new Name(testName)));
+        List<Tag> moduleList = new ArrayList<>(Arrays.asList(new Tag(testModuleString)));
+        assertEquals(new SearchCommand(nameList, moduleList), command);
+    }
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()

@@ -1,7 +1,9 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_CS2100;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -11,6 +13,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddTutorialCommand;
 import seedu.address.logic.commands.SearchCommand;
 import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
@@ -35,6 +38,12 @@ public class SearchCommandParserTest {
         List<Tag> expectedModuleList = new ArrayList<>(Arrays.asList(testModuleTag));
         assertParseSuccess(parser, " m/" + MODULE_CS2100,
                 new SearchCommand(expectedNameList, expectedModuleList));
+    }
+
+    @Test
+    public void parse_preambleNotEmptyError() {
+        assertParseFailure(parser, " dummy text", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                SearchCommand.MESSAGE_USAGE));
     }
 }
 

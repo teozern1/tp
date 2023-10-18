@@ -60,6 +60,7 @@ public class SearchCommand extends Command {
         if (!(other instanceof SearchCommand)) {
             return false;
         }
+
         List<Name> otherPersonNameToSearch = ((SearchCommand) other).personNameToSearch;
         List<Tag> otherModuleTagToSearch = ((SearchCommand) other).moduleTagToSearch;
         return this.personNameToSearch.equals(otherPersonNameToSearch)
