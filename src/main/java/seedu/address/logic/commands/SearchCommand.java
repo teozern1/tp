@@ -39,8 +39,8 @@ public class SearchCommand extends Command {
 
     private Predicate<Person> getPersonPredicateFromModule() {
         return (person -> personNameToSearch.stream()
-                .allMatch(name -> person.getName().equals(name)) &&
-        moduleTagToSearch.stream()
+                .allMatch(name -> person.getName().equals(name))
+                && moduleTagToSearch.stream()
                 .allMatch(moduleTag -> person.getTags().contains(moduleTag)));
     }
 
@@ -62,7 +62,7 @@ public class SearchCommand extends Command {
         }
         List<Name> otherPersonNameToSearch = ((SearchCommand) other).personNameToSearch;
         List<Tag> otherModuleTagToSearch = ((SearchCommand) other).moduleTagToSearch;
-        return this.personNameToSearch.equals(otherPersonNameToSearch) &&
-                this.moduleTagToSearch.equals(otherModuleTagToSearch);
+        return this.personNameToSearch.equals(otherPersonNameToSearch)
+                && this.moduleTagToSearch.equals(otherModuleTagToSearch);
     }
 }

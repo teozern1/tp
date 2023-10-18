@@ -1,19 +1,20 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.SearchCommand;
-import seedu.address.model.person.Name;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import static seedu.address.logic.commands.CommandTestUtil.MODULE_CS2100;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static seedu.address.logic.commands.CommandTestUtil.MODULE_CS2100;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.SearchCommand;
+import seedu.address.model.person.Name;
+import seedu.address.model.tag.Tag;
+import seedu.address.testutil.PersonBuilder;
 
 public class SearchCommandParserTest {
     private SearchCommandParser parser = new SearchCommandParser();
