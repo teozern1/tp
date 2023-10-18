@@ -84,8 +84,10 @@ public class AddToModuleCommand extends Command {
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
         updatedTags.add(new Tag(this.moduleToAddTo.getModuleCode()));
+        StudentNumber updatedStudentNumber = personToEdit.getStudentNumber();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedStudentNumber);
     }
 
     @Override

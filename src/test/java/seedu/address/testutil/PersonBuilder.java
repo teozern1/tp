@@ -3,7 +3,12 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentNumber;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -91,6 +96,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code StudentNumber} of the {@code Person} that we are building.
+     */
     public PersonBuilder withStudentNumber(String studentNumber) {
         this.studentNumber = new StudentNumber(studentNumber);
         return this;

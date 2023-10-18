@@ -86,8 +86,9 @@ public class RemoveFromModuleCommand extends Command {
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
         updatedTags.remove(new Tag(this.moduleToRemoveFrom.getModuleCode()));
+        StudentNumber updatedStudentNumber = personToEdit.getStudentNumber();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedStudentNumber);
     }
 
     /**
