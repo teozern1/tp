@@ -12,9 +12,9 @@ public class JsonAdaptedModuleTest {
     private static final String INVALID_MODULE_CODE = "S/U THIS MOD LMAO";
     @Test
     public void toModelType_validModuleDetails_returnsModule() throws Exception {
-        Module CS2030S = new Module("CS2030S");
-        JsonAdaptedModule module = new JsonAdaptedModule(CS2030S);
-        assertEquals(CS2030S, module.toModelType());
+        Module randomModule = new Module("CS2030S");
+        JsonAdaptedModule module = new JsonAdaptedModule(randomModule);
+        assertEquals(randomModule, module.toModelType());
     }
 
     @Test
