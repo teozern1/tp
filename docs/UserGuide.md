@@ -76,7 +76,7 @@ Format: `help`
 
 Adds a person to TASsistant.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STUDENT_NUMBER [t/TAG]…​`
 
 <box type="tip" seamless>
 
@@ -86,6 +86,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Johann Petrovich s/A0232865J`
 
 ### Listing all persons : `list`
 
@@ -93,7 +94,28 @@ Shows a list of all persons in TASsistant.
 
 Format: `list`
 
+
+### Editing a person : `edit`
+
+Edits an existing person in the address book.
+
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STUDENT_NUMBER] [t/TAG]…​`
+
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person’s tags by typing `t/` without
+    specifying any tags after it.
+
+Examples:
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 3 s/A0514624K` Edits the student number of the 2nd person to be 'A0514624K'
+### Locating persons by name: `find`
+
 ### Deleting a person : `delete`
+
 
 Deletes the specified person from TASsistant.
 
@@ -149,6 +171,7 @@ If your changes to the data file makes its format invalid, TASsistant will disca
 
 ### Archiving data files `[coming in v2.0]`
 
+
 ### Adds a module to TASsistant: `addModule`
 Adds the module to TASsistant, displaying it on the GUI.
 The module name must consist of only alphanumeric characters, no shorter than 5 characters.
@@ -169,25 +192,8 @@ Format: `deleteModule INDEX`
 
 Example: `deleteModule 1`
 
-### Editing a Student's name : `editName`
 
-Changes the name of the student at the specified INDEX to NEW_NAME. INDEX specified must be within the boundaries of the
-current displayed list.
-
-Format: `editName INDEX NEW_NAME`
-
-Example: `editName 3 Ken Masters`
-
-### Editing a Student's student number: `editStudentNumber`
-
-Changes the student number of the student at the specified INDEX to NEW_NUMBER.
-INDEX must be within the boundaries on the current displayed list.
-
-Format: `editStudentNumber INDEX NEW_NUMBER`
-
-Example: `editStudentNumber 2 A0203032J`
-
-### Editing a Student's details: `editDetail`
+### Editing a Student's details: `editDetail` '[coming soon]'
 
 Allows the user to change less important details such as the telegram handle and
 email to new values. For this version the details are limited to `/TELEGRAM` and `/EMAIL`.

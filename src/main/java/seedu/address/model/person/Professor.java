@@ -11,7 +11,7 @@ public class Professor extends Person {
     /**
      * Every field must be present and not null.
      */
-    public Professor(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        super(name, phone, email, address, tags);
+    public Professor(Name name, Phone phone, Email email, Address address, Set<Tag> tags, StudentNumber studentNumber) {
+        super(name, phone, email, address, tags, studentNumber);
     }
 }
