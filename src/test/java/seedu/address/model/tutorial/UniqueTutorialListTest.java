@@ -75,6 +75,15 @@ public class UniqueTutorialListTest {
     }
 
     @Test
+    public void equals() {
+        UniqueTutorialList test = new UniqueTutorialList();
+
+        assertTrue(test.equals(test));
+        assertFalse(test.equals(1));
+        assertFalse(test.equals(null));
+    }
+
+    @Test
     public void toStringMethod() {
         assertEquals(uniqueTutorialList.asUnmodifiableObservableList().toString(), uniqueTutorialList.toString());
     }

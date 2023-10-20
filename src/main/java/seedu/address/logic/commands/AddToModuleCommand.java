@@ -19,6 +19,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -84,8 +85,10 @@ public class AddToModuleCommand extends Command {
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
         updatedTags.add(new Tag(this.moduleToAddTo.getModuleCode()));
+        StudentNumber updatedStudentNumber = personToEdit.getStudentNumber();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedStudentNumber);
     }
 
     @Override
