@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -9,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -18,16 +20,13 @@ import seedu.address.model.tutorial.Tutorial;
 public class DeleteTutorialCommandTest {
     @Test
     public void execute_outOfBoundsIndex_errorMessage() {
-        /* Needs Jackson's addressBook fix (so addressBook copies also copies modules) to work, not taking it from
-        from his fork in order to not interfere with RepoSense contribution.
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Module testModule = new Module("CS1000");
         model.addModule(testModule);
         Tutorial testTutorial = new Tutorial(testModule, "test name", "test time");
         model.addTutorial(testTutorial);
         DeleteTutorialCommand deleteTutorialCommand = new DeleteTutorialCommand(Index.fromOneBased(999));
-
-        assertCommandFailure(deleteTutorialCommand, model, DeleteTutorialCommand.MESSAGE_NO_TUTORIAL_FOUND);*/
+        assertCommandFailure(deleteTutorialCommand, model, DeleteTutorialCommand.MESSAGE_NO_TUTORIAL_FOUND);
     }
 
     @Test

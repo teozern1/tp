@@ -29,7 +29,6 @@ public class DeleteModuleCommandTest {
         String expectedMessage = String.format(DeleteModuleCommand.MESSAGE_SUCCESS, moduleToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        System.out.println(expectedModel.getModuleList());
         expectedModel.deleteModule(moduleToDelete);
 
         assertCommandSuccess(deleteModuleCommand, model, expectedMessage, expectedModel);

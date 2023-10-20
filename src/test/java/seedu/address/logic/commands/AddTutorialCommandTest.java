@@ -29,8 +29,6 @@ public class AddTutorialCommandTest {
 
     @Test
     public void execute_duplicateTutorial_errorMessage() {
-        /* Needs Jackson's addressBook fix (so addressBook copies also copies modules) to work, not taking it from
-        from his fork in order to not interfere with RepoSense contribution.
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Module testModule = new Module("CS1000");
         Tutorial testTutorial = new Tutorial(testModule, "test name", "test time");
@@ -38,7 +36,6 @@ public class AddTutorialCommandTest {
         model.addTutorial(testTutorial);
         AddTutorialCommand addTutorialCommand = new AddTutorialCommand(testTutorial);
         assertCommandFailure(addTutorialCommand, model, AddTutorialCommand.MESSAGE_DUPLICATE_TUTORIAL);
-        */
     }
 
     @Test

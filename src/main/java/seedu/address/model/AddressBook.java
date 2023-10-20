@@ -57,8 +57,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the person list with {@code modules}.
+     * {@code modules} must not contain duplicate persons.
      */
     public void setModules(List<Module> modules) {
         this.modules.setModules(modules);
