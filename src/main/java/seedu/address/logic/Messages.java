@@ -48,6 +48,12 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        builder.append("; Modules: ");
+        person.getModules().forEach(builder::append);
+        builder.append("; Tutorials: ");
+        person.getTutorials().forEach(builder::append);
+        builder.append("; Student Number: ")
+               .append(person.getStudentNumber());
         return builder.toString();
     }
 
