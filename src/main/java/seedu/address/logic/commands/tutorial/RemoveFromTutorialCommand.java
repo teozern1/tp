@@ -1,0 +1,132 @@
+package seedu.address.logic.commands.tutorial;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_NAME;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tutorial.Tutorial;
+
+/**
+ * Edits the details of an existing person in the address book.
+ */
+public class RemoveFromTutorialCommand extends Command {
+
+    public static final String COMMAND_WORD = "removeFromModule";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a user from a given tutorial "
+            + "Parameters:"
+            + "INDEX (must be a positive integer)"
+            + "[" + PREFIX_MODULE + "MODULE_NAME]"
+            + "[" + PREFIX_TUTORIAL_NAME + "TUTORIAL_NAME]\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_MODULE + "CS2103T "
+            + PREFIX_TUTORIAL_NAME + "T11 ";
+
+    public static final String MESSAGE_SUCCESS = "Edited Person: %1$s";
+
+    private final Index index;
+
+    private final Tutorial tutorialToRemoveFrom;
+
+    /**
+     * @param index of the person in the filtered person list to add tag to
+     */
+    public RemoveFromTutorialCommand(Index index, Tutorial tutorialToRemoveFrom) {
+        requireNonNull(index);
+        requireNonNull(tutorialToRemoveFrom);
+        this.index = index;
+        this.tutorialToRemoveFrom = tutorialToRemoveFrom;
+    }
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        if (!model.hasTutorial(tutorialToRemoveFrom)) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL);
+        }
+
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        if (!personHasTutorial(personToEdit, this.tutorialToRemoveFrom)) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL);
+        }
+        Person editedPerson = createEditedPerson(personToEdit);
+        model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(editedPerson)));
+    }
+
+    /**
+     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * edited with {@code editPersonDescriptor}.
+     */
+    private Person createEditedPerson(Person personToEdit) {
+        assert personToEdit != null;
+
+        Name updatedName = personToEdit.getName();
+        Phone updatedPhone = personToEdit.getPhone();
+        Email updatedEmail = personToEdit.getEmail();
+        Address updatedAddress = personToEdit.getAddress();
+        Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
+        updatedTags.remove(new Tag(this.tutorialToRemoveFrom.getTutName()));
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+    }
+
+    /**
+     * Returns if a given person is part of a specified tutorial.
+     * @param personToCheck The given person.
+     * @param tutorial The specified tutorial.
+     * @return Whether the person is part of the tutorial.
+     */
+    private boolean personHasTutorial(Person personToCheck, Tutorial tutorial) {
+        return personToCheck.getTags().contains(new Tag(tutorial.getTutName()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof RemoveFromTutorialCommand)) {
+            return false;
+        }
+
+        return this.index.equals(((RemoveFromTutorialCommand) other).index)
+                && this.tutorialToRemoveFrom.equals(((RemoveFromTutorialCommand) other).tutorialToRemoveFrom);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("index", index)
+                .add("tutorialName", tutorialToRemoveFrom)
+                .toString();
+    }
+}
+
