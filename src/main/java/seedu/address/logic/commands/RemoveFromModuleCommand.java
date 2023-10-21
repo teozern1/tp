@@ -21,6 +21,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentNumber;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutorial.Tutorial;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -85,11 +86,14 @@ public class RemoveFromModuleCommand extends Command {
         Phone updatedPhone = personToEdit.getPhone();
         Email updatedEmail = personToEdit.getEmail();
         Address updatedAddress = personToEdit.getAddress();
-        Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
-        updatedTags.remove(new Tag(this.moduleToRemoveFrom.getModuleCode()));
+        Set<Tag> updatedTags = personToEdit.getTags();
+        Set<Module> updatedModules = new HashSet<>(personToEdit.getModules());
+        updatedModules.remove(moduleToRemoveFrom);
+        Set<Tutorial> updatedTutorials = personToEdit.getTutorials();
         StudentNumber updatedStudentNumber = personToEdit.getStudentNumber();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedStudentNumber);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                updatedModules, updatedTutorials, updatedStudentNumber);
     }
 
     /**
@@ -99,7 +103,7 @@ public class RemoveFromModuleCommand extends Command {
      * @return Whether the person is part of the module.
      */
     private boolean personHasModule(Person personToCheck, Module module) {
-        return personToCheck.getTags().contains(new Tag(module.getModuleCode()));
+        return personToCheck.getModules().contains(module);
     }
 
     @Override

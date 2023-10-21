@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.logic.Messages;
 import seedu.address.model.person.Person;
 
 /**
@@ -40,6 +41,10 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+
+    @FXML
+    private Label moduleAndTutorialList;
+
     @FXML
     private Label studentNumber;
 
@@ -55,6 +60,8 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         studentNumber.setText(person.getStudentNumber().value);
+        moduleAndTutorialList.setText(Messages.MESSAGE_MODULE_STARTER
+            + String.join(", ", person.getUiOfModulesAndTutorials()));
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

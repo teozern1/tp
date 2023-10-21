@@ -22,6 +22,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.PersonBuilder;
 
 public class RemoveFromModuleCommandTest {
     @Test
@@ -55,19 +56,18 @@ public class RemoveFromModuleCommandTest {
         Module testModule = new Module("CS1000");
         model.addModule(testModule);
 
-        Person originalPerson = model.getAddressBook().getPersonList().get(0);
-        Set<Tag> updatedTags = new HashSet<>(originalPerson.getTags());
-        updatedTags.add(new Tag("CS1000"));
-        Person editedPerson = new Person(originalPerson.getName(), originalPerson.getPhone(),
-                originalPerson.getEmail(), originalPerson.getAddress(), updatedTags, originalPerson.getStudentNumber());
-        model.setPerson(model.getFilteredPersonList().get(0), editedPerson);
-        RemoveFromModuleCommand editCommand = new RemoveFromModuleCommand(INDEX_FIRST_PERSON, testModule);
+        Person personWithModule = new PersonBuilder(model.getAddressBook().getPersonList().get(0))
+                .withModules(testModule).build();
+        Person personWithoutModule = new PersonBuilder(model.getAddressBook().getPersonList().get(0)).build();
+        model.setPerson(model.getFilteredPersonList().get(0), personWithModule);
+
+        RemoveFromModuleCommand removeFromModuleCommand = new RemoveFromModuleCommand(INDEX_FIRST_PERSON, testModule);
         String expectedMessage = String.format(RemoveFromModuleCommand.MESSAGE_SUCCESS,
-                Messages.format(originalPerson));
+                Messages.format(personWithoutModule));
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.addModule(testModule);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(removeFromModuleCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

@@ -16,11 +16,13 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentNumber;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
 
@@ -89,10 +91,14 @@ public class AddToTutorialCommand extends Command {
         Phone updatedPhone = personToEdit.getPhone();
         Email updatedEmail = personToEdit.getEmail();
         Address updatedAddress = personToEdit.getAddress();
-        Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
-        updatedTags.add(new Tag(this.tutorialToAddTo.getModuleName()));
+        Set<Tag> updatedTags = personToEdit.getTags();
+        Set<Module> updatedModules = personToEdit.getModules();
+        Set<Tutorial> updatedTutorials = new HashSet<>(personToEdit.getTutorials());
+        updatedTutorials.add(tutorialToAddTo);
+        StudentNumber updatedStudentNumber = personToEdit.getStudentNumber();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedModules,
+                updatedTutorials, updatedStudentNumber);
     }
 
     @Override

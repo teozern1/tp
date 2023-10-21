@@ -16,11 +16,13 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentNumber;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
 
@@ -29,7 +31,7 @@ import seedu.address.model.tutorial.Tutorial;
  */
 public class RemoveFromTutorialCommand extends Command {
 
-    public static final String COMMAND_WORD = "removeFromModule";
+    public static final String COMMAND_WORD = "removeFromTutorial";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a user from a given tutorial "
             + "Parameters:"
@@ -90,10 +92,14 @@ public class RemoveFromTutorialCommand extends Command {
         Phone updatedPhone = personToEdit.getPhone();
         Email updatedEmail = personToEdit.getEmail();
         Address updatedAddress = personToEdit.getAddress();
-        Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
-        updatedTags.remove(new Tag(this.tutorialToRemoveFrom.getTutName()));
+        Set<Tag> updatedTags = personToEdit.getTags();
+        Set<Module> updatedModules = personToEdit.getModules();
+        Set<Tutorial> updatedTutorials = new HashSet<>(personToEdit.getTutorials());
+        updatedTutorials.remove(tutorialToRemoveFrom);
+        StudentNumber updatedStudentNumber = personToEdit.getStudentNumber();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                updatedModules, updatedTutorials, updatedStudentNumber);
     }
 
     /**
@@ -103,7 +109,7 @@ public class RemoveFromTutorialCommand extends Command {
      * @return Whether the person is part of the tutorial.
      */
     private boolean personHasTutorial(Person personToCheck, Tutorial tutorial) {
-        return personToCheck.getTags().contains(new Tag(tutorial.getTutName()));
+        return personToCheck.getTutorials().contains(tutorial);
     }
 
     @Override

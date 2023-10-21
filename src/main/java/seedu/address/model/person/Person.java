@@ -4,18 +4,20 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.module.Module;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutorial.Tutorial;
 
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
-
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -24,20 +26,23 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-
+    private final Set<Module> modules = new HashSet<>();
+    private final Set<Tutorial> tutorials = new HashSet<>();
     private final StudentNumber studentNumber;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  StudentNumber studentNumber) {
+                  Set<Module> modules, Set<Tutorial> tutorials, StudentNumber studentNumber) {
         requireAllNonNull(name, phone, email, address, tags, studentNumber);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.modules.addAll(modules);
+        this.tutorials.addAll(tutorials);
         this.studentNumber = studentNumber;
     }
 
@@ -63,6 +68,39 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Module> getModules() {
+        return Collections.unmodifiableSet(modules);
+    }
+
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tutorial> getTutorials() {
+        return Collections.unmodifiableSet(tutorials);
+    }
+
+    public Set<String> getUiOfModulesAndTutorials() {
+        /* LinkedHashSet used over HashSet because it maintains insertion order, so user will see all tutorials first,
+        then all modules without tutorials. */
+        Set<String> uiList = new LinkedHashSet<>();
+        Set<String> moduleCodesWithTutorials = new HashSet<>();
+        for (Tutorial tutorial : this.getTutorials()) {
+            moduleCodesWithTutorials.add(tutorial.getModuleName());
+            uiList.add(tutorial.toString());
+        }
+        for (Module module : this.getModules()) {
+            if (!moduleCodesWithTutorials.contains(module.getModuleCode())) {
+                uiList.add(module.toString());
+            }
+        }
+        return uiList;
     }
 
     public StudentNumber getStudentNumber() {
@@ -103,13 +141,15 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
+                && modules.equals(otherPerson.modules)
+                && tutorials.equals(otherPerson.tutorials)
                 && studentNumber.equals(otherPerson.studentNumber);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, studentNumber);
+        return Objects.hash(name, phone, email, address, tags, modules, tutorials, studentNumber);
     }
 
     @Override
@@ -120,6 +160,8 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("modules", modules)
+                .add("tutorials", tutorials)
                 .add("studentNumber", studentNumber)
                 .toString();
     }
