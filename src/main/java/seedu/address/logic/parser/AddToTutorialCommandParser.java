@@ -27,7 +27,7 @@ public class AddToTutorialCommandParser implements Parser<AddToTutorialCommand> 
     public AddToTutorialCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_MODULE, PREFIX_TUTORIAL_NAME);
+                ArgumentTokenizer.tokenize(args, PREFIX_MODULE, PREFIX_TUTORIAL_NAME, PREFIX_TUTORIAL_TIME);
 
         Index index;
         try {

@@ -6,6 +6,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -37,9 +38,8 @@ public class RemoveFromModuleCommand extends Command {
             + PREFIX_MODULE + "CS1000 ";
 
     public static final String MESSAGE_SUCCESS = "Edited Person: %1$s";
-
+    public static final String MESSAGE_PERSON_LACKS_MODULE = "User does not have the given module.";
     private final Index index;
-
     private final Module moduleToRemoveFrom;
 
     /**
@@ -67,7 +67,7 @@ public class RemoveFromModuleCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         if (!personHasModule(personToEdit, this.moduleToRemoveFrom)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_MODULE);
+            throw new CommandException(MESSAGE_PERSON_LACKS_MODULE);
         }
         Person editedPerson = createEditedPerson(personToEdit);
         model.setPerson(personToEdit, editedPerson);
@@ -89,7 +89,9 @@ public class RemoveFromModuleCommand extends Command {
         Set<Tag> updatedTags = personToEdit.getTags();
         Set<Module> updatedModules = new HashSet<>(personToEdit.getModules());
         updatedModules.remove(moduleToRemoveFrom);
-        Set<Tutorial> updatedTutorials = personToEdit.getTutorials();
+        Set<Tutorial> updatedTutorials = new HashSet<>(personToEdit.getTutorials());
+        updatedTutorials.removeIf(tutorial -> Objects.equals(tutorial.getModuleName(),
+                moduleToRemoveFrom.getModuleCode()));
         StudentNumber updatedStudentNumber = personToEdit.getStudentNumber();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
