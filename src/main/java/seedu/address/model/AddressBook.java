@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -135,6 +136,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The module must already exist in the address book.
      */
     public void removeModule(Module module) {
+        removeTutorialWithDeletedModule(module.getModuleCode());
         modules.remove(module);
     }
 
@@ -150,7 +152,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Adds a tutorial to the address book.
-     * The module must not already exist in the address book.
+     * The tutorial must not already exist in the address book.
      */
     public void addTutorial(Tutorial tutorial) {
         tutorials.add(tutorial);
@@ -158,10 +160,28 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Delete a tutorial from the address book.
-     * The module must already exist in the address book.
+     * The tutorial must already exist in the address book.
      */
     public void removeTutorial(Tutorial tutorial) {
         tutorials.remove(tutorial);
+    }
+
+    /**
+     * Delete a tutorial that contains a deleted Module from the address book.
+     */
+    public void removeTutorialWithDeletedModule(String deletedModuleCode) {
+        List<Tutorial> toBeRemoved = new ArrayList<>();
+
+        // Stores the tutorials which are to be removed in another list
+        for (Tutorial tutorial : tutorials) {
+            if (tutorial.getModuleName().equals(deletedModuleCode)) {
+                toBeRemoved.add(tutorial);
+            }
+        }
+
+        for (Tutorial tutorial : toBeRemoved) {
+            removeTutorial(tutorial);
+        }
     }
 
     /**
