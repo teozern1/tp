@@ -55,9 +55,9 @@ public class UniqueTutorialList implements Iterable<Tutorial> {
         }
     }
 
-
     /**
      * Replaces the contents of this list with {@code tutorials}.
+     * {@code tutorials} must not contain duplicate tutorials.
      */
     public void setTutorials(List<Tutorial> tutorials) {
         requireAllNonNull(tutorials);
