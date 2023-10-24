@@ -43,7 +43,7 @@ public class RemoveFromModuleCommandTest {
         model.addModule(test);
 
         assertCommandFailure(new RemoveFromModuleCommand(INDEX_FIRST_PERSON, test), model,
-                Messages.MESSAGE_INVALID_MODULE);
+                RemoveFromModuleCommand.MESSAGE_PERSON_LACKS_MODULE);
     }
 
     @Test
