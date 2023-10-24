@@ -205,7 +205,9 @@ public class ModelManager implements Model {
 
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && modules.equals(otherModelManager.modules)
+                && tutorials.equals(otherModelManager.tutorials);
     }
 
 }

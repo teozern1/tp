@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -12,6 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.module.Module;
+import seedu.address.model.tutorial.Tutorial;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -35,7 +38,21 @@ public class DeleteModuleCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+    public void execute_validModuleListWithTutorials_success() {
+        Module module = model.getModuleList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Tutorial tutorialOne = new Tutorial(module, "T12", "Mon 2pm");
+        Tutorial tutorialTwo = new Tutorial(module, "T13", "Mon 4pm");
+
+        model.addTutorial(tutorialOne);
+        model.addTutorial(tutorialTwo);
+        assertTrue(model.getTutorialList().size() == 2);
+
+        model.deleteModule(module);
+        assertTrue(model.getTutorialList().size() == 0);
+    }
+
+    @Test
+    public void execute_invalidIndexList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getModuleList().size() + 1);
         DeleteModuleCommand deleteModuleCommand = new DeleteModuleCommand(outOfBoundIndex);
 

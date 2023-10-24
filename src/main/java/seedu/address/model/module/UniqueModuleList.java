@@ -88,12 +88,6 @@ public class UniqueModuleList implements Iterable<Module> {
         UniqueModuleList otherUniqueModuleList = (UniqueModuleList) other;
         return internalList.equals(otherUniqueModuleList.internalList);
     }
-
-    @Override
-    public int hashCode() {
-        return internalList.hashCode();
-    }
-
     @Override
     public String toString() {
         return internalList.toString();
