@@ -77,11 +77,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_deleteModule() throws Exception {
-        Module module = new ModuleBuilder().build();
-
         String inputCmd = DeleteModuleCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased();
         DeleteModuleCommand command = (DeleteModuleCommand) parser.parseCommand(inputCmd);
-
 
         assertEquals(new DeleteModuleCommand(INDEX_FIRST_PERSON), command);
     }

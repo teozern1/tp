@@ -51,7 +51,6 @@ public class AddModuleCommandTest {
         AddModuleCommand addCS2100 = new AddModuleCommand(moduleCS2100);
         AddModuleCommand addCS2030 = new AddModuleCommand(moduleCS2030);
 
-
         // same object -> returns true
         assertTrue(addCS2100.equals(addCS2100));
 

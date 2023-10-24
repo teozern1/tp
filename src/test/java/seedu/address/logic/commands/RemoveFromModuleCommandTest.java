@@ -18,6 +18,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
+import seedu.address.model.tutorial.Tutorial;
 import seedu.address.testutil.PersonBuilder;
 
 public class RemoveFromModuleCommandTest {
@@ -50,18 +51,20 @@ public class RemoveFromModuleCommandTest {
     public void execute_validArgs_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Module testModule = new Module("CS1000");
+        Tutorial testTutorial = new Tutorial(testModule, "test tutorial name", "Mon 6pm");
         model.addModule(testModule);
+        model.addTutorial(testTutorial);
 
         Person personWithModule = new PersonBuilder(model.getAddressBook().getPersonList().get(0))
-                .withModules(testModule).build();
+                .withModules(testModule).withTutorials(testTutorial).build();
         Person personWithoutModule = new PersonBuilder(model.getAddressBook().getPersonList().get(0)).build();
         model.setPerson(model.getFilteredPersonList().get(0), personWithModule);
-
         RemoveFromModuleCommand removeFromModuleCommand = new RemoveFromModuleCommand(INDEX_FIRST_PERSON, testModule);
         String expectedMessage = String.format(RemoveFromModuleCommand.MESSAGE_SUCCESS,
                 Messages.format(personWithoutModule));
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.addModule(testModule);
+        expectedModel.addTutorial(testTutorial);
 
         assertCommandSuccess(removeFromModuleCommand, model, expectedMessage, expectedModel);
     }
