@@ -1,10 +1,12 @@
 package seedu.address.logic.commands;
 
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalModules.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -59,4 +61,25 @@ public class DeleteModuleCommandTest {
         assertCommandFailure(deleteModuleCommand, model, "The module list is currently empty!");
     }
 
+    @Test
+    public void equals() {
+        DeleteModuleCommand deleteFirst = new DeleteModuleCommand(INDEX_FIRST_PERSON);
+        DeleteModuleCommand deleteSecond = new DeleteModuleCommand(INDEX_SECOND_PERSON);
+
+        // same object -> returns true
+        assertTrue(deleteFirst.equals(deleteFirst));
+
+        // same values -> returns true
+        DeleteModuleCommand deleteFirstCopy = new DeleteModuleCommand(INDEX_FIRST_PERSON);
+        assertTrue(deleteFirst.equals(deleteFirstCopy));
+
+        // different types -> returns false
+        assertFalse(deleteFirst.equals(1));
+
+        // null -> returns false
+        assertFalse(deleteFirst.equals(null));
+
+        // different person -> returns false
+        assertFalse(deleteFirst.equals(deleteSecond));
+    }
 }

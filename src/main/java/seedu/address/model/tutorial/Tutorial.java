@@ -5,7 +5,7 @@ import java.util.Objects;
 import seedu.address.model.module.Module;
 
 /**
- * Placeholder comment.
+ * Represents a Tutorial in the address book.
  */
 public class Tutorial {
     /* Fields */

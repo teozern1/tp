@@ -13,8 +13,13 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.module.Module;
+import seedu.address.model.tutorial.Tutorial;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -23,6 +28,16 @@ public class PersonTest {
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+    }
+
+    @Test
+    public void getUiOfModulesAndTutorials_oneModuleAndTutorial_onlyTutorialGiven() {
+        Module testModule = new Module("CS1000");
+        Tutorial testTutorial = new Tutorial(testModule, "test tutorial name", "Mon 6pm");
+        Person testPerson = new PersonBuilder().withModules(testModule).withTutorials(testTutorial).build();
+        Set<String> expected = new LinkedHashSet<>();
+        expected.add(testTutorial.toString());
+        assertEquals(expected, testPerson.getUiOfModulesAndTutorials());
     }
 
     @Test
@@ -99,6 +114,7 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
+                + ", modules=" + ALICE.getModules() + ", tutorials=" + ALICE.getTutorials()
                 + ", studentNumber=" + ALICE.getStudentNumber() + "}";
         assertEquals(expected, ALICE.toString());
     }
