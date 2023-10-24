@@ -27,11 +27,13 @@ public class Person {
 
     private final StudentNumber studentNumber;
 
+    private final Telegram telegram;
+
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  StudentNumber studentNumber) {
+                  StudentNumber studentNumber, Telegram telegram) {
         requireAllNonNull(name, phone, email, address, tags, studentNumber);
         this.name = name;
         this.phone = phone;
@@ -39,6 +41,7 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.studentNumber = studentNumber;
+        this.telegram = telegram;
     }
 
     public Name getName() {
@@ -68,6 +71,11 @@ public class Person {
     public StudentNumber getStudentNumber() {
         return studentNumber;
     }
+
+    public Telegram getTelegram() {
+        return telegram;
+    }
+
 
     /**
      * Returns true if both persons have the same name.
@@ -103,13 +111,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && studentNumber.equals(otherPerson.studentNumber);
+                && studentNumber.equals(otherPerson.studentNumber)
+                && telegram.equals(otherPerson.telegram);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, studentNumber);
+        return Objects.hash(name, phone, email, address, tags, studentNumber, telegram);
     }
 
     @Override
@@ -121,6 +130,7 @@ public class Person {
                 .add("address", address)
                 .add("tags", tags)
                 .add("studentNumber", studentNumber)
+                .add("telegram", telegram)
                 .toString();
     }
 

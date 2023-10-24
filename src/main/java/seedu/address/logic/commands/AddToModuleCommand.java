@@ -20,6 +20,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentNumber;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -86,9 +87,11 @@ public class AddToModuleCommand extends Command {
         Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
         updatedTags.add(new Tag(this.moduleToAddTo.getModuleCode()));
         StudentNumber updatedStudentNumber = personToEdit.getStudentNumber();
+        Telegram updatedTelegram = personToEdit.getTelegram();
 
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedStudentNumber);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedStudentNumber,
+                updatedTelegram);
     }
 
     @Override
