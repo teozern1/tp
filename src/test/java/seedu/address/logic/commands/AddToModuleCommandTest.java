@@ -49,7 +49,8 @@ public class AddToModuleCommandTest {
         Set<Tag> updatedTags = new HashSet<>(originalPerson.getTags());
         updatedTags.add(new Tag("CS1000"));
         Person editedPerson = new Person(originalPerson.getName(), originalPerson.getPhone(),
-                originalPerson.getEmail(), originalPerson.getAddress(), updatedTags, originalPerson.getStudentNumber());
+                originalPerson.getEmail(), originalPerson.getAddress(), updatedTags, originalPerson.getStudentNumber(),
+                originalPerson.getTelegram());
         AddToModuleCommand editCommand = new AddToModuleCommand(INDEX_FIRST_PERSON, testModule);
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 

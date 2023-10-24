@@ -59,7 +59,8 @@ public class RemoveFromModuleCommandTest {
         Set<Tag> updatedTags = new HashSet<>(originalPerson.getTags());
         updatedTags.add(new Tag("CS1000"));
         Person editedPerson = new Person(originalPerson.getName(), originalPerson.getPhone(),
-                originalPerson.getEmail(), originalPerson.getAddress(), updatedTags, originalPerson.getStudentNumber());
+                originalPerson.getEmail(), originalPerson.getAddress(), updatedTags, originalPerson.getStudentNumber(),
+                originalPerson.getTelegram());
         model.setPerson(model.getFilteredPersonList().get(0), editedPerson);
         RemoveFromModuleCommand editCommand = new RemoveFromModuleCommand(INDEX_FIRST_PERSON, testModule);
         String expectedMessage = String.format(RemoveFromModuleCommand.MESSAGE_SUCCESS,
