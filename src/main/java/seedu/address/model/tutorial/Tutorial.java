@@ -53,31 +53,12 @@ public class Tutorial {
         return Objects.equals(module, tutorial.module) && Objects.equals(tutName, tutorial.tutName);
     }
 
-    /**
-     * returns the tutorial details only.
-     */
     @Override
     public String toString() {
         StringBuffer res = new StringBuffer("");
         res.append(module.getModuleCode() + " ");
         res.append(this.getTutName() + " ");
-        res.append(this.getTime() + " \nStudents:\n");
-        return res.toString();
-    }
-
-    /**
-     * returns the tutorial details and all the students.
-     */
-    public String toFullString() {
-        StringBuffer res = new StringBuffer("");
-        res.append(module.getModuleCode() + " ");
-        res.append(this.getTutName() + " ");
-        res.append(this.getTime() + " \nStudents:\n");
-        Person p;
-        for (int i = 0; i < population; i++) {
-            p = stuList.get(i);
-            res.append(p.toString() + "\n");
-        }
+        res.append(this.getTime() + " ");
         return res.toString();
     }
 
