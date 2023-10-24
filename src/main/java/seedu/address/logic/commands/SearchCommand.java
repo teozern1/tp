@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.model.Model;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
 
 /**
  * Searches for all persons in the address book that fit the given parameters.
@@ -28,20 +28,20 @@ public class SearchCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Found the following people.";
 
     private final List<Name> personNameToSearch;
-    private final List<Tag> moduleTagToSearch;
+    private final List<Module> modulesToSearch;
     /**
      * Creates an SearchByModuleCommand to add the specified {@code Person}
      */
-    public SearchCommand(List<Name> personName, List<Tag> module) {
+    public SearchCommand(List<Name> personName, List<Module> module) {
         personNameToSearch = personName;
-        moduleTagToSearch = module;
+        modulesToSearch = module;
     }
 
     private Predicate<Person> getPersonPredicateFromModule() {
         return (person -> personNameToSearch.stream()
                 .allMatch(name -> person.getName().equals(name))
-                && moduleTagToSearch.stream()
-                .allMatch(moduleTag -> person.getTags().contains(moduleTag)));
+                && modulesToSearch.stream()
+                .allMatch(module -> person.getModules().contains(module)));
     }
 
     @Override
@@ -62,8 +62,8 @@ public class SearchCommand extends Command {
         }
 
         List<Name> otherPersonNameToSearch = ((SearchCommand) other).personNameToSearch;
-        List<Tag> otherModuleTagToSearch = ((SearchCommand) other).moduleTagToSearch;
+        List<Module> otherModulesToSearch = ((SearchCommand) other).modulesToSearch;
         return this.personNameToSearch.equals(otherPersonNameToSearch)
-                && this.moduleTagToSearch.equals(otherModuleTagToSearch);
+                && this.modulesToSearch.equals(otherModulesToSearch);
     }
 }
