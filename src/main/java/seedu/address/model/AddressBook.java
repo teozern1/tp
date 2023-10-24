@@ -227,8 +227,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons) && modules.equals(otherAddressBook.modules)
-                && tutorials.equals(otherAddressBook.tutorials);
+        return persons.equals(otherAddressBook.persons);
     }
 
     @Override
