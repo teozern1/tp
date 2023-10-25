@@ -21,6 +21,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentNumber;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
 
@@ -93,9 +94,10 @@ public class RemoveFromModuleCommand extends Command {
         updatedTutorials.removeIf(tutorial -> Objects.equals(tutorial.getModuleName(),
                 moduleToRemoveFrom.getModuleCode()));
         StudentNumber updatedStudentNumber = personToEdit.getStudentNumber();
+        Telegram updatedTelegram = personToEdit.getTelegram();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedModules, updatedTutorials, updatedStudentNumber);
+                updatedModules, updatedTutorials, updatedStudentNumber, updatedTelegram);
     }
 
     /**

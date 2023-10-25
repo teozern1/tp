@@ -16,6 +16,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentNumber;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
 
@@ -35,13 +36,16 @@ class JsonAdaptedPerson {
 
     private final String studentNumber;
 
+    private final String telegram;
+
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("studentNumber") String studentNumber) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("studentNumber") String studentNumber,
+                             @JsonProperty("telegram") String telegram) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -50,6 +54,7 @@ class JsonAdaptedPerson {
             this.tags.addAll(tags);
         }
         this.studentNumber = studentNumber;
+        this.telegram = telegram;
     }
 
     /**
@@ -64,6 +69,7 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         studentNumber = source.getStudentNumber().value;
+        telegram = source.getTelegram().value;
     }
 
     /**
@@ -115,8 +121,14 @@ class JsonAdaptedPerson {
         }
         final StudentNumber modelStudentNumber = new StudentNumber(studentNumber);
 
+        if (telegram == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Telegram.class.getSimpleName()));
+        }
+        final Telegram modelTelegram = new Telegram(telegram);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                new HashSet<>(), new HashSet<>(), modelStudentNumber);
+                new HashSet<>(), new HashSet<>(), modelStudentNumber, modelTelegram);
     }
 }
