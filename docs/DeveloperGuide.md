@@ -4,10 +4,32 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# TAssistant Developer Guide
 
-<!-- * Table of Contents -->
-<page-nav-print />
+<h2>Table of Contents</h2>
+
+- **[Acknowledgements](#acknowledgements)**
+- **[Setting up, getting started](#setting-up-getting-started)**
+- **[Design](#design)**
+- **[Architecture](#architecture)**
+    * [UI Component](#ui-component)
+    * [Logic Component](#logic-component)
+    * [Model Component](#model-component)
+    * [Storage Component](#storage-component)
+- **[Implementation](#implementation)**
+    * [Module-Tutorial Interaction](#module-tutorial-interaction)
+    * [[Proposed] Undo/Redo feature](#proposed-undoredo-feature)
+- **[Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)**
+- **[Appendix: Requirements](#appendix-requirements)**
+    * [Product Scope](#product-scope)
+    * [User Stories](#user-stories)
+    * [Use Cases](#use-cases)
+    * [Non-functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
+- **[Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)**
+    * [Launch and shutdown](#launch-and-shutdown)
+    * [Delete a person](#deleting-a-person)
+    * [Saving data](#saving-data)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -156,6 +178,19 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### **Module-Tutorial Interaction**
+
+In NUS, modules are a unit of study, and most modules require students taking them to participate in tutorials. Each 
+module with tutorials has one or more tutorials, but each tutorial is usually only for one module. Given that Teaching 
+Assistants usually only teach tutorials rather than a module as a whole, we considered only including tutorials in our
+product, but decided against it because having both modules and tutorials allows for more convenient searching for
+teaching assistants teaching multiple modules. This comes at the cost of having to maintain the multiplicity between
+module and tutorials.
+
+To better enable advanced users, the app automatically performs actions to maintain the multiplicity constraint rather
+than force the user to type additional commands to maintain it. For example, the AddToTutorial command, which adds a 
+tutorial to a person, also adds the corresponding module to the user should they not have it.(Add sequence diagram here)
 
 ### \[Proposed\] Undo/redo feature
 

@@ -4,28 +4,35 @@
     pageNav: 3
 ---
 
-# TASsistant User Guide
+# **TASsistant User Guide**
 
 TASsistant is a desktop app for Teaching Assistants (TAs) in NUS to track information about the students and professors
 involved in tutoring. It is optimised for users that have experience with a Command Line Interface (CLI) and aims to be
 able to handle contact organisation faster than GUI apps if the user can type quickly.
 
-<!-- * Table of Contents -->
-<page-nav-print />
+<h2>Table of Contents</h2>
+
+- **[Introduction](#TASsistant User Guide)**
+- **[About](#setting-up-getting-started)**
+- **[Quick Start](#quick-start)**
+- **[Features](#features)**
+- **[List of Features](#command-summary)**
+- **[Glossary](#glossary)**
+- **[FAQ](#faq)**
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## **Quick start**
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `TASsistant.jar` from [here]().
+2. Download the latest `TASsistant.jar` from [here]().
 
-1. Copy the file to the folder you want to use as the _home folder_ for your TASsistant.
+3. Copy the file to the folder you want to use as the _home folder_ for your TASsistant.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TASsistant.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TASsistant.jar` command to run the application.<br>
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     * `list` : Lists all contacts.
@@ -36,11 +43,11 @@ able to handle contact organisation faster than GUI apps if the user can type qu
 
     * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## **Features**
 
 <box type="info" seamless>
 
@@ -94,7 +101,6 @@ Shows a list of all persons in TASsistant.
 
 Format: `list`
 
-
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
@@ -115,7 +121,6 @@ Examples:
 ### Locating persons by name: `find`
 
 ### Deleting a person : `delete`
-
 
 Deletes the specified person from TASsistant.
 
@@ -163,8 +168,6 @@ TASsistant data are saved in the hard disk automatically after any command that 
 
 TASsistant data are saved automatically as a JSON file `[JAR file location]/data/TASsistant.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
-
 **Caution:**
 If your changes to the data file makes its format invalid, TASsistant will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </box>
@@ -192,7 +195,6 @@ Format: `deleteModule INDEX`
 
 Example: `deleteModule 1`
 
-
 ### Editing a Student's details: `editDetail` '[coming soon]'
 
 Allows the user to change less important details such as the telegram handle and
@@ -209,52 +211,46 @@ The index refers to the index number shown in the displayed user list.
 Users are added with “none” status. The index must be a positive integer.
 Will give an error message if the module given has not been made.
 
-Format: `addToModule INDEX MODULE`
+Format: `addToModule INDEX [m/MODULE]`
 
-Example: `addToModule 2 CS2103T`
+Example: `addToModule 2 m/CS2103T` adds the person who is second from the top in the current list to the module
+CS2103T, if the module CS2103T exists.
 
 ### Removes a user from a given module: `removeFromModule`
 
 Removes the user at the specified INDEX displayed on the GUI from a given module.
-The index refers to the index number shown in the displayed user list.
-Users are added with “none” status. The index must be a positive integer.
+The index refers to the index number shown in the displayed user list. The index must be a positive integer.
 Will give an error message if the module given has not been made or if the user is not part of the given module.
 
-Format: `removeFromModule INDEX MODULE`
+Format: `removeFromModule INDEX [m/MODULE]`
 
-Example: `removeFromModule 2 CS2103T`
+Example: `removeFromModule 2 m/CS2103T` removes the person who is second from the top in the current list from the module
+CS2103T, if the module CS2103T exists and the person who is second from the top is part of the module CS2103T.
 
 ### Adds a tutorial to a given module: `addTutorial`
-Adds a tutorial with a specific tutorial name to a given module.
-Different modules can have different tutorials with the same name.
-Will give an error message if the module does not exist or a tutorial with the same name
-has already been made for the module.
 
-Format: `addTutorial TUTORIALNAME MODULE`
+Adds a tutorial with a specific tutorial name to a given module. Different modules can have different tutorials 
+with the same name. Will give an error message if the module does not exist or a tutorial with the same name has already
+been made for the module.
 
-Example: `addTutorial c12 CS2103T`
+Format: `addTutorial [m/MODULE_NAME] [tn/TUTORIAL_NAME] [tt/TUTORIAL_TIME]`
+
+Example: `addTutorial m/CS2103T tn/T12 tt/Mon 6pm` adds a tutorial with name T12 and time "Mon 6pm" belonging to module
+CS2103T, if module CS2103T exists.
 
 ### Removes a tutorial from a given module: `removeTutorial`
+
 Removes a tutorial with a specific tutorial name to a given module.
 Will give an error message if the module given has not been made, or if the tutorial does not exist.
 
-Format: `removeTutorial TUTORIALNAME MODULE`
+Format: `removeTutorial [tn/TUTORIAL_NAME] [m/MODULE_NAME]`
 
-Example: `removeTutorial c12 CS2103T`
-
-### Gives a specific user a given status: `changeStatus`
-Changes the status of the user at the specified INDEX for a given module,
-whether they are a professor, teaching assistant, user or none, a placeholder value.
-The index refers to the index number shown in the displayed user list. It must be a positive integer.
-The letter represents the status to change the user to: “p” for professor, “t” for TA, “s” for student and “n” for none.
-
-Format: `changeStatus INDEX MODULE (LETTER: p/t/s/n)`
-
-Example: `changeStatus 2 CS2103T t`
+Example: `removeTutorial c12 CS2103T` removes a tutorial with name T12 and time "Mon 6pm" belonging to module CS2103T,
+if module CS2103T exists and the tutorial already exists.
 
 ### Adds a student to stated Tutorial: `addToTutorial`
-Add a new student to the stated tutorial’s student list.
-Fails if the index is not valid.
+
+Add a new student to the stated tutorial’s student list. Fails if the index is not valid.
 Fails and gives an error message if the student already has a tutorial.
 
 Format: `addToTutorial INDEX [m/MODULE_NAME] [tn/TUTORIAL_NAME]`
@@ -262,14 +258,15 @@ Format: `addToTutorial INDEX [m/MODULE_NAME] [tn/TUTORIAL_NAME]`
 Example: `addToTutorial 1 m/CS2103T tn/T11`
 
 ### Removes a student from stated Tutorial: `removeFromTutorial`
-Remove a new student to the stated tutorial’s student list.
-Fails if the index is not valid.
+
+Removes a student from the stated tutorial’s student list. Fails if the index is not valid.
 
 Format: `removeFromTutorial INDEX [m/MODULE_NAME] [tn/TUTORIAL_NAME]`
 
 Example: `removeFromTutorial 1 m/CS2103T tn/T11`
 
 ### Edit the details of the stated Tutorial: `editTutorial`
+
 Edit the name and/or the time of the stated Tutorial.
 Fails if NEW_NAME or NEW_TIME is in invalid format.
 
@@ -307,3 +304,22 @@ Example: `editTutorial 1 tn/T11 tt/Mon`
 | **addToTutorial**      | `addToTutorial INDEX [m/MODULE_NAME] [tn/TUTORIAL_NAME]` <br> e.g., `addToTutorial 1 m/CS2103T tn/T11`                                                                |
 | **removeFromTutorial** | `removeFromTutorial INDEX [m/MODULE_NAME] [tn/TUTORIAL_NAME]` <br> e.g., `removeFromTutorial 1 m/CS2103T tn/T11`                                                      |
 | **editTutorial**       | `editTutorial INDEX [tn/NEW_NAME] [tt/NEW_TIME]` <br> e.g., `editTutorial 1 tn/T11 tt/Mon`                                                                            |
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Glossary
+
+* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Teaching Assistant (TA)**: A non-professor tutor which helps the professors of a module by teaching one or more classes.
+* **Module**: A unit of study in a specific field set by NUS, such as CS2103T focusing on Software Engineering.
+* **Class**: Lessons that are part of a module. Includes laboratries, recitations, tutorials and any form of lesson that includes a TA.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **FAQ**
+
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install the app on the other computer and overwrite the empty data file it creates with the file that contains
+the data of your previous UniNurse home folder.
+
+--------------------------------------------------------------------------------------------------------------------
