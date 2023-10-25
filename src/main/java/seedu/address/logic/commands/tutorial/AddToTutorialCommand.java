@@ -96,9 +96,10 @@ public class AddToTutorialCommand extends Command {
         Set<Tutorial> updatedTutorials = new HashSet<>(personToEdit.getTutorials());
         updatedTutorials.add(tutorialToAddTo);
         StudentNumber updatedStudentNumber = personToEdit.getStudentNumber();
+        Telegram updatedTelegram = personToEdit.getTelegram();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedModules,
-                updatedTutorials, updatedStudentNumber);
+                updatedTutorials, updatedStudentNumber, updatedTelegram);
     }
 
     @Override
