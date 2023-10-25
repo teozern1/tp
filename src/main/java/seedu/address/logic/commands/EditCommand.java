@@ -23,6 +23,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -31,6 +32,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentNumber;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutorial.Tutorial;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -97,6 +99,8 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
+     * Note that EditCommand cannot affect modules & tutorials as those are separate commands & are too complex to
+     * put into editCommand.
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
@@ -106,12 +110,14 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Module> updatedModules = personToEdit.getModules();
+        Set<Tutorial> updatedTutorials = personToEdit.getTutorials();
         StudentNumber updatedStudentNumber = editPersonDescriptor.getStudentNumber()
                 .orElse(personToEdit.getStudentNumber());
         Telegram updatedTelegram = editPersonDescriptor.getTelegram().orElse(personToEdit.getTelegram());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedStudentNumber,
-                updatedTelegram);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedModules,
+                updatedTutorials, updatedStudentNumber, updatedTelegram);
     }
 
     @Override
@@ -167,7 +173,6 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
             setStudentNumber(toCopy.studentNumber);
             setTelegram(toCopy.telegram);
-
         }
 
         /**

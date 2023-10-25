@@ -9,9 +9,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -21,7 +18,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
+import seedu.address.testutil.PersonBuilder;
 
 public class AddToModuleCommandTest {
     @Test
@@ -45,17 +42,14 @@ public class AddToModuleCommandTest {
         Module testModule = new Module("CS1000");
         model.addModule(testModule);
 
-        Person originalPerson = model.getAddressBook().getPersonList().get(0);
-        Set<Tag> updatedTags = new HashSet<>(originalPerson.getTags());
-        updatedTags.add(new Tag("CS1000"));
-        Person editedPerson = new Person(originalPerson.getName(), originalPerson.getPhone(),
-                originalPerson.getEmail(), originalPerson.getAddress(), updatedTags, originalPerson.getStudentNumber(),
-                originalPerson.getTelegram());
+        Person personWithModule = new PersonBuilder(model.getAddressBook().getPersonList().get(0))
+                .withModules(testModule).build();
+
         AddToModuleCommand editCommand = new AddToModuleCommand(INDEX_FIRST_PERSON, testModule);
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(AddToModuleCommand.MESSAGE_SUCCESS, Messages.format(personWithModule));
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), personWithModule);
         expectedModel.addModule(testModule);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);

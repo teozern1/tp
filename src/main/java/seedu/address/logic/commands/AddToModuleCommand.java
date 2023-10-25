@@ -22,6 +22,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentNumber;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutorial.Tutorial;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -36,7 +37,7 @@ public class AddToModuleCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_MODULE + "CS1000 ";
 
-    public static final String MESSAGE_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_SUCCESS = "Added person to module: %1$s";
 
     private final Index index;
 
@@ -84,14 +85,16 @@ public class AddToModuleCommand extends Command {
         Phone updatedPhone = personToEdit.getPhone();
         Email updatedEmail = personToEdit.getEmail();
         Address updatedAddress = personToEdit.getAddress();
-        Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
-        updatedTags.add(new Tag(this.moduleToAddTo.getModuleCode()));
+        Set<Tag> updatedTags = personToEdit.getTags();
+        Set<Module> updatedModules = new HashSet<>(personToEdit.getModules());
+        updatedModules.add(moduleToAddTo);
+        Set<Tutorial> updatedTutorials = personToEdit.getTutorials();
         StudentNumber updatedStudentNumber = personToEdit.getStudentNumber();
         Telegram updatedTelegram = personToEdit.getTelegram();
 
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedModules,
+                updatedTutorials, updatedStudentNumber, updatedTelegram);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedStudentNumber,
-                updatedTelegram);
     }
 
     @Override

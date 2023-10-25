@@ -36,7 +36,6 @@ import seedu.address.model.module.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.ModuleBuilder;
@@ -77,11 +76,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_deleteModule() throws Exception {
-        Module module = new ModuleBuilder().build();
-
         String inputCmd = DeleteModuleCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased();
         DeleteModuleCommand command = (DeleteModuleCommand) parser.parseCommand(inputCmd);
-
 
         assertEquals(new DeleteModuleCommand(INDEX_FIRST_PERSON), command);
     }
@@ -141,7 +137,7 @@ public class AddressBookParserTest {
                 + PREFIX_NAME + testName + " " + PREFIX_MODULE + testModuleString);
 
         List<Name> nameList = new ArrayList<>(Arrays.asList(new Name(testName)));
-        List<Tag> moduleList = new ArrayList<>(Arrays.asList(new Tag(testModuleString)));
+        List<Module> moduleList = new ArrayList<>(Arrays.asList(new Module(testModuleString)));
         assertEquals(new SearchCommand(nameList, moduleList), command);
     }
     @Test

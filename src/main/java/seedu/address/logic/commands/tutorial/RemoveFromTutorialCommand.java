@@ -1,17 +1,19 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.tutorial;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
@@ -21,36 +23,39 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentNumber;
-import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
  * Edits the details of an existing person in the address book.
  */
-public class RemoveFromModuleCommand extends Command {
+public class RemoveFromTutorialCommand extends Command {
 
-    public static final String COMMAND_WORD = "removeFromModule";
+    public static final String COMMAND_WORD = "removeFromTutorial";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a user from a given module "
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_MODULE + "MODULE]\n "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a user from a given tutorial "
+            + "Parameters:"
+            + "INDEX (must be a positive integer)"
+            + "[" + PREFIX_MODULE + "MODULE_NAME]"
+            + "[" + PREFIX_TUTORIAL_NAME + "TUTORIAL_NAME]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_MODULE + "CS1000 ";
+            + PREFIX_MODULE + "CS2103T "
+            + PREFIX_TUTORIAL_NAME + "T11 ";
 
     public static final String MESSAGE_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_PERSON_LACKS_MODULE = "User does not have the given module.";
+
     private final Index index;
-    private final Module moduleToRemoveFrom;
+
+    private final Tutorial tutorialToRemoveFrom;
 
     /**
      * @param index of the person in the filtered person list to add tag to
      */
-    public RemoveFromModuleCommand(Index index, Module moduleToRemoveFrom) {
+    public RemoveFromTutorialCommand(Index index, Tutorial tutorialToRemoveFrom) {
         requireNonNull(index);
-        requireNonNull(moduleToRemoveFrom);
+        requireNonNull(tutorialToRemoveFrom);
         this.index = index;
-        this.moduleToRemoveFrom = moduleToRemoveFrom;
+        this.tutorialToRemoveFrom = tutorialToRemoveFrom;
     }
 
     @Override
@@ -62,13 +67,13 @@ public class RemoveFromModuleCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        if (!model.hasModule(moduleToRemoveFrom)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_MODULE);
+        if (!model.hasTutorial(tutorialToRemoveFrom)) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        if (!personHasModule(personToEdit, this.moduleToRemoveFrom)) {
-            throw new CommandException(MESSAGE_PERSON_LACKS_MODULE);
+        if (!personHasTutorial(personToEdit, this.tutorialToRemoveFrom)) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL);
         }
         Person editedPerson = createEditedPerson(personToEdit);
         model.setPerson(personToEdit, editedPerson);
@@ -88,26 +93,23 @@ public class RemoveFromModuleCommand extends Command {
         Email updatedEmail = personToEdit.getEmail();
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = personToEdit.getTags();
-        Set<Module> updatedModules = new HashSet<>(personToEdit.getModules());
-        updatedModules.remove(moduleToRemoveFrom);
+        Set<Module> updatedModules = personToEdit.getModules();
         Set<Tutorial> updatedTutorials = new HashSet<>(personToEdit.getTutorials());
-        updatedTutorials.removeIf(tutorial -> Objects.equals(tutorial.getModuleName(),
-                moduleToRemoveFrom.getModuleCode()));
+        updatedTutorials.remove(tutorialToRemoveFrom);
         StudentNumber updatedStudentNumber = personToEdit.getStudentNumber();
-        Telegram updatedTelegram = personToEdit.getTelegram();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedModules, updatedTutorials, updatedStudentNumber, updatedTelegram);
+                updatedModules, updatedTutorials, updatedStudentNumber);
     }
 
     /**
-     * Returns if a given person is part of a specified module.
+     * Returns if a given person is part of a specified tutorial.
      * @param personToCheck The given person.
-     * @param module The specified module.
-     * @return Whether the person is part of the module.
+     * @param tutorial The specified tutorial.
+     * @return Whether the person is part of the tutorial.
      */
-    private boolean personHasModule(Person personToCheck, Module module) {
-        return personToCheck.getModules().contains(module);
+    private boolean personHasTutorial(Person personToCheck, Tutorial tutorial) {
+        return personToCheck.getTutorials().contains(tutorial);
     }
 
     @Override
@@ -117,18 +119,20 @@ public class RemoveFromModuleCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof RemoveFromModuleCommand)) {
+        if (!(other instanceof RemoveFromTutorialCommand)) {
             return false;
         }
 
-        return this.index.equals(((RemoveFromModuleCommand) other).index)
-                && this.moduleToRemoveFrom.equals(((RemoveFromModuleCommand) other).moduleToRemoveFrom);
+        return this.index.equals(((RemoveFromTutorialCommand) other).index)
+                && this.tutorialToRemoveFrom.equals(((RemoveFromTutorialCommand) other).tutorialToRemoveFrom);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
+                .add("tutorialName", tutorialToRemoveFrom)
                 .toString();
     }
 }
+
