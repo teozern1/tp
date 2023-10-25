@@ -149,7 +149,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags)      
+                && tags.equals(otherPerson.tags)
                 && modules.equals(otherPerson.modules)
                 && tutorials.equals(otherPerson.tutorials)
                 && studentNumber.equals(otherPerson.studentNumber)
