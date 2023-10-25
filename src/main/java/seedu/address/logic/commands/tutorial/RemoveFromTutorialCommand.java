@@ -97,9 +97,10 @@ public class RemoveFromTutorialCommand extends Command {
         Set<Tutorial> updatedTutorials = new HashSet<>(personToEdit.getTutorials());
         updatedTutorials.remove(tutorialToRemoveFrom);
         StudentNumber updatedStudentNumber = personToEdit.getStudentNumber();
+        Telegram updatedTelegram = personToEdit.getTelegram();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedModules, updatedTutorials, updatedStudentNumber);
+                updatedModules, updatedTutorials, updatedStudentNumber, updatedTelegram);
     }
 
     /**
