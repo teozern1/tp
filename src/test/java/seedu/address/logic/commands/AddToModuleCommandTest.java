@@ -44,6 +44,7 @@ public class AddToModuleCommandTest {
 
         Person personWithModule = new PersonBuilder(model.getAddressBook().getPersonList().get(0))
                 .withModules(testModule).build();
+
         AddToModuleCommand editCommand = new AddToModuleCommand(INDEX_FIRST_PERSON, testModule);
         String expectedMessage = String.format(AddToModuleCommand.MESSAGE_SUCCESS, Messages.format(personWithModule));
 

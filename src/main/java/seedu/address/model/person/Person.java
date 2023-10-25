@@ -30,11 +30,14 @@ public class Person {
     private final Set<Tutorial> tutorials = new HashSet<>();
     private final StudentNumber studentNumber;
 
+    private final Telegram telegram;
+
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  Set<Module> modules, Set<Tutorial> tutorials, StudentNumber studentNumber) {
+                  Set<Module> modules, Set<Tutorial> tutorials, StudentNumber studentNumber,
+                  Telegram telegram) {
         requireAllNonNull(name, phone, email, address, tags, studentNumber);
         this.name = name;
         this.phone = phone;
@@ -44,6 +47,7 @@ public class Person {
         this.modules.addAll(modules);
         this.tutorials.addAll(tutorials);
         this.studentNumber = studentNumber;
+        this.telegram = telegram;
     }
 
     public Name getName() {
@@ -107,6 +111,11 @@ public class Person {
         return studentNumber;
     }
 
+    public Telegram getTelegram() {
+        return telegram;
+    }
+
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -143,13 +152,14 @@ public class Person {
                 && tags.equals(otherPerson.tags)
                 && modules.equals(otherPerson.modules)
                 && tutorials.equals(otherPerson.tutorials)
-                && studentNumber.equals(otherPerson.studentNumber);
+                && studentNumber.equals(otherPerson.studentNumber)
+                && telegram.equals(otherPerson.telegram);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, modules, tutorials, studentNumber);
+        return Objects.hash(name, phone, email, address, tags, modules, tutorials, studentNumber, telegram);
     }
 
     @Override
@@ -163,7 +173,7 @@ public class Person {
                 .add("modules", modules)
                 .add("tutorials", tutorials)
                 .add("studentNumber", studentNumber)
+                .add("telegram", telegram)
                 .toString();
     }
-
 }

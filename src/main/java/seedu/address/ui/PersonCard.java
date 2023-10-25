@@ -48,6 +48,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label studentNumber;
 
+    @FXML
+    private Label telegram;
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -65,5 +67,6 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        telegram.setText(person.getTelegram().value);
     }
 }

@@ -11,6 +11,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentNumber;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
 import seedu.address.model.util.SampleDataUtil;
@@ -27,6 +28,8 @@ public class PersonBuilder {
 
     public static final String DEFAULT_STUDENT_NUMBER = "A1234567K";
 
+    public static final String DEFAULT_TELEGRAM = "@default";
+
     private Name name;
     private Phone phone;
     private Email email;
@@ -36,6 +39,8 @@ public class PersonBuilder {
     private Set<Tutorial> tutorials;
 
     private StudentNumber studentNumber;
+
+    private Telegram telegram;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -49,6 +54,7 @@ public class PersonBuilder {
         modules = new HashSet<>();
         tutorials = new HashSet<>();
         studentNumber = new StudentNumber(DEFAULT_STUDENT_NUMBER);
+        telegram = new Telegram(DEFAULT_TELEGRAM);
     }
 
     /**
@@ -63,6 +69,7 @@ public class PersonBuilder {
         modules = new HashSet<>(personToCopy.getModules());
         tutorials = new HashSet<>(personToCopy.getTutorials());
         studentNumber = personToCopy.getStudentNumber();
+        telegram = personToCopy.getTelegram();
     }
 
     /**
@@ -128,9 +135,15 @@ public class PersonBuilder {
         this.studentNumber = new StudentNumber(studentNumber);
         return this;
     }
-
+    /**
+     * Sets the {@code Telegram} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withTelegram(String telegram) {
+        this.telegram = new Telegram(telegram);
+        return this;
+    }
     public Person build() {
-        return new Person(name, phone, email, address, tags, modules, tutorials, studentNumber);
+        return new Person(name, phone, email, address, tags, modules, tutorials, studentNumber, telegram);
     }
 
 }
