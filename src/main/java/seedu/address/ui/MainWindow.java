@@ -204,9 +204,13 @@ public class MainWindow extends UiPart<Stage> {
             moduleBoxPlaceholder.getChildren().clear();
             moduleBoxPlaceholder.getChildren().add(moduleBox.getRoot());
 
+            logger.info("Module GUI updated: " + logic.getModuleList());
+
             TutorialBox tutorialBox = new TutorialBox(logic.getTutorialList());
             tutorialBoxPlaceholder.getChildren().clear();
             tutorialBoxPlaceholder.getChildren().add(tutorialBox.getRoot());
+
+            logger.info("Tutorial GUI updated: " + logic.getTutorialList());
 
             return commandResult;
         } catch (CommandException | ParseException e) {

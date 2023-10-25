@@ -21,6 +21,10 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_MODULE = "Module does not exist";
     public static final String MESSAGE_ADD_MODULE_CHECK = "New module added: ";
+    public static final String MESSAGE_INVALID_TUTORIAL = "Tutorial does not exist";
+
+    public static final String MESSAGE_MODULE_STARTER = "Tutorials and Modules: ";
+    public static final String MESSAGE_INVALID_TUTORIAL_DISPLAYED_INDEX = "The tutorial index provided is invalid";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -48,6 +52,12 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        builder.append("; Modules: ");
+        person.getModules().forEach(builder::append);
+        builder.append("; Tutorials: ");
+        person.getTutorials().forEach(builder::append);
+        builder.append("; Student Number: ")
+               .append(person.getStudentNumber());
         return builder.toString();
     }
 

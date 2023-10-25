@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Name;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new SearchCommand object
@@ -32,9 +32,9 @@ public class SearchCommandParser implements Parser<SearchCommand> {
                 .stream()
                 .map(nameString -> new Name(nameString))
                 .collect(Collectors.toList());
-        final List<Tag> moduleTagList = argMultimap.getAllValues(PREFIX_MODULE)
+        final List<Module> moduleTagList = argMultimap.getAllValues(PREFIX_MODULE)
                 .stream()
-                .map(moduleCode -> new Tag(moduleCode))
+                .map(moduleCode -> new Module(moduleCode))
                 .collect(Collectors.toList());
         return new SearchCommand(personNameList, moduleTagList);
     }
