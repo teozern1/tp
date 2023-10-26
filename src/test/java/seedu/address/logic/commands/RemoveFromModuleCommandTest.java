@@ -55,7 +55,6 @@ public class RemoveFromModuleCommandTest {
         model.addModule(testModule);
         model.addTutorial(testTutorial);
 
-
         Person personWithModule = new PersonBuilder(model.getAddressBook().getPersonList().get(0))
                 .withModules(testModule).withTutorials(testTutorial).build();
         Person personWithoutModule = new PersonBuilder(model.getAddressBook().getPersonList().get(0)).build();

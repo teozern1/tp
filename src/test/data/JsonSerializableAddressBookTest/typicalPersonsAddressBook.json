@@ -14,6 +14,14 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ],
+    "modules" : [ {
+      "moduleCode" : "CS2030S"
+    } ],
+    "tutorials" : [ {
+      "moduleCode" : "CS2030S",
+      "tutName" : "TUT1",
+      "time" : "Mon 9pm"
+    } ],
     "studentNumber" : "A0203221J",
     "telegram" : "@bruh"
   }, {

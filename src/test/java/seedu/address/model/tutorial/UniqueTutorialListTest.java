@@ -4,13 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalTutorials.TESTMODULE_CS1000;
-import static seedu.address.testutil.TypicalTutorials.TUTORIAL_CS1000_TUT1_MON9PM;
+import static seedu.address.testutil.TypicalTutorials.TUTORIAL_TUT1_MON9PM;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.tutorial.exceptions.DuplicateTutorialException;
 import seedu.address.model.tutorial.exceptions.TutorialNotFoundException;
+import seedu.address.testutil.TypicalModules;
 
 public class UniqueTutorialListTest {
 
@@ -23,19 +23,19 @@ public class UniqueTutorialListTest {
 
     @Test
     public void contains_tutorialNotInList_returnsFalse() {
-        assertFalse(uniqueTutorialList.contains(TUTORIAL_CS1000_TUT1_MON9PM));
+        assertFalse(uniqueTutorialList.contains(TUTORIAL_TUT1_MON9PM));
     }
 
     @Test
     public void contains_tutorialInList_returnsTrue() {
-        uniqueTutorialList.add(TUTORIAL_CS1000_TUT1_MON9PM);
-        assertTrue(uniqueTutorialList.contains(TUTORIAL_CS1000_TUT1_MON9PM));
+        uniqueTutorialList.add(TUTORIAL_TUT1_MON9PM);
+        assertTrue(uniqueTutorialList.contains(TUTORIAL_TUT1_MON9PM));
     }
 
     @Test
     public void contains_tutorialWithSameIdentityFieldsInList_returnsTrue() {
-        uniqueTutorialList.add(TUTORIAL_CS1000_TUT1_MON9PM);
-        Tutorial sameTutorial = new Tutorial(TESTMODULE_CS1000, "TUT1", "Mon 9pm");
+        uniqueTutorialList.add(TUTORIAL_TUT1_MON9PM);
+        Tutorial sameTutorial = new Tutorial(TypicalModules.FIRST_MODULE, "TUT1", "Mon 9pm");
         assertTrue(uniqueTutorialList.contains(sameTutorial));
     }
 
@@ -46,8 +46,8 @@ public class UniqueTutorialListTest {
 
     @Test
     public void add_duplicateTutorial_throwsDuplicateTutorialException() {
-        uniqueTutorialList.add(TUTORIAL_CS1000_TUT1_MON9PM);
-        assertThrows(DuplicateTutorialException.class, () -> uniqueTutorialList.add(TUTORIAL_CS1000_TUT1_MON9PM));
+        uniqueTutorialList.add(TUTORIAL_TUT1_MON9PM);
+        assertThrows(DuplicateTutorialException.class, () -> uniqueTutorialList.add(TUTORIAL_TUT1_MON9PM));
     }
 
     @Test
@@ -57,13 +57,13 @@ public class UniqueTutorialListTest {
 
     @Test
     public void remove_tutorialDoesNotExist_throwsTutorialNotFoundException() {
-        assertThrows(TutorialNotFoundException.class, () -> uniqueTutorialList.remove(TUTORIAL_CS1000_TUT1_MON9PM));
+        assertThrows(TutorialNotFoundException.class, () -> uniqueTutorialList.remove(TUTORIAL_TUT1_MON9PM));
     }
 
     @Test
     public void remove_existingTutorial_removesTutorial() {
-        uniqueTutorialList.add(TUTORIAL_CS1000_TUT1_MON9PM);
-        uniqueTutorialList.remove(TUTORIAL_CS1000_TUT1_MON9PM);
+        uniqueTutorialList.add(TUTORIAL_TUT1_MON9PM);
+        uniqueTutorialList.remove(TUTORIAL_TUT1_MON9PM);
         UniqueTutorialList expectedUniqueTutorialList = new UniqueTutorialList();
         assertEquals(expectedUniqueTutorialList, uniqueTutorialList);
     }
