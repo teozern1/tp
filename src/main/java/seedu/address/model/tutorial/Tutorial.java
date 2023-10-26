@@ -61,17 +61,4 @@ public class Tutorial {
         res.append(this.getTime() + " ");
         return res.toString();
     }
-
-    /**
-     * Placeholder comment.
-     * @param otherTutorial
-     * @return
-     */
-    public boolean isSameTutorial(Tutorial otherTutorial) {
-        if (otherTutorial == this) {
-            return true;
-        }
-
-        return this.module.equals(otherTutorial.module) && this.tutName.equals(otherTutorial.tutName);
-    }
 }

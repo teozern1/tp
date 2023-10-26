@@ -15,7 +15,6 @@ import seedu.address.model.tutorial.exceptions.TutorialNotFoundException;
  * A list of tutorials that enforces uniqueness between its elements and does not allow nulls.
  * Supports a minimal set of list operations.
  *
- * @see Tutorial#isSameTutorial(Tutorial)
  */
 public class UniqueTutorialList implements Iterable<Tutorial> {
 
@@ -29,7 +28,7 @@ public class UniqueTutorialList implements Iterable<Tutorial> {
      */
     public boolean contains(Tutorial toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameTutorial);
+        return internalList.stream().anyMatch(toCheck::equals);
     }
 
     /**
