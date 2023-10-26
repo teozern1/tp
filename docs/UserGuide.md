@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-    title: "User Guide"
-    pageNav: 3
+layout: default.md
+title: "User Guide"
+pageNav: 3
 ---
 
 # **TASsistant User Guide**
@@ -12,11 +12,11 @@ able to handle contact organisation faster than GUI apps if the user can type qu
 
 <h2>Table of Contents</h2>
 
-- **[Introduction](#TASsistant User Guide)**
-- **[About](#setting-up-getting-started)**
+- **[Introduction](#tassistant-user-guide)**
 - **[Quick Start](#quick-start)**
 - **[Features](#features)**
-- **[List of Features](#command-summary)**
+- **[Command summary](#command-summary)**
+- **[Known issues](#known-issues)**
 - **[Glossary](#glossary)**
 - **[FAQ](#faq)**
 
@@ -48,8 +48,6 @@ able to handle contact organisation faster than GUI apps if the user can type qu
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Features**
-
-<box type="info" seamless>
 
 **Notes about the command format:**
 
@@ -84,8 +82,6 @@ Format: `help`
 Adds a person to TASsistant.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STUDENT_NUMBER [t/TAG]…​`
-
-<box type="tip" seamless>
 
 **Tip:** A person can have any number of tags (including 0)
 </box>
@@ -307,7 +303,7 @@ Example: `editTutorial 1 tn/T11 tt/Mon`
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Glossary
+## Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Teaching Assistant (TA)**: A non-professor tutor which helps the professors of a module by teaching one or more classes.
