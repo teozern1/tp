@@ -278,9 +278,9 @@ Example: `editTutorial 1 tn/T11 tt/Mon`
 
 ### Records the attendance of the student: `attn`
 
-Records a student's attendance and displays the change by adding a tag 
-on the GUI. The index refers to the position of the person as displayed
-in the GUI. The LESSON_NUMBER must be alphanumeric. 
+Records a student's attendance and displays the change by adding a tag on the GUI. 
+The index refers to the position of the person as displayed in the GUI. 
+The LESSON_NUMBER must be alphanumeric. 
 Further prompts are given for incorrect inputs.
 
 Format: `attn INDEX se/LESSON_NUMBER`
@@ -317,6 +317,7 @@ Example: `attn 1 se/S1`
 | **addToTutorial**      | `addToTutorial INDEX [m/MODULE_NAME] [tn/TUTORIAL_NAME]` <br> e.g., `addToTutorial 1 m/CS2103T tn/T11`                                                                |
 | **removeFromTutorial** | `removeFromTutorial INDEX [m/MODULE_NAME] [tn/TUTORIAL_NAME]` <br> e.g., `removeFromTutorial 1 m/CS2103T tn/T11`                                                      |
 | **editTutorial**       | `editTutorial INDEX [tn/NEW_NAME] [tt/NEW_TIME]` <br> e.g., `editTutorial 1 tn/T11 tt/Mon`                                                                            |
+| **attn**               | `attn INDEX se/LESSON_NUMBER` <br> e.g., `attn 1 se/S1`                                                                                                               |
 
 --------------------------------------------------------------------------------------------------------------------
 
