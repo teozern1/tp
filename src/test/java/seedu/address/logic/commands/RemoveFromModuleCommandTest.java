@@ -29,6 +29,7 @@ public class RemoveFromModuleCommandTest {
         assertCommandFailure(new RemoveFromModuleCommand(Index.fromZeroBased(999),
                 new Module("CS1000")), model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
+
     @Test
     public void execute_moduleNotFound_errorMessage() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());

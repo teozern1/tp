@@ -93,7 +93,8 @@ public class AddToTutorialCommand extends Command {
         Email updatedEmail = personToEdit.getEmail();
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = personToEdit.getTags();
-        Set<Module> updatedModules = personToEdit.getModules();
+        Set<Module> updatedModules = new HashSet<>(personToEdit.getModules());
+        updatedModules.add(new Module(tutorialToAddTo.getModuleName()));
         Set<Tutorial> updatedTutorials = new HashSet<>(personToEdit.getTutorials());
         updatedTutorials.add(tutorialToAddTo);
         StudentNumber updatedStudentNumber = personToEdit.getStudentNumber();
