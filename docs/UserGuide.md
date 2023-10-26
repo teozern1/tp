@@ -176,6 +176,7 @@ If your changes to the data file makes its format invalid, TASsistant will disca
 
 
 ### Adds a module to TASsistant: `addModule`
+
 Adds the module to TASsistant, displaying it on the GUI.
 The module name must consist of only alphanumeric characters, no shorter than 5 characters.
 Will give an error message if the module already exists in TASsistant,
@@ -186,6 +187,7 @@ Format: `addModule m/MODULE_NAME`
 Example: `addModule m/CS2100`
 
 ### Deletes a module from TASsistant: `deleteModule`
+
 Deletes the module from TASsistant and the GUI will change to reflect this.
 The index refers to the position of the module displayed on the GUI.
 Will give an error message if the module does not exist in TASsistant,
@@ -273,6 +275,17 @@ Fails if NEW_NAME or NEW_TIME is in invalid format.
 Format: `editTutorial INDEX [tn/NEW_NAME] [tt/NEW_TIME]`
 
 Example: `editTutorial 1 tn/T11 tt/Mon`
+
+### Records the attendance of the student: `attn`
+
+Records a student's attendance and displays the change by adding a tag 
+on the GUI. The index refers to the position of the person as displayed
+in the GUI. The LESSON_NUMBER must be alphanumeric. 
+Further prompts are given for incorrect inputs.
+
+Format: `attn INDEX se/LESSON_NUMBER`
+
+Example: `attn 1 se/S1`
 
 --------------------------------------------------------------------------------------------------------------------
 
