@@ -146,6 +146,7 @@ The `Model` component,
 
 * stores the address book data i.e., all `Person`, `Module`, `Tutorial` objects (which are contained in a `UniquePersonList`, `UniqueModuleList`, `UniqueTutorialList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* `Module` and `Tutorial` objects are stored in a similar way, as a separate filtered list that the UI automatically updates as the data in the list changes.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -357,6 +358,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: Records attendance for a student**
+
+**MSS**
+
+1. User specifies the INDEX of the person and the lesson for which the person is attending.
+2. System updates the displayed tags of the person.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -365,7 +373,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The product is meant for a single Teaching Assistant that makes all changes to the AddressBook themselves.
-5.  Data will be stored in a .txt file to allow for advanced users to manipulate the data directly.
+5.  Data will be stored in a .json file to allow for advanced users to manipulate the data directly.
 
 ### Glossary
 
