@@ -4,10 +4,32 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# TAssistant Developer Guide
 
-<!-- * Table of Contents -->
-<page-nav-print />
+<h2>Table of Contents</h2>
+
+- **[Acknowledgements](#acknowledgements)**
+- **[Setting up, getting started](#setting-up-getting-started)**
+- **[Design](#design)**
+- **[Architecture](#architecture)**
+    * [UI Component](#ui-component)
+    * [Logic Component](#logic-component)
+    * [Model Component](#model-component)
+    * [Storage Component](#storage-component)
+- **[Implementation](#implementation)**
+    * [Module-Tutorial Interaction](#module-tutorial-interaction)
+    * [[Proposed] Undo/Redo feature](#proposed-undoredo-feature)
+- **[Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)**
+- **[Appendix: Requirements](#appendix-requirements)**
+    * [Product Scope](#product-scope)
+    * [User Stories](#user-stories)
+    * [Use Cases](#use-cases)
+    * [Non-functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
+- **[Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)**
+    * [Launch and shutdown](#launch-and-shutdown)
+    * [Delete a person](#deleting-a-person)
+    * [Saving data](#saving-data)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -27,7 +49,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
+<img src="images/ArchitectureDiagram.png" width="281" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -52,7 +74,7 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
+<img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -61,7 +83,7 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<puml src="diagrams/ComponentManagers.puml" width="300" />
+<img src="images/ComponentManagers.png" width="300" />
 
 The sections below give more details of each component.
 
@@ -69,7 +91,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
+<img src="images/UiClassDiagram.png" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -88,11 +110,11 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
+<img src="images/LogicClassDiagram.png" width="550"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<img src="images/DeleteSequenceDiagram.png" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
 <box type="info" seamless>
 
@@ -108,7 +130,7 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<puml src="diagrams/ParserClasses.puml" width="600"/>
+<img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -117,13 +139,14 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<img src="images/ModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
 
 * stores the address book data i.e., all `Person`, `Module`, `Tutorial` objects (which are contained in a `UniquePersonList`, `UniqueModuleList`, `UniqueTutorialList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* `Module` and `Tutorial` objects are stored in a similar way, as a separate filtered list that the UI automatically updates as the data in the list changes.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -131,7 +154,7 @@ The `Model` component,
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="450" />
 
 </box>
 
@@ -140,7 +163,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -156,6 +179,19 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### **Module-Tutorial Interaction**
+
+In NUS, modules are a unit of study, and most modules require students taking them to participate in tutorials. Each 
+module with tutorials has one or more tutorials, but each tutorial is usually only for one module. Given that Teaching 
+Assistants usually only teach tutorials rather than a module as a whole, we considered only including tutorials in our
+product, but decided against it because having both modules and tutorials allows for more convenient searching for
+teaching assistants teaching multiple modules. This comes at the cost of having to maintain the multiplicity between
+module and tutorials.
+
+To better enable advanced users, the app automatically performs actions to maintain the multiplicity constraint rather
+than force the user to type additional commands to maintain it. For example, the AddToTutorial command, which adds a 
+tutorial to a person, also adds the corresponding module to the user should they not have it.(Add sequence diagram here)
 
 ### \[Proposed\] Undo/redo feature
 
@@ -173,15 +209,15 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
+<img src="images/UndoRedoState0.png" alt="UndoRedoState0" />
 
 Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
+<img src="images/UndoRedoState1.png" alt="UndoRedoState1" />
 
 Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
+<img src="images/UndoRedoState2.png" alt="UndoRedoState2" />
 
 <box type="info" seamless>
 
@@ -191,7 +227,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
+<img src="images/UndoRedoState3.png" alt="UndoRedoState3" />
 
 
 <box type="info" seamless>
@@ -203,7 +239,7 @@ than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
 
-<puml src="diagrams/UndoSequenceDiagram.puml" alt="UndoSequenceDiagram" />
+<img src="images/UndoSequenceDiagram.png" alt="UndoSequenceDiagram" />
 
 <box type="info" seamless>
 
@@ -221,15 +257,15 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
+<img src="images/UndoRedoState4.png" alt="UndoRedoState4" />
 
 Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
+<img src="images/UndoRedoState5.png" alt="UndoRedoState5" />
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+<img src="images/CommitActivityDiagram.png" width="250" />
 
 #### Design considerations:
 
@@ -322,6 +358,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: Records attendance for a student**
+
+**MSS**
+
+1. User specifies the INDEX of the person and the lesson for which the person is attending.
+2. System updates the displayed tags of the person.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -330,7 +373,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The product is meant for a single Teaching Assistant that makes all changes to the AddressBook themselves.
-5.  Data will be stored in a .txt file to allow for advanced users to manipulate the data directly.
+5.  Data will be stored in a .json file to allow for advanced users to manipulate the data directly.
 
 ### Glossary
 

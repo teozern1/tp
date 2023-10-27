@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -18,8 +19,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentNumber;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
-
-
+import seedu.address.model.tutorial.Tutorial;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -27,15 +27,14 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-
     private final String name;
     private final String phone;
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
-
+    private final List<JsonAdaptedModule> modules = new ArrayList<>();
+    private final List<JsonAdaptedTutorial> tutorials = new ArrayList<>();
     private final String studentNumber;
-
     private final String telegram;
 
     /**
@@ -43,8 +42,11 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("studentNumber") String studentNumber,
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("modules") List<JsonAdaptedModule> modules,
+                             @JsonProperty("tutorials") List<JsonAdaptedTutorial> tutorials,
+                             @JsonProperty("studentNumber") String studentNumber,
                              @JsonProperty("telegram") String telegram) {
         this.name = name;
         this.phone = phone;
@@ -52,6 +54,12 @@ class JsonAdaptedPerson {
         this.address = address;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (modules != null) {
+            this.modules.addAll(modules);
+        }
+        if (tutorials != null) {
+            this.tutorials.addAll(tutorials);
         }
         this.studentNumber = studentNumber;
         this.telegram = telegram;
@@ -68,6 +76,12 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        modules.addAll(source.getModules().stream()
+                .map(JsonAdaptedModule::new)
+                .collect(Collectors.toList()));
+        tutorials.addAll(source.getTutorials().stream()
+                .map(JsonAdaptedTutorial::new)
+                .collect(Collectors.toList()));
         studentNumber = source.getStudentNumber().value;
         telegram = source.getTelegram().value;
     }
@@ -78,11 +92,6 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
-        }
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -115,6 +124,22 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
+
+        final List<Tag> personTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : tags) {
+            personTags.add(tag.toModelType());
+        }
+
+        final List<Module> personModules = new ArrayList<>();
+        for (JsonAdaptedModule module : modules) {
+            personModules.add(module.toModelType());
+        }
+
+        final List<Tutorial> personTutorials = new ArrayList<>();
+        for (JsonAdaptedTutorial tutorial : tutorials) {
+            personTutorials.add(tutorial.toModelType());
+        }
+
         if (studentNumber == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     StudentNumber.class.getSimpleName()));
@@ -128,7 +153,9 @@ class JsonAdaptedPerson {
         final Telegram modelTelegram = new Telegram(telegram);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Module> modelModules = new HashSet<>(personModules);
+        final Set<Tutorial> modelTutorials = new HashSet<>(personTutorials);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                new HashSet<>(), new HashSet<>(), modelStudentNumber, modelTelegram);
+                modelModules, modelTutorials, modelStudentNumber, modelTelegram);
     }
 }
