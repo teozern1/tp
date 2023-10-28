@@ -14,6 +14,6 @@ able to handle contact organisation faster than GUI apps if the user can type qu
 * Search for professors of a module
 * Search for all students in a module
 * View all students, including their email and telegram handle
-* Filter students by class/module
+* Filter students by tutorial/module
 * Save data to file
 * Clear all data

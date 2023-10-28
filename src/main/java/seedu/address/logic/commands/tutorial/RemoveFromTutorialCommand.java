@@ -76,6 +76,7 @@ public class RemoveFromTutorialCommand extends Command {
         if (!personHasTutorial(personToEdit, this.tutorialToRemoveFrom)) {
             throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL);
         }
+
         Person editedPerson = createEditedPerson(personToEdit);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

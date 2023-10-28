@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-    title: "User Guide"
-    pageNav: 3
+layout: default.md
+title: "User Guide"
+pageNav: 3
 ---
 
 # **TASsistant User Guide**
@@ -12,11 +12,11 @@ able to handle contact organisation faster than GUI apps if the user can type qu
 
 <h2>Table of Contents</h2>
 
-- **[Introduction](#TASsistant User Guide)**
-- **[About](#setting-up-getting-started)**
+- **[Introduction](#tassistant-user-guide)**
 - **[Quick Start](#quick-start)**
 - **[Features](#features)**
-- **[List of Features](#command-summary)**
+- **[Command summary](#command-summary)**
+- **[Known issues](#known-issues)**
 - **[Glossary](#glossary)**
 - **[FAQ](#faq)**
 
@@ -48,8 +48,6 @@ able to handle contact organisation faster than GUI apps if the user can type qu
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Features**
-
-<box type="info" seamless>
 
 **Notes about the command format:**
 
@@ -84,8 +82,6 @@ Format: `help`
 Adds a person to TASsistant.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STUDENT_NUMBER [t/TAG]…​`
-
-<box type="tip" seamless>
 
 **Tip:** A person can have any number of tags (including 0)
 </box>
@@ -176,6 +172,7 @@ If your changes to the data file makes its format invalid, TASsistant will disca
 
 
 ### Adds a module to TASsistant: `addModule`
+
 Adds the module to TASsistant, displaying it on the GUI.
 The module name must consist of only alphanumeric characters, no shorter than 5 characters.
 Will give an error message if the module already exists in TASsistant,
@@ -186,6 +183,7 @@ Format: `addModule m/MODULE_NAME`
 Example: `addModule m/CS2100`
 
 ### Deletes a module from TASsistant: `deleteModule`
+
 Deletes the module from TASsistant and the GUI will change to reflect this.
 The index refers to the position of the module displayed on the GUI.
 Will give an error message if the module does not exist in TASsistant,
@@ -274,6 +272,17 @@ Format: `editTutorial INDEX [tn/NEW_NAME] [tt/NEW_TIME]`
 
 Example: `editTutorial 1 tn/T11 tt/Mon`
 
+### Records the attendance of the student: `attn`
+
+Records a student's attendance and displays the change by adding a tag on the GUI. 
+The index refers to the position of the person as displayed in the GUI. 
+The LESSON_NUMBER must be alphanumeric. 
+Further prompts are given for incorrect inputs.
+
+Format: `attn INDEX se/LESSON_NUMBER`
+
+Example: `attn 1 se/S1`
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -304,10 +313,11 @@ Example: `editTutorial 1 tn/T11 tt/Mon`
 | **addToTutorial**      | `addToTutorial INDEX [m/MODULE_NAME] [tn/TUTORIAL_NAME]` <br> e.g., `addToTutorial 1 m/CS2103T tn/T11`                                                                |
 | **removeFromTutorial** | `removeFromTutorial INDEX [m/MODULE_NAME] [tn/TUTORIAL_NAME]` <br> e.g., `removeFromTutorial 1 m/CS2103T tn/T11`                                                      |
 | **editTutorial**       | `editTutorial INDEX [tn/NEW_NAME] [tt/NEW_TIME]` <br> e.g., `editTutorial 1 tn/T11 tt/Mon`                                                                            |
+| **attn**               | `attn INDEX se/LESSON_NUMBER` <br> e.g., `attn 1 se/S1`                                                                                                               |
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Glossary
+## Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Teaching Assistant (TA)**: A non-professor tutor which helps the professors of a module by teaching one or more classes.

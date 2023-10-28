@@ -16,10 +16,10 @@ public class Tutorial {
     /* Constructors */
 
     /**
-     * Placeholder comment.
-     * @param module
-     * @param tutName
-     * @param time
+     * Constructs a {@code Tutorial}.
+     * @param module Module tutorial belongs to.
+     * @param tutName Name of tutorial.
+     * @param time Time of tutorial.
      */
     public Tutorial(Module module, String tutName, String time) {
         this.module = module;
@@ -50,7 +50,8 @@ public class Tutorial {
             return false;
         }
         Tutorial tutorial = (Tutorial) o;
-        return Objects.equals(module, tutorial.module) && Objects.equals(tutName, tutorial.tutName);
+        return Objects.equals(module, tutorial.module) && Objects.equals(tutName, tutorial.tutName)
+                && Objects.equals(time, tutorial.time);
     }
 
     @Override
@@ -62,16 +63,8 @@ public class Tutorial {
         return res.toString();
     }
 
-    /**
-     * Placeholder comment.
-     * @param otherTutorial
-     * @return
-     */
-    public boolean isSameTutorial(Tutorial otherTutorial) {
-        if (otherTutorial == this) {
-            return true;
-        }
-
-        return this.module.equals(otherTutorial.module) && this.tutName.equals(otherTutorial.tutName);
+    @Override
+    public int hashCode() {
+        return Objects.hash(module, tutName, time);
     }
 }
