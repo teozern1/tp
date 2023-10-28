@@ -32,7 +32,7 @@ public class SearchCommand extends Command {
 
     private final List<Name> personNameToSearch;
     private final List<Module> modulesToSearch;
-    public final List<Tutorial> tutorialsToSearch;
+    private final List<Tutorial> tutorialsToSearch;
 
     /**
      * Creates an SearchByModuleCommand to add the specified {@code Person}
