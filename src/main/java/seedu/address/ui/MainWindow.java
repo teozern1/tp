@@ -32,6 +32,8 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+
+    private AssignmentListPanel assignmentListPanel;
     private ModuleBox moduleBox;
     private TutorialBox tutorialBox;
     private ResultDisplay resultDisplay;
@@ -45,6 +47,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane assignmentListPanelPlaceholder;
 
     @FXML
     private StackPane moduleBoxPlaceholder;
@@ -118,6 +123,9 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        assignmentListPanel = new AssignmentListPanel(logic.getFilteredPersonList());
+        assignmentListPanelPlaceholder.getChildren().add(assignmentListPanel.getRoot());
+
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
