@@ -1,8 +1,7 @@
-package seedu.address.logic.commands.tutorial;
+package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.HashSet;
@@ -10,10 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
@@ -28,49 +24,34 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Takes attendance.
  */
-public class AddToTutorialCommand extends Command {
+public class AttendanceCommand extends Command {
+    public static final String COMMAND_WORD = "attn";
 
-    public static final String COMMAND_WORD = "addToTutorial";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Takes attendance for the indicated person. "
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_ATTENDANCE + "LESSON_NUMBER\n"
+            + "Example: " + COMMAND_WORD + " S1 ";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a user to a given tutorial "
-            + "Parameters:"
-            + "INDEX (must be a positive integer)"
-            + "[" + PREFIX_MODULE + "MODULE_NAME]"
-            + "[" + PREFIX_TUTORIAL_NAME + "TUTORIAL_NAME]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_MODULE + "CS2103T "
-            + PREFIX_TUTORIAL_NAME + "T11 ";
-
-    public static final String MESSAGE_SUCCESS = "Edited Person: %1$s";
-
+    public static final String MESSAGE_SUCCESS = "Attendance successfully taken.";
     private final Index index;
-
-    private final Tutorial tutorialToAddTo;
+    private final Tag toAdd;
 
     /**
      * @param index of the person in the filtered person list to add tag to
-     * @param tutorialToAddTo the target tutorial to add the person
      */
-    public AddToTutorialCommand(Index index, Tutorial tutorialToAddTo) {
+    public AttendanceCommand(Index index, Tag toAdd) {
         requireNonNull(index);
-        requireNonNull(tutorialToAddTo);
         this.index = index;
-        this.tutorialToAddTo = tutorialToAddTo;
+        this.toAdd = toAdd;
     }
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        if (!model.hasTutorial(tutorialToAddTo)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
@@ -92,16 +73,21 @@ public class AddToTutorialCommand extends Command {
         Phone updatedPhone = personToEdit.getPhone();
         Email updatedEmail = personToEdit.getEmail();
         Address updatedAddress = personToEdit.getAddress();
-        Set<Tag> updatedTags = personToEdit.getTags();
+
+        Set<Tag> updatedTags = new HashSet<>();
+        for (Tag tag : personToEdit.getTags()) {
+            updatedTags.add(tag);
+        }
+        updatedTags.add(toAdd);
+
         Set<Module> updatedModules = new HashSet<>(personToEdit.getModules());
-        updatedModules.add(new Module(tutorialToAddTo.getModuleName()));
-        Set<Tutorial> updatedTutorials = new HashSet<>(personToEdit.getTutorials());
-        updatedTutorials.add(tutorialToAddTo);
+        Set<Tutorial> updatedTutorials = personToEdit.getTutorials();
         StudentNumber updatedStudentNumber = personToEdit.getStudentNumber();
         Telegram updatedTelegram = personToEdit.getTelegram();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedModules,
                 updatedTutorials, updatedStudentNumber, updatedTelegram);
+
     }
 
     @Override
@@ -110,23 +96,11 @@ public class AddToTutorialCommand extends Command {
             return true;
         }
 
-        // instanceof handles nulls
-        if (!(other instanceof seedu.address.logic.commands.tutorial.AddToTutorialCommand)) {
+        if (!(other instanceof AttendanceCommand)) {
             return false;
         }
 
-        AddToTutorialCommand otherCommand = (AddToTutorialCommand) other;
-
-        return this.tutorialToAddTo.equals(otherCommand.tutorialToAddTo)
-                && this.index.equals(otherCommand.index);
+        return this.index.equals(((AttendanceCommand) other).index)
+                && this.toAdd.equals(((AttendanceCommand) other).toAdd);
     }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("index", index)
-                .add("tutorialName", tutorialToAddTo)
-                .toString();
-    }
-
 }
