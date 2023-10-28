@@ -123,7 +123,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        assignmentListPanel = new AssignmentListPanel(logic.getFilteredPersonList());
+        assignmentListPanel = new AssignmentListPanel(logic.getAssignmentList());
         assignmentListPanelPlaceholder.getChildren().add(assignmentListPanel.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
