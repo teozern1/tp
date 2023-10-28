@@ -134,8 +134,7 @@ public class AddressBookParserTest {
         String testModuleString = "CS1000";
         String testName = "test name";
         String testTutorialString = "TG01";
-        String testTime = "0900";
-        Tutorial testTutorial = new Tutorial(new Module(testModuleString), testTutorialString, testTime);
+        Tutorial testTutorial = new Tutorial(new Module(testModuleString), testTutorialString, null);
         SearchCommand command = (SearchCommand) parser.parseCommand(SearchCommand.COMMAND_WORD + " "
                 + PREFIX_NAME + testName + " "
                 + PREFIX_MODULE + testModuleString + " "
