@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_CS2100;
+import static seedu.address.logic.commands.CommandTestUtil.MODULE_CS2101;
+import static seedu.address.logic.commands.CommandTestUtil.TUTORIAL_GROUP_TG01;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -46,6 +48,13 @@ public class SearchCommandParserTest {
     public void parse_preambleNotEmptyError() {
         assertParseFailure(parser, " dummy text", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 SearchCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_tooManyModulesGivenError() {
+        assertParseFailure(parser,
+                " m/" + MODULE_CS2100 + " m/" + MODULE_CS2101 + " tn/" + TUTORIAL_GROUP_TG01,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_TOO_MANY_MODULES));
     }
 }
 
