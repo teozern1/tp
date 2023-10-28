@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.SearchCommand;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Name;
+import seedu.address.model.tutorial.Tutorial;
 import seedu.address.testutil.PersonBuilder;
 
 public class SearchCommandParserTest {
@@ -26,8 +27,9 @@ public class SearchCommandParserTest {
         Name expectedName = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build().getName();
         List<Name> expectedNameList = new ArrayList<>(Arrays.asList(expectedName));
         List<Module> expectedModuleList = new ArrayList<>();
+        List<Tutorial> expectedTutorialList = new ArrayList<>();
         assertParseSuccess(parser, " n/" + BOB.getName(),
-                new SearchCommand(expectedNameList, expectedModuleList));
+                new SearchCommand(expectedNameList, expectedModuleList, expectedTutorialList));
     }
 
     @Test
@@ -35,8 +37,9 @@ public class SearchCommandParserTest {
         List<Name> expectedNameList = new ArrayList<>();
         Module testModuleTag = new Module(MODULE_CS2100);
         List<Module> expectedModuleList = new ArrayList<>(Arrays.asList(testModuleTag));
+        List<Tutorial> expectedTutorialList = new ArrayList<>();
         assertParseSuccess(parser, " m/" + MODULE_CS2100,
-                new SearchCommand(expectedNameList, expectedModuleList));
+                new SearchCommand(expectedNameList, expectedModuleList, expectedTutorialList));
     }
 
     @Test

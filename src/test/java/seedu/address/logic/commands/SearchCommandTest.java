@@ -19,7 +19,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Name;
-
+import seedu.address.model.tutorial.Tutorial;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for SearchCommand.
@@ -40,9 +40,9 @@ public class SearchCommandTest {
         Name nameToSearch = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getName();
         List<Name> nameList = new ArrayList<>(Arrays.asList(nameToSearch));
         List<Module> moduleList = new ArrayList<>();
-
+        List<Tutorial> tutorialList = new ArrayList<>();
         expectedModel.updateFilteredPersonList(person -> person.getName().equals(nameToSearch));
-        assertCommandSuccess(new SearchCommand(nameList, moduleList), model,
+        assertCommandSuccess(new SearchCommand(nameList, moduleList, tutorialList), model,
                 SearchCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -51,9 +51,9 @@ public class SearchCommandTest {
         Module module = new Module(MODULE_CS2100);
         List<Name> nameList = new ArrayList<>();
         List<Module> moduleList = new ArrayList<>(Arrays.asList(module));
-
-        expectedModel.updateFilteredPersonList(person -> person.getTags().contains(module));
-        assertCommandSuccess(new SearchCommand(nameList, moduleList), model,
+        List<Tutorial> tutorialList = new ArrayList<>();
+        expectedModel.updateFilteredPersonList(person -> person.getModules().contains(module));
+        assertCommandSuccess(new SearchCommand(nameList, moduleList, tutorialList), model,
                 SearchCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -65,11 +65,13 @@ public class SearchCommandTest {
         List<Module> cs2100ModuleList = new ArrayList<>(Arrays.asList(new Module("CS2100")));
         List<Module> cs2040ModuleList = new ArrayList<>(Arrays.asList(new Module("CS2040")));
 
-        SearchCommand baseSearchCommand = new SearchCommand(aliceNameList, cs2100ModuleList);
-        SearchCommand baseSearchCommandAlt = new SearchCommand(aliceNameList, cs2100ModuleList);
-        SearchCommand diffNameSearchCommand = new SearchCommand(bobNameList, cs2100ModuleList);
-        SearchCommand diffModSearchCommand = new SearchCommand(aliceNameList, cs2040ModuleList);
-        SearchCommand diffNameDiffModSearchCommand = new SearchCommand(bobNameList, cs2040ModuleList);
+        List<Tutorial> tutorialList = new ArrayList<>();
+
+        SearchCommand baseSearchCommand = new SearchCommand(aliceNameList, cs2100ModuleList, tutorialList);
+        SearchCommand baseSearchCommandAlt = new SearchCommand(aliceNameList, cs2100ModuleList, tutorialList);
+        SearchCommand diffNameSearchCommand = new SearchCommand(bobNameList, cs2100ModuleList, tutorialList);
+        SearchCommand diffModSearchCommand = new SearchCommand(aliceNameList, cs2040ModuleList, tutorialList);
+        SearchCommand diffNameDiffModSearchCommand = new SearchCommand(bobNameList, cs2040ModuleList, tutorialList);
 
         // same object -> returns true
         assertTrue(baseSearchCommand.equals(baseSearchCommand));

@@ -133,12 +133,18 @@ public class AddressBookParserTest {
     public void parseCommand_search() throws Exception {
         String testModuleString = "CS1000";
         String testName = "test name";
+        String testTutorialString = "TG01";
+        String testTime = "0900";
+        Tutorial testTutorial = new Tutorial(new Module(testModuleString), testTutorialString, testTime);
         SearchCommand command = (SearchCommand) parser.parseCommand(SearchCommand.COMMAND_WORD + " "
-                + PREFIX_NAME + testName + " " + PREFIX_MODULE + testModuleString);
+                + PREFIX_NAME + testName + " "
+                + PREFIX_MODULE + testModuleString + " "
+                + PREFIX_TUTORIAL_NAME + testTutorialString);
 
         List<Name> nameList = new ArrayList<>(Arrays.asList(new Name(testName)));
         List<Module> moduleList = new ArrayList<>(Arrays.asList(new Module(testModuleString)));
-        assertEquals(new SearchCommand(nameList, moduleList), command);
+        List<Tutorial> tutorialList = new ArrayList<>(Arrays.asList(testTutorial));
+        assertEquals(new SearchCommand(nameList, moduleList, tutorialList), command);
     }
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
