@@ -17,19 +17,19 @@ public class AttendanceCommandParserTest {
     public void parse_validArgs_returnsAttendanceCommand() {
         Tag tag = new Tag("S1");
 
-        assertParseSuccess(parser, "1 se/S1",
+        assertParseSuccess(parser, "1 ln/S1",
                 new AttendanceCommand(INDEX_FIRST_PERSON, tag));
     }
 
     @Test
     public void parse_invalidIndex_throwsParseException() {
-        assertParseFailure(parser, "-9 se/S1",
+        assertParseFailure(parser, "-9 ln/S1",
                 String.format(ParserUtil.MESSAGE_INVALID_INDEX));
     }
 
     @Test
     public void parse_noIndex_throwsParseException() {
-        assertParseFailure(parser, "se/S1",
+        assertParseFailure(parser, "ln/S1",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AttendanceCommand.MESSAGE_USAGE));
     }
 }
