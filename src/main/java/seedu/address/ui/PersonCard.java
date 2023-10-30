@@ -63,7 +63,6 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         studentNumber.setText(person.getStudentNumber().value);
-        // MESSAGE_MODULE_STARTER
         moduleAndTutorialList.setText(MESSAGE_MODULE_STARTER
             + String.join(", ", person.getUiOfModulesAndTutorials()));
         person.getTags().stream()
