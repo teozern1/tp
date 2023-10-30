@@ -53,6 +53,12 @@ public class Tutorial {
         return time;
     }
 
+    /**
+     * the equals function of Tutorial
+     * @param o the object to compare
+     * @throws NullPointerException when Tutorial is created
+     * using the constructor with 2 arguments
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -62,16 +68,23 @@ public class Tutorial {
             return false;
         }
         Tutorial tutorial = (Tutorial) o;
+
+        requireNonNull(this.time);
+        requireNonNull(tutorial.time);
+
         return Objects.equals(module, tutorial.module) && Objects.equals(tutName, tutorial.tutName)
                 && Objects.equals(time, tutorial.time);
     }
 
     @Override
     public String toString() {
+        requireNonNull(time);
+
         StringBuffer res = new StringBuffer("");
         res.append(module.getModuleCode() + " ");
         res.append(this.getTutName() + " ");
         res.append(this.getTime() + " ");
+
         return res.toString();
     }
 
