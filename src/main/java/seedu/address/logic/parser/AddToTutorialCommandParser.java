@@ -27,7 +27,7 @@ public class AddToTutorialCommandParser implements Parser<AddToTutorialCommand> 
     public AddToTutorialCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_MODULE, PREFIX_TUTORIAL_NAME, PREFIX_TUTORIAL_TIME);
+                ArgumentTokenizer.tokenize(args, PREFIX_MODULE, PREFIX_TUTORIAL_NAME);
 
         Index index;
         try {
@@ -44,8 +44,9 @@ public class AddToTutorialCommandParser implements Parser<AddToTutorialCommand> 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MODULE, PREFIX_TUTORIAL_NAME);
         Module module = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get());
         String tutorialName = ParserUtil.parseTutorialName(argMultimap.getValue(PREFIX_TUTORIAL_NAME).get());
-        String tutorialTime = ParserUtil.parseTutorialTime(argMultimap.getValue(PREFIX_TUTORIAL_TIME).get());
-        Tutorial tutorial = new Tutorial(module, tutorialName, tutorialTime);
+
+
+        Tutorial tutorial = new Tutorial(module, tutorialName);
         return new AddToTutorialCommand(index, tutorial);
     }
 
