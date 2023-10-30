@@ -25,6 +25,7 @@ public class Messages {
 
     public static final String MESSAGE_MODULE_STARTER = "Tutorials and Modules: ";
     public static final String MESSAGE_INVALID_TUTORIAL_DISPLAYED_INDEX = "The tutorial index provided is invalid";
+    public static final String MESSAGE_INVALID_TUTORIAL_TIME_FORMAT = "Tutorial time format is invalid";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
