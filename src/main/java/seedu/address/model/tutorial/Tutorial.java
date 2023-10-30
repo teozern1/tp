@@ -1,5 +1,7 @@
 package seedu.address.model.tutorial;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Objects;
 
 import seedu.address.model.module.Module;
@@ -56,8 +58,7 @@ public class Tutorial {
     /**
      * the equals function of Tutorial
      * @param o the object to compare
-     * @throws NullPointerException when Tutorial is created
-     * using the constructor with 2 arguments
+     * @throws NullPointerException when Tutorial is created using the constructor with 2 arguments.
      */
     @Override
     public boolean equals(Object o) {
