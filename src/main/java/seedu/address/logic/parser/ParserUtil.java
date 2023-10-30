@@ -9,6 +9,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.Title;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -189,4 +191,17 @@ public class ParserUtil {
         String trimmedTime = tutorialTime.trim();
         return trimmedTime;
     }
+
+    /**
+     * Parses a {@code String Title} into an {@code Title}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Title} is invalid.
+     */
+    public static Title parseTitle(String Title) throws ParseException {
+        requireNonNull(Title);
+        String trimmedTitle = Title.trim();
+        return new Title(trimmedTitle);
+    }
+
 }

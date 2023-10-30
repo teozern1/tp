@@ -61,8 +61,6 @@ public class Assignment {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("title", title)
-                .toString();
+        return this.title.toString();
     }
 }

@@ -19,4 +19,8 @@ public class CliSyntax {
     // Prefixes here can be changed if needed.
     public static final Prefix PREFIX_TUTORIAL_NAME = new Prefix("tn/");
     public static final Prefix PREFIX_TUTORIAL_TIME = new Prefix("tt/");
+
+    public static final Prefix PREFIX_ASSIGNMENT = new Prefix("assgn/");
+
+
 }
