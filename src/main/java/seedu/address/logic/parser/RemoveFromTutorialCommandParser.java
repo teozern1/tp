@@ -27,7 +27,7 @@ public class RemoveFromTutorialCommandParser implements Parser<RemoveFromTutoria
     public RemoveFromTutorialCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_MODULE, PREFIX_TUTORIAL_NAME, PREFIX_TUTORIAL_TIME);
+                ArgumentTokenizer.tokenize(args, PREFIX_MODULE, PREFIX_TUTORIAL_NAME);
 
         Index index;
         try {
@@ -37,16 +37,15 @@ public class RemoveFromTutorialCommandParser implements Parser<RemoveFromTutoria
                     RemoveFromTutorialCommand.MESSAGE_USAGE), pe);
         }
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE, PREFIX_TUTORIAL_NAME, PREFIX_TUTORIAL_TIME)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE, PREFIX_TUTORIAL_NAME)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     RemoveFromTutorialCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MODULE, PREFIX_TUTORIAL_NAME, PREFIX_TUTORIAL_TIME);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MODULE, PREFIX_TUTORIAL_NAME);
         Module module = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get());
         String tutorialName = ParserUtil.parseTutorialName(argMultimap.getValue(PREFIX_TUTORIAL_NAME).get());
-        String tutorialTime = ParserUtil.parseTutorialTime(argMultimap.getValue(PREFIX_TUTORIAL_TIME).get());
-        Tutorial tutorial = new Tutorial(module, tutorialName, tutorialTime);
+        Tutorial tutorial = new Tutorial(module, tutorialName);
         return new RemoveFromTutorialCommand(index, tutorial);
     }
 
