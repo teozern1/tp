@@ -27,6 +27,18 @@ public class Tutorial {
         this.time = time;
     }
 
+    /**
+     * Constructs a {@code Tutorial}.
+     * This constructor only create a tutorial model
+     * to find the actual tutorial in tutorial list.
+     * @param module Module tutorial belongs to.
+     * @param tutorialName Name of tutorial.
+     */
+    public Tutorial(Module module, String tutorialName) {
+        this.module = module;
+        this.tutName = tutorialName;
+    }
+
     /* Methods */
 
     public String getModuleName() {
