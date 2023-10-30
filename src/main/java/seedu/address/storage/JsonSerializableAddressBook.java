@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
@@ -27,6 +28,8 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedModule> modules = new ArrayList<>();
     private final List<JsonAdaptedTutorial> tutorials = new ArrayList<>();
+
+    private final List<JsonAdaptedAssignment> assignments = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
@@ -45,6 +48,7 @@ class JsonSerializableAddressBook {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         modules.addAll(source.getModuleList().stream().map(JsonAdaptedModule::new).collect(Collectors.toList()));
         tutorials.addAll(source.getTutorialList().stream().map(JsonAdaptedTutorial::new).collect(Collectors.toList()));
+        assignments.addAll(source.getAssignmentList().stream().map(JsonAdaptedAssignment::new).collect(Collectors.toList()));
     }
 
     /**
@@ -76,6 +80,14 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TUTORIAL);
             }
             addressBook.addTutorial(tutorial);
+        }
+
+        for (JsonAdaptedAssignment jsonAdaptedAssignment : assignments) {
+            Assignment tutorial = jsonAdaptedAssignment.toModelType();
+            if (addressBook.hasAssignment(tutorial)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_TUTORIAL);
+            }
+            addressBook.addAssignment(tutorial);
         }
 
         return addressBook;

@@ -44,7 +44,6 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         modules = new FilteredList<>(this.addressBook.getModuleList());
         tutorials = new FilteredList<>(this.addressBook.getTutorialList());
-        this.addressBook.addAssignment(new Assignment(new Title("TestAssignment")));
         assignments = new FilteredList<>(this.addressBook.getAssignmentList());
     }
 
