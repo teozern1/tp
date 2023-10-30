@@ -73,8 +73,8 @@ public class AddToTutorialCommand extends Command {
 
         try {
             realTutorial = (Tutorial) model.getTutorialList().stream().filter(
-                    tut -> tut.getModuleName().equals(tutorialToAddTo.getModuleName()) &&
-                            tut.getTutName().equals(tutorialToAddTo.getTutName())
+                    tut -> tut.getModuleName().equals(tutorialToAddTo.getModuleName())
+                            && tut.getTutName().equals(tutorialToAddTo.getTutName())
 
             ).toArray()[0];
         } catch (RuntimeException e) {

@@ -71,8 +71,8 @@ public class RemoveFromTutorialCommand extends Command {
         Tutorial realTutorial;
         try {
             realTutorial = (Tutorial) model.getTutorialList().stream().filter(
-                    tut -> tut.getModuleName().equals(tutorialToRemoveFrom.getModuleName()) &&
-                            tut.getTutName().equals(tutorialToRemoveFrom.getTutName())
+                    tut -> tut.getModuleName().equals(tutorialToRemoveFrom.getModuleName())
+                            && tut.getTutName().equals(tutorialToRemoveFrom.getTutName())
 
             ).toArray()[0];
         } catch (RuntimeException e) {
