@@ -114,6 +114,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 *  `edit 3 s/A0514624K` Edits the student number of the 2nd person to be 'A0514624K'
+
 ### Locating persons by name: `find`
 
 ### Deleting a person : `delete`
@@ -243,7 +244,7 @@ Will give an error message if the module given has not been made, or if the tuto
 
 Format: `removeTutorial [tn/TUTORIAL_NAME] [m/MODULE_NAME]`
 
-Example: `removeTutorial c12 CS2103T` removes a tutorial with name T12 and time "Mon 6pm" belonging to module CS2103T,
+Example: `removeTutorial tn/c12 m/CS2103T` removes a tutorial with name T12 and time "Mon 6pm" belonging to module CS2103T,
 if module CS2103T exists and the tutorial already exists.
 
 ### Adds a student to stated Tutorial: `addToTutorial`

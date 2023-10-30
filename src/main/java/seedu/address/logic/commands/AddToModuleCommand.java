@@ -7,7 +7,9 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -38,10 +40,9 @@ public class AddToModuleCommand extends Command {
             + PREFIX_MODULE + "CS1000 ";
 
     public static final String MESSAGE_SUCCESS = "Added person to module: %1$s";
-
     private final Index index;
-
     private final Module moduleToAddTo;
+    private final Logger logger = LogsCenter.getLogger(AddToModuleCommand.class);
 
     /**
      * @param index of the person in the filtered person list to add tag to
@@ -56,9 +57,9 @@ public class AddToModuleCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> personList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= personList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -66,7 +67,8 @@ public class AddToModuleCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_MODULE);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person personToEdit = personList.get(index.getZeroBased());
+        logger.info("Person to be added to module " + personList);
         Person editedPerson = createEditedPerson(personToEdit);
 
         model.setPerson(personToEdit, editedPerson);
@@ -94,7 +96,6 @@ public class AddToModuleCommand extends Command {
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedModules,
                 updatedTutorials, updatedStudentNumber, updatedTelegram);
-
     }
 
     @Override

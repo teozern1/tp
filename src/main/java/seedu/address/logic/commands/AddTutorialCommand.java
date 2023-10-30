@@ -12,7 +12,7 @@ import seedu.address.model.module.Module;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
- * Adds a module to the address book.
+ * Adds a tutorial to the address book.
  */
 public class AddTutorialCommand extends Command {
     public static final String COMMAND_WORD = "addTutorial";
@@ -41,10 +41,13 @@ public class AddTutorialCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        /* Enforces the constraint that a tutorial must be linked to a (valid) module. */
         if (!model.hasModule(new Module(toAdd.getModuleName()))) {
             throw new CommandException(Messages.MESSAGE_INVALID_MODULE);
         }
 
+        /* Enforces the constraint that there cannot be two tutorials with the same name. Requires the equality of
+        tutorials to depend on tutorial name. */
         if (model.hasTutorial(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_TUTORIAL);
         }

@@ -35,6 +35,7 @@ public class DeleteTutorialCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        requireNonNull(targetIndex);
         List<Tutorial> lastShownList = model.getTutorialList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
