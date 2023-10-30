@@ -124,7 +124,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// module-level operations
 
     /**
-     * Adds a module to the address book.
+     * Adds a {@code module} to the address book.
      * The module must not already exist in the address book.
      */
     public void addModule(Module module) {
@@ -132,7 +132,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Delete a module to the address book.
+     * Delete a {@code module} to the address book.
      * The module must already exist in the address book.
      */
     public void removeModule(Module module) {
@@ -141,7 +141,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a module with the same identity as {@code module} exists in the address book.
      */
     public boolean hasModule(Module module) {
         requireNonNull(module);
@@ -151,7 +151,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// tutorial-level operations
 
     /**
-     * Adds a tutorial to the address book.
+     * Adds a {@code tutorial} to the address book.
      * The tutorial must not already exist in the address book.
      */
     public void addTutorial(Tutorial tutorial) {
@@ -159,7 +159,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Delete a tutorial from the address book.
+     * Delete a {@code tutorial} from the address book.
      * The tutorial must already exist in the address book.
      */
     public void removeTutorial(Tutorial tutorial) {

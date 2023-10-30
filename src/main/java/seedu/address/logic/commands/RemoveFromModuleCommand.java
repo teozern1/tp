@@ -28,7 +28,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Removes a person from a module.
  */
 public class RemoveFromModuleCommand extends Command {
 
@@ -40,7 +40,7 @@ public class RemoveFromModuleCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_MODULE + "CS1000 ";
 
-    public static final String MESSAGE_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_SUCCESS = "Deleted person from module: %1$s";
     public static final String MESSAGE_PERSON_LACKS_MODULE = "User does not have the given module.";
     private final Index index;
     private final Module moduleToRemoveFrom;

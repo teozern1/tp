@@ -27,7 +27,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Adds a person to a module.
  */
 public class AddToModuleCommand extends Command {
 
