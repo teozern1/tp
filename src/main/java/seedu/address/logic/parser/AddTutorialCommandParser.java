@@ -43,7 +43,7 @@ public class AddTutorialCommandParser implements Parser<AddTutorialCommand> {
         Module module = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get());
         String tutorialName = ParserUtil.parseTutorialName(argMultimap.getValue(PREFIX_TUTORIAL_NAME).get());
         String tutorialTime = ParserUtil.parseTutorialTime(argMultimap.getValue(PREFIX_TUTORIAL_TIME).get());
-        
+
         try {
             String[] dateTimeParts = tutorialTime.split(" ");
             String dayPart = dateTimeParts[0];
@@ -56,11 +56,12 @@ public class AddTutorialCommandParser implements Parser<AddTutorialCommand> {
                 throw new RuntimeException();
             }
         } catch (RuntimeException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_TUTORIAL_TIME_FORMAT, AddTutorialCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_TUTORIAL_TIME_FORMAT,
+                    AddTutorialCommand.MESSAGE_USAGE));
         }
-        
+
         Tutorial tutorial = new Tutorial(module, tutorialName, tutorialTime);
-        
+
         return new AddTutorialCommand(tutorial);
     }
 
