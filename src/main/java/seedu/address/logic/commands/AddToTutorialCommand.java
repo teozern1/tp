@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.tutorial;
+package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
@@ -12,8 +12,6 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
@@ -120,7 +118,7 @@ public class AddToTutorialCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof seedu.address.logic.commands.tutorial.AddToTutorialCommand)) {
+        if (!(other instanceof AddToTutorialCommand)) {
             return false;
         }
 

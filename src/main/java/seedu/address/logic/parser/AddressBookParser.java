@@ -25,8 +25,8 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemoveFromModuleCommand;
 import seedu.address.logic.commands.SearchCommand;
-import seedu.address.logic.commands.tutorial.AddToTutorialCommand;
-import seedu.address.logic.commands.tutorial.RemoveFromTutorialCommand;
+import seedu.address.logic.commands.AddToTutorialCommand;
+import seedu.address.logic.commands.RemoveFromTutorialCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
