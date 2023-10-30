@@ -2,10 +2,12 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_TUTORIAL_TIME_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_TIME;
 
+import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddTutorialCommand;
@@ -17,7 +19,11 @@ import seedu.address.model.tutorial.Tutorial;
  * Parses input arguments and creates a new AddTutorialCommand object
  */
 public class AddTutorialCommandParser implements Parser<AddTutorialCommand> {
+    /* Fields */
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("E ha");
+    private static final String TIME_FORMAT_REGEX = "\\d?\\d[AP]M";
 
+    /* Methods */
     /**
      * Parses the given {@code String} of arguments in the context of the AddTutorialCommand
      * and returns an AddTutorialCommand object for execution.
@@ -37,7 +43,24 @@ public class AddTutorialCommandParser implements Parser<AddTutorialCommand> {
         Module module = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get());
         String tutorialName = ParserUtil.parseTutorialName(argMultimap.getValue(PREFIX_TUTORIAL_NAME).get());
         String tutorialTime = ParserUtil.parseTutorialTime(argMultimap.getValue(PREFIX_TUTORIAL_TIME).get());
+        
+        try {
+            String[] dateTimeParts = tutorialTime.split(" ");
+            String dayPart = dateTimeParts[0];
+            String timePart = dateTimeParts[1];
+
+            // checks if dayPart is in correct format
+            DayOfWeek.valueOf(dayPart);
+            // checks if timePart is in correct format
+            if (!timePart.matches(TIME_FORMAT_REGEX)) {
+                throw new RuntimeException();
+            }
+        } catch (RuntimeException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_TUTORIAL_TIME_FORMAT, AddTutorialCommand.MESSAGE_USAGE));
+        }
+        
         Tutorial tutorial = new Tutorial(module, tutorialName, tutorialTime);
+        
         return new AddTutorialCommand(tutorial);
     }
 
@@ -48,4 +71,10 @@ public class AddTutorialCommandParser implements Parser<AddTutorialCommand> {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
+
+    private enum DayOfWeek {
+        Mon, Tue, Wed, Thu, Fri, Sat, Sun
+    }
 }
+
+
