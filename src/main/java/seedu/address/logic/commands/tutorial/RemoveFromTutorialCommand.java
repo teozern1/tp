@@ -68,16 +68,22 @@ public class RemoveFromTutorialCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        if (!model.hasTutorial(tutorialToRemoveFrom)) {
+        Tutorial realTutorial = (Tutorial) model.getTutorialList().stream().filter(
+                tut -> tut.getModuleName().equals(tutorialToRemoveFrom.getModuleName()) &&
+                        tut.getTutName().equals(tutorialToRemoveFrom.getTutName())
+
+        ).toArray()[0];
+
+        if (!model.hasTutorial(realTutorial)) {
             throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        if (!personHasTutorial(personToEdit, this.tutorialToRemoveFrom)) {
+        if (!personHasTutorial(personToEdit, realTutorial)) {
             throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL);
         }
 
-        Person editedPerson = createEditedPerson(personToEdit);
+        Person editedPerson = createEditedPerson(personToEdit, realTutorial);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(editedPerson)));
@@ -87,8 +93,9 @@ public class RemoveFromTutorialCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private Person createEditedPerson(Person personToEdit) {
+    private Person createEditedPerson(Person personToEdit, Tutorial realTutorial) {
         assert personToEdit != null;
+        assert realTutorial != null;
 
         Name updatedName = personToEdit.getName();
         Phone updatedPhone = personToEdit.getPhone();
@@ -97,7 +104,7 @@ public class RemoveFromTutorialCommand extends Command {
         Set<Tag> updatedTags = personToEdit.getTags();
         Set<Module> updatedModules = personToEdit.getModules();
         Set<Tutorial> updatedTutorials = new HashSet<>(personToEdit.getTutorials());
-        updatedTutorials.remove(tutorialToRemoveFrom);
+        updatedTutorials.remove(realTutorial);
         StudentNumber updatedStudentNumber = personToEdit.getStudentNumber();
         Telegram updatedTelegram = personToEdit.getTelegram();
 
