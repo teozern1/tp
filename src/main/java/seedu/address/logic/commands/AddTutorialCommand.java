@@ -42,7 +42,7 @@ public class AddTutorialCommand extends Command {
         requireNonNull(model);
 
         /* Enforces the constraint that a tutorial must be linked to a (valid) module. */
-        if (!model.hasModule(new Module(toAdd.getModuleName()))) {
+        if (!model.hasModule(new Module(toAdd.getModuleCode()))) {
             throw new CommandException(Messages.MESSAGE_INVALID_MODULE);
         }
 

@@ -29,7 +29,7 @@ public class Tutorial {
 
     /* Methods */
 
-    public String getModuleName() {
+    public String getModuleCode() {
         return module.getModuleCode();
     }
 

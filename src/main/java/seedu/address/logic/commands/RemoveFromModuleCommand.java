@@ -96,7 +96,7 @@ public class RemoveFromModuleCommand extends Command {
         Set<Module> updatedModules = new HashSet<>(personToEdit.getModules());
         updatedModules.remove(moduleToRemoveFrom);
         Set<Tutorial> updatedTutorials = new HashSet<>(personToEdit.getTutorials());
-        updatedTutorials.removeIf(tutorial -> Objects.equals(tutorial.getModuleName(),
+        updatedTutorials.removeIf(tutorial -> Objects.equals(tutorial.getModuleCode(),
                 moduleToRemoveFrom.getModuleCode()));
         StudentNumber updatedStudentNumber = personToEdit.getStudentNumber();
         Telegram updatedTelegram = personToEdit.getTelegram();

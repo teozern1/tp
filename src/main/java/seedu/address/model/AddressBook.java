@@ -174,7 +174,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         // Stores the tutorials which are to be removed in another list
         for (Tutorial tutorial : tutorials) {
-            if (tutorial.getModuleName().equals(deletedModuleCode)) {
+            if (tutorial.getModuleCode().equals(deletedModuleCode)) {
                 toBeRemoved.add(tutorial);
             }
         }

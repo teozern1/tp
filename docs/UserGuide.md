@@ -215,7 +215,7 @@ Format: `addToModule INDEX [m/MODULE]`
 Example: `addToModule 2 m/CS2103T` adds the person who is second from the top in the current list to the module
 CS2103T, if the module CS2103T exists.
 
-### Removes a user from a given module: `removeFromModule`
+### Removes a user from a given module: `deleteFromModule`
 
 Removes the user at the specified INDEX displayed on the GUI from a given module.
 The index refers to the index number shown in the displayed user list. The index must be a positive integer.
@@ -306,11 +306,10 @@ Example: `attn 1 se/S1`
 | **Help**               | `help`                                                                                                                                                                |
 | **addModule**          | `addModule m/MODULE_NAME` <br> e.g., `addModule m/CS2100`                                                                                                             |
 | **deleteModule**       | `deleteModule INDEX` <br> e.g., `deleteModule 1`                                                                                                                      |
-| **addToModule**        | `addToModule INDEX MODULE` <br> e.g., `addToModule 2 CS2103T`                                                                                                         |
-| **removeFromModule**   | `removeFromModule INDEX MODULE` <br> e.g., `removeFromModule 2 CS2103T`                                                                                               |
-| **addTutorial**        | `addTutorial TUTORIALNAME MODULE` <br> e.g., `addTutorial c12 CS2103T`                                                                                                |
-| **removeTutorial**     | `removeTutorial TUTORIALNAME MODULE` <br> e.g., `removeTutorial c12 CS2103T`                                                                                          |
-| **changeStatus**       | `changeStatus INDEX MODULE (LETTER: p/t/s/n)` <br> e.g., `changeStatus 2 CS2103T t`                                                                                   |
+| **addToModule**        | `addToModule INDEX MODULE` <br> e.g., `addToModule 2 m/CS2103T`                                                                                                       |
+| **deleteFromModule**   | `deleteFromModule INDEX MODULE` <br> e.g., `removeFromModule 2 m/CS2103T`                                                                                             |
+| **addTutorial**        | `addTutorial TUTORIALNAME MODULE` <br> e.g., `addTutorial tn/c12 m/CS2103T`                                                                                           |
+| **removeTutorial**     | `removeTutorial TUTORIALNAME MODULE` <br> e.g., `removeTutorial c12 m/CS2103T`                                                                                        |
 | **addToTutorial**      | `addToTutorial INDEX [m/MODULE_NAME] [tn/TUTORIAL_NAME]` <br> e.g., `addToTutorial 1 m/CS2103T tn/T11`                                                                |
 | **removeFromTutorial** | `removeFromTutorial INDEX [m/MODULE_NAME] [tn/TUTORIAL_NAME]` <br> e.g., `removeFromTutorial 1 m/CS2103T tn/T11`                                                      |
 | **editTutorial**       | `editTutorial INDEX [tn/NEW_NAME] [tt/NEW_TIME]` <br> e.g., `editTutorial 1 tn/T11 tt/Mon`                                                                            |
