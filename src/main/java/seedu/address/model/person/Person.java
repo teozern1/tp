@@ -96,7 +96,7 @@ public class Person {
         Set<String> uiList = new LinkedHashSet<>();
         Set<String> moduleCodesWithTutorials = new HashSet<>();
         for (Tutorial tutorial : this.getTutorials()) {
-            moduleCodesWithTutorials.add(tutorial.getModuleName());
+            moduleCodesWithTutorials.add(tutorial.getModuleCode());
             uiList.add(tutorial.toString());
         }
         for (Module module : this.getModules()) {

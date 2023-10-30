@@ -32,7 +32,7 @@ public class JsonAdaptedTutorial {
      * Converts a given {@code Tutorial} into this class for Jackson use.
      */
     public JsonAdaptedTutorial(Tutorial source) {
-        this.moduleCode = source.getModuleName();
+        this.moduleCode = source.getModuleCode();
         this.tutName = source.getTutName();
         this.time = source.getTime();
     }

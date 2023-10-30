@@ -16,7 +16,6 @@ public class Module {
 
     /**
      * Constructs an {@code Module}.
-     *
      * @param moduleCode A valid module code.
      */
     public Module(String moduleCode) {

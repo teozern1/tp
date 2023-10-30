@@ -12,7 +12,7 @@ import seedu.address.model.module.Module;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
- * Adds a module to the address book.
+ * Adds a tutorial to the address book.
  */
 public class AddTutorialCommand extends Command {
     public static final String COMMAND_WORD = "addTutorial";
@@ -21,16 +21,17 @@ public class AddTutorialCommand extends Command {
             + "Parameters: "
             + PREFIX_MODULE + "MODULE "
             + PREFIX_TUTORIAL_NAME + "TUTORIAL_NAME "
-            + PREFIX_TUTORIAL_TIME + "TUTORIAL_TIME";
+            + PREFIX_TUTORIAL_TIME + "TUTORIAL_TIME\n"
+            + "Example: " + COMMAND_WORD + " m/CS1000 tn/T12 tt/Mon 6pm";
 
-    public static final String MESSAGE_SUCCESS = "New tutorial added: %s";
+    public static final String MESSAGE_SUCCESS = "Added tutorial: %s";
 
     public static final String MESSAGE_DUPLICATE_TUTORIAL = "This tutorial already exists in the address book";
 
     private final Tutorial toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddTutorialCommand to add the specified {@code Tutorial}
      */
     public AddTutorialCommand(Tutorial tutorial) {
         requireNonNull(tutorial);
@@ -41,10 +42,13 @@ public class AddTutorialCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasModule(new Module(toAdd.getModuleName()))) {
+        /* Enforces the constraint that a tutorial must be linked to a (valid) module. */
+        if (!model.hasModule(new Module(toAdd.getModuleCode()))) {
             throw new CommandException(Messages.MESSAGE_INVALID_MODULE);
         }
 
+        /* Enforces the constraint that there cannot be two tutorials with the same name. Requires the equality of
+        tutorials to depend on tutorial name. */
         if (model.hasTutorial(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_TUTORIAL);
         }

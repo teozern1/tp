@@ -16,8 +16,10 @@ public class DeleteTutorialCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteTutorial";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a tutorial from the list\n"
-            + "Parameters: INDEX";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Deletes the tutorial identified by the index number used in the displayed tutorial list.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SUCCESS = "Deleted tutorial: %s";
 
@@ -26,7 +28,7 @@ public class DeleteTutorialCommand extends Command {
     private Index targetIndex;
 
     /**
-     * Creates an DeleteTutorialCommand to add the specified {@code Person}
+     * Creates an DeleteTutorialCommand to delete the specified {@code Index}
      */
     public DeleteTutorialCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -35,6 +37,7 @@ public class DeleteTutorialCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        requireNonNull(targetIndex);
         List<Tutorial> lastShownList = model.getTutorialList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
