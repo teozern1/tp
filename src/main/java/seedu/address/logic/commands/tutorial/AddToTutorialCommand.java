@@ -69,12 +69,18 @@ public class AddToTutorialCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        if (!model.hasTutorial(tutorialToAddTo)) {
+        Tutorial realTutorial = (Tutorial) model.getTutorialList().stream().filter(
+                tut -> tut.getModuleName().equals(tutorialToAddTo.getModuleName()) &&
+                            tut.getTutName().equals(tutorialToAddTo.getTutName())
+
+        ).toArray()[0];
+
+        if (!model.hasTutorial(realTutorial)) {
             throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit);
+        Person editedPerson = createEditedPerson(personToEdit, realTutorial);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -85,8 +91,9 @@ public class AddToTutorialCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private Person createEditedPerson(Person personToEdit) {
+    private Person createEditedPerson(Person personToEdit, Tutorial realTutorial) {
         assert personToEdit != null;
+        assert realTutorial != null;
 
         Name updatedName = personToEdit.getName();
         Phone updatedPhone = personToEdit.getPhone();
@@ -94,9 +101,9 @@ public class AddToTutorialCommand extends Command {
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = personToEdit.getTags();
         Set<Module> updatedModules = new HashSet<>(personToEdit.getModules());
-        updatedModules.add(new Module(tutorialToAddTo.getModuleName()));
+        updatedModules.add(new Module(realTutorial.getModuleName()));
         Set<Tutorial> updatedTutorials = new HashSet<>(personToEdit.getTutorials());
-        updatedTutorials.add(tutorialToAddTo);
+        updatedTutorials.add(realTutorial);
         StudentNumber updatedStudentNumber = personToEdit.getStudentNumber();
         Telegram updatedTelegram = personToEdit.getTelegram();
 
