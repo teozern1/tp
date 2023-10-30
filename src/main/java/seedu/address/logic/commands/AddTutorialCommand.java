@@ -21,7 +21,7 @@ public class AddTutorialCommand extends Command {
             + "Parameters: "
             + PREFIX_MODULE + "MODULE "
             + PREFIX_TUTORIAL_NAME + "TUTORIAL_NAME "
-            + PREFIX_TUTORIAL_TIME + "TUTORIAL_TIME";
+            + PREFIX_TUTORIAL_TIME + "TUTORIAL_TIME(e.g. Mon 2PM)";
 
     public static final String MESSAGE_SUCCESS = "New tutorial added: %s";
 
