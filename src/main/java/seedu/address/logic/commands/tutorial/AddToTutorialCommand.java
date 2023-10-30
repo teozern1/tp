@@ -69,13 +69,15 @@ public class AddToTutorialCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Tutorial realTutorial = (Tutorial) model.getTutorialList().stream().filter(
-                tut -> tut.getModuleName().equals(tutorialToAddTo.getModuleName()) &&
+        Tutorial realTutorial;
+
+        try {
+            realTutorial = (Tutorial) model.getTutorialList().stream().filter(
+                    tut -> tut.getModuleName().equals(tutorialToAddTo.getModuleName()) &&
                             tut.getTutName().equals(tutorialToAddTo.getTutName())
 
-        ).toArray()[0];
-
-        if (!model.hasTutorial(realTutorial)) {
+            ).toArray()[0];
+        } catch (RuntimeException e) {
             throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL);
         }
 
