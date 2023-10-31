@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.tutorial;
+package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
@@ -12,8 +12,6 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
@@ -30,11 +28,11 @@ import seedu.address.model.tutorial.Tutorial;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class AddToTutorialCommand extends Command {
+public class RemoveFromTutorialCommand extends Command {
 
-    public static final String COMMAND_WORD = "addToTutorial";
+    public static final String COMMAND_WORD = "removeFromTutorial";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a user to a given tutorial "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a user from a given tutorial "
             + "Parameters:"
             + "INDEX (must be a positive integer)"
             + "[" + PREFIX_MODULE + "MODULE_NAME]"
@@ -44,20 +42,20 @@ public class AddToTutorialCommand extends Command {
             + PREFIX_TUTORIAL_NAME + "T11 ";
 
     public static final String MESSAGE_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_PERSON_LACKS_TUTORIAL = "User does not have the given tutorial.";
 
     private final Index index;
 
-    private final Tutorial tutorialToAddTo;
+    private final Tutorial tutorialToRemoveFrom;
 
     /**
      * @param index of the person in the filtered person list to add tag to
-     * @param tutorialToAddTo the target tutorial to add the person
      */
-    public AddToTutorialCommand(Index index, Tutorial tutorialToAddTo) {
+    public RemoveFromTutorialCommand(Index index, Tutorial tutorialToRemoveFrom) {
         requireNonNull(index);
-        requireNonNull(tutorialToAddTo);
+        requireNonNull(tutorialToRemoveFrom);
         this.index = index;
-        this.tutorialToAddTo = tutorialToAddTo;
+        this.tutorialToRemoveFrom = tutorialToRemoveFrom;
     }
 
     @Override
@@ -69,13 +67,22 @@ public class AddToTutorialCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        if (!model.hasTutorial(tutorialToAddTo)) {
+        Tutorial realTutorial;
+        try {
+            realTutorial = (Tutorial) model.getTutorialList().stream().filter(
+                    tut -> tut.equals(tutorialToRemoveFrom)
+
+            ).toArray()[0];
+        } catch (RuntimeException e) {
             throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit);
+        if (!personHasTutorial(personToEdit, realTutorial)) {
+            throw new CommandException(MESSAGE_PERSON_LACKS_TUTORIAL);
+        }
 
+        Person editedPerson = createEditedPerson(personToEdit, realTutorial);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(editedPerson)));
@@ -85,23 +92,33 @@ public class AddToTutorialCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private Person createEditedPerson(Person personToEdit) {
+    private Person createEditedPerson(Person personToEdit, Tutorial realTutorial) {
         assert personToEdit != null;
+        assert realTutorial != null;
 
         Name updatedName = personToEdit.getName();
         Phone updatedPhone = personToEdit.getPhone();
         Email updatedEmail = personToEdit.getEmail();
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = personToEdit.getTags();
-        Set<Module> updatedModules = new HashSet<>(personToEdit.getModules());
-        updatedModules.add(new Module(tutorialToAddTo.getModuleCode()));
+        Set<Module> updatedModules = personToEdit.getModules();
         Set<Tutorial> updatedTutorials = new HashSet<>(personToEdit.getTutorials());
-        updatedTutorials.add(tutorialToAddTo);
+        updatedTutorials.remove(realTutorial);
         StudentNumber updatedStudentNumber = personToEdit.getStudentNumber();
         Telegram updatedTelegram = personToEdit.getTelegram();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedModules,
-                updatedTutorials, updatedStudentNumber, updatedTelegram);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                updatedModules, updatedTutorials, updatedStudentNumber, updatedTelegram);
+    }
+
+    /**
+     * Returns if a given person is part of a specified tutorial.
+     * @param personToCheck The given person.
+     * @param tutorial The specified tutorial.
+     * @return Whether the person is part of the tutorial.
+     */
+    private boolean personHasTutorial(Person personToCheck, Tutorial tutorial) {
+        return personToCheck.getTutorials().contains(tutorial);
     }
 
     @Override
@@ -111,22 +128,20 @@ public class AddToTutorialCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof seedu.address.logic.commands.tutorial.AddToTutorialCommand)) {
+        if (!(other instanceof RemoveFromTutorialCommand)) {
             return false;
         }
 
-        AddToTutorialCommand otherCommand = (AddToTutorialCommand) other;
-
-        return this.tutorialToAddTo.equals(otherCommand.tutorialToAddTo)
-                && this.index.equals(otherCommand.index);
+        return this.index.equals(((RemoveFromTutorialCommand) other).index)
+                && this.tutorialToRemoveFrom.equals(((RemoveFromTutorialCommand) other).tutorialToRemoveFrom);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("tutorialName", tutorialToAddTo)
+                .add("tutorialName", tutorialToRemoveFrom)
                 .toString();
     }
-
 }
+

@@ -20,51 +20,81 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
 import seedu.address.testutil.PersonBuilder;
 
-class AddToTutorialCommandTest {
+class RemoveFromTutorialCommandTest {
 
     @Test
     public void execute_tutorialNotFound_errorMessage() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Tutorial testTut = new Tutorial(new Module("CS1000"), "testName", "Mon 2PM");
+        // data
+        Module testModule = new Module("CS1000");
+        Tutorial testTut = new Tutorial(testModule, "testName", "Mon 2PM");
 
+        // models to be edited
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        // result
         assertCommandFailure(
-                new AddToTutorialCommand(INDEX_FIRST_PERSON, testTut), model,
+                new RemoveFromTutorialCommand(INDEX_FIRST_PERSON, testTut), model,
                 Messages.MESSAGE_INVALID_TUTORIAL
         );
     }
 
     @Test
     public void execute_invalidIndex_errorMessage() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Tutorial testTut = new Tutorial(new Module("CS1000"), "testName", "Mon 2PM");
+        // data
+        Module testModule = new Module("CS1000");
+        Tutorial testTut = new Tutorial(testModule, "testName", "Mon 2PM");
 
-        assertCommandFailure(new AddToTutorialCommand(Index.fromZeroBased(999999),
+        // models to be edited
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        // result
+        assertCommandFailure(new RemoveFromTutorialCommand(Index.fromZeroBased(999999),
                 testTut), model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_tutorialNotAttachedToPerson_errorMessage() {
+        // data
+        Module testModule = new Module("CS1000");
+        Tutorial testTut = new Tutorial(testModule, "testName", "Mon 2PM");
+
+        // models to be edited
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model.addModule(testModule);
+        model.addTutorial(testTut);
+
+        // result
+        assertCommandFailure(new RemoveFromTutorialCommand(INDEX_FIRST_PERSON, testTut), model,
+                RemoveFromTutorialCommand.MESSAGE_PERSON_LACKS_TUTORIAL);
     }
 
     @Test
     public void execute_tutorialWithoutTime_success() {
         // data
         Module testModule = new Module("CS1000");
-        Tutorial testTut = new Tutorial(testModule, "testName", "Mon 2PM");
         Tutorial searchTut = new Tutorial(testModule, "testName");
+        Tutorial testTut = new Tutorial(testModule, "testName", "Mon 2PM");
 
         // command
-        AddToTutorialCommand command = new AddToTutorialCommand(INDEX_FIRST_PERSON, searchTut);
+        RemoveFromTutorialCommand command = new RemoveFromTutorialCommand(INDEX_FIRST_PERSON, searchTut);
 
-        // model to be edited
+        // models to be edited
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         model.addModule(testModule);
         model.addTutorial(testTut);
+        Person personToEdit = new PersonBuilder(model.getAddressBook().getPersonList().get(0))
+                .withModules(testModule).withTutorials(testTut).build();
+        model.setPerson(model.getFilteredPersonList().get(0), personToEdit);
 
         // expected
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.addModule(testModule);
         expectedModel.addTutorial(testTut);
         Person expectedPerson = new PersonBuilder(expectedModel.getAddressBook().getPersonList().get(0))
-                .withModules(testModule).withTutorials(testTut).build();
-        String expectedMessage = String.format(AddToTutorialCommand.MESSAGE_SUCCESS, Messages.format(expectedPerson));
+                .withModules(testModule).build();
         expectedModel.setPerson(expectedModel.getFilteredPersonList().get(0), expectedPerson);
+        String expectedMessage = String.format(
+                RemoveFromTutorialCommand.MESSAGE_SUCCESS, Messages.format(expectedPerson));
 
         // result
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -77,21 +107,25 @@ class AddToTutorialCommandTest {
         Tutorial testTut = new Tutorial(testModule, "testName", "Mon 2PM");
 
         // command
-        AddToTutorialCommand command = new AddToTutorialCommand(INDEX_FIRST_PERSON, testTut);
+        RemoveFromTutorialCommand command = new RemoveFromTutorialCommand(INDEX_FIRST_PERSON, testTut);
 
-        // model to be edited
+        // models to be edited
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         model.addModule(testModule);
         model.addTutorial(testTut);
+        Person personToEdit = new PersonBuilder(model.getAddressBook().getPersonList().get(0))
+                .withModules(testModule).withTutorials(testTut).build();
+        model.setPerson(model.getFilteredPersonList().get(0), personToEdit);
 
         // expected
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.addModule(testModule);
         expectedModel.addTutorial(testTut);
         Person expectedPerson = new PersonBuilder(expectedModel.getAddressBook().getPersonList().get(0))
-                .withModules(testModule).withTutorials(testTut).build();
+                .withModules(testModule).build();
         expectedModel.setPerson(expectedModel.getFilteredPersonList().get(0), expectedPerson);
-        String expectedMessage = String.format(AddToTutorialCommand.MESSAGE_SUCCESS, Messages.format(expectedPerson));
+        String expectedMessage = String.format(
+                RemoveFromTutorialCommand.MESSAGE_SUCCESS, Messages.format(expectedPerson));
 
         // result
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -99,6 +133,7 @@ class AddToTutorialCommandTest {
 
     @Test
     public void equals() {
+        // data
         String testName1 = "T11";
         String testName2 = "T12";
 
@@ -109,46 +144,53 @@ class AddToTutorialCommandTest {
         Module test2 = new Module("CS2000");
         Tutorial test21 = new Tutorial(test2, testName1);
 
-        AddToTutorialCommand addToTutorialCommand1 = new AddToTutorialCommand(
+        // command
+        RemoveFromTutorialCommand removeFromTutorialCommand1 = new RemoveFromTutorialCommand(
                 INDEX_FIRST_PERSON, test11);
-        AddToTutorialCommand addToTutorialCommand2 = new AddToTutorialCommand(
+        RemoveFromTutorialCommand removeFromTutorialCommand2 = new RemoveFromTutorialCommand(
                 INDEX_FIRST_PERSON, test12);
-        AddToTutorialCommand addToTutorialCommand3 = new AddToTutorialCommand(
+        RemoveFromTutorialCommand removeFromTutorialCommand3 = new RemoveFromTutorialCommand(
                 INDEX_FIRST_PERSON, test21);
 
         // same object -> returns true
-        assertTrue(addToTutorialCommand1.equals(addToTutorialCommand1));
+        assertTrue(removeFromTutorialCommand1.equals(removeFromTutorialCommand1));
 
         // same values -> returns true
-        AddToTutorialCommand addToTutorialCommandCopy = new AddToTutorialCommand(INDEX_FIRST_PERSON,
-                test11);
-        assertTrue(addToTutorialCommand1.equals(addToTutorialCommandCopy));
+        RemoveFromTutorialCommand removeFromTutorialCommandCopy =
+                new RemoveFromTutorialCommand(INDEX_FIRST_PERSON, test11);
+        assertTrue(removeFromTutorialCommand1.equals(removeFromTutorialCommandCopy));
 
         // different types -> returns false
-        assertFalse(addToTutorialCommand1.equals(1));
+        assertFalse(removeFromTutorialCommand1.equals(1));
 
         // null -> returns false
-        assertFalse(addToTutorialCommand1.equals(null));
+        assertFalse(removeFromTutorialCommand1.equals(null));
 
         // different Module -> returns false
-        assertFalse(addToTutorialCommand1.equals(addToTutorialCommand3));
+        assertFalse(removeFromTutorialCommand1.equals(removeFromTutorialCommand3));
 
         // different Tutorial Name -> returns false
-        assertFalse(addToTutorialCommand1.equals(addToTutorialCommand2));
+        assertFalse(removeFromTutorialCommand1.equals(removeFromTutorialCommand2));
     }
 
     @Test
     public void toStringMethod() {
+        // data
         Index targetIndex = Index.fromOneBased(1);
 
         Module testModule = new Module("CS1000");
         Tutorial testTut = new Tutorial(testModule, "testName", "Mon 2PM");
 
-        AddToTutorialCommand addToTutorialCommand = new AddToTutorialCommand(
+        // command
+        RemoveFromTutorialCommand removeFromTutorialCommand = new RemoveFromTutorialCommand(
                 INDEX_FIRST_PERSON, testTut);
-        String expected = AddToTutorialCommand.class.getCanonicalName()
+
+        // expected
+        String expected = RemoveFromTutorialCommand.class.getCanonicalName()
                 + "{index=" + targetIndex + ", tutorialName="
                 + testTut + "}";
-        assertEquals(expected, addToTutorialCommand.toString());
+
+        // result
+        assertEquals(expected, removeFromTutorialCommand.toString());
     }
 }

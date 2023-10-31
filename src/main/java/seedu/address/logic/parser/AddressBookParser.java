@@ -11,6 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddModuleCommand;
 import seedu.address.logic.commands.AddToModuleCommand;
+import seedu.address.logic.commands.AddToTutorialCommand;
 import seedu.address.logic.commands.AddTutorialCommand;
 import seedu.address.logic.commands.AttendanceCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -24,9 +25,8 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemoveFromModuleCommand;
+import seedu.address.logic.commands.RemoveFromTutorialCommand;
 import seedu.address.logic.commands.SearchCommand;
-import seedu.address.logic.commands.tutorial.AddToTutorialCommand;
-import seedu.address.logic.commands.tutorial.RemoveFromTutorialCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

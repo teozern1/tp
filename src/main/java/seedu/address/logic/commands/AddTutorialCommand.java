@@ -22,7 +22,7 @@ public class AddTutorialCommand extends Command {
             + PREFIX_MODULE + "MODULE "
             + PREFIX_TUTORIAL_NAME + "TUTORIAL_NAME "
             + PREFIX_TUTORIAL_TIME + "TUTORIAL_TIME\n"
-            + "Example: " + COMMAND_WORD + " m/CS1000 tn/T12 tt/Mon 6pm";
+            + "Example: " + COMMAND_WORD + " m/CS1000 tn/T12 tt/Mon 6PM";
 
     public static final String MESSAGE_SUCCESS = "Added tutorial: %s";
 
