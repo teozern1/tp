@@ -219,7 +219,7 @@ CS2103T, if the module CS2103T exists and the person who is second from the top 
 
 ### Adds a tutorial to a given module: `addTutorial`
 
-Adds a tutorial with a specific tutorial name to a given module. Different modules can have different tutorials 
+Adds a tutorial with a specific tutorial name to a given module. Different modules can have different tutorials
 with the same name. Will give an error message if the module does not exist or a tutorial with the same name has already
 been made for the module.
 
@@ -266,9 +266,9 @@ Example: `editTutorial 1 tn/T11 tt/Mon`
 
 ### Records the attendance of the student: `attn`
 
-Records a student's attendance and displays the change by adding a tag on the GUI. 
-The index refers to the position of the person as displayed in the GUI. 
-The LESSON_NUMBER must be alphanumeric. 
+Records a student's attendance and displays the change by adding a tag on the GUI.
+The index refers to the position of the person as displayed in the GUI.
+The LESSON_NUMBER must be alphanumeric.
 Further prompts are given for incorrect inputs.
 
 Format: `attn INDEX se/LESSON_NUMBER`

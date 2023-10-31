@@ -1,9 +1,8 @@
 package seedu.address.model.assignment;
 
-import seedu.address.commons.util.ToStringBuilder;
-import java.util.Objects;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Objects;
 
 /**
  * Represents a Assignment in the address book.
@@ -25,6 +24,10 @@ public class Assignment {
         return title;
     }
 
+    /**
+     * Returns true if both assignments have the same title.
+     * This defines a weaker notion of equality between two assignments.
+     */
     public boolean isSameAssignment(Assignment otherAssignment) {
         if (otherAssignment == this) {
             return true;

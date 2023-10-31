@@ -1,21 +1,22 @@
 package seedu.address.model.assignment;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import seedu.address.model.assignment.exceptions.DuplicateAssignmentException;
-import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
+import seedu.address.model.assignment.exceptions.DuplicateAssignmentException;
 
 /**
  * A list of assignments that enforces uniqueness between its elements and does not allow nulls.
- * A assignment is considered unique by comparing using {@code Assignment#isSameAssignment(Assignment)}. As such, adding and updating of
- * assignments uses Assignment#isSameAssignment(Assignment) for equality so as to ensure that the assignment being added or updated is
- * unique in terms of identity in the UniqueAssignmentList. However, the removal of a assignment uses Assignment#equals(Object) so
+ * A assignment is considered unique by comparing using {@code Assignment#isSameAssignment(Assignment)}.
+ * As such, adding and updating of assignments uses Assignment#isSameAssignment(Assignment) for equality
+ * so as to ensure that the assignment being added or updated is unique in terms of identity in the
+ * UniqueAssignmentList. However, the removal of a assignment uses Assignment#equals(Object) so
  * as to ensure that the assignment with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
@@ -53,7 +54,8 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
     /**
      * Replaces the assignment {@code target} in the list with {@code editedAssignment}.
      * {@code target} must exist in the list.
-     * The assignment identity of {@code editedAssignment} must not be the same as another existing assignment in the list.
+     * The assignment identity of {@code editedAssignment} must not be the same as another existing
+     * assignment in the list.
      */
     public void setAssignment(Assignment target, Assignment editedAssignment) {
         requireAllNonNull(target, editedAssignment);
