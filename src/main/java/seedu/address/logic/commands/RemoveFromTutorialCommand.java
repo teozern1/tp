@@ -42,6 +42,7 @@ public class RemoveFromTutorialCommand extends Command {
             + PREFIX_TUTORIAL_NAME + "T11 ";
 
     public static final String MESSAGE_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_PERSON_LACKS_TUTORIAL = "User does not have the given tutorial.";
 
     private final Index index;
 
@@ -69,8 +70,7 @@ public class RemoveFromTutorialCommand extends Command {
         Tutorial realTutorial;
         try {
             realTutorial = (Tutorial) model.getTutorialList().stream().filter(
-                    tut -> tut.getModuleName().equals(tutorialToRemoveFrom.getModuleName())
-                            && tut.getTutName().equals(tutorialToRemoveFrom.getTutName())
+                    tut -> tut.equals(tutorialToRemoveFrom)
 
             ).toArray()[0];
         } catch (RuntimeException e) {
@@ -79,7 +79,7 @@ public class RemoveFromTutorialCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         if (!personHasTutorial(personToEdit, realTutorial)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL);
+            throw new CommandException(MESSAGE_PERSON_LACKS_TUTORIAL);
         }
 
         Person editedPerson = createEditedPerson(personToEdit, realTutorial);
