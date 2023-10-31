@@ -55,13 +55,25 @@ public class Tutorial {
         return time;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Tutorial tutorial = (Tutorial) o;
+
+        return Objects.equals(module, tutorial.module) && Objects.equals(tutName, tutorial.tutName);
+    }
+
     /**
      * the equals function of Tutorial
      * @param o the object to compare
      * @throws NullPointerException when Tutorial is created using the constructor with 2 arguments.
      */
-    @Override
-    public boolean equals(Object o) {
+    public boolean isSameTutorial(Object o) {
         if (this == o) {
             return true;
         }
