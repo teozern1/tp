@@ -20,7 +20,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddToTutorialCommandTest {
+class AddToTutorialCommandTest {
 
     @Test
     public void execute_tutorialNotFound_errorMessage() {
@@ -43,7 +43,7 @@ public class AddToTutorialCommandTest {
     }
 
     @Test
-    public void execute_tutorialWithoutTime_Success() {
+    public void execute_tutorialWithoutTime_success() {
         // data
         Module testModule = new Module("CS1000");
         Tutorial testTut = new Tutorial(testModule, "testName", "Mon 2PM");

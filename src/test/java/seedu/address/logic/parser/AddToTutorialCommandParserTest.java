@@ -1,14 +1,16 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.AddToTutorialCommand;
-import seedu.address.model.module.Module;
-import seedu.address.model.tutorial.Tutorial;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.AddToTutorialCommand;
+import seedu.address.model.module.Module;
+import seedu.address.model.tutorial.Tutorial;
+
 
 class AddToTutorialCommandParserTest {
     private final AddToTutorialCommandParser parser = new AddToTutorialCommandParser();

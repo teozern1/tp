@@ -1,15 +1,15 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.AddToTutorialCommand;
-import seedu.address.logic.commands.RemoveFromTutorialCommand;
-import seedu.address.model.module.Module;
-import seedu.address.model.tutorial.Tutorial;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.RemoveFromTutorialCommand;
+import seedu.address.model.module.Module;
+import seedu.address.model.tutorial.Tutorial;
 
 class RemoveFromTutorialCommandParserTest {
     private final RemoveFromTutorialCommandParser parser = new RemoveFromTutorialCommandParser();
@@ -48,5 +48,4 @@ class RemoveFromTutorialCommandParserTest {
         assertParseSuccess(parser, "1 m/CS1000 tn/T11",
                 new RemoveFromTutorialCommand(INDEX_FIRST_PERSON, testTut));
     }
-
 }

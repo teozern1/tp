@@ -1,6 +1,15 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
@@ -10,12 +19,6 @@ import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
 import seedu.address.testutil.PersonBuilder;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 class RemoveFromTutorialCommandTest {
 
@@ -66,7 +69,7 @@ class RemoveFromTutorialCommandTest {
     }
 
     @Test
-    public void execute_tutorialWithoutTime_Success() {
+    public void execute_tutorialWithoutTime_success() {
         // data
         Module testModule = new Module("CS1000");
         Tutorial searchTut = new Tutorial(testModule, "testName");
@@ -90,7 +93,8 @@ class RemoveFromTutorialCommandTest {
         Person expectedPerson = new PersonBuilder(expectedModel.getAddressBook().getPersonList().get(0))
                 .withModules(testModule).build();
         expectedModel.setPerson(expectedModel.getFilteredPersonList().get(0), expectedPerson);
-        String expectedMessage = String.format(RemoveFromTutorialCommand.MESSAGE_SUCCESS, Messages.format(expectedPerson));
+        String expectedMessage = String.format(
+                RemoveFromTutorialCommand.MESSAGE_SUCCESS, Messages.format(expectedPerson));
 
         // result
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -120,7 +124,8 @@ class RemoveFromTutorialCommandTest {
         Person expectedPerson = new PersonBuilder(expectedModel.getAddressBook().getPersonList().get(0))
                 .withModules(testModule).build();
         expectedModel.setPerson(expectedModel.getFilteredPersonList().get(0), expectedPerson);
-        String expectedMessage = String.format(RemoveFromTutorialCommand.MESSAGE_SUCCESS, Messages.format(expectedPerson));
+        String expectedMessage = String.format(
+                RemoveFromTutorialCommand.MESSAGE_SUCCESS, Messages.format(expectedPerson));
 
         // result
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -151,8 +156,8 @@ class RemoveFromTutorialCommandTest {
         assertTrue(removeFromTutorialCommand1.equals(removeFromTutorialCommand1));
 
         // same values -> returns true
-        RemoveFromTutorialCommand removeFromTutorialCommandCopy
-                = new RemoveFromTutorialCommand(INDEX_FIRST_PERSON, test11);
+        RemoveFromTutorialCommand removeFromTutorialCommandCopy =
+                new RemoveFromTutorialCommand(INDEX_FIRST_PERSON, test11);
         assertTrue(removeFromTutorialCommand1.equals(removeFromTutorialCommandCopy));
 
         // different types -> returns false
