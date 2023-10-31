@@ -13,8 +13,8 @@ public class Professor extends Person {
     /**
      * Every field must be present and not null.
      */
-    public Professor(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+    public Professor(Name name, Phone phone, Email email, Set<Tag> tags,
                      Set<Module> modules, Set<Tutorial> tutorials, StudentNumber studentNumber, Telegram telegram) {
-        super(name, phone, email, address, tags, modules, tutorials, new StudentNumber("N/A"), telegram);
+        super(name, phone, email, tags, modules, tutorials, new StudentNumber("N/A"), telegram);
     }
 }

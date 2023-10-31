@@ -101,7 +101,8 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STUDENT_NUMBER] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STUDENT_NUMBER] [tele/TELEGRAM_HANDLE]
+[t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -113,8 +114,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STUDENT_NUMBER] 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-*  `edit 3 s/A0514624K` Edits the student number of the 2nd person to be 'A0514624K'
+*  `edit 3 s/A0514624K tele/@JP` Edits the student number of the 2nd person to be `A0514624K` and telegram handle to be `@JP`.
 
+>>>>>>> 3663689bca9d97b5b9de4f6af9ebfb259dbe30a4
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -209,15 +211,6 @@ Format: `deleteModule INDEX`
 
 Example: `deleteModule 1`
 
-### Editing a Student's details: `editDetail` '[coming soon]'
-
-Allows the user to change less important details such as the telegram handle and
-email to new values. For this version the details are limited to `/TELEGRAM` and `/EMAIL`.
-
-Format: `editDetail INDEX /DETAIL NEW_DETAIL`
-
-Example: `editDetail 1 /TELEGRAM @johannpetrovich`
-
 ### Adding a user to a given module: `addToModule`
 
 Adds the user at the specified INDEX displayed on the GUI to a given module.
@@ -242,7 +235,7 @@ CS2103T, if the module CS2103T exists and the person who is second from the top 
 
 ### Adds a tutorial to a given module: `addTutorial`
 
-Adds a tutorial with a specific tutorial name to a given module. Different modules can have different tutorials 
+Adds a tutorial with a specific tutorial name to a given module. Different modules can have different tutorials
 with the same name. Will give an error message if the module does not exist or a tutorial with the same name has already
 been made for the module.
 
@@ -280,9 +273,9 @@ Example: `removeFromTutorial 1 m/CS2103T tn/T11`
 
 ### Records the attendance of the student: `attn`
 
-Records a student's attendance and displays the change by adding a tag on the GUI. 
-The index refers to the position of the person as displayed in the GUI. 
-The LESSON_NUMBER must be alphanumeric. 
+Records a student's attendance and displays the change by adding a tag on the GUI.
+The index refers to the position of the person as displayed in the GUI.
+The LESSON_NUMBER must be alphanumeric.
 Further prompts are given for incorrect inputs.
 
 Format: `attn INDEX se/LESSON_NUMBER`
@@ -304,7 +297,7 @@ Example: `attn 1 se/S1`
 | **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **Clear**              | `clear`                                                                                                                                                               |
 | **Delete**             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/STUDENT_NUMBER] [tele/TELEGRAM_HANDLE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
 | **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
 | **List**               | `list`                                                                                                                                                                |
 | **Search**             | `search CONDITION1, CONDITION2`<br> e.g., `search module: CS2103T`                                                                                                    |

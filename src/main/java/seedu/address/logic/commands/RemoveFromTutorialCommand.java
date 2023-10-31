@@ -15,7 +15,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -99,7 +98,6 @@ public class RemoveFromTutorialCommand extends Command {
         Name updatedName = personToEdit.getName();
         Phone updatedPhone = personToEdit.getPhone();
         Email updatedEmail = personToEdit.getEmail();
-        Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = personToEdit.getTags();
         Set<Module> updatedModules = personToEdit.getModules();
         Set<Tutorial> updatedTutorials = new HashSet<>(personToEdit.getTutorials());
@@ -107,7 +105,7 @@ public class RemoveFromTutorialCommand extends Command {
         StudentNumber updatedStudentNumber = personToEdit.getStudentNumber();
         Telegram updatedTelegram = personToEdit.getTelegram();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedTags,
                 updatedModules, updatedTutorials, updatedStudentNumber, updatedTelegram);
     }
 

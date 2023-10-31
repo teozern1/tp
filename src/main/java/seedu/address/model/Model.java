@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
@@ -102,4 +103,12 @@ public interface Model {
     boolean hasTutorial(Tutorial tutorial);
 
     ObservableList<Tutorial> getTutorialList();
+
+    void addAssignment(Assignment assignment);
+
+    void deleteAssignment(Assignment assignment);
+
+    boolean hasAssignment(Assignment assignment);
+
+    ObservableList<Assignment> getAssignmentList();
 }

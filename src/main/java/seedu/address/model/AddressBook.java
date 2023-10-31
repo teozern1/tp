@@ -7,6 +7,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.UniqueAssignmentList;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.UniqueModuleList;
 import seedu.address.model.person.Person;
@@ -24,6 +26,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniqueModuleList modules;
     private final UniqueTutorialList tutorials;
 
+    private final UniqueAssignmentList assignments;
+
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -35,6 +39,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons = new UniquePersonList();
         modules = new UniqueModuleList();
         tutorials = new UniqueTutorialList();
+        assignments = new UniqueAssignmentList();
     }
 
     public AddressBook() {}
@@ -74,6 +79,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the person list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setAssignments(List<Assignment> assignments) {
+        this.assignments.setAssignments(assignments);
+    }
+
+
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
@@ -82,6 +97,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         setPersons(newData.getPersonList());
         setModules(newData.getModuleList());
         setTutorials(newData.getTutorialList());
+        setAssignments(newData.getAssignmentList());
     }
 
     //// person-level operations
@@ -192,6 +208,31 @@ public class AddressBook implements ReadOnlyAddressBook {
         return tutorials.contains(tutorial);
     }
 
+    //// assignment-level operations
+
+    /**
+     * Adds a assignment to the address book.
+     * The assignment must not already exist in the address book.
+     */
+    public void addAssignment(Assignment assignment) {
+        assignments.add(assignment);
+    }
+
+    /**
+     * Delete a assignment from the address book.
+     * The assignment must already exist in the address book.
+     */
+    public void removeAssignment(Assignment assignment) {
+        assignments.remove(assignment);
+    }
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    public boolean hasAssignment(Assignment assignment) {
+        requireNonNull(assignment);
+        return assignments.contains(assignment);
+    }
     //// util methods
 
     @Override
@@ -215,6 +256,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Tutorial> getTutorialList() {
         return tutorials.asUnmodifiableObservableList();
     }
+
+    @Override
+    public ObservableList<Assignment> getAssignmentList() {
+        return assignments.asUnmodifiableObservableList();
+    }
+
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
