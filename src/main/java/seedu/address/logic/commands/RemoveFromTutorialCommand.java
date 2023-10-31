@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.tutorial;
+package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
@@ -12,8 +12,6 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
@@ -43,6 +41,7 @@ public class RemoveFromTutorialCommand extends Command {
             + PREFIX_TUTORIAL_NAME + "T11 ";
 
     public static final String MESSAGE_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_PERSON_LACKS_TUTORIAL = "User does not have the given tutorial.";
 
     private final Index index;
 
@@ -67,16 +66,22 @@ public class RemoveFromTutorialCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        if (!model.hasTutorial(tutorialToRemoveFrom)) {
+        Tutorial realTutorial;
+        try {
+            realTutorial = (Tutorial) model.getTutorialList().stream().filter(
+                    tut -> tut.equals(tutorialToRemoveFrom)
+
+            ).toArray()[0];
+        } catch (RuntimeException e) {
             throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        if (!personHasTutorial(personToEdit, this.tutorialToRemoveFrom)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL);
+        if (!personHasTutorial(personToEdit, realTutorial)) {
+            throw new CommandException(MESSAGE_PERSON_LACKS_TUTORIAL);
         }
 
-        Person editedPerson = createEditedPerson(personToEdit);
+        Person editedPerson = createEditedPerson(personToEdit, realTutorial);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(editedPerson)));
@@ -86,8 +91,9 @@ public class RemoveFromTutorialCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private Person createEditedPerson(Person personToEdit) {
+    private Person createEditedPerson(Person personToEdit, Tutorial realTutorial) {
         assert personToEdit != null;
+        assert realTutorial != null;
 
         Name updatedName = personToEdit.getName();
         Phone updatedPhone = personToEdit.getPhone();
@@ -95,7 +101,7 @@ public class RemoveFromTutorialCommand extends Command {
         Set<Tag> updatedTags = personToEdit.getTags();
         Set<Module> updatedModules = personToEdit.getModules();
         Set<Tutorial> updatedTutorials = new HashSet<>(personToEdit.getTutorials());
-        updatedTutorials.remove(tutorialToRemoveFrom);
+        updatedTutorials.remove(realTutorial);
         StudentNumber updatedStudentNumber = personToEdit.getStudentNumber();
         Telegram updatedTelegram = personToEdit.getTelegram();
 

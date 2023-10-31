@@ -4,12 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_TIME;
 
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.tutorial.RemoveFromTutorialCommand;
+import seedu.address.logic.commands.RemoveFromTutorialCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Module;
 import seedu.address.model.tutorial.Tutorial;
@@ -27,7 +26,7 @@ public class RemoveFromTutorialCommandParser implements Parser<RemoveFromTutoria
     public RemoveFromTutorialCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_MODULE, PREFIX_TUTORIAL_NAME, PREFIX_TUTORIAL_TIME);
+                ArgumentTokenizer.tokenize(args, PREFIX_MODULE, PREFIX_TUTORIAL_NAME);
 
         Index index;
         try {
@@ -37,16 +36,15 @@ public class RemoveFromTutorialCommandParser implements Parser<RemoveFromTutoria
                     RemoveFromTutorialCommand.MESSAGE_USAGE), pe);
         }
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE, PREFIX_TUTORIAL_NAME, PREFIX_TUTORIAL_TIME)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE, PREFIX_TUTORIAL_NAME)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     RemoveFromTutorialCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MODULE, PREFIX_TUTORIAL_NAME, PREFIX_TUTORIAL_TIME);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MODULE, PREFIX_TUTORIAL_NAME);
         Module module = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get());
         String tutorialName = ParserUtil.parseTutorialName(argMultimap.getValue(PREFIX_TUTORIAL_NAME).get());
-        String tutorialTime = ParserUtil.parseTutorialTime(argMultimap.getValue(PREFIX_TUTORIAL_TIME).get());
-        Tutorial tutorial = new Tutorial(module, tutorialName, tutorialTime);
+        Tutorial tutorial = new Tutorial(module, tutorialName);
         return new RemoveFromTutorialCommand(index, tutorial);
     }
 

@@ -115,7 +115,25 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 *  `edit 3 s/A0514624K tele/@JP` Edits the student number of the 2nd person to be `A0514624K` and telegram handle to be `@JP`.
+
+>>>>>>> 3663689bca9d97b5b9de4f6af9ebfb259dbe30a4
 ### Locating persons by name: `find`
+
+Finds persons whose names contain any of the given keywords.
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
 
@@ -171,7 +189,6 @@ If your changes to the data file makes its format invalid, TASsistant will disca
 
 ### Archiving data files `[coming in v2.0]`
 
-
 ### Adds a module to TASsistant: `addModule`
 
 Adds the module to TASsistant, displaying it on the GUI.
@@ -201,7 +218,7 @@ The index refers to the index number shown in the displayed user list.
 Users are added with “none” status. The index must be a positive integer.
 Will give an error message if the module given has not been made.
 
-Format: `addToModule INDEX [m/MODULE]`
+Format: `addToModule INDEX m/MODULE`
 
 Example: `addToModule 2 m/CS2103T` adds the person who is second from the top in the current list to the module
 CS2103T, if the module CS2103T exists.
@@ -210,9 +227,8 @@ CS2103T, if the module CS2103T exists.
 
 Removes the user at the specified INDEX displayed on the GUI from a given module.
 The index refers to the index number shown in the displayed user list. The index must be a positive integer.
-Will give an error message if the module given has not been made or if the user is not part of the given module.
 
-Format: `removeFromModule INDEX [m/MODULE]`
+Format: `removeFromModule INDEX m/MODULE`
 
 Example: `removeFromModule 2 m/CS2103T` removes the person who is second from the top in the current list from the module
 CS2103T, if the module CS2103T exists and the person who is second from the top is part of the module CS2103T.
@@ -223,19 +239,19 @@ Adds a tutorial with a specific tutorial name to a given module. Different modul
 with the same name. Will give an error message if the module does not exist or a tutorial with the same name has already
 been made for the module.
 
-Format: `addTutorial [m/MODULE_NAME] [tn/TUTORIAL_NAME] [tt/TUTORIAL_TIME]`
+Format: `addTutorial m/MODULE_NAME tn/TUTORIAL_NAME tt/TUTORIAL_TIME`
 
 Example: `addTutorial m/CS2103T tn/T12 tt/Mon 6pm` adds a tutorial with name T12 and time "Mon 6pm" belonging to module
 CS2103T, if module CS2103T exists.
 
-### Removes a tutorial from a given module: `removeTutorial`
+### Deletes a tutorial from a given module: `deleteTutorial`
 
-Removes a tutorial with a specific tutorial name to a given module.
+Deletes a tutorial with a specific tutorial name to a given module.
 Will give an error message if the module given has not been made, or if the tutorial does not exist.
 
-Format: `removeTutorial [tn/TUTORIAL_NAME] [m/MODULE_NAME]`
+Format: `deleteTutorial tn/TUTORIAL_NAME m/MODULE_NAME`
 
-Example: `removeTutorial c12 CS2103T` removes a tutorial with name T12 and time "Mon 6pm" belonging to module CS2103T,
+Example: `deleteTutorial tn/c12 m/CS2103T` removes a tutorial with name T12 belonging to module CS2103T,
 if module CS2103T exists and the tutorial already exists.
 
 ### Adds a student to stated Tutorial: `addToTutorial`
@@ -243,7 +259,7 @@ if module CS2103T exists and the tutorial already exists.
 Add a new student to the stated tutorial’s student list. Fails if the index is not valid.
 Fails and gives an error message if the student already has a tutorial.
 
-Format: `addToTutorial INDEX [m/MODULE_NAME] [tn/TUTORIAL_NAME]`
+Format: `addToTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME`
 
 Example: `addToTutorial 1 m/CS2103T tn/T11`
 
@@ -251,18 +267,9 @@ Example: `addToTutorial 1 m/CS2103T tn/T11`
 
 Removes a student from the stated tutorial’s student list. Fails if the index is not valid.
 
-Format: `removeFromTutorial INDEX [m/MODULE_NAME] [tn/TUTORIAL_NAME]`
+Format: `removeFromTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME`
 
 Example: `removeFromTutorial 1 m/CS2103T tn/T11`
-
-### Edit the details of the stated Tutorial: `editTutorial`
-
-Edit the name and/or the time of the stated Tutorial.
-Fails if NEW_NAME or NEW_TIME is in invalid format.
-
-Format: `editTutorial INDEX [tn/NEW_NAME] [tt/NEW_TIME]`
-
-Example: `editTutorial 1 tn/T11 tt/Mon`
 
 ### Records the attendance of the student: `attn`
 
@@ -297,14 +304,12 @@ Example: `attn 1 se/S1`
 | **Help**               | `help`                                                                                                                                                                |
 | **addModule**          | `addModule m/MODULE_NAME` <br> e.g., `addModule m/CS2100`                                                                                                             |
 | **deleteModule**       | `deleteModule INDEX` <br> e.g., `deleteModule 1`                                                                                                                      |
-| **addToModule**        | `addToModule INDEX MODULE` <br> e.g., `addToModule 2 CS2103T`                                                                                                         |
-| **removeFromModule**   | `removeFromModule INDEX MODULE` <br> e.g., `removeFromModule 2 CS2103T`                                                                                               |
-| **addTutorial**        | `addTutorial TUTORIALNAME MODULE` <br> e.g., `addTutorial c12 CS2103T`                                                                                                |
-| **removeTutorial**     | `removeTutorial TUTORIALNAME MODULE` <br> e.g., `removeTutorial c12 CS2103T`                                                                                          |
-| **changeStatus**       | `changeStatus INDEX MODULE (LETTER: p/t/s/n)` <br> e.g., `changeStatus 2 CS2103T t`                                                                                   |
-| **addToTutorial**      | `addToTutorial INDEX [m/MODULE_NAME] [tn/TUTORIAL_NAME]` <br> e.g., `addToTutorial 1 m/CS2103T tn/T11`                                                                |
-| **removeFromTutorial** | `removeFromTutorial INDEX [m/MODULE_NAME] [tn/TUTORIAL_NAME]` <br> e.g., `removeFromTutorial 1 m/CS2103T tn/T11`                                                      |
-| **editTutorial**       | `editTutorial INDEX [tn/NEW_NAME] [tt/NEW_TIME]` <br> e.g., `editTutorial 1 tn/T11 tt/Mon`                                                                            |
+| **addToModule**        | `addToModule INDEX m/MODULE_NAME` <br> e.g., `addToModule 2 m/CS2103T`                                                                                                     |
+| **removeFromModule**   | `removeFromModule INDEX m/MODULE_NAME` <br> e.g., `removeFromModule 2 m/CS2103T`                                                                                           |
+| **addTutorial**        | `addTutorial TUTORIALNAME m/MODULE_NAME` <br> e.g., `addTutorial tn/c12 m/CS2103T`                                                                                         |
+| **deleteTutorial**     | `deleteTutorial INDEX` <br> e.g., `deleteTutorial 2`                                                                                                                  |
+| **addToTutorial**      | `addToTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME` <br> e.g., `addToTutorial 1 m/CS2103T tn/T11`                                                                    |
+| **removeFromTutorial** | `removeFromTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME` <br> e.g., `removeFromTutorial 1 m/CS2103T tn/T11`                                                          |
 | **attn**               | `attn INDEX se/LESSON_NUMBER` <br> e.g., `attn 1 se/S1`                                                                                                               |
 
 --------------------------------------------------------------------------------------------------------------------

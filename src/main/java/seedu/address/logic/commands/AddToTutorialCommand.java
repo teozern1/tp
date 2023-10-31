@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.tutorial;
+package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
@@ -12,8 +12,6 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
@@ -68,12 +66,18 @@ public class AddToTutorialCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        if (!model.hasTutorial(tutorialToAddTo)) {
+        Tutorial realTutorial;
+
+        try {
+            realTutorial = (Tutorial) model.getTutorialList().stream().filter(
+                    tut -> tut.equals(tutorialToAddTo)
+            ).toArray()[0];
+        } catch (RuntimeException e) {
             throw new CommandException(Messages.MESSAGE_INVALID_TUTORIAL);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit);
+        Person editedPerson = createEditedPerson(personToEdit, realTutorial);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -84,17 +88,18 @@ public class AddToTutorialCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private Person createEditedPerson(Person personToEdit) {
+    private Person createEditedPerson(Person personToEdit, Tutorial realTutorial) {
         assert personToEdit != null;
+        assert realTutorial != null;
 
         Name updatedName = personToEdit.getName();
         Phone updatedPhone = personToEdit.getPhone();
         Email updatedEmail = personToEdit.getEmail();
         Set<Tag> updatedTags = personToEdit.getTags();
         Set<Module> updatedModules = new HashSet<>(personToEdit.getModules());
-        updatedModules.add(new Module(tutorialToAddTo.getModuleName()));
+        updatedModules.add(new Module(tutorialToAddTo.getModuleCode()));
         Set<Tutorial> updatedTutorials = new HashSet<>(personToEdit.getTutorials());
-        updatedTutorials.add(tutorialToAddTo);
+        updatedTutorials.add(realTutorial);
         StudentNumber updatedStudentNumber = personToEdit.getStudentNumber();
         Telegram updatedTelegram = personToEdit.getTelegram();
 
@@ -109,7 +114,7 @@ public class AddToTutorialCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof seedu.address.logic.commands.tutorial.AddToTutorialCommand)) {
+        if (!(other instanceof AddToTutorialCommand)) {
             return false;
         }
 
