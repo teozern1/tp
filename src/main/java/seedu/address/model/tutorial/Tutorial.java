@@ -2,6 +2,7 @@ package seedu.address.model.tutorial;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import seedu.address.model.module.Module;
@@ -11,6 +12,8 @@ import seedu.address.model.module.Module;
  */
 public class Tutorial {
     /* Fields */
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("E ha");
+    public static final String TIME_FORMAT_REGEX = "\\d?\\d[AP]M";
     private Module module;
     private String tutName;
     private String time;

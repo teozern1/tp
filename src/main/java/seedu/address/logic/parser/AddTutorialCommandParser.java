@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_TIME;
 
-import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddTutorialCommand;
@@ -19,10 +18,6 @@ import seedu.address.model.tutorial.Tutorial;
  * Parses input arguments and creates a new AddTutorialCommand object
  */
 public class AddTutorialCommandParser implements Parser<AddTutorialCommand> {
-    /* Fields */
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("E ha");
-    private static final String TIME_FORMAT_REGEX = "\\d?\\d[AP]M";
-
     /* Methods */
     /**
      * Parses the given {@code String} of arguments in the context of the AddTutorialCommand
@@ -52,7 +47,7 @@ public class AddTutorialCommandParser implements Parser<AddTutorialCommand> {
             // checks if dayPart is in correct format
             DayOfWeek.valueOf(dayPart);
             // checks if timePart is in correct format
-            if (!timePart.matches(TIME_FORMAT_REGEX)) {
+            if (!timePart.matches(Tutorial.TIME_FORMAT_REGEX)) {
                 throw new RuntimeException();
             }
         } catch (RuntimeException e) {
