@@ -39,18 +39,8 @@ public class AddTutorialCommandParser implements Parser<AddTutorialCommand> {
         String tutorialName = ParserUtil.parseTutorialName(argMultimap.getValue(PREFIX_TUTORIAL_NAME).get());
         String tutorialTime = ParserUtil.parseTutorialTime(argMultimap.getValue(PREFIX_TUTORIAL_TIME).get());
 
-        try {
-            String[] dateTimeParts = tutorialTime.split(" ");
-            String dayPart = dateTimeParts[0];
-            String timePart = dateTimeParts[1];
 
-            // checks if dayPart is in correct format
-            DayOfWeek.valueOf(dayPart);
-            // checks if timePart is in correct format
-            if (!timePart.matches(Tutorial.TIME_FORMAT_REGEX)) {
-                throw new RuntimeException();
-            }
-        } catch (RuntimeException e) {
+        if (!Tutorial.isTimeFormat(tutorialTime)) {
             throw new ParseException(String.format(MESSAGE_INVALID_TUTORIAL_TIME_FORMAT,
                     AddTutorialCommand.MESSAGE_USAGE));
         }
@@ -66,10 +56,6 @@ public class AddTutorialCommandParser implements Parser<AddTutorialCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
-    private enum DayOfWeek {
-        Mon, Tue, Wed, Thu, Fri, Sat, Sun
     }
 }
 
