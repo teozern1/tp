@@ -22,8 +22,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_MODULE = "Module does not exist";
     public static final String MESSAGE_ADD_MODULE_CHECK = "New module added: ";
     public static final String MESSAGE_INVALID_TUTORIAL = "Tutorial does not exist";
-
-    public static final String MESSAGE_MODULE_STARTER = "Tutorials and Modules: ";
     public static final String MESSAGE_INVALID_TUTORIAL_DISPLAYED_INDEX = "The tutorial index provided is invalid";
     public static final String MESSAGE_INVALID_TUTORIAL_TIME_FORMAT = "Tutorial time format is invalid";
 

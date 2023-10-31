@@ -8,7 +8,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -26,7 +28,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Removes a person from a module.
  */
 public class RemoveFromModuleCommand extends Command {
 
@@ -38,10 +40,11 @@ public class RemoveFromModuleCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_MODULE + "CS1000 ";
 
-    public static final String MESSAGE_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_SUCCESS = "Deleted person from module: %1$s";
     public static final String MESSAGE_PERSON_LACKS_MODULE = "User does not have the given module.";
     private final Index index;
     private final Module moduleToRemoveFrom;
+    private final Logger logger = LogsCenter.getLogger(RemoveFromModuleCommand.class);
 
     /**
      * @param index of the person in the filtered person list to add tag to
@@ -67,6 +70,8 @@ public class RemoveFromModuleCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        logger.info("Person with modules " + personToEdit.getModules() + " and tutorials "
+                + personToEdit.getTutorials() + " removing " + this.moduleToRemoveFrom);
         if (!personHasModule(personToEdit, this.moduleToRemoveFrom)) {
             throw new CommandException(MESSAGE_PERSON_LACKS_MODULE);
         }
@@ -91,7 +96,7 @@ public class RemoveFromModuleCommand extends Command {
         Set<Module> updatedModules = new HashSet<>(personToEdit.getModules());
         updatedModules.remove(moduleToRemoveFrom);
         Set<Tutorial> updatedTutorials = new HashSet<>(personToEdit.getTutorials());
-        updatedTutorials.removeIf(tutorial -> Objects.equals(tutorial.getModuleName(),
+        updatedTutorials.removeIf(tutorial -> Objects.equals(tutorial.getModuleCode(),
                 moduleToRemoveFrom.getModuleCode()));
         StudentNumber updatedStudentNumber = personToEdit.getStudentNumber();
         Telegram updatedTelegram = personToEdit.getTelegram();
@@ -107,6 +112,10 @@ public class RemoveFromModuleCommand extends Command {
      * @return Whether the person is part of the module.
      */
     private boolean personHasModule(Person personToCheck, Module module) {
+        boolean hasModule = personToCheck.getModules().contains(module);
+        if (!hasModule) {
+            logger.info("Person " + personToCheck + " found to not have " + this.moduleToRemoveFrom);
+        }
         return personToCheck.getModules().contains(module);
     }
 
