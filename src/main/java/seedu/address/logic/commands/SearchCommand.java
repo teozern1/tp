@@ -12,6 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
@@ -33,21 +34,24 @@ public class SearchCommand extends Command {
     private final List<Name> personNameToSearch;
     private final List<Module> modulesToSearch;
     private final List<Tutorial> tutorialsToSearch;
+    private final List<Tag> tagsToSearch;
 
     /**
      * Creates an SearchByModuleCommand to add the specified {@code Person}
      */
-    public SearchCommand(List<Name> personName, List<Module> module, List<Tutorial> tutorials) {
+    public SearchCommand(List<Name> personName, List<Module> module, List<Tutorial> tutorials, List<Tag> tags) {
         personNameToSearch = personName;
         modulesToSearch = module;
         tutorialsToSearch = tutorials;
+        tagsToSearch = tags;
     }
 
     private Predicate<Person> getPersonPredicateFromModule() {
         return (person -> personNameToSearch.stream()
                 .allMatch(name -> person.getName().equals(name))
                 && person.getModules().containsAll(modulesToSearch)
-                && person.getTutorials().containsAll(tutorialsToSearch));
+                && person.getTutorials().containsAll(tutorialsToSearch)
+                && person.getTags().containsAll(tagsToSearch));
     }
 
     @Override
@@ -70,8 +74,10 @@ public class SearchCommand extends Command {
         List<Name> otherPersonNameToSearch = ((SearchCommand) other).personNameToSearch;
         List<Module> otherModulesToSearch = ((SearchCommand) other).modulesToSearch;
         List<Tutorial> otherTutorialsToSearch = ((SearchCommand) other).tutorialsToSearch;
+        List<Tag> otherTagsToSearch = ((SearchCommand) other).tagsToSearch;
         return this.personNameToSearch.equals(otherPersonNameToSearch)
                 && this.modulesToSearch.equals(otherModulesToSearch)
-                && this.tutorialsToSearch.equals(otherTutorialsToSearch);
+                && this.tutorialsToSearch.equals(otherTutorialsToSearch)
+                && this.tagsToSearch.equals(otherTagsToSearch);
     }
 }

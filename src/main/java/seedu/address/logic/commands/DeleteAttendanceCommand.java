@@ -23,28 +23,31 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
- * Takes attendance from the person.
+ * Deletes attendance from the person.
  */
-public class AttendanceCommand extends Command {
-    public static final String COMMAND_WORD = "attn";
+public class DeleteAttendanceCommand extends Command {
+    public static final String COMMAND_WORD = "deleteAttn";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Takes attendance for the indicated person. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes attendance for the indicated person. "
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_ATTENDANCE + "LESSON_NUMBER\n"
             + "Example: " + COMMAND_WORD + " 2 ln/S1";
 
-    public static final String MESSAGE_SUCCESS = "Attendance successfully taken.";
+    public static final String MESSAGE_SUCCESS = "Attendance successfully deleted.";
+    public static final String MESSAGE_NO_LESSON_FOUND = "The lesson number does not exist!";
+
     private final Index index;
-    private final Tag toAdd;
+    private final Tag toDelete;
 
     /**
      * @param index of the person in the filtered person list to add tag to
      */
-    public AttendanceCommand(Index index, Tag toAdd) {
+    public DeleteAttendanceCommand(Index index, Tag toDelete) {
         requireNonNull(index);
         this.index = index;
-        this.toAdd = toAdd;
+        this.toDelete = toDelete;
     }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -54,6 +57,9 @@ public class AttendanceCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        if (!personToEdit.getTags().contains(toDelete)) {
+            throw new CommandException(MESSAGE_NO_LESSON_FOUND);
+        }
         Person editedPerson = createEditedPerson(personToEdit);
 
         model.setPerson(personToEdit, editedPerson);
@@ -74,9 +80,10 @@ public class AttendanceCommand extends Command {
 
         Set<Tag> updatedTags = new HashSet<>();
         for (Tag tag : personToEdit.getTags()) {
-            updatedTags.add(tag);
+            if (!tag.equals(toDelete)) {
+                updatedTags.add(tag);
+            }
         }
-        updatedTags.add(toAdd);
 
         Set<Module> updatedModules = new HashSet<>(personToEdit.getModules());
         Set<Tutorial> updatedTutorials = personToEdit.getTutorials();
@@ -94,11 +101,11 @@ public class AttendanceCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof AttendanceCommand)) {
+        if (!(other instanceof DeleteAttendanceCommand)) {
             return false;
         }
 
-        return this.index.equals(((AttendanceCommand) other).index)
-                && this.toAdd.equals(((AttendanceCommand) other).toAdd);
+        return this.index.equals(((DeleteAttendanceCommand) other).index)
+                && this.toDelete.equals(((DeleteAttendanceCommand) other).toDelete);
     }
 }
