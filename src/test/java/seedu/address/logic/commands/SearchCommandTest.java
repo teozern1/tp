@@ -2,18 +2,18 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.MODULE_CS2100;
-import static seedu.address.logic.commands.CommandTestUtil.MODULE_CS2101;
-import static seedu.address.logic.commands.CommandTestUtil.TUTORIAL_GROUP_TG01;
-import static seedu.address.logic.commands.CommandTestUtil.TUTORIAL_GROUP_TG02;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CS2100;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_TG01;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_TG02;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -43,7 +43,7 @@ public class SearchCommandTest {
     @Test
     public void execute_searchByName() {
         Name nameToSearch = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getName();
-        List<Name> nameList = new ArrayList<>(Arrays.asList(nameToSearch));
+        List<Name> nameList = new ArrayList<>(Collections.singletonList(nameToSearch));
         List<Module> moduleList = new ArrayList<>();
         List<Tutorial> tutorialList = new ArrayList<>();
         expectedModel.updateFilteredPersonList(person -> person.getName().equals(nameToSearch));
@@ -53,9 +53,9 @@ public class SearchCommandTest {
 
     @Test
     public void execute_searchByModule() {
-        Module module = new Module(MODULE_CS2100);
+        Module module = new Module(VALID_MODULE_CS2100);
         List<Name> nameList = new ArrayList<>();
-        List<Module> moduleList = new ArrayList<>(Arrays.asList(module));
+        List<Module> moduleList = new ArrayList<>(List.of(module));
         List<Tutorial> tutorialList = new ArrayList<>();
         expectedModel.updateFilteredPersonList(person -> person.getModules().contains(module));
         assertCommandSuccess(new SearchCommand(nameList, moduleList, tutorialList), model,
@@ -64,11 +64,11 @@ public class SearchCommandTest {
 
     @Test
     public void execute_searchByTutorial() {
-        Module modCS2100 = new Module(MODULE_CS2100);
-        Tutorial tutTG01 = new Tutorial(modCS2100, TUTORIAL_GROUP_TG01);
+        Module modCS2100 = new Module(VALID_MODULE_CS2100);
+        Tutorial tutTG01 = new Tutorial(modCS2100, VALID_TUTORIAL_GROUP_TG01);
         List<Name> nameList = new ArrayList<>();
         List<Module> moduleList = new ArrayList<>();
-        List<Tutorial> tutorialList = new ArrayList<>(Arrays.asList(tutTG01));
+        List<Tutorial> tutorialList = new ArrayList<>(List.of(tutTG01));
         expectedModel.updateFilteredPersonList(person -> person.getTutorials().contains(tutTG01));
         assertCommandSuccess(new SearchCommand(nameList, moduleList, tutorialList), model,
                 SearchCommand.MESSAGE_SUCCESS, expectedModel);
@@ -76,17 +76,20 @@ public class SearchCommandTest {
 
     @Test
     public void equals() {
-        List<Name> amyNameList = new ArrayList<>(Arrays.asList(new Name(VALID_NAME_AMY)));
-        List<Name> bobNameList = new ArrayList<>(Arrays.asList(new Name(VALID_NAME_BOB)));
+        List<Name> amyNameList = new ArrayList<>(List.of(new Name(VALID_NAME_AMY)));
+        List<Name> bobNameList = new ArrayList<>(List.of(new Name(VALID_NAME_BOB)));
 
-        Module modCS2100 = new Module(MODULE_CS2100);
-        Module modCS2101 = new Module(MODULE_CS2101);
+        Module modCS2100 = new Module(VALID_MODULE_CS2100);
+        Module modCS2101 = new Module(VALID_MODULE_CS2101);
 
-        List<Module> cs2100ModuleList = new ArrayList<>(Arrays.asList(modCS2100));
-        List<Module> cs2101ModuleList = new ArrayList<>(Arrays.asList(modCS2101));
+        List<Module> cs2100ModuleList = new ArrayList<>(List.of(modCS2100));
+        List<Module> cs2101ModuleList = new ArrayList<>(List.of(modCS2101));
 
-        List<Tutorial> tutorialListTG01 = new ArrayList<>(Arrays.asList(new Tutorial(modCS2100, TUTORIAL_GROUP_TG01)));
-        List<Tutorial> tutorialListTG02 = new ArrayList<>(Arrays.asList(new Tutorial(modCS2101, TUTORIAL_GROUP_TG02)));
+        Tutorial tutTG01 = new Tutorial(modCS2100, VALID_TUTORIAL_GROUP_TG01);
+        Tutorial tutTG02 = new Tutorial(modCS2100, VALID_TUTORIAL_GROUP_TG02);
+
+        List<Tutorial> tutorialListTG01 = new ArrayList<>(List.of(tutTG01));
+        List<Tutorial> tutorialListTG02 = new ArrayList<>(List.of(tutTG02));
 
         SearchCommand baseSearchCommand = new SearchCommand(amyNameList, cs2100ModuleList, tutorialListTG01);
         SearchCommand baseSearchCommandAlt = new SearchCommand(amyNameList, cs2100ModuleList, tutorialListTG01);

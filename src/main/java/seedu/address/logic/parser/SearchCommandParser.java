@@ -30,6 +30,12 @@ public class SearchCommandParser implements Parser<SearchCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
         }
 
+        if (argMultimap.getAllValues(PREFIX_MODULE).size() != 1
+                && argMultimap.getAllValues(PREFIX_TUTORIAL_NAME).size() > 0) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_INVALID_NUM_OF_MODULES));
+        }
+
         final List<Name> personNameList = argMultimap.getAllValues(PREFIX_NAME)
                 .stream()
                 .map(nameString -> new Name(nameString))
@@ -43,10 +49,6 @@ public class SearchCommandParser implements Parser<SearchCommand> {
                 .map(nameString -> new Tutorial(moduleList.get(0), nameString))
                 .collect(Collectors.toList());
 
-        if (moduleList.size() > 1 && tutorialList.size() > 0) {
-            throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_TOO_MANY_MODULES));
-        }
         return new SearchCommand(personNameList, moduleList, tutorialList);
     }
 }
