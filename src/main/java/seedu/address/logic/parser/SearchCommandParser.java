@@ -38,11 +38,11 @@ public class SearchCommandParser implements Parser<SearchCommand> {
                 .stream()
                 .map(moduleCode -> new Module(moduleCode))
                 .collect(Collectors.toList());
-
         final List<Tutorial> tutorialList = argMultimap.getAllValues(PREFIX_TUTORIAL_NAME)
                 .stream()
-                .map(nameString -> new Tutorial(moduleList.get(0), nameString, null))
+                .map(nameString -> new Tutorial(moduleList.get(0), nameString))
                 .collect(Collectors.toList());
+
         if (moduleList.size() > 1 && tutorialList.size() > 0) {
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_TOO_MANY_MODULES));

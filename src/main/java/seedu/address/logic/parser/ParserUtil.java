@@ -181,9 +181,9 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code Title} is invalid.
      */
-    public static Title parseTitle(String Title) throws ParseException {
-        requireNonNull(Title);
-        String trimmedTitle = Title.trim();
+    public static Title parseTitle(String title) throws ParseException {
+        requireNonNull(title);
+        String trimmedTitle = title.trim();
         return new Title(trimmedTitle);
     }
 
