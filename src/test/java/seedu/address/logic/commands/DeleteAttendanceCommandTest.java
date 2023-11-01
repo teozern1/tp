@@ -18,38 +18,49 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
-public class AttendanceCommandTest {
+public class DeleteAttendanceCommandTest {
 
     @Test
     public void execute_indexTooBig_errorMessage() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-        assertCommandFailure(new AttendanceCommand(Index.fromZeroBased(999999),
+        assertCommandFailure(new DeleteAttendanceCommand(Index.fromZeroBased(999999),
                 new Tag("S1")), model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_noTagFound_errorMessage() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Tag toDelete = new Tag("S1");
+
+
+        DeleteAttendanceCommand deleteAttendanceCommand = new DeleteAttendanceCommand(INDEX_FIRST_PERSON, toDelete);
+        assertCommandFailure(deleteAttendanceCommand, model, DeleteAttendanceCommand.MESSAGE_NO_LESSON_FOUND);
     }
 
     @Test
     public void execute_validIndexAndTag_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Tag toAdd = new Tag("S1");
+        Tag toDelete = new Tag("S1");
 
         Person person = model.getFilteredPersonList().get(0);
         Person editedPerson = new PersonBuilder(person).withTags("friends", "S1").build();
 
-        AttendanceCommand attendanceCommand = new AttendanceCommand(INDEX_FIRST_PERSON, toAdd);
-        String expectedMessage = String.format(AttendanceCommand.MESSAGE_SUCCESS, Messages.format(editedPerson));
+        model.setPerson(person, editedPerson);
+
+        DeleteAttendanceCommand deleteAttendanceCommand = new DeleteAttendanceCommand(INDEX_FIRST_PERSON, toDelete);
+        String expectedMessage = String.format(DeleteAttendanceCommand.MESSAGE_SUCCESS, Messages.format(person));
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
-        assertCommandSuccess(attendanceCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteAttendanceCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void equals() {
         Tag tag = new Tag("S1");
-        AttendanceCommand a1 = new AttendanceCommand(INDEX_FIRST_PERSON, tag);
-        AttendanceCommand a2 = new AttendanceCommand(INDEX_FIRST_PERSON, tag);
+        DeleteAttendanceCommand a1 = new DeleteAttendanceCommand(INDEX_FIRST_PERSON, tag);
+        DeleteAttendanceCommand a2 = new DeleteAttendanceCommand(INDEX_FIRST_PERSON, tag);
 
         assertTrue(a1.equals(a1));
         assertTrue(a1.equals(a2));
