@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.logic.Messages;
 import seedu.address.model.person.Person;
 
 /**
@@ -25,6 +24,8 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
+    private static final String MESSAGE_MODULE_STARTER = "Tutorials and Modules: "; // To avoid magic string.
+
     public final Person person;
 
     @FXML
@@ -35,8 +36,6 @@ public class PersonCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label phone;
-    @FXML
-    private Label address;
     @FXML
     private Label email;
     @FXML
@@ -59,10 +58,9 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         studentNumber.setText(person.getStudentNumber().value);
-        moduleAndTutorialList.setText(Messages.MESSAGE_MODULE_STARTER
+        moduleAndTutorialList.setText(MESSAGE_MODULE_STARTER
             + String.join(", ", person.getUiOfModulesAndTutorials()));
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

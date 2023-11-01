@@ -182,15 +182,15 @@ This section describes some noteworthy details on how certain features are imple
 
 ### **Module-Tutorial Interaction**
 
-In NUS, modules are a unit of study, and most modules require students taking them to participate in tutorials. Each 
-module with tutorials has one or more tutorials, but each tutorial is usually only for one module. Given that Teaching 
+In NUS, modules are a unit of study, and most modules require students taking them to participate in tutorials. Each
+module with tutorials has one or more tutorials, but each tutorial is usually only for one module. Given that Teaching
 Assistants usually only teach tutorials rather than a module as a whole, we considered only including tutorials in our
 product, but decided against it because having both modules and tutorials allows for more convenient searching for
 teaching assistants teaching multiple modules. This comes at the cost of having to maintain the multiplicity between
 module and tutorials.
 
 To better enable advanced users, the app automatically performs actions to maintain the multiplicity constraint rather
-than force the user to type additional commands to maintain it. For example, the AddToTutorial command, which adds a 
+than force the user to type additional commands to maintain it. For example, the AddToTutorial command, which adds a
 tutorial to a person, also adds the corresponding module to the user should they not have it.(Add sequence diagram here)
 
 ### \[Proposed\] Undo/redo feature

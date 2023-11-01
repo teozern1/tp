@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_TUTORIAL_TIME_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_TIME;
@@ -17,7 +18,7 @@ import seedu.address.model.tutorial.Tutorial;
  * Parses input arguments and creates a new AddTutorialCommand object
  */
 public class AddTutorialCommandParser implements Parser<AddTutorialCommand> {
-
+    /* Methods */
     /**
      * Parses the given {@code String} of arguments in the context of the AddTutorialCommand
      * and returns an AddTutorialCommand object for execution.
@@ -37,7 +38,15 @@ public class AddTutorialCommandParser implements Parser<AddTutorialCommand> {
         Module module = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get());
         String tutorialName = ParserUtil.parseTutorialName(argMultimap.getValue(PREFIX_TUTORIAL_NAME).get());
         String tutorialTime = ParserUtil.parseTutorialTime(argMultimap.getValue(PREFIX_TUTORIAL_TIME).get());
+
+
+        if (!Tutorial.isTimeFormat(tutorialTime)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_TUTORIAL_TIME_FORMAT,
+                    AddTutorialCommand.MESSAGE_USAGE));
+        }
+
         Tutorial tutorial = new Tutorial(module, tutorialName, tutorialTime);
+
         return new AddTutorialCommand(tutorial);
     }
 
@@ -49,3 +58,5 @@ public class AddTutorialCommandParser implements Parser<AddTutorialCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
+
+

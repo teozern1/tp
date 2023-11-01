@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
@@ -27,4 +28,6 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate modules.
      */
     ObservableList<Tutorial> getTutorialList();
+
+    ObservableList<Assignment> getAssignmentList();
 }

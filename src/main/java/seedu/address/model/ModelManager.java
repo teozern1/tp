@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
@@ -27,6 +28,8 @@ public class ModelManager implements Model {
     private final FilteredList<Module> modules;
     private final FilteredList<Tutorial> tutorials;
 
+    private final FilteredList<Assignment> assignments;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -40,6 +43,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         modules = new FilteredList<>(this.addressBook.getModuleList());
         tutorials = new FilteredList<>(this.addressBook.getTutorialList());
+        assignments = new FilteredList<>(this.addressBook.getAssignmentList());
     }
 
     public ModelManager() {
@@ -186,6 +190,33 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Tutorial> getTutorialList() {
         return tutorials;
+    }
+
+    //=========== Assignment Management =========================================================================
+
+    @Override
+    public void addAssignment(Assignment assignment) {
+        addressBook.addAssignment(assignment);
+    }
+
+    @Override
+    public void deleteAssignment(Assignment assignment) {
+        addressBook.removeAssignment(assignment);
+    }
+
+    @Override
+    public boolean hasAssignment(Assignment assignment) {
+        requireNonNull(assignment);
+        return addressBook.hasAssignment(assignment);
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Assignment> getAssignmentList() {
+        return assignments;
     }
 
     // others

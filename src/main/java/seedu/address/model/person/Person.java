@@ -24,7 +24,6 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Module> modules = new HashSet<>();
     private final Set<Tutorial> tutorials = new HashSet<>();
@@ -35,14 +34,13 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags,
                   Set<Module> modules, Set<Tutorial> tutorials, StudentNumber studentNumber,
                   Telegram telegram) {
-        requireAllNonNull(name, phone, email, address, tags, studentNumber);
+        requireAllNonNull(name, phone, email, tags, studentNumber);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.tags.addAll(tags);
         this.modules.addAll(modules);
         this.tutorials.addAll(tutorials);
@@ -60,10 +58,6 @@ public class Person {
 
     public Email getEmail() {
         return email;
-    }
-
-    public Address getAddress() {
-        return address;
     }
 
     /**
@@ -96,7 +90,7 @@ public class Person {
         Set<String> uiList = new LinkedHashSet<>();
         Set<String> moduleCodesWithTutorials = new HashSet<>();
         for (Tutorial tutorial : this.getTutorials()) {
-            moduleCodesWithTutorials.add(tutorial.getModuleName());
+            moduleCodesWithTutorials.add(tutorial.getModuleCode());
             uiList.add(tutorial.toString());
         }
         for (Module module : this.getModules()) {
@@ -148,7 +142,6 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
                 && modules.equals(otherPerson.modules)
                 && tutorials.equals(otherPerson.tutorials)
@@ -159,7 +152,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, modules, tutorials, studentNumber, telegram);
+        return Objects.hash(name, phone, email, tags, modules, tutorials, studentNumber, telegram);
     }
 
     @Override
@@ -168,7 +161,6 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
                 .add("tags", tags)
                 .add("modules", modules)
                 .add("tutorials", tutorials)

@@ -14,7 +14,6 @@ import seedu.address.model.tutorial.exceptions.TutorialNotFoundException;
 /**
  * A list of tutorials that enforces uniqueness between its elements and does not allow nulls.
  * Supports a minimal set of list operations.
- *
  */
 public class UniqueTutorialList implements Iterable<Tutorial> {
 
@@ -24,7 +23,7 @@ public class UniqueTutorialList implements Iterable<Tutorial> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent tutorial as the given argument.
      */
     public boolean contains(Tutorial toCheck) {
         requireNonNull(toCheck);

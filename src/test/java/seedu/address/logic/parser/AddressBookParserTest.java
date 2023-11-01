@@ -110,11 +110,11 @@ public class AddressBookParserTest {
         String testModuleString = "CS1000";
         Module testModule = new Module("CS1000");
         String testName = "test name";
-        String testTime = "test time";
+        String testTime = "Mon 2PM";
         AddTutorialCommand command = (AddTutorialCommand) parser.parseCommand(
                 AddTutorialCommand.COMMAND_WORD + " " + PREFIX_MODULE + testModuleString
                         + " " + PREFIX_TUTORIAL_NAME + testName + " " + PREFIX_TUTORIAL_TIME + testTime);
-        assertEquals(new AddTutorialCommand(new Tutorial(testModule, "test name", "test time")), command);
+        assertEquals(new AddTutorialCommand(new Tutorial(testModule, "test name", "Mon 2PM")), command);
     }
 
     @Test
