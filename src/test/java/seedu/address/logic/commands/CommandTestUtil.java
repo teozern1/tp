@@ -76,7 +76,10 @@ public class CommandTestUtil {
 
 
     public static final String MODULE_CS2100 = "CS2100";
+    public static final String MODULE_CS2101 = "CS2101";
 
+    public static final String TUTORIAL_GROUP_TG01 = "TG01";
+    public static final String TUTORIAL_GROUP_TG02 = "TG02";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
