@@ -28,7 +28,7 @@ public class SearchCommand extends Command {
             + PREFIX_MODULE + "CS1000 ";
 
     public static final String MESSAGE_SUCCESS = "Found the following people.";
-    public static final String MESSAGE_TOO_MANY_MODULES = "Too many modules given.";
+    public static final String MESSAGE_INVALID_NUM_OF_MODULES = "Invalid number of modules given. Please give only 1.";
 
     private final List<Name> personNameToSearch;
     private final List<Module> modulesToSearch;

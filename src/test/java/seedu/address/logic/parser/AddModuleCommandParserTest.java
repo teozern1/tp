@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.MODULE_CS2100;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CS2100;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -16,9 +16,9 @@ public class AddModuleCommandParserTest {
 
     @Test
     public void parse_modulePresent_success() {
-        Module testModule = new ModuleBuilder().build(MODULE_CS2100);
+        Module testModule = new ModuleBuilder().build(VALID_MODULE_CS2100);
 
-        assertParseSuccess(parser, " m/" + MODULE_CS2100, new AddModuleCommand(testModule));
+        assertParseSuccess(parser, " m/" + VALID_MODULE_CS2100, new AddModuleCommand(testModule));
     }
 
     @Test
