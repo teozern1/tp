@@ -36,6 +36,7 @@ import seedu.address.model.module.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.ModuleBuilder;
@@ -143,7 +144,8 @@ public class AddressBookParserTest {
         List<Name> nameList = new ArrayList<>(Arrays.asList(new Name(testName)));
         List<Module> moduleList = new ArrayList<>(Arrays.asList(new Module(testModuleString)));
         List<Tutorial> tutorialList = new ArrayList<>(Arrays.asList(testTutorial));
-        assertEquals(new SearchCommand(nameList, moduleList, tutorialList), command);
+        List<Tag> emptyTagList = new ArrayList<>();
+        assertEquals(new SearchCommand(nameList, moduleList, tutorialList, emptyTagList), command);
     }
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {

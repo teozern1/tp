@@ -27,6 +27,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
 import seedu.address.testutil.PersonBuilder;
 
@@ -55,8 +56,9 @@ public class SearchCommandTest {
         List<Name> nameList = new ArrayList<>(Collections.singletonList(nameToSearch));
         List<Module> moduleList = new ArrayList<>();
         List<Tutorial> tutorialList = new ArrayList<>();
+        List<Tag> tagList = new ArrayList<>();
         expectedModel.updateFilteredPersonList(person -> person.getName().equals(nameToSearch));
-        assertCommandSuccess(new SearchCommand(nameList, moduleList, tutorialList), model,
+        assertCommandSuccess(new SearchCommand(nameList, moduleList, tutorialList, tagList), model,
                 SearchCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -65,8 +67,9 @@ public class SearchCommandTest {
         List<Name> nameList = new ArrayList<>();
         List<Module> moduleList = new ArrayList<>(List.of(FIRST_MODULE));
         List<Tutorial> tutorialList = new ArrayList<>();
+        List<Tag> tagList = new ArrayList<>();
         expectedModel.updateFilteredPersonList(person -> person.getModules().contains(FIRST_MODULE));
-        assertCommandSuccess(new SearchCommand(nameList, moduleList, tutorialList), model,
+        assertCommandSuccess(new SearchCommand(nameList, moduleList, tutorialList, tagList), model,
                 SearchCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -75,8 +78,9 @@ public class SearchCommandTest {
         List<Name> nameList = new ArrayList<>();
         List<Module> moduleList = new ArrayList<>();
         List<Tutorial> tutorialList = new ArrayList<>(List.of(TUTORIAL_TUT1_MON9PM));
+        List<Tag> tagList = new ArrayList<>();
         expectedModel.updateFilteredPersonList(person -> person.getTutorials().contains(TUTORIAL_TUT1_MON9PM));
-        assertCommandSuccess(new SearchCommand(nameList, moduleList, tutorialList), model,
+        assertCommandSuccess(new SearchCommand(nameList, moduleList, tutorialList, tagList), model,
                 SearchCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -97,11 +101,13 @@ public class SearchCommandTest {
         List<Tutorial> tutorialListTG01 = new ArrayList<>(List.of(tutTG01));
         List<Tutorial> tutorialListTG02 = new ArrayList<>(List.of(tutTG02));
 
-        SearchCommand baseSearchCommand = new SearchCommand(amyNameList, cs2100ModuleList, tutorialListTG01);
-        SearchCommand baseSearchCommandAlt = new SearchCommand(amyNameList, cs2100ModuleList, tutorialListTG01);
-        SearchCommand diffNameSearchCommand = new SearchCommand(bobNameList, cs2100ModuleList, tutorialListTG01);
-        SearchCommand diffModSearchCommand = new SearchCommand(amyNameList, cs2101ModuleList, tutorialListTG01);
-        SearchCommand diffTutSearchCommand = new SearchCommand(amyNameList, cs2100ModuleList, tutorialListTG02);
+        List<Tag> tags = new ArrayList<>();
+
+        SearchCommand baseSearchCommand = new SearchCommand(amyNameList, cs2100ModuleList, tutorialListTG01, tags);
+        SearchCommand baseSearchCommandAlt = new SearchCommand(amyNameList, cs2100ModuleList, tutorialListTG01, tags);
+        SearchCommand diffNameSearchCommand = new SearchCommand(bobNameList, cs2100ModuleList, tutorialListTG01, tags);
+        SearchCommand diffModSearchCommand = new SearchCommand(amyNameList, cs2101ModuleList, tutorialListTG01, tags);
+        SearchCommand diffTutSearchCommand = new SearchCommand(amyNameList, cs2100ModuleList, tutorialListTG02, tags);
 
         // same object -> returns true
         assertTrue(baseSearchCommand.equals(baseSearchCommand));

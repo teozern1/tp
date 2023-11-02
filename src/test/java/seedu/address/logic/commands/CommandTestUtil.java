@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -58,6 +59,8 @@ public class CommandTestUtil {
 
     public static final String MODULE_DESC_CS2100 = " " + PREFIX_MODULE + VALID_MODULE_CS2100;
     public static final String MODULE_DESC_CS2101 = " " + PREFIX_MODULE + VALID_MODULE_CS2101;
+
+    public static final String ATTN_LESSON_ONE = " " + PREFIX_ATTENDANCE + "S2";
 
     public static final String TUTORIAL_GROUP_DESC_TG01 = " " + PREFIX_TUTORIAL_NAME + VALID_TUTORIAL_GROUP_TG01;
 
