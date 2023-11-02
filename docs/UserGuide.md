@@ -307,6 +307,13 @@ Format: `deleteAttn INDEX se/LESSON_NUMBER`
 
 Example: `deleteAttn 1 ln/S1`
 
+### Adds an assignment `addAssignment`
+Adds a new assignment to the system. Fails if the name given is blank. 
+
+Format: `addAssignment assgn/ ASSIGNMENT_TITLE`
+
+Example: `addAssignment assgn/ Assignment 1`
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
