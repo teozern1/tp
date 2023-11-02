@@ -99,9 +99,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STUDENT_NUMBER [t/TAG]…
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-* `add n/Johann Petrovich s/A0232865J`
+* `add n/Judas p/98768432 e/judas@example.com s/A1234567J tele/@judas`
+* `add n/John Doe p/98765432 e/johnd@example.com s/A0240253J tele/@john t/friends`
 
 ### Listing all persons : `list`
 
@@ -308,7 +307,7 @@ Example: `attn 1 se/S1`
 
 | Action                 | Format, Examples                                                                                                                                                      |
 |------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Judas p/98768432 e/judas@example.com s/A1234567J tele/@judas`                               |
 | **Clear**              | `clear`                                                                                                                                                               |
 | **Delete**             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
 | **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/STUDENT_NUMBER] [tele/TELEGRAM_HANDLE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
@@ -318,9 +317,9 @@ Example: `attn 1 se/S1`
 | **Help**               | `help`                                                                                                                                                                |
 | **addModule**          | `addModule m/MODULE_NAME` <br> e.g., `addModule m/CS2100`                                                                                                             |
 | **deleteModule**       | `deleteModule INDEX` <br> e.g., `deleteModule 1`                                                                                                                      |
-| **addToModule**        | `addToModule INDEX m/MODULE_NAME` <br> e.g., `addToModule 2 m/CS2103T`                                                                                                     |
-| **removeFromModule**   | `removeFromModule INDEX m/MODULE_NAME` <br> e.g., `removeFromModule 2 m/CS2103T`                                                                                           |
-| **addTutorial**        | `addTutorial TUTORIALNAME m/MODULE_NAME` <br> e.g., `addTutorial tn/c12 m/CS2103T`                                                                                         |
+| **addToModule**        | `addToModule INDEX m/MODULE_NAME` <br> e.g., `addToModule 2 m/CS2103T`                                                                                                |
+| **removeFromModule**   | `removeFromModule INDEX m/MODULE_NAME` <br> e.g., `removeFromModule 2 m/CS2103T`                                                                                      |
+| **addTutorial**        | `addTutorial TUTORIALNAME m/MODULE_NAME` <br> e.g., `addTutorial tn/c12 m/CS2103T`                                                                                    |
 | **deleteTutorial**     | `deleteTutorial INDEX` <br> e.g., `deleteTutorial 2`                                                                                                                  |
 | **addToTutorial**      | `addToTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME` <br> e.g., `addToTutorial 1 m/CS2103T tn/T11`                                                                    |
 | **removeFromTutorial** | `removeFromTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME` <br> e.g., `removeFromTutorial 1 m/CS2103T tn/T11`                                                          |
