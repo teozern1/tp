@@ -36,6 +36,7 @@ import seedu.address.model.module.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.ModuleBuilder;
@@ -133,12 +134,18 @@ public class AddressBookParserTest {
     public void parseCommand_search() throws Exception {
         String testModuleString = "CS1000";
         String testName = "test name";
+        String testTutorialString = "TG01";
+        Tutorial testTutorial = new Tutorial(new Module(testModuleString), testTutorialString, null);
         SearchCommand command = (SearchCommand) parser.parseCommand(SearchCommand.COMMAND_WORD + " "
-                + PREFIX_NAME + testName + " " + PREFIX_MODULE + testModuleString);
+                + PREFIX_NAME + testName + " "
+                + PREFIX_MODULE + testModuleString + " "
+                + PREFIX_TUTORIAL_NAME + testTutorialString);
 
         List<Name> nameList = new ArrayList<>(Arrays.asList(new Name(testName)));
         List<Module> moduleList = new ArrayList<>(Arrays.asList(new Module(testModuleString)));
-        assertEquals(new SearchCommand(nameList, moduleList), command);
+        List<Tutorial> tutorialList = new ArrayList<>(Arrays.asList(testTutorial));
+        List<Tag> emptyTagList = new ArrayList<>();
+        assertEquals(new SearchCommand(nameList, moduleList, tutorialList, emptyTagList), command);
     }
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
