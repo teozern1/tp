@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.ATTN_LESSON_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_DESC_CS2100;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_DESC_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -19,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.SearchCommand;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Name;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
 
 public class SearchCommandParserTest {
@@ -30,8 +32,9 @@ public class SearchCommandParserTest {
         List<Name> expectedNameList = new ArrayList<>(List.of(expectedName));
         List<Module> expectedModuleList = new ArrayList<>();
         List<Tutorial> expectedTutorialList = new ArrayList<>();
+        List<Tag> expectedTagList = new ArrayList<>();
         assertParseSuccess(parser, NAME_DESC_AMY,
-                new SearchCommand(expectedNameList, expectedModuleList, expectedTutorialList));
+                new SearchCommand(expectedNameList, expectedModuleList, expectedTutorialList, expectedTagList));
     }
 
     @Test
@@ -40,8 +43,9 @@ public class SearchCommandParserTest {
         Module testModuleTag = new Module(VALID_MODULE_CS2100);
         List<Module> expectedModuleList = new ArrayList<>(List.of(testModuleTag));
         List<Tutorial> expectedTutorialList = new ArrayList<>();
+        List<Tag> expectedTagList = new ArrayList<>();
         assertParseSuccess(parser, MODULE_DESC_CS2100,
-                new SearchCommand(expectedNameList, expectedModuleList, expectedTutorialList));
+                new SearchCommand(expectedNameList, expectedModuleList, expectedTutorialList, expectedTagList));
     }
 
     @Test
@@ -51,8 +55,21 @@ public class SearchCommandParserTest {
         List<Module> expectedModuleList = new ArrayList<>(List.of(testModule));
         Tutorial testTutorial = new Tutorial(testModule, VALID_TUTORIAL_GROUP_TG01);
         List<Tutorial> expectedTutorialList = new ArrayList<>(List.of(testTutorial));
+        List<Tag> expectedTagList = new ArrayList<>();
         assertParseSuccess(parser, MODULE_DESC_CS2100 + TUTORIAL_GROUP_DESC_TG01,
-                new SearchCommand(expectedNameList, expectedModuleList, expectedTutorialList));
+                new SearchCommand(expectedNameList, expectedModuleList, expectedTutorialList, expectedTagList));
+    }
+
+    @Test
+    public void parse_tagPresentSuccess() {
+        List<Name> expectedNameList = new ArrayList<>();
+        List<Module> expectedModuleList = new ArrayList<>();
+        List<Tutorial> expectedTutorialList = new ArrayList<>();
+
+        Tag testTag = new Tag("S2");
+        List<Tag> expectedTagList = new ArrayList<>(List.of(testTag));
+        assertParseSuccess(parser, ATTN_LESSON_ONE,
+                new SearchCommand(expectedNameList, expectedModuleList, expectedTutorialList, expectedTagList));
     }
 
     @Test
