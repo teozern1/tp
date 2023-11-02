@@ -293,7 +293,19 @@ Further prompts are given for incorrect inputs.
 
 Format: `attn INDEX se/LESSON_NUMBER`
 
-Example: `attn 1 se/S1`
+Example: `attn 1 ln/S1`
+
+### Deletes the attendance of the student: `deleteAttn`
+
+Deletes a student's attendance and displays the change by removing the tag on the GUI.
+The index refers to the position of the person as displayed in the GUI.
+The LESSON_NUMBER must be alphanumeric.
+Will give an error message if the LESSON_NUMBER does not exist.
+Further prompts are given for incorrect inputs.
+
+Format: `deleteAttn INDEX se/LESSON_NUMBER`
+
+Example: `deleteAttn 1 ln/S1`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -323,7 +335,8 @@ Example: `attn 1 se/S1`
 | **deleteTutorial**     | `deleteTutorial INDEX` <br> e.g., `deleteTutorial 2`                                                                                                                  |
 | **addToTutorial**      | `addToTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME` <br> e.g., `addToTutorial 1 m/CS2103T tn/T11`                                                                    |
 | **removeFromTutorial** | `removeFromTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME` <br> e.g., `removeFromTutorial 1 m/CS2103T tn/T11`                                                          |
-| **attn**               | `attn INDEX se/LESSON_NUMBER` <br> e.g., `attn 1 se/S1`                                                                                                               |
+| **attn**               | `attn INDEX ln/LESSON_NUMBER` <br> e.g., `attn 1 ln/S1`                                                                                                               |
+| **deleteAttn**         | `deleteAttn INDEX ln/LESSON_NUMBER` <br> e.g., `deleteAttn 1 ln/S1`                                                                                                   |
 
 --------------------------------------------------------------------------------------------------------------------
 
