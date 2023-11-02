@@ -282,6 +282,9 @@ Format: `attn INDEX se/LESSON_NUMBER`
 
 Example: `attn 1 se/S1`
 
+### Adds an assignment 
+Adds a new assingment to the application. Fails if the index is not valid
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
