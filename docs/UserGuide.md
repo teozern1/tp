@@ -295,8 +295,12 @@ Format: `attn INDEX se/LESSON_NUMBER`
 
 Example: `attn 1 se/S1`
 
-### Adds an assignment 
-Adds a new assingment to the application. Fails if the index is not valid
+### Adds an assignment `addAssignment`
+Adds a new assignment to the system. Fails if the name given is blank. 
+
+Format: `addAssignment assgn/ ASSIGNMENT_TITLE`
+
+Example: `addAssignment assgn/ Assignment 1`
 
 --------------------------------------------------------------------------------------------------------------------
 
