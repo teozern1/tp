@@ -202,7 +202,7 @@ If your changes to the data file makes its format invalid, TASsistant will disca
 ### Adds a module to TASsistant: `addModule`
 
 Adds the module to TASsistant, displaying it on the GUI.
-The module name must consist of only alphanumeric characters, between 5 - 7 characters.
+The module name must consist of only alphanumeric characters, between 5 - 8 characters.
 Modules must be added one at a time.
 
 The output for module name inputs "cs2100" and "CS2100" will be the same as the module

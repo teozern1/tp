@@ -10,9 +10,9 @@ public class Module {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Module codes should only contain alphanumeric characters and it should be 5 to 7 characters";
-    public static final String VALIDATION_REGEX = "[A-Z0-9]*";
+    public static final String VALIDATION_REGEX = "[a-zA-Z0-9]*";
     public static final int VALIDATION_MIN_LENGTH = 5;
-    public static final int VALIDATION_MAX_LENGTH = 7;
+    public static final int VALIDATION_MAX_LENGTH = 8;
     private final String moduleCode;
 
     /**

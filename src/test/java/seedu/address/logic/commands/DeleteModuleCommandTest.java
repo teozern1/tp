@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -9,6 +8,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalModules.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalModules.getTypicalModuleAddressBook;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,22 +24,17 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
 import seedu.address.testutil.PersonBuilder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
  * {@code DeleteModuleCommand}.
  */
 public class DeleteModuleCommandTest {
-
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
     public static final Person PERSON_NO_MODULE_AND_TUTORIAL = new PersonBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withStudentNumber("A0203221J")
             .withTelegram("@bruh")
             .withTags("owesMoney", "friends").build();
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validModuleList_success() {
@@ -74,7 +71,9 @@ public class DeleteModuleCommandTest {
 
         try {
             CommandResult r = deleteModuleCommand.execute(model);
-        } catch (CommandException e) { }
+        } catch (CommandException e) {
+            System.out.println("IT SHOULD NEVER REACH HERE");
+        }
 
         Person editedPerson = model.getFilteredPersonList().get(0);
 
