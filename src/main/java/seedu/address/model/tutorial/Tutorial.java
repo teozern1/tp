@@ -116,6 +116,10 @@ public class Tutorial {
      */
     public static String reformat(String time) {
         String[] dateTimeParts = time.split(" ");
+        if (dateTimeParts.length != 2) {
+            throw new IllegalArgumentException("incorrect format");
+        }
+
         String dayPart = dateTimeParts[0];
         String timePart = dateTimeParts[1];
 
