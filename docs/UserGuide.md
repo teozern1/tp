@@ -246,13 +246,21 @@ CS2103T, if the module CS2103T exists and the person who is second from the top 
 
 ### Adds a tutorial to a given module: `addTutorial`
 
-Adds a tutorial with a specific tutorial name to a given module. Different modules can have different tutorials
-with the same name. Will give an error message if the module does not exist or a tutorial with the same name has already
-been made for the module.
+Adds a tutorial with a specific tutorial name and time to a given module. 
+Note that:
+- Different modules can have different tutorials with the same name. 
+- Tutorial time
+  - should follow "E ha" format stated in [java api](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/format/DateTimeFormatter.html)
+  - is **case-sensitive**.
+  - e.g. `Mon 6PM` is valid, while `Mon 6pm`, `mon 6PM`, `Monday 6PM` are not valid.
+- Will give an error message if:
+  1. The module does not exist;
+  2. Tutorial with the same name has already been made for the module;
+  3. TUTORIAL_TIME format is invalid.
 
 Format: `addTutorial m/MODULE_NAME tn/TUTORIAL_NAME tt/TUTORIAL_TIME`
 
-Example: `addTutorial m/CS2103T tn/T12 tt/Mon 6pm` adds a tutorial with name T12 and time "Mon 6pm" belonging to module
+Example: `addTutorial m/CS2103T tn/T12 tt/Mon 6PM` adds a tutorial with name T12 and time "Mon 6PM" belonging to module
 CS2103T, if module CS2103T exists.
 
 ### Deletes a tutorial from a given module: `deleteTutorial`
