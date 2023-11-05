@@ -13,7 +13,7 @@ import seedu.address.model.module.Module;
 public class Tutorial {
     /* Fields */
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("E ha");
-    public static final String TIME_FORMAT_REGEX = "\\d?\\d[AP]M";
+    public static final String TIME_FORMAT_REGEX = "\\b([1-9]|1[0-2])[AP]M";
     private Module module;
     private String tutName;
     private String time;
@@ -126,7 +126,7 @@ public class Tutorial {
         } else if (!timePart.matches(Tutorial.TIME_FORMAT_REGEX)) {
             return false;
         }
-
+        
         return true;
     }
 
@@ -135,7 +135,7 @@ public class Tutorial {
 
         public static boolean contains(String value) {
             for (DayOfWeek day : values()) {
-                if (day.name().equalsIgnoreCase(value)) {
+                if (day.name().equals(value)) {
                     return true;
                 }
             }
