@@ -126,7 +126,7 @@ public class Tutorial {
         } else if (!timePart.matches(Tutorial.TIME_FORMAT_REGEX)) {
             return false;
         }
-        
+
         return true;
     }
 
