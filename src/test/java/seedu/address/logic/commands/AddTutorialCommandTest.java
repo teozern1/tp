@@ -31,7 +31,7 @@ public class AddTutorialCommandTest {
     public void execute_duplicateTutorial_errorMessage() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Module testModule = new Module("CS1000");
-        Tutorial testTutorial = new Tutorial(testModule, "test name", "test time");
+        Tutorial testTutorial = new Tutorial(testModule, "test name", "Mon 6PM");
         model.addModule(testModule);
         model.addTutorial(testTutorial);
         AddTutorialCommand addTutorialCommand = new AddTutorialCommand(testTutorial);

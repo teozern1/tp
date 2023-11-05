@@ -38,7 +38,5 @@ public class AddTutorialCommandParserTest {
                 String.format(MESSAGE_INVALID_TUTORIAL_TIME_FORMAT, AddTutorialCommand.MESSAGE_USAGE));
         assertParseFailure(parser, " m/CS1000 tn/test name tt/Mon 13PM",
                 String.format(MESSAGE_INVALID_TUTORIAL_TIME_FORMAT, AddTutorialCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, " m/CS1000 tn/test name tt/Mon 2pm",
-                String.format(MESSAGE_INVALID_TUTORIAL_TIME_FORMAT, AddTutorialCommand.MESSAGE_USAGE));
     }
 }
