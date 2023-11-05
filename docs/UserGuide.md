@@ -251,12 +251,12 @@ Note that:
 - Different modules can have different tutorials with the same name. 
 - Tutorial time
   - should follow `E ha` format stated in [java api](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/format/DateTimeFormatter.html)
-  - is **case-sensitive**.
-  - e.g. `Mon 6PM` is valid, while `Mon 6pm`, `mon 6PM`, `Monday 6PM`, `Mon 0PM` are not valid.
+  - is **not** case-sensitive.
+  - e.g. `Mon 6PM`, `Mon 6pm`, `mon 6PM`, `Monday 6PM` are all valid, but `Mon 0PM` is not valid.
 - Will give an error message if:
   1. The module does not exist;
   2. Tutorial with the same name has already been made for the module;
-  3. TUTORIAL_TIME format is invalid.
+  3. TUTORIAL_TIME is invalid.
 
 Format: `addTutorial m/MODULE_NAME tn/TUTORIAL_NAME tt/TUTORIAL_TIME`
 
