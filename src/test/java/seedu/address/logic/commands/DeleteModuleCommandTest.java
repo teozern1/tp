@@ -8,15 +8,22 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalModules.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalModules.getTypicalModuleAddressBook;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.module.Module;
+import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
+import seedu.address.testutil.PersonBuilder;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -26,17 +33,24 @@ public class DeleteModuleCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    public static final Person PERSON_NO_MODULE_AND_TUTORIAL = new PersonBuilder().withName("Benson Meier")
+            .withEmail("johnd@example.com").withPhone("98765432")
+            .withStudentNumber("A0203221J")
+            .withTelegram("@bruh")
+            .withTags("owesMoney", "friends").build();
+
     @Test
     public void execute_validModuleList_success() {
-        Module moduleToDelete = model.getModuleList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Model specialModel = new ModelManager(getTypicalModuleAddressBook(), new UserPrefs());
+        Module moduleToDelete = specialModel.getModuleList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteModuleCommand deleteModuleCommand = new DeleteModuleCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteModuleCommand.MESSAGE_SUCCESS, moduleToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(specialModel.getAddressBook(), new UserPrefs());
         expectedModel.deleteModule(moduleToDelete);
 
-        assertCommandSuccess(deleteModuleCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteModuleCommand, specialModel, expectedMessage, expectedModel);
     }
 
     @Test
@@ -47,10 +61,24 @@ public class DeleteModuleCommandTest {
 
         model.addTutorial(tutorialOne);
         model.addTutorial(tutorialTwo);
-        assertTrue(model.getTutorialList().size() == 2);
+        assertTrue(model.getTutorialList().size() == 3);
 
         model.deleteModule(module);
         assertTrue(model.getTutorialList().size() == 0);
+    }
+
+    @Test
+    public void execute_updatedPersonWithDeletedModule_success() {
+        Person expectedPerson = new ArrayList<>(Arrays.asList(PERSON_NO_MODULE_AND_TUTORIAL)).get(0);
+        DeleteModuleCommand deleteModuleCommand = new DeleteModuleCommand(INDEX_FIRST_PERSON);
+
+        try {
+            CommandResult r = deleteModuleCommand.execute(model);
+        } catch (CommandException e) { }
+
+        Person editedPerson = model.getFilteredPersonList().get(0);
+
+        assertTrue(editedPerson.equals(expectedPerson));
     }
 
     @Test
@@ -58,7 +86,7 @@ public class DeleteModuleCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getModuleList().size() + 1);
         DeleteModuleCommand deleteModuleCommand = new DeleteModuleCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteModuleCommand, model, "The module list is currently empty!");
+        assertCommandFailure(deleteModuleCommand, model, DeleteModuleCommand.MESSAGE_EXCEED_LIST);
     }
 
     @Test
