@@ -112,7 +112,7 @@ Format: `help`
 
 Adds a person to TASsistant.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STUDENT_NUMBER [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL s/STUDENT_NUMBER tele/TELEGRAM_USERNAME [t/TAG]…​`
 
 **Tip:** A person can have any number of tags (including 0)
 </box>
