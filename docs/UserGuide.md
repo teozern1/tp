@@ -222,7 +222,12 @@ If your changes to the data file makes its format invalid, TASsistant will disca
 ### Adds a module to TASsistant: `addModule`
 
 Adds the module to TASsistant, displaying it on the GUI.
-The module name must consist of only alphanumeric characters, no shorter than 5 characters.
+The module name must consist of only alphanumeric characters, between 5 - 8 characters.
+Modules must be added one at a time.
+
+The output for module name inputs "cs2100" and "CS2100" will be the same as the module
+shown on the GUI will be capitalised.
+
 Will give an error message if the module already exists in TASsistant,
 further prompts are given for incorrect inputs.
 
@@ -234,6 +239,10 @@ Example: `addModule m/CS2100`
 
 Deletes the module from TASsistant and the GUI will change to reflect this.
 The index refers to the position of the module displayed on the GUI.
+
+Any related tutorials on the GUI as well as modules/tutorials on students 
+will also be deleted. As such, please use this command with discretion.
+
 Will give an error message if the module does not exist in TASsistant,
 further prompts are given for incorrect inputs.
 
@@ -315,7 +324,7 @@ The index refers to the position of the person as displayed in the GUI.
 The LESSON_NUMBER must be alphanumeric.
 Further prompts are given for incorrect inputs.
 
-Format: `attn INDEX se/LESSON_NUMBER`
+Format: `attn INDEX ln/LESSON_NUMBER`
 
 Example: `attn 1 ln/S1`
 
@@ -327,7 +336,7 @@ The LESSON_NUMBER must be alphanumeric.
 Will give an error message if the LESSON_NUMBER does not exist.
 Further prompts are given for incorrect inputs.
 
-Format: `deleteAttn INDEX se/LESSON_NUMBER`
+Format: `deleteAttn INDEX ln/LESSON_NUMBER`
 
 Example: `deleteAttn 1 ln/S1`
 
