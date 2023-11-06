@@ -67,7 +67,7 @@ Here are some symbols used throughout this user guide:
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -83,7 +83,7 @@ Here are some symbols used throughout this user guide:
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -133,7 +133,7 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -167,11 +167,12 @@ Format: `search CONDITION1, CONDITION2, …`
 * Condition is given in the format keyword: value.
 * Accepted condition keywords are module, classNum, and studentName.
 * Unrecognised keywords cause this method to fail.
+* Preamble must be empty.
 
 Examples:
-* `search module: CS2103T` returns all students in the module CS2103T
-* `search classNum: T03` returns all students in the class T03
-* `search studentName:` John Doe' returns all students with the name John Doe
+* `search m/CS2103T` returns all students in the module CS2103T
+* `search tn/T03` returns all students in the class T03
+* `search n/John Doe` returns all students with the name John Doe
 
 ### Clearing all entries : `clear`
 
@@ -352,7 +353,7 @@ Example: `addAssignment assgn/ Assignment 1`
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Teaching Assistant (TA)**: A non-professor tutor which helps the professors of a module by teaching one or more classes.
 * **Module**: A unit of study in a specific field set by NUS, such as CS2103T focusing on Software Engineering.
-* **Class**: Lessons that are part of a module. Includes laboratries, recitations, tutorials and any form of lesson that includes a TA.
+* **Class**: Lessons that are part of a module. Includes laboratories, recitations, tutorials and any form of lesson that includes a TA.
 
 --------------------------------------------------------------------------------------------------------------------
 
