@@ -140,24 +140,27 @@ How the parsing works:
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/AddressBookClassDiagram.png" width="450" />
 
+* Note: For the Person class, fields such as "Name", "Email" and "Phone" have been integrated into Person_Fields to
+simplify the diagram. The Person_Fields class does not exist and is meant to represent the less important fields in
+Person, such as "Name", "Email" and "Phone" that have similar attributes.
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person`, `Module`, `Tutorial` objects (which are contained in a `UniquePersonList`, `UniqueModuleList`, `UniqueTutorialList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* `Module` and `Tutorial` objects are stored in a similar way, as a separate filtered list that the UI automatically updates as the data in the list changes.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</box>
-
+* stores the address book data i.e., all `Person`, `Module`, `Tutorial`, `Assignment` objects 
+(which are contained in a `UniquePersonList`, `UniqueModuleList`, `UniqueTutorialList`, `UniqueAssignmentList` object).
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) 
+as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` 
+that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* `Module`, `Tutorial` and `Assignment` objects are stored in a similar way, as a separate list that the UI
+automatically updates as the data in the list changes. However, since the UI always shows all modules, tutorials and
+assignments the user has (i.e. there is no filtering for Modules, Tutorials and Assignments), the list exposed to
+outsiders is always guaranteed to be the full list of Modules, Tutorials or Assignments.
+* stores a `UserPref` object that represents the user’s preferences. 
+This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* does not depend on any of the other three components 
+(as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 ### Storage component
 
@@ -190,8 +193,10 @@ teaching assistants teaching multiple modules. This comes at the cost of having 
 module and tutorials.
 
 To better enable advanced users, the app automatically performs actions to maintain the multiplicity constraint rather
-than force the user to type additional commands to maintain it. For example, the AddToTutorial command, which adds a
-tutorial to a person, also adds the corresponding module to the user should they not have it.(Add sequence diagram here)
+than force the user to type additional commands to maintain it. For example, the AddToTutorial command adds a
+tutorial to a person, also adds the corresponding module to the user should they not have it.
+
+<img src="images/ModelTutorialInteractionActivityDiagram.png" width="550" />
 
 ### \[Proposed\] Undo/redo feature
 
@@ -306,6 +311,7 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * NUS SoC teaching assistants
+* Has to tutor multiple tutorials, potentially in multiple modules
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -371,9 +377,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The product is meant for a single Teaching Assistant that makes all changes to the AddressBook themselves.
-5.  Data will be stored in a .json file to allow for advanced users to manipulate the data directly.
+3.  Should be able to hold up to 5 modules without a noticeable sluggishness in performance for typical usage.
+4.  Should be able to hold up to 8 tutorials without a noticeable sluggishness in performance for typical usage.
+5.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) 
+should be able to accomplish most of the tasks faster using commands than using the mouse.
+6.  The product is meant for a single Teaching Assistant that makes all changes to the AddressBook themselves.
+7.  Data will be stored in a .json file to allow for advanced users to manipulate the data directly.
+8.  The product does not require the Internet to operate.
 
 ### Glossary
 
@@ -436,3 +446,11 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+1. Currently, the addToModule command, when used on a user that already has the given module, does not give an
+error message. We intend to change this so that the addToModule command when used on a user that already has the given
+module will now give the error message `User already has the given module` in the output box.
