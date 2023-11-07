@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithAttendance;
 
 import org.junit.jupiter.api.Test;
 
@@ -42,6 +43,7 @@ public class DeleteAttendanceCommandTest {
     public void execute_validIndexAndTag_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Tag toDelete = new Tag("S1");
+        model.addAttendanceTag(new Tag("A0203220JS1"));
 
         Person person = model.getFilteredPersonList().get(0);
         Person editedPerson = new PersonBuilder(person).withTags("friends", "S1").build();
@@ -54,6 +56,14 @@ public class DeleteAttendanceCommandTest {
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
         assertCommandSuccess(deleteAttendanceCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_notAttendanceTag_errorMessage() {
+        Model model = new ModelManager(getTypicalAddressBookWithAttendance(), new UserPrefs());
+
+        assertCommandFailure(new DeleteAttendanceCommand(INDEX_FIRST_PERSON,
+                new Tag("friends")), model, DeleteAttendanceCommand.MESSAGE_NOT_ATTENDANCE_TAG);
     }
 
     @Test
