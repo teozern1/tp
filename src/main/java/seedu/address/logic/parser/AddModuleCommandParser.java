@@ -28,6 +28,8 @@ public class AddModuleCommandParser implements Parser<AddModuleCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddModuleCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MODULE);
+
         Module module = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get());
         return new AddModuleCommand(module);
     }
