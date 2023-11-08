@@ -26,6 +26,8 @@ public class AttendanceCommandParser implements Parser<AttendanceCommand> {
         if (!isPrefixPresent(argMultimap, PREFIX_ATTENDANCE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AttendanceCommand.MESSAGE_USAGE));
         }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ATTENDANCE);
+
         Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
         Tag toAdd = ParserUtil.parseTag(argMultimap.getValue(PREFIX_ATTENDANCE).get());
 
