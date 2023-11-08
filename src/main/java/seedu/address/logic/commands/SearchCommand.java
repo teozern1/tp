@@ -25,7 +25,7 @@ public class SearchCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds people with the given conditions "
             + "Parameters: CONDITION1, CONDITION2, ..."
             + String.format("[%sNAME] OR [%sMODULE] OR [%sTUTORIAL]", PREFIX_NAME, PREFIX_MODULE, PREFIX_TUTORIAL_NAME)
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD
             + PREFIX_MODULE + "CS1000 ";
 
     public static final String MESSAGE_SUCCESS = "Found the following people.";
