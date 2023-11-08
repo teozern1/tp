@@ -24,8 +24,9 @@ public class AddToModuleCommandTest {
     @Test
     public void execute_indexTooBig_errorMessage() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        int numOfPeople = model.getFilteredPersonList().size();
 
-        assertCommandFailure(new AddToModuleCommand(Index.fromZeroBased(999999),
+        assertCommandFailure(new AddToModuleCommand(Index.fromZeroBased(numOfPeople),
                 new Module("CS1000")), model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
     @Test
@@ -36,23 +37,28 @@ public class AddToModuleCommandTest {
                 Messages.MESSAGE_INVALID_MODULE);
     }
 
+    /* Boundary value. The command fails if the index does not represent a person, so the equivalence partition that
+    generates a positive result is [1, highest index in the address book]. Thus, highest index in the address book
+    is used in a test case. */
     @Test
     public void execute_validIndexAndModule_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        int numOfPeople = model.getFilteredPersonList().size();
         Module testModule = new Module("CS1000");
         model.addModule(testModule);
 
-        Person personWithModule = new PersonBuilder(model.getAddressBook().getPersonList().get(0))
+        Person personWithModule = new PersonBuilder(model.getAddressBook().getPersonList().get(numOfPeople - 1))
                 .withModules(testModule).build();
 
-        AddToModuleCommand editCommand = new AddToModuleCommand(INDEX_FIRST_PERSON, testModule);
+        AddToModuleCommand addToModuleCommand = new
+                AddToModuleCommand(Index.fromZeroBased(numOfPeople - 1), testModule);
         String expectedMessage = String.format(AddToModuleCommand.MESSAGE_SUCCESS, Messages.format(personWithModule));
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), personWithModule);
+        expectedModel.setPerson(model.getFilteredPersonList().get(numOfPeople - 1), personWithModule);
         expectedModel.addModule(testModule);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(addToModuleCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

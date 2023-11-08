@@ -20,6 +20,12 @@ public class AddTutorialCommandParserTest {
                 AddTutorialCommand.MESSAGE_USAGE));
     }
 
+    // Boundary value for tutorial names. (accepts any non-null string)
+    @Test
+    public void parse_emptyTutorialName_throwsParseExceptionAboutConstraints() {
+        assertParseFailure(parser, " m/CS1000 tn/ tt/Mon 6PM", Tutorial.MESSAGE_CONSTRAINTS);
+    }
+
     @Test
     public void parse_invalidTutorialTimeFormat_throwsParseException() {
         Module testModule = new Module("CS1000");

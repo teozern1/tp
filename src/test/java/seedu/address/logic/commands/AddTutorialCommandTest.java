@@ -37,21 +37,6 @@ public class AddTutorialCommandTest {
         AddTutorialCommand addTutorialCommand = new AddTutorialCommand(testTutorial);
         assertCommandFailure(addTutorialCommand, model, AddTutorialCommand.MESSAGE_DUPLICATE_TUTORIAL);
     }
-    @Test
-    public void execute_emptyTutorialName_errorMessage() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Module testModule = new Module("CS1000");
-        model.addModule(testModule);
-        Tutorial testTutorial = new Tutorial(testModule, " ", "test time");
-
-        AddTutorialCommand addTutorialCommand = new AddTutorialCommand(testTutorial);
-
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.addModule(testModule);
-        expectedModel.addTutorial(testTutorial);
-
-        assertCommandFailure(addTutorialCommand, model, AddTutorialCommand.MESSAGE_DUPLICATE_TUTORIAL);
-    }
 
     @Test
     public void execute_validModule_success() {
