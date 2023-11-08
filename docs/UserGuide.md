@@ -187,8 +187,8 @@ Format: `search CONDITION1, CONDITION2, …`
 * Condition is given in the format keyword: value.
 * Accepted condition keywords are module, classNum, and studentName.
 * Unrecognised keywords cause this method to fail.
+* Searching with no conditions will return no users.
 * Preamble must be empty.
-
 Examples:
 * `search m/CS2103T` returns all students in the module CS2103T
 * `search tn/T03` returns all students in the class T03
@@ -369,7 +369,7 @@ Example: `addAssignment assgn/ Assignment 1`
 | **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/STUDENT_NUMBER] [tele/TELEGRAM_HANDLE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
 | **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
 | **List**               | `list`                                                                                                                                                                |
-| **Search**             | `search CONDITION1, CONDITION2`<br> e.g., `search module: CS2103T`                                                                                                    |
+| **Search**             | `search CONDITION1, CONDITION2`<br> e.g., `search m/CS2103T`                                                                                                    |
 | **Help**               | `help`                                                                                                                                                                |
 | **addModule**          | `addModule m/MODULE_NAME` <br> e.g., `addModule m/CS2100`                                                                                                             |
 | **deleteModule**       | `deleteModule INDEX` <br> e.g., `deleteModule 1`                                                                                                                      |

@@ -47,6 +47,13 @@ public class SearchCommand extends Command {
     }
 
     private Predicate<Person> getPersonPredicateFromModule() {
+        if (personNameToSearch.isEmpty()
+                && modulesToSearch.isEmpty()
+                && tutorialsToSearch.isEmpty()
+                && tagsToSearch.isEmpty()) {
+            return (person -> false);
+        }
+
         return (person -> personNameToSearch.stream()
                 .allMatch(name -> person.getName().equals(name))
                 && person.getModules().containsAll(modulesToSearch)
