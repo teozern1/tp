@@ -17,6 +17,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentNumber;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutorial.Tutorial;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -159,9 +160,12 @@ public class ParserUtil {
      * Parses a {@code String tutorialName} by trimming leading and trailing whitespaces.
      * @return The tutorialName.
      */
-    public static String parseTutorialName(String tutorialName) {
+    public static String parseTutorialName(String tutorialName) throws ParseException {
         requireNonNull(tutorialName);
         String trimmedName = tutorialName.trim();
+        if (!Tutorial.isValidTutName(trimmedName)) {
+            throw new ParseException(Tutorial.MESSAGE_CONSTRAINTS);
+        }
         return trimmedName;
     }
 

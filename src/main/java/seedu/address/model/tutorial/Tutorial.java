@@ -1,6 +1,7 @@
 package seedu.address.model.tutorial;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
@@ -14,6 +15,7 @@ public class Tutorial {
     /* Fields */
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("E ha");
     public static final String TIME_FORMAT_REGEX = "\\d?\\d[AP]M";
+    public static final String MESSAGE_CONSTRAINTS = "Tutorial name cannot be empty";
     private Module module;
     private String tutName;
     private String time;
@@ -22,26 +24,41 @@ public class Tutorial {
 
     /**
      * Constructs a {@code Tutorial}.
+     * This constructor only create a tutorial model
+     * to find the actual tutorial in tutorial list.
+     * @param module Module tutorial belongs to.
+     * @param tutName Name of tutorial.
+     */
+    public Tutorial(Module module, String tutName) {
+        requireNonNull(module);
+        requireNonNull(tutName);
+        checkArgument(isValidTutName(tutName), MESSAGE_CONSTRAINTS);
+        this.module = module;
+        this.tutName = tutName;
+    }
+
+    /**
+     * Constructs a {@code Tutorial}.
      * @param module Module tutorial belongs to.
      * @param tutName Name of tutorial.
      * @param time Time of tutorial.
      */
     public Tutorial(Module module, String tutName, String time) {
+        requireNonNull(module);
+        requireNonNull(tutName);
+        requireNonNull(time);
+        checkArgument(isValidTutName(tutName), MESSAGE_CONSTRAINTS);
         this.module = module;
         this.tutName = tutName;
         this.time = time;
     }
 
     /**
-     * Constructs a {@code Tutorial}.
-     * This constructor only create a tutorial model
-     * to find the actual tutorial in tutorial list.
-     * @param module Module tutorial belongs to.
-     * @param tutorialName Name of tutorial.
+     * Returns if a given string is a valid tutorial name
+     * @param test A tutorial name to be tested.
      */
-    public Tutorial(Module module, String tutorialName) {
-        this.module = module;
-        this.tutName = tutorialName;
+    public static boolean isValidTutName(String test) {
+        return !("".equals(test));
     }
 
     /* Methods */
