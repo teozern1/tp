@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Module {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Module codes should only contain alphanumeric characters and it should be 5 to 7 characters";
+            "Module codes should only contain alphanumeric characters and it should be 5 to 8 characters";
     public static final String VALIDATION_REGEX = "[a-zA-Z0-9]*";
     public static final int VALIDATION_MIN_LENGTH = 5;
     public static final int VALIDATION_MAX_LENGTH = 8;

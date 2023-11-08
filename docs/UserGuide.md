@@ -6,9 +6,12 @@ pageNav: 3
 
 # **TASsistant User Guide**
 
-TASsistant is a desktop app for Teaching Assistants (TAs) in NUS to track information about the students and professors
-involved in tutoring. It is optimised for users that have experience with a Command Line Interface (CLI) and aims to be
-able to handle contact organisation faster than GUI apps if the user can type quickly.
+TASsistant is a desktop app for Teaching Assistants (TAs) in NUS School of Computing who are taking
+multiple modules and tutorials with a large class size. It aims to help TAs track information more 
+easily about the students and professors involved in tutoring. 
+
+If you are experienced in using a Command Line Interface (CLI) and can type quickly, you will be able to
+handle contact organisation faster than GUI apps.
 
 <!-- @@author izzahaj-reused
 Table Reused from (https://github.com/AY2223S1-CS2103T-T12-4/tp/blob/master/docs/UserGuide.md)
@@ -81,7 +84,7 @@ TAssistant has data on, but you may filter the list of people with commands like
 
 **Notes about the command format:**
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
@@ -104,7 +107,7 @@ TAssistant has data on, but you may filter the list of people with commands like
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](images/newHelpMessage.png)
 
 Format: `help`
 
@@ -112,8 +115,7 @@ Format: `help`
 
 Adds a person to TASsistant.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL s/STUDENT_NUMBER [t/TAG]…​`
-
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [s/STUDENT_NUMBER] [tele/TELEGRAM_HANDLE] [t/TAG]…​`
 
 **Tip:** A person can have any number of tags (including 0)
 </box>
@@ -178,23 +180,25 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in TASsistant.
 
-### Search : `search`
+### Searching for persons : `search`
 
-Lists out all students with the given condition.
+Lists out all persons with the given condition.
 
 Format: `search CONDITION1, CONDITION2, …`
 
 * Condition is given in the format keyword: value.
-* Accepted condition keywords are module, classNum, and studentName.
+* Accepted condition keywords are module, tutorial name and person name.
+* Keywords are case-sensitive, only NAME is case-insensitive.
 * Unrecognised keywords cause this method to fail.
 * Searching with no conditions will return no users.
 * Searching by name is limited to 1 name per search.
+* Searching by tutorial must include exactly 1 module.
 * Preamble must be empty.
 
 Examples:
-* `search m/CS2103T` returns all students in the module CS2103T
-* `search tn/T03` returns all students in the class T03
-* `search n/John Doe` returns all students with the name John Doe
+* `search m/CS2103T` returns all persons in the module CS2103T
+* `search tn/T03` returns all persons in the class T03
+* `search n/John Doe` returns all persons with the name John Doe
 
 ### Clearing all entries : `clear`
 
@@ -218,12 +222,11 @@ TASsistant data are saved automatically as a JSON file `[JAR file location]/data
 Advanced users are welcome to update data directly by editing that data file.
 
 **Caution:**
-If your changes to the data file makes its format invalid, TASsistant will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, TASsistant will discard all data and start with an empty data file at the next run. 
+Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-### Adds a module to TASsistant: `addModule`
+### Adding a module to TASsistant: `addModule`
 
 Adds the module to TASsistant, displaying it on the GUI.
 The module name must consist of only alphanumeric characters, between 5 - 8 characters.
@@ -239,12 +242,12 @@ Format: `addModule m/MODULE_NAME`
 
 Example: `addModule m/CS2100`
 
-### Deletes a module from TASsistant: `deleteModule`
+### Deleting a module from TASsistant: `deleteModule`
 
 Deletes the module from TASsistant and the GUI will change to reflect this.
 The index refers to the position of the module displayed on the GUI.
 
-Any related tutorials on the GUI as well as modules/tutorials on students 
+Any related tutorials on the GUI as well as modules/tutorials on persons 
 will also be deleted. As such, please use this command with discretion.
 
 Will give an error message if the module does not exist in TASsistant,
@@ -265,7 +268,7 @@ Format: `addToModule INDEX m/MODULE_NAME`
 Example: `addToModule 1 m/CS1000` adds the person who is at the top in the current list to the module
 CS1000, if the module CS1000 exists.
 
-### Removes a user from a given module: `removeFromModule`
+### Removing a person from a given module: `removeFromModule`
 
 Removes the user at the specified INDEX displayed on the GUI from a given module.
 The index refers to the index number shown in the displayed user list. The index must be a positive integer.
@@ -277,7 +280,7 @@ Format: `removeFromModule INDEX m/MODULE_NAME`
 Example: `removeFromModule 1 m/CS1000` removes the person who is at the top in the current list from the module
 CS1000, if the module CS1000 exists and the person at the top in the current list is part of the module CS1000.
 
-### Adds a tutorial to a given module: `addTutorial`
+### Adding a tutorial to a given module: `addTutorial`
 
 Adds a tutorial with a specific tutorial name to a given module. Different modules can have different tutorials
 with the same name. Will give an error message if the module does not exist or a tutorial with the same name has already
@@ -288,7 +291,7 @@ Format: `addTutorial m/MODULE_NAME tn/TUTORIAL_NAME tt/TUTORIAL_TIME`
 Example: `addTutorial m/CS1000 tn/T12 tt/Mon 6PM` adds a tutorial with name T12 and time "Mon 6PM" belonging to module
 CS1000, if module CS1000 exists.
 
-### Deletes a tutorial from a given module: `deleteTutorial`
+### Deleting a tutorial from a given module: `deleteTutorial`
 
 Deletes a tutorial.
 The index refers to the position of the tutorial in the displayed tutorial list, with the leftmost tutorial being index 1.
@@ -301,7 +304,7 @@ Format: `deleteTutorial INDEX`
 
 Example: `deleteTutorial 2` removes the second-leftmost tutorial from the tutorial list, if it exists.
 
-### Adds a person to stated Tutorial: `addToTutorial`
+### Adding a person to a given tutorial: `addToTutorial`
 
 Adds a given user to the stated tutorial. 
 The index refers to the position of the given person as displayed in the GUI and **must be a positive integer** 1, 2, 3... 
@@ -311,7 +314,7 @@ Format: `addToTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME`
 
 Example: `addToTutorial 1 m/CS2103T tn/T11`
 
-### Removes a person from stated Tutorial: `removeFromTutorial`
+### Removing a person from a given tutorial: `removeFromTutorial`
 
 Removes a given person from the stated tutorial. 
 The index refers to the position of the given person as displayed in the GUI and **must be a positive integer** 1, 2, 3...
@@ -321,9 +324,9 @@ Format: `removeFromTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME`
 
 Example: `removeFromTutorial 1 m/CS2103T tn/T11`
 
-### Records the attendance of the student: `attn`
+### Recording attendance of a given person: `attn`
 
-Records a student's attendance and displays the change by adding a tag on the GUI.
+Records a person's attendance and displays the change by adding a tag on the GUI.
 The index refers to the position of the person as displayed in the GUI.
 The LESSON_NUMBER must be alphanumeric.
 
@@ -334,9 +337,9 @@ Format: `attn INDEX ln/LESSON_NUMBER`
 
 Example: `attn 1 ln/S1`
 
-### Deletes the attendance of the student: `deleteAttn`
+### Deleting attendance of a given person: `deleteAttn`
 
-Deletes a student's attendance and displays the change by removing the tag on the GUI.
+Deletes a person's attendance and displays the change by removing the tag on the GUI.
 The index refers to the position of the person as displayed in the GUI.
 The LESSON_NUMBER must be alphanumeric.
 
@@ -354,7 +357,7 @@ Format: `deleteAttn INDEX ln/LESSON_NUMBER`
 
 Example: `deleteAttn 1 ln/S1`
 
-### Adds an assignment `addAssignment`
+### Adding an assignment `addAssignment`
 Adds a new assignment to the system. Fails if the name given is blank. 
 
 Format: `addAssignment assgn/ ASSIGNMENT_TITLE`
@@ -366,32 +369,32 @@ Example: `addAssignment assgn/ Assignment 1`
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, 
-2. and later switch to using only the primary screen, the GUI will open off-screen. 
-3. To resolve this, delete the `preferences.json` file created by the application before running the application again.
+   and later switch to using only the primary screen, the GUI will open off-screen. 
+   To resolve this, delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-| Action                 | Format, Examples                                                                                                                                                      |
-|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Judas p/98768432 e/judas@example.com s/A1234567J tele/@judas`                               |
-| **Clear**              | `clear`                                                                                                                                                               |
-| **Delete**             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| Action                 | Format, Examples                                                                                                                                                     |
+|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Judas p/98768432 e/judas@example.com s/A1234567J tele/@judas`                              |
+| **Clear**              | `clear`                                                                                                                                                              |
+| **Delete**             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                  |
 | **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/STUDENT_NUMBER] [tele/TELEGRAM_HANDLE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
-| **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **List**               | `list`                                                                                                                                                                |
+| **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                           |
+| **List**               | `list`                                                                                                                                                               |
 | **Search**             | `search CONDITION1, CONDITION2`<br> e.g., `search m/CS2103T`                                                                                                    |
-| **Help**               | `help`                                                                                                                                                                |
-| **addModule**          | `addModule m/MODULE_NAME` <br> e.g., `addModule m/CS2100`                                                                                                             |
-| **deleteModule**       | `deleteModule INDEX` <br> e.g., `deleteModule 1`                                                                                                                      |
-| **addToModule**        | `addToModule INDEX m/MODULE_NAME` <br> e.g., `addToModule 2 m/CS2103T`                                                                                                |
-| **removeFromModule**   | `removeFromModule INDEX m/MODULE_NAME` <br> e.g., `removeFromModule 2 m/CS2103T`                                                                                      |
-| **addTutorial**        | `addTutorial m/MODULE_NAME tn/TUTORIAL_NAME tt/TUTORIAL_TIME` <br> e.g., `addTutorial m/CS1000 tn/T12 tt/Mon 6PM`                                                     |
-| **deleteTutorial**     | `deleteTutorial INDEX` <br> e.g., `deleteTutorial 2`                                                                                                                  |
-| **addToTutorial**      | `addToTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME` <br> e.g., `addToTutorial 1 m/CS2103T tn/T11`                                                                    |
-| **removeFromTutorial** | `removeFromTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME` <br> e.g., `removeFromTutorial 1 m/CS2103T tn/T11`                                                          |
-| **attn**               | `attn INDEX ln/LESSON_NUMBER` <br> e.g., `attn 1 ln/S1`                                                                                                               |
+| **Help**               | `help`                                                                                                                                                               |
+| **addModule**          | `addModule m/MODULE_NAME` <br> e.g., `addModule m/CS2100`                                                                                                            |
+| **deleteModule**       | `deleteModule INDEX` <br> e.g., `deleteModule 1`                                                                                                                     |
+| **addToModule**        | `addToModule INDEX m/MODULE_NAME` <br> e.g., `addToModule 2 m/CS2103T`                                                                                               |
+| **removeFromModule**   | `removeFromModule INDEX m/MODULE_NAME` <br> e.g., `removeFromModule 2 m/CS2103T`                                                                                     |
+| **addTutorial**        | `addTutorial m/MODULE_NAME tn/TUTORIAL_NAME tt/TUTORIAL_TIME` <br> e.g., `addTutorial m/CS1000 tn/T12 tt/Mon 6PM`                                                    |
+| **deleteTutorial**     | `deleteTutorial INDEX` <br> e.g., `deleteTutorial 2`                                                                                                                 |
+| **addToTutorial**      | `addToTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME` <br> e.g., `addToTutorial 1 m/CS2103T tn/T11`                                                                   |
+| **removeFromTutorial** | `removeFromTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME` <br> e.g., `removeFromTutorial 1 m/CS2103T tn/T11`                                                         |
+| **attn**               | `attn INDEX ln/LESSON_NUMBER` <br> e.g., `attn 1 ln/S1`                                                                                                              |
 | **deleteAttn**         | `deleteAttn INDEX ln/LESSON_NUMBER` <br> e.g., `deleteAttn 1 ln/S1`                                                                                                   |
 
 --------------------------------------------------------------------------------------------------------------------
