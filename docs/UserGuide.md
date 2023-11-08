@@ -168,6 +168,8 @@ Format: `search CONDITION1, CONDITION2, …`
 * Accepted condition keywords are module, classNum, and studentName.
 * Unrecognised keywords cause this method to fail.
 * Searching with no conditions will return no users.
+* Searching by name is limited to 1 name per search.
+
 Examples:
 * `search module: CS2103T` returns all students in the module CS2103T
 * `search classNum: T03` returns all students in the class T03

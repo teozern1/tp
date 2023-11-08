@@ -32,10 +32,9 @@ public class SearchCommandParser implements Parser<SearchCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
         }
 
-        if (argMultimap.getAllValues(PREFIX_MODULE).size() != 1
-                && argMultimap.getAllValues(PREFIX_TUTORIAL_NAME).size() > 0) {
+        if (argMultimap.getAllValues(PREFIX_NAME).size() > 1) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_INVALID_NUM_OF_MODULES));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_ERROR_TOO_MANY_NAMES));
         }
 
         final List<Name> personNameList = argMultimap.getAllValues(PREFIX_NAME)

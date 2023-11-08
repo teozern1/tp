@@ -30,6 +30,7 @@ public class SearchCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Found the following people.";
     public static final String MESSAGE_INVALID_NUM_OF_MODULES = "Invalid number of modules given. Please give only 1.";
+    public static final String MESSAGE_ERROR_TOO_MANY_NAMES = "Too many names given. Please give only 1.";
 
     private final List<Name> personNameToSearch;
     private final List<Module> modulesToSearch;
