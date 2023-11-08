@@ -23,8 +23,8 @@ public class SearchCommand extends Command {
     public static final String COMMAND_WORD = "search";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds people with the given conditions "
-            + "Parameters: CONDITION1, CONDITION2, ..."
-            + String.format("[%sNAME] OR [%sMODULE] OR [%sTUTORIAL]", PREFIX_NAME, PREFIX_MODULE, PREFIX_TUTORIAL_NAME)
+            + "Parameters: CONDITION1, CONDITION2, ... \n"
+            + String.format("[%sNAME] OR [%sMODULE] OR [%sTUTORIAL]\n", PREFIX_NAME, PREFIX_MODULE, PREFIX_TUTORIAL_NAME)
             + "Example: " + COMMAND_WORD
             + PREFIX_MODULE + "CS1000 ";
 
