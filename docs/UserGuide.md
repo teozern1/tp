@@ -167,7 +167,7 @@ Format: `search CONDITION1, CONDITION2, …`
 * Condition is given in the format keyword: value.
 * Accepted condition keywords are module, classNum, and studentName.
 * Unrecognised keywords cause this method to fail.
-
+* Searching with no conditions will return no users.
 Examples:
 * `search module: CS2103T` returns all students in the module CS2103T
 * `search classNum: T03` returns all students in the class T03
