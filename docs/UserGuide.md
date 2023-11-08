@@ -326,6 +326,8 @@ Example: `removeFromTutorial 1 m/CS2103T tn/T11`
 Records a student's attendance and displays the change by adding a tag on the GUI.
 The index refers to the position of the person as displayed in the GUI.
 The LESSON_NUMBER must be alphanumeric.
+
+An error is thrown if the LESSON_NUMBER already exists.
 Further prompts are given for incorrect inputs.
 
 Format: `attn INDEX ln/LESSON_NUMBER`
@@ -337,7 +339,15 @@ Example: `attn 1 ln/S1`
 Deletes a student's attendance and displays the change by removing the tag on the GUI.
 The index refers to the position of the person as displayed in the GUI.
 The LESSON_NUMBER must be alphanumeric.
-Will give an error message if the LESSON_NUMBER does not exist.
+
+Only tags added using `attn` can be deleted with this command.
+
+Likewise, tags not added using `attn` cannot be deleted with this command.
+
+An error is thrown if :
+* The given LESSON_NUMBER does not exist.
+* The given LESSON_NUMBER exists but was not added using `attn`.
+
 Further prompts are given for incorrect inputs.
 
 Format: `deleteAttn INDEX ln/LESSON_NUMBER`
