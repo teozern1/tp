@@ -187,11 +187,12 @@ Format: `search CONDITION1, CONDITION2, …`
 * Condition is given in the format keyword: value.
 * Accepted condition keywords are module, classNum, and studentName.
 * Unrecognised keywords cause this method to fail.
+* Preamble must be empty.
 
 Examples:
-* `search module: CS2103T` returns all students in the module CS2103T
-* `search classNum: T03` returns all students in the class T03
-* `search studentName: John Doe`  returns all students with the name John Doe
+* `search m/CS2103T` returns all students in the module CS2103T
+* `search tn/T03` returns all students in the class T03
+* `search n/John Doe` returns all students with the name John Doe
 
 ### Clearing all entries : `clear`
 
