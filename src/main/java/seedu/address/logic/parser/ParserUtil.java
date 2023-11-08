@@ -148,7 +148,7 @@ public class ParserUtil {
      */
     public static Module parseModule(String moduleCode) throws ParseException {
         requireNonNull(moduleCode);
-        String trimmedModuleCode = moduleCode.trim();
+        String trimmedModuleCode = moduleCode.trim().toUpperCase();
         if (!Module.isValidModule(trimmedModuleCode)) {
             throw new ParseException(Module.MESSAGE_CONSTRAINTS);
         }
