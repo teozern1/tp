@@ -371,7 +371,7 @@ Example: `addAssignment assgn/ Assignment 1`
 | **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/STUDENT_NUMBER] [tele/TELEGRAM_HANDLE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
 | **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
 | **List**               | `list`                                                                                                                                                                |
-| **Search**             | `search CONDITION1, CONDITION2`<br> e.g., `search m/CS2103T`                                                                                                    |
+| **Search**             | `search CONDITION1, CONDITION2`<br> e.g., `search m/CS2103T`                                                                                                          |
 | **Help**               | `help`                                                                                                                                                                |
 | **addModule**          | `addModule m/MODULE_NAME` <br> e.g., `addModule m/CS2100`                                                                                                             |
 | **deleteModule**       | `deleteModule INDEX` <br> e.g., `deleteModule 1`                                                                                                                      |
@@ -383,7 +383,7 @@ Example: `addAssignment assgn/ Assignment 1`
 | **removeFromTutorial** | `removeFromTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME` <br> e.g., `removeFromTutorial 1 m/CS2103T tn/T11`                                                          |
 | **attn**               | `attn INDEX ln/LESSON_NUMBER` <br> e.g., `attn 1 ln/S1`                                                                                                               |
 | **deleteAttn**         | `deleteAttn INDEX ln/LESSON_NUMBER` <br> e.g., `deleteAttn 1 ln/S1`                                                                                                   |
-
+| **addAssignment**      | `addAssignment assgn/ ASSIGNMENT_TITLE` <br> e.g., `addAssignment assgn/ Assignment 1`                                                                                |                                                                                 |
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
