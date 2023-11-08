@@ -23,13 +23,15 @@ public class SearchCommand extends Command {
     public static final String COMMAND_WORD = "search";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds people with the given conditions "
-            + "Parameters: CONDITION1, CONDITION2, ..."
-            + String.format("[%sNAME] OR [%sMODULE] OR [%sTUTORIAL]", PREFIX_NAME, PREFIX_MODULE, PREFIX_TUTORIAL_NAME)
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Parameters: CONDITION1, CONDITION2, ... \n"
+            + String.format("[%sNAME] OR [%sMODULE] OR [%sTUTORIAL]\n",
+            PREFIX_NAME, PREFIX_MODULE, PREFIX_TUTORIAL_NAME)
+            + "Example: " + COMMAND_WORD
             + PREFIX_MODULE + "CS1000 ";
 
     public static final String MESSAGE_SUCCESS = "Found the following people.";
     public static final String MESSAGE_INVALID_NUM_OF_MODULES = "Invalid number of modules given. Please give only 1.";
+    public static final String MESSAGE_ERROR_TOO_MANY_NAMES = "Too many names given. Please give only 1.";
 
     private final List<Name> personNameToSearch;
     private final List<Module> modulesToSearch;
