@@ -29,6 +29,8 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAssignmentCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ASSIGNMENT);
+
         Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_ASSIGNMENT).get());
 
         Assignment assignment = new Assignment(title);
