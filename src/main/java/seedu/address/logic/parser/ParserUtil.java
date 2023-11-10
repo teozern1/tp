@@ -76,7 +76,6 @@ public class ParserUtil {
      * @throws ParseException if the given {@code studentNumber} is invalid.
      */
     public static StudentNumber parseStudentNumber(String studentNumber) throws ParseException {
-        requireNonNull(studentNumber);
         String trimmedStudentNumber = studentNumber.trim();
         if (!StudentNumber.isValidStudentNumber(trimmedStudentNumber)) {
             throw new ParseException(StudentNumber.MESSAGE_CONSTRAINTS);
@@ -91,7 +90,6 @@ public class ParserUtil {
      * @throws ParseException if the given {@code telegram} is invalid.
      */
     public static Telegram parseTelegram(String telegram) throws ParseException {
-        requireNonNull(telegram);
         String trimmedTelegram = telegram.trim();
         if (!Telegram.isValidTelegram(trimmedTelegram)) {
             throw new ParseException(Telegram.MESSAGE_CONSTRAINTS);
@@ -188,6 +186,9 @@ public class ParserUtil {
     public static Title parseTitle(String title) throws ParseException {
         requireNonNull(title);
         String trimmedTitle = title.trim();
+        if (!Title.isValidTitle(trimmedTitle)) {
+            throw new ParseException(Title.MESSAGE_CONSTRAINTS);
+        }
         return new Title(trimmedTitle);
     }
 

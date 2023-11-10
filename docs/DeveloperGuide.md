@@ -232,24 +232,26 @@ tutorial to a person and the corresponding module should they not have it.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                                                        | So that I can…​                                                               |
-|----------|---------|---------------------------------------------------------------------|-------------------------------------------------------------------------------|
-| `* * *`  | user    | search for professors for a module                                  | quickly search for the professor that is conducting the module I am TAing for |
-| `* * *`  | user    | search for all my students in a module                              | manage them more easily                                                       |
-| `* * *`  | user    | read information about students, modules and tutorials from a file  | keep any students added or closed even after closing the program              |
-| `* * *`  | user    | view my students school email and telegram handle                   | contact them if needed                                                        |
-| `* * *`  | user    | sign up as a TA of module(s)                                        | manage what modules I am part of                                              |
-| `* * *`  | user    | add and delete lessons                                              | it is easier for me to organise my schedule.                                  |
-| `* * *`  | user    | filter students by tutorials and module                             | make preparations based on upcoming classes, like marking their work          |
-| `* * *`  | user    | add and remove students to tutorials	                               | it is easier for me to organise my schedule.                                  |
-| `* *`    | user    | edit the information of students                                    | rectify any mistakes made for personal information and grades.                |
-| `* *`    | user    | view my professors' email in the same mod                           | easily reach out to them for updates or help.                                 |
-| `* *`    | user    | edit the tutorials I teach                                          | it does not conflict with any of my other tutorials.                          |
-| `* *`    | user    | export the attendance list as a pdf                                 | submit it to the people in charge                                             |
+| Priority | As a …​ | I want to …​                                                     | So that I can…​                                                               |
+|----------|---------|------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| `* * *`  | user    | search for professors for a module                               | quickly search for the professor that is conducting the module I am TAing for |
+| `* * *`  | user    | search for all my students in a module                           | manage them more easily                                                       |
+| `* * *`  | user    | read information about students, modules and classes from a file | keep any students added or closed even after closing the program              |
+| `* * *`  | user    | view my students school email and telegram handle                | contact them if needed                                                        |
+| `* * *`  | user    | sign up as a TA of module(s)                                     | manage what modules I am part of                                              |
+| `* * *`  | user    | add and delete lessons                                           | it is easier for me to organise my schedule.                                  |
+| `* * *`  | user    | filter students by class and module                              | make preparations based on upcoming classes, like marking their work          |
+| `* * *`  | user    | add and remove students to classes	                              | it is easier for me to organise my schedule.                                  |
+| `* * * ` | user   | add an assignment to the database                                | keep track of the assignments to be marked                                    |
+| `* *`    | user    | edit the information of students                                 | rectify any mistakes made for personal information and grades.                |
+| `* *`    | user    | view my professors' email in the same mod                        | easily reach out to them for updates or help.                                 |
+| `* *`    | user    | edit the classes I teach                                         | it does not conflict with any of my other classes.                            |
+| `* *`    | user    | export the attendance list as a pdf                              | submit it to the people in charge                                             |
+
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TAssistant` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Searching for a student within a module**
 
@@ -264,7 +266,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The module does not exist.
 
-  * 2a1. AddressBook shows an error message informing the user.
+
+  * 3a1. TAssistant shows an error message informing the user.
+
 
   Use case ends.
 
@@ -343,7 +347,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to take attendance, specifying the index of the person and the lesson name.
 2. System updates the displayed tags of the person.
 
-   Use case ends.
+    Use case ends.
 
 **Extensions**
 
@@ -360,7 +364,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 * 2a. The given lesson name already exists.
+
     * 2a1. System shows an error message informing the user it is a duplicate.
+
+  Use case ends.
+
+**Use case: Adding assignment to the database**
+
+**MSS**
+
+1. User requests to add an assignment to the database
+2. System updates to show the added assignment
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The assignment's title is not supplied by the user.
+
+  Use case ends.
+
+* 2a. Error message is shown informing the user of te correct usage of the command.
 
   Use case ends.
 
@@ -375,6 +399,7 @@ should be able to accomplish most of the tasks faster using commands than using 
 6.  The product is meant for a single Teaching Assistant that makes all changes to the AddressBook themselves.
 7.  Data will be stored in a .json file to allow for advanced users to manipulate the data directly.
 8.  The product does not require the Internet to operate.
+
 
 ### Glossary
 
@@ -477,6 +502,16 @@ testers are expected to do more *exploratory* testing.
 
     1. Other incorrect delete commands to try: `attn 1 ln/`, `attn 2 ln/09%^&` <br>
        Expected: Similar to previous.
+
+### Adding an assignment
+
+1. Adding an assignment which has a title
+
+   1. Test case: `addAssignment assgn/Assignment 1`  
+      Expected: A new assignment with the title `Assignment 1` appears in the assignment list panel on the right side of the GUI.
+    
+   1. Test case: `addAssignment assgn/`  
+      Expected: No assignment is added to the assignment list. An error message is shown in the status message.
 
 ### Saving data
 

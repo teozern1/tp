@@ -32,7 +32,7 @@ public class SampleDataUtil {
                 new Telegram("@charredOlive")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 getTagSet("family"), new HashSet<>(), new HashSet<>(), new StudentNumber("A0240252J"),
-                new Telegram("@_davLi")),
+                new Telegram("@davLi")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 getTagSet("classmates"), new HashSet<>(), new HashSet<>(), new StudentNumber("A0240252J"),
                 new Telegram("@fanhim")),
