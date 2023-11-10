@@ -266,18 +266,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The module does not exist.
 
-
-  * 3a1. TAssistant shows an error message informing the user.
-
+  * 2a1. System shows an error message informing the user.
 
   Use case ends.
 
 * 3a. The module exists, but no one is part of the module.
 
-    * 3a1. No one is displayed.
-    * 3a2. The display states that "No users are found".
+  * 3a1. No one is displayed.
+  * 3a2. The display states that "No users are found".
 
-    Use case ends.
+  Use case ends.
 
 **Use case: Deleting a module**
 
@@ -292,7 +290,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The user gives a non-integer index, negative index, or omits it.
 
-    * 1a1. System shows an error message informing the user that they need to specify an integer index.
+  * 1a1. System shows an error message informing the user that they need to specify an integer index.
 
   Use case ends.
 
@@ -304,8 +302,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. There are people in the address book that are part of the module.
 
-    * 2a1. System deletes the modules (and related tutorials, if any) from everyone in the address book.
-    * 2a2. System deletes the module.
+  * 2a1. System deletes the modules (and related tutorials, if any) from everyone in the address book.
+  * 2a2. System deletes the module.
 
   Use case ends.
 
@@ -512,14 +510,6 @@ testers are expected to do more *exploratory* testing.
     
    1. Test case: `addAssignment assgn/`  
       Expected: No assignment is added to the assignment list. An error message is shown in the status message.
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
 
 --------------------------------------------------------------------------------------------------------------------
 
