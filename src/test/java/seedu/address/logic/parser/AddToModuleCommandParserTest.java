@@ -11,6 +11,9 @@ import seedu.address.logic.commands.AddToModuleCommand;
 import seedu.address.model.module.Module;
 public class AddToModuleCommandParserTest {
     private final AddToModuleCommandParser parser = new AddToModuleCommandParser();
+
+    /* Boundary value, valid args are [1 - any number] since whether the index connects to a person is not checked
+    at the parser. */
     @Test
     public void parse_validArgs_returnsAddToModuleCommand() {
         Module cs1000 = new Module("CS1000");
@@ -18,6 +21,7 @@ public class AddToModuleCommandParserTest {
         assertParseSuccess(parser, "1 m/CS1000",
                 new AddToModuleCommand(INDEX_FIRST_PERSON, cs1000));
     }
+
     @Test
     public void parse_invalidIndex_throwsParseException() {
         assertParseFailure(parser, "a m/CS1000",

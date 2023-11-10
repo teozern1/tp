@@ -140,24 +140,27 @@ How the parsing works:
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/AddressBookClassDiagram.png" width="450" />
 
+* Note: For the Person class, fields such as "Name", "Email" and "Phone" have been integrated into Person_Fields to
+simplify the diagram. The Person_Fields class does not exist and is meant to represent the less important fields in
+Person, such as "Name", "Email" and "Phone" that have similar attributes.
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person`, `Module`, `Tutorial` objects (which are contained in a `UniquePersonList`, `UniqueModuleList`, `UniqueTutorialList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* `Module` and `Tutorial` objects are stored in a similar way, as a separate filtered list that the UI automatically updates as the data in the list changes.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</box>
-
+* stores the address book data i.e., all `Person`, `Module`, `Tutorial`, `Assignment` objects 
+(which are contained in a `UniquePersonList`, `UniqueModuleList`, `UniqueTutorialList`, `UniqueAssignmentList` object).
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) 
+as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` 
+that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* `Module`, `Tutorial` and `Assignment` objects are stored in a similar way, as a separate list that the UI
+automatically updates as the data in the list changes. However, since the UI always shows all modules, tutorials and
+assignments the user has (i.e. there is no filtering for Modules, Tutorials and Assignments), the list exposed to
+outsiders is always guaranteed to be the full list of Modules, Tutorials or Assignments.
+* stores a `UserPref` object that represents the user’s preferences. 
+This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* does not depend on any of the other three components 
+(as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 ### Storage component
 
@@ -182,7 +185,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### **Module-Tutorial Interaction**
 
-In NUS, modules are a unit of study, and most modules require students taking them to participate in tutorials. Each
+In NUS, modules are a unit of study, and most modules require students to participate in tutorials. Each
 module with tutorials has one or more tutorials, but each tutorial is usually only for one module. Given that Teaching
 Assistants usually only teach tutorials rather than a module as a whole, we considered only including tutorials in our
 product, but decided against it because having both modules and tutorials allows for more convenient searching for
@@ -190,101 +193,10 @@ teaching assistants teaching multiple modules. This comes at the cost of having 
 module and tutorials.
 
 To better enable advanced users, the app automatically performs actions to maintain the multiplicity constraint rather
-than force the user to type additional commands to maintain it. For example, the AddToTutorial command, which adds a
-tutorial to a person, also adds the corresponding module to the user should they not have it.(Add sequence diagram here)
+than force the user to type additional commands to maintain it. For example, the AddToTutorial command adds a
+tutorial to a person and the corresponding module should they not have it.
 
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<img src="images/UndoRedoState0.png" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<img src="images/UndoRedoState1.png" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<img src="images/UndoRedoState2.png" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<img src="images/UndoRedoState3.png" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how the undo operation works:
-
-<img src="images/UndoSequenceDiagram.png" alt="UndoSequenceDiagram" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<img src="images/UndoRedoState4.png" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<img src="images/UndoRedoState5.png" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
+<img src="images/ModelTutorialInteractionActivityDiagram.png" width="550" />
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -306,6 +218,7 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * NUS SoC teaching assistants
+* Has to tutor multiple tutorials, potentially in multiple modules
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -318,16 +231,21 @@ _{Explain here how the data archiving feature will be implemented}_
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​ | I want to …​                                                     | So that I can…​                                                               |
-|----------|--------|------------------------------------------------------------------|-------------------------------------------------------------------------------|
-| `* * *`  | user   | search for professors for a module                               | quickly search for the professor that is conducting the module I am TAing for |
-| `* * *`  | user   | search for all my students in a module                           | manage them more easily                                                       |
-| `* * *`  | user   | read information about students, modules and classes from a file | keep any students added or closed even after closing the program              |
-| `* * *`  | user   | view my students school email and telegram handle                | contact them if needed                                                        |
-| `* * *`  | user   | sign up as a TA of module(s)                                     | manage what modules I am part of                                              |
-| `* * *`  | user   | add and delete lessons                                           | it is easier for me to organise my schedule.                                  |
-| `* * *`  | user   | filter students by class and module                              | I can make preparations based on upcoming classes, like marking their work    |
-| `* * *`  | user   | add and remove students to classes	                              | it is easier for me to organise my schedule.                                  |
-| `* * * ` | user   | add an assignment to the database                                | keep track of the assignments to be marked                                    | 
+|----------|---------|------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| `* * *`  | user    | search for professors for a module                               | quickly search for the professor that is conducting the module I am TAing for |
+| `* * *`  | user    | search for all my students in a module                           | manage them more easily                                                       |
+| `* * *`  | user    | read information about students, modules and classes from a file | keep any students added or closed even after closing the program              |
+| `* * *`  | user    | view my students school email and telegram handle                | contact them if needed                                                        |
+| `* * *`  | user    | sign up as a TA of module(s)                                     | manage what modules I am part of                                              |
+| `* * *`  | user    | add and delete lessons                                           | it is easier for me to organise my schedule.                                  |
+| `* * *`  | user    | filter students by class and module                              | make preparations based on upcoming classes, like marking their work          |
+| `* * *`  | user    | add and remove students to classes	                              | it is easier for me to organise my schedule.                                  |
+| `* * * ` | user   | add an assignment to the database                                | keep track of the assignments to be marked                                    |
+| `* *`    | user    | edit the information of students                                 | rectify any mistakes made for personal information and grades.                |
+| `* *`    | user    | view my professors' email in the same mod                        | easily reach out to them for updates or help.                                 |
+| `* *`    | user    | edit the classes I teach                                         | it does not conflict with any of my other classes.                            |
+| `* *`    | user    | export the attendance list as a pdf                              | submit it to the people in charge                                             |
+
 
 *{More to be added}*
 
@@ -385,16 +303,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The product is meant for a single Teaching Assistant that makes all changes to the TAssistant themselves.
-5.  Data will be stored in a .json file to allow for advanced users to manipulate the data directly.
+3.  Should be able to hold up to 5 modules without a noticeable sluggishness in performance for typical usage.
+4.  Should be able to hold up to 8 tutorials without a noticeable sluggishness in performance for typical usage.
+5.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) 
+should be able to accomplish most of the tasks faster using commands than using the mouse.
+6.  The product is meant for a single Teaching Assistant that makes all changes to the AddressBook themselves.
+7.  Data will be stored in a .json file to allow for advanced users to manipulate the data directly.
+8.  The product does not require the Internet to operate.
+
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Teaching Assistant (TA)**: A non-professor tutor which helps the professors of a module by teaching one or more classes.
 * **Module**: A unit of study in a specific field set by NUS, such as CS2103T focusing on Software Engineering.
-* **Class**: Lessons that are part of a module. Includes laboratries, recitations, tutorials and any form of lesson that includes a TA.
+* **Tutorial**: Lessons that are part of a module. Includes laboratories, recitations, tutorials and any form of lesson that includes a TA.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -460,3 +383,11 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+1. Currently, the addToModule command, when used on a user that already has the given module, does not give an
+error message. We intend to change this so that the addToModule command when used on a user that already has the given
+module will now give the error message `User already has the given module` in the output box.

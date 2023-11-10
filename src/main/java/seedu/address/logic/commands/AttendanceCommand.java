@@ -34,6 +34,7 @@ public class AttendanceCommand extends Command {
             + "Example: " + COMMAND_WORD + " 2 ln/S1";
 
     public static final String MESSAGE_SUCCESS = "Attendance successfully taken.";
+    public static final String MESSAGE_DUPLICATE_ATTENDANCE = "This attendance has already been taken!";
     private final Index index;
     private final Tag toAdd;
 
@@ -54,10 +55,18 @@ public class AttendanceCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        // create special tag to put in attendance list
+        String studentNumber = personToEdit.getStudentNumber().toString();
+        Tag specialTag = new Tag(studentNumber + toAdd.tagName);
+
+        if (model.hasAttendanceTag(specialTag)) {
+            throw new CommandException(MESSAGE_DUPLICATE_ATTENDANCE);
+        }
         Person editedPerson = createEditedPerson(personToEdit);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.addAttendanceTag(specialTag);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(editedPerson)));
     }
 
