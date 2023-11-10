@@ -18,7 +18,6 @@
     * [Storage Component](#storage-component)
 - **[Implementation](#implementation)**
     * [Module-Tutorial Interaction](#module-tutorial-interaction)
-    * [[Proposed] Undo/Redo feature](#proposed-undoredo-feature)
 - **[Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)**
 - **[Appendix: Requirements](#appendix-requirements)**
     * [Product Scope](#product-scope)
@@ -29,6 +28,7 @@
 - **[Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)**
     * [Launch and shutdown](#launch-and-shutdown)
     * [Delete a person](#deleting-a-person)
+    * [Adding tutorials](#adding-tutorials)
     * [Saving data](#saving-data)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -247,8 +247,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user    | export the attendance list as a pdf                              | submit it to the people in charge                                             |
 
 
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is the `TAssistant` and the **Actor** is the `user`, unless specified otherwise)
@@ -266,7 +264,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The module does not exist.
 
+
   * 3a1. TAssistant shows an error message informing the user.
+
 
   Use case ends.
 
@@ -284,7 +284,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User specifies the INDEX of the person and the lesson for which the person is attending.
 2. System updates the displayed tags of the person.
 
-*{More to be added}*
+**Use case: Delete tutorial**
+
+**MSS**
+
+1. User requests to delete a tutorial and provides it's index.
+2. System deletes the tutorial.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user gives a non-integer index, negative index, or omits it.
+
+    * 1a1. System shows an error message informing the user that they need to specify an integer index.
+
+  Use case ends.
+
+* 1a. The index given is higher than the number of tutorials the user has.
+
+    * 1a1. System shows an error message informing the user the tutorial cannot be found.
+
+  Use case ends.
+
+* 2a. There are people in the address book that are part of the tutorial.
+
+    * 2a1. System deletes the tutorial from everyone in the address book.
+    * 2a2. System deletes the tutorial.
+
+  Use case ends.
 
 **Use case: Add assignment to the database**
 
@@ -303,8 +331,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  Should be able to hold up to 5 modules without a noticeable sluggishness in performance for typical usage.
-4.  Should be able to hold up to 8 tutorials without a noticeable sluggishness in performance for typical usage.
+3.  Should be able to hold up to 10 modules without a noticeable sluggishness in performance for typical usage.
+4.  Should be able to hold up to 10 tutorials without a noticeable sluggishness in performance for typical usage.
 5.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) 
 should be able to accomplish most of the tasks faster using commands than using the mouse.
 6.  The product is meant for a single Teaching Assistant that makes all changes to the AddressBook themselves.
@@ -364,7 +392,22 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Adding Tutorials
+
+1. Adding a tutorial
+   1. Prerequisites: A module has been created. This guide will assume that a module with module code "CS2103" has been
+   created, but modules with different module codes may be used. The tutorials in the test cases below should not be
+   created before the tests.
+
+   1. Test case: `addTutorial m/CS2103 tn/T10 tt/Mon 6PM`<br>
+          Expected: Details of the tutorial added to the tutorial list. Details of the added tutorial shown in the status message.
+
+   1. Test case: `addTutorial m/CS2103 tn/ tt/Mon 6PM`<br>
+       Expected: No tutorial is added. Error details regarding empty tutorial name shown in the status message.
+       Tutorial list remains the same.
+
+   1. Other incorrect commands to try: `addTutorial `, `addTutorial randomString`, `addTutorial tn/T10 tt/Mon 6PM` <br>
+        Expected: Similar to previous.
 
 ### Adding an assignment
 1. Adding an assignment which has a title
