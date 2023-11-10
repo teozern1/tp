@@ -83,7 +83,7 @@ Here are some symbols used throughout this user guide:
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -93,7 +93,8 @@ Format: `help`
 
 Adds a person to TASsistant.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STUDENT_NUMBER [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [s/STUDENT_NUMBER] [tele/TELEGRAM_HANDLE]`
+* Currently, the telegram handle is unrestricted, however, restrictions such as having the handle only start withh `@` will be implemented in the future.
 
 **Tip:** A person can have any number of tags (including 0)
 </box>
@@ -112,15 +113,12 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STUDENT_NUMBER] [tele/TELEGRAM_HANDLE]
-[t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [s/STUDENT_NUMBER] [tele/TELEGRAM_HANDLE]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -296,11 +294,13 @@ Format: `attn INDEX se/LESSON_NUMBER`
 Example: `attn 1 se/S1`
 
 ### Adds an assignment `addAssignment`
-Adds a new assignment to the system. Fails if the name given is blank. 
+Adds a new assignment to the system. Fails if the name given is blank. Currently TAssistnt only supports
+addition of assignments to the system, however, editing and removing functionality will be
+implemented in the future.
 
-Format: `addAssignment assgn/ ASSIGNMENT_TITLE`
+Format: `addAssignment assgn/ASSIGNMENT_TITLE`
 
-Example: `addAssignment assgn/ Assignment 1`
+Example: `addAssignment assgn/Assignment 1`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -312,25 +312,26 @@ Example: `addAssignment assgn/ Assignment 1`
 
 ## Command summary
 
-| Action                 | Format, Examples                                                                                                                                                      |
-|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Judas p/98768432 e/judas@example.com s/A1234567J tele/@judas`                               |
-| **Clear**              | `clear`                                                                                                                                                               |
-| **Delete**             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/STUDENT_NUMBER] [tele/TELEGRAM_HANDLE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
-| **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **List**               | `list`                                                                                                                                                                |
-| **Search**             | `search CONDITION1, CONDITION2`<br> e.g., `search module: CS2103T`                                                                                                    |
-| **Help**               | `help`                                                                                                                                                                |
-| **addModule**          | `addModule m/MODULE_NAME` <br> e.g., `addModule m/CS2100`                                                                                                             |
-| **deleteModule**       | `deleteModule INDEX` <br> e.g., `deleteModule 1`                                                                                                                      |
-| **addToModule**        | `addToModule INDEX m/MODULE_NAME` <br> e.g., `addToModule 2 m/CS2103T`                                                                                                |
-| **removeFromModule**   | `removeFromModule INDEX m/MODULE_NAME` <br> e.g., `removeFromModule 2 m/CS2103T`                                                                                      |
-| **addTutorial**        | `addTutorial TUTORIALNAME m/MODULE_NAME` <br> e.g., `addTutorial tn/c12 m/CS2103T`                                                                                    |
-| **deleteTutorial**     | `deleteTutorial INDEX` <br> e.g., `deleteTutorial 2`                                                                                                                  |
-| **addToTutorial**      | `addToTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME` <br> e.g., `addToTutorial 1 m/CS2103T tn/T11`                                                                    |
-| **removeFromTutorial** | `removeFromTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME` <br> e.g., `removeFromTutorial 1 m/CS2103T tn/T11`                                                          |
-| **attn**               | `attn INDEX se/LESSON_NUMBER` <br> e.g., `attn 1 se/S1`                                                                                                               |
+| Action                 | Format, Examples                                                                                                                                                       |
+|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Judas p/98768432 e/judas@example.com s/A1234567J tele/@judas`                                |
+| **Clear**              | `clear`                                                                                                                                                                |
+| **Delete**             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                    |
+| **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/STUDENT_NUMBER] [tele/TELEGRAM_HANDLE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`  |
+| **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                             |
+| **List**               | `list`                                                                                                                                                                 |
+| **Search**             | `search CONDITION1, CONDITION2`<br> e.g., `search module: CS2103T`                                                                                                     |
+| **Help**               | `help`                                                                                                                                                                 |
+| **addModule**          | `addModule m/MODULE_NAME` <br> e.g., `addModule m/CS2100`                                                                                                              |
+| **deleteModule**       | `deleteModule INDEX` <br> e.g., `deleteModule 1`                                                                                                                       |
+| **addToModule**        | `addToModule INDEX m/MODULE_NAME` <br> e.g., `addToModule 2 m/CS2103T`                                                                                                 |
+| **removeFromModule**   | `removeFromModule INDEX m/MODULE_NAME` <br> e.g., `removeFromModule 2 m/CS2103T`                                                                                       |
+| **addTutorial**        | `addTutorial TUTORIALNAME m/MODULE_NAME` <br> e.g., `addTutorial tn/c12 m/CS2103T`                                                                                     |
+| **deleteTutorial**     | `deleteTutorial INDEX` <br> e.g., `deleteTutorial 2`                                                                                                                   |
+| **addToTutorial**      | `addToTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME` <br> e.g., `addToTutorial 1 m/CS2103T tn/T11`                                                                     |
+| **removeFromTutorial** | `removeFromTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME` <br> e.g., `removeFromTutorial 1 m/CS2103T tn/T11`                                                           |
+| **attn**               | `attn INDEX se/LESSON_NUMBER` <br> e.g., `attn 1 se/S1`                                                                                                                |
+|**addAssignment**      | `addAssignment assgn/ASSIGNMENT_TITLE` <br> e.g., `addAssignment assgn/Project`                                                                                        |   
 
 --------------------------------------------------------------------------------------------------------------------
 
