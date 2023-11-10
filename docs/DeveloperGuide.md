@@ -317,22 +317,23 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                                                      | So that I can…​                                                                       |
-|----------|--------|------------------------------------------------------------------|--------------------------------------------------------------------------------------|
-| `* * *`  | user   | search for professors for a module                               | quickly search for the professor that is conducting the module I am TAing for        |
-| `* * *`  | user   | search for all my students in a module                           | manage them more easily                                                              |
-| `* * *`  | user   | read information about students, modules and classes from a file | keep any students added or closed even after closing the program                     |
-| `* * *`  | user   | view my students school email and telegram handle                | contact them if needed                                                               |
-| `* * *`  | user   | sign up as a TA of module(s)                                     | manage what modules I am part of                                                     |
-| `* * *`  | user   | add and delete lessons                                           | it is easier for me to organise my schedule.                                         |
-| `* * *`  | user   | filter students by class and module                              | I can make preparations based on upcoming classes, like marking their work           |
-| `* * *`  | user   | add and remove students to classes	                             | it is easier for me to organise my schedule.                                         |
+| Priority | As a …​ | I want to …​                                                     | So that I can…​                                                               |
+|----------|--------|------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| `* * *`  | user   | search for professors for a module                               | quickly search for the professor that is conducting the module I am TAing for |
+| `* * *`  | user   | search for all my students in a module                           | manage them more easily                                                       |
+| `* * *`  | user   | read information about students, modules and classes from a file | keep any students added or closed even after closing the program              |
+| `* * *`  | user   | view my students school email and telegram handle                | contact them if needed                                                        |
+| `* * *`  | user   | sign up as a TA of module(s)                                     | manage what modules I am part of                                              |
+| `* * *`  | user   | add and delete lessons                                           | it is easier for me to organise my schedule.                                  |
+| `* * *`  | user   | filter students by class and module                              | I can make preparations based on upcoming classes, like marking their work    |
+| `* * *`  | user   | add and remove students to classes	                              | it is easier for me to organise my schedule.                                  |
+| `* * * ` | user   | add an assignment to the database                                | keep track of the assignments to be marked                                    | 
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TAssistant` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Search for a student within a module**
 
@@ -347,7 +348,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The module does not exist.
 
-  * 3a1. AddressBook shows an error message informing the user.
+  * 3a1. TAssistant shows an error message informing the user.
 
   Use case ends.
 
@@ -367,12 +368,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+**Use case: Add assignment to the database**
+
+**MSS**
+
+1. User requests to add an assignment to the database
+2. System updates to show the added assignment
+
+    Use case ends.
+
+**Extensions**
+* 1a. The assignment's title is not supplied by the user
+  * 2a1. Error message is shown informing the user of te correct usage of the command
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The product is meant for a single Teaching Assistant that makes all changes to the AddressBook themselves.
+4.  The product is meant for a single Teaching Assistant that makes all changes to the TAssistant themselves.
 5.  Data will be stored in a .json file to allow for advanced users to manipulate the data directly.
 
 ### Glossary
@@ -428,6 +442,16 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Adding an assignment
+1. Adding an assignment which has a title
+   1. Test case: `addAssignment assgn/Assignment 1`  
+    Expected: A new assignment with the title `Assignment 1` appears in the assignment list panel on the right side of the GUI.
+   2. Test case: `addAssignment assgn/`  
+      Expected: No assignment is added to the assignment list. An error message is shown in the status message.
+3. 
+   
+
 
 ### Saving data
 
