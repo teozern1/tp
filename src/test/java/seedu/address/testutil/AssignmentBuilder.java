@@ -1,11 +1,11 @@
- package seedu.address.testutil;
+package seedu.address.testutil;
 
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.Title;
 
- /**
- * Creates a {@code AssignmentBuilder} with the default details.
- */
+/**
+* Creates a {@code AssignmentBuilder} with the default details.
+*/
 public class AssignmentBuilder {
     private static Title title;
 

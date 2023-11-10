@@ -1,15 +1,17 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSIGNMENT_TITLE;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.AddAssignmentCommand;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.testutil.AssignmentBuilder;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSIGNMENT_TITLE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CS2100;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
 
 public class AddAssignmentCommandParserTest {
     private AddAssignmentCommandParser parser = new AddAssignmentCommandParser();
