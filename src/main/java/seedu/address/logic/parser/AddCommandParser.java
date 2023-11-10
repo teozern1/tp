@@ -39,8 +39,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_TAG, PREFIX_STUDENT_NUMBER, PREFIX_TELEGRAM);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_STUDENT_NUMBER, PREFIX_TELEGRAM)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -53,8 +52,20 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Module> modules = new HashSet<>();
         Set<Tutorial> tutorials = new HashSet<>();
-        StudentNumber studentNumber = ParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_STUDENT_NUMBER).get());
-        Telegram telegram = ParserUtil.parseTelegram(argMultimap.getValue(PREFIX_TELEGRAM).get());
+        StudentNumber studentNumber;
+        if (argMultimap.getValue(PREFIX_STUDENT_NUMBER).isEmpty()) {
+            studentNumber = new StudentNumber("PlaceholderStudentNumber");
+        } else {
+            studentNumber = ParserUtil.parseStudentNumber(
+                    argMultimap.getValue(PREFIX_STUDENT_NUMBER).get());
+        }
+
+        Telegram telegram;
+        if (argMultimap.getValue(PREFIX_TELEGRAM).isEmpty()) {
+            telegram = new Telegram("PlaceholderTelegramHandle");
+        } else {
+            telegram = ParserUtil.parseTelegram(argMultimap.getValue(PREFIX_TELEGRAM).get());
+        }
 
         Person person = new Person(name, phone, email, tagList, modules, tutorials, studentNumber, telegram);
 
