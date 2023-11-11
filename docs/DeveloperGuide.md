@@ -29,10 +29,11 @@
     * [Launch and shutdown](#launch-and-shutdown)
     * [Deleting a person](#deleting-a-person)
     * [Adding modules](#adding-modules)
-    * [Recording attendance](#recording-attendance)
     * [Adding tutorials](#adding-tutorials)
-    * [Saving data](#saving-data)
+    * [Recording attendance](#recording-attendance)
     * [Adding assignments](#adding-an-assignment)
+- **[Appendix: Effort](#appendix-effort)**
+- **[Appendix: Planned Enhancements](#appendix-planned-enhancements)**
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -512,6 +513,10 @@ testers are expected to do more *exploratory* testing.
     
    1. Test case: `addAssignment assgn/`  
       Expected: No assignment is added to the assignment list. An error message is shown in the status message.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
 
 --------------------------------------------------------------------------------------------------------------------
 
