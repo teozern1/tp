@@ -530,3 +530,5 @@ testers are expected to do more *exploratory* testing.
 error message. We intend to change this so that the commands when used on a user that already has the given
 module/tutorial will now give the error message `User already has the given module` or
 `User already has the given tutorial` respectively in the output box.
+2. Only addition of assignments is available as of now. We intend to implement it so that editing, removal and searching for assignments 
+will be possible in the future. Also, integration with the respective tutorials and modules should also be able to be done.
