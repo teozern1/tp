@@ -32,6 +32,7 @@
     * [Recording attendance](#recording-attendance)
     * [Adding tutorials](#adding-tutorials)
     * [Saving data](#saving-data)
+    * [Adding assignments](#adding-an-assignment)
 
 --------------------------------------------------------------------------------------------------------------------
 
