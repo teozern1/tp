@@ -325,9 +325,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 1a. The index given is higher than the number of tutorials the user has.
+* 1b. The index given is higher than the number of tutorials the user has.
 
-    * 1a1. System shows an error message informing the user the tutorial cannot be found.
+    * 1b1. System shows an error message informing the user the tutorial cannot be found.
 
   Use case ends.
 
@@ -481,7 +481,8 @@ testers are expected to do more *exploratory* testing.
        Tutorial list remains the same.
 
    1. Other incorrect commands to try: `addTutorial `, `addTutorial randomString`, `addTutorial tn/T10 tt/Mon 6PM` <br>
-        Expected: Similar to previous.
+        Expected: No tutorial is added. Error details regarding invalid command format shown in the status message.
+      Tutorial list remains the same.
 
 ### Recording attendance
 
@@ -515,6 +516,9 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancements**
 
-1. Currently, the addToModule command, when used on a user that already has the given module, does not give an
-error message. We intend to change this so that the addToModule command when used on a user that already has the given
-module will now give the error message `User already has the given module` in the output box.
+1. Currently, the addToModule and addToTutorial command, when used on a user that already has the given module, does not give an
+error message. We intend to change this so that the commands when used on a user that already has the given
+module/tutorial will now give the error message `User already has the given module` or
+`User already has the given tutorial` respectively in the output box.
+2. Only addition of assignments is available as of now. We intend to implement it so that editing, removal and searching for assignments 
+will be possible in the future. Also, integration with the respective tutorials and modules should also be able to be done.
