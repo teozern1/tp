@@ -4,9 +4,9 @@ title: "User Guide"
 pageNav: 3
 ---
 
-# **TASsistant User Guide**
+# **TAssistant User Guide**
 
-TASsistant is a desktop app for Teaching Assistants (TAs) in NUS School of Computing who are taking
+TAssistant is a desktop app for Teaching Assistants (TAs) in NUS School of Computing who are taking
 multiple modules and tutorials with a large class size. It aims to help TAs track information more 
 easily about the students and professors involved in tutoring. 
 
@@ -42,11 +42,11 @@ Here are some symbols used throughout this user guide:
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `TASsistant.jar` from [here](https://github.com/AY2324S1-CS2103T-F12-3/tp/releases).
+2. Download the latest `TAssistant.jar` from [here](https://github.com/AY2324S1-CS2103T-F12-3/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your TASsistant.
+3. Copy the file to the folder you want to use as the _home folder_ for your TAssistant.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TASsistant.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TAssistant.jar` command to run the application.<br>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -113,7 +113,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to TASsistant.
+Adds a person to TAssistant.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [s/STUDENT_NUMBER] [tele/TELEGRAM_HANDLE]`
 * Currently, the telegram handle is unrestricted, however, restrictions such as having the handle only start withh `@` will be implemented in the future.
@@ -127,7 +127,7 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in TASsistant.
+Shows a list of all persons in TAssistant.
 
 Format: `list`
 
@@ -170,7 +170,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from TASsistant.
+Deletes the specified person from TAssistant.
 
 Format: `delete INDEX`
 
@@ -179,7 +179,7 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in TASsistant.
+* `list` followed by `delete 2` deletes the 2nd person in TAssistant.
 
 ### Searching for persons : `search`
 
@@ -203,7 +203,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from TASsistant.
+Clears all entries from TAssistant.
 
 Format: `clear`
 
@@ -215,43 +215,43 @@ Format: `exit`
 
 ### Saving the data
 
-TASsistant data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TAssistant data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-TASsistant data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`.
+TAssistant data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`.
 Advanced users are welcome to update data directly by editing that data file.
 
 **Caution:**
-If your changes to the data file makes its format invalid, TASsistant will discard all data and start with an empty data file at the next run. 
+If your changes to the data file makes its format invalid, TAssistant will discard all data and start with an empty data file at the next run. 
 Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
-### Adding a module to TASsistant: `addModule`
+### Adding a module to TAssistant: `addModule`
 
-Adds the module to TASsistant, displaying it on the GUI.
+Adds the module to TAssistant, displaying it on the GUI.
 The module name must consist of only alphanumeric characters, between 5 - 8 characters.
 Modules must be added one at a time.
 
 The output for module name inputs "cs2100" and "CS2100" will be the same as the module
 shown on the GUI will be capitalised.
 
-Will give an error message if the module already exists in TASsistant,
+Will give an error message if the module already exists in TAssistant,
 further prompts are given for incorrect inputs.
 
 Format: `addModule m/MODULE_NAME`
 
 Example: `addModule m/CS2100`
 
-### Deleting a module from TASsistant: `deleteModule`
+### Deleting a module from TAssistant: `deleteModule`
 
-Deletes the module from TASsistant and the GUI will change to reflect this.
+Deletes the module from TAssistant and the GUI will change to reflect this.
 The index refers to the position of the module displayed on the GUI.
 
 Any related tutorials on the GUI as well as modules/tutorials on persons 
 will also be deleted. As such, please use this command with discretion.
 
-Will give an error message if the module does not exist in TASsistant,
+Will give an error message if the module does not exist in TAssistant,
 further prompts are given for incorrect inputs.
 
 Format: `deleteModule INDEX`
@@ -359,7 +359,7 @@ Format: `deleteAttn INDEX ln/LESSON_NUMBER`
 Example: `deleteAttn 1 ln/S1`
 
 ### Adding an assignment `addAssignment`
-Adds a new assignment to the system. Fails if the name given is blank. Currently TAssistnt only supports
+Adds a new assignment to the system. Fails if the name given is blank. Currently, TAssistant only supports
 addition of assignments to the system, however, editing and removing functionality will be
 implemented in the future.
 
@@ -379,26 +379,27 @@ Example: `addAssignment assgn/Assignment 1`
 
 ## Command summary
 
-| Action                 | Format, Examples                                                                                                                                                       |
-|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Judas p/98768432 e/judas@example.com s/A1234567J tele/@judas`                                |
-| **Clear**              | `clear`                                                                                                                                                                |
-| **Delete**             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                    |
-| **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/STUDENT_NUMBER] [tele/TELEGRAM_HANDLE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`  |
-| **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                             |
-| **List**               | `list`                                                                                                                                                                 |
-| **Search**             | `search CONDITION1, CONDITION2`<br> e.g., `search module: CS2103T`                                                                                                     |
-| **Help**               | `help`                                                                                                                                                                 |
-| **addModule**          | `addModule m/MODULE_NAME` <br> e.g., `addModule m/CS2100`                                                                                                              |
-| **deleteModule**       | `deleteModule INDEX` <br> e.g., `deleteModule 1`                                                                                                                       |
-| **addToModule**        | `addToModule INDEX m/MODULE_NAME` <br> e.g., `addToModule 2 m/CS2103T`                                                                                                 |
-| **removeFromModule**   | `removeFromModule INDEX m/MODULE_NAME` <br> e.g., `removeFromModule 2 m/CS2103T`                                                                                       |
-| **addTutorial**        | `addTutorial TUTORIALNAME m/MODULE_NAME` <br> e.g., `addTutorial tn/c12 m/CS2103T`                                                                                     |
-| **deleteTutorial**     | `deleteTutorial INDEX` <br> e.g., `deleteTutorial 2`                                                                                                                   |
-| **addToTutorial**      | `addToTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME` <br> e.g., `addToTutorial 1 m/CS2103T tn/T11`                                                                     |
-| **removeFromTutorial** | `removeFromTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME` <br> e.g., `removeFromTutorial 1 m/CS2103T tn/T11`                                                           |
-| **attn**               | `attn INDEX se/LESSON_NUMBER` <br> e.g., `attn 1 se/S1`                                                                                                                |
-|**addAssignment**      | `addAssignment assgn/ASSIGNMENT_TITLE` <br> e.g., `addAssignment assgn/Project`                                                                                        |   
+| Action                 | Format, Examples                                                                                                                                                      |
+|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Judas p/98768432 e/judas@example.com s/A1234567J tele/@judas`                               |
+| **Clear**              | `clear`                                                                                                                                                               |
+| **Delete**             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/STUDENT_NUMBER] [tele/TELEGRAM_HANDLE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
+| **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
+| **List**               | `list`                                                                                                                                                                |
+| **Search**             | `search CONDITION1, CONDITION2`<br> e.g., `search module: CS2103T`                                                                                                    |
+| **Help**               | `help`                                                                                                                                                                |
+| **addModule**          | `addModule m/MODULE_NAME` <br> e.g., `addModule m/CS2100`                                                                                                             |
+| **deleteModule**       | `deleteModule INDEX` <br> e.g., `deleteModule 1`                                                                                                                      |
+| **addToModule**        | `addToModule INDEX m/MODULE_NAME` <br> e.g., `addToModule 2 m/CS2103T`                                                                                                |
+| **removeFromModule**   | `removeFromModule INDEX m/MODULE_NAME` <br> e.g., `removeFromModule 2 m/CS2103T`                                                                                      |
+| **addTutorial**        | `addTutorial TUTORIALNAME m/MODULE_NAME` <br> e.g., `addTutorial tn/c12 m/CS2103T`                                                                                    |
+| **deleteTutorial**     | `deleteTutorial INDEX` <br> e.g., `deleteTutorial 2`                                                                                                                  |
+| **addToTutorial**      | `addToTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME` <br> e.g., `addToTutorial 1 m/CS2103T tn/T11`                                                                    |
+| **removeFromTutorial** | `removeFromTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME` <br> e.g., `removeFromTutorial 1 m/CS2103T tn/T11`                                                          |
+| **attn**               | `attn INDEX ln/LESSON_NUMBER` <br> e.g., `attn 1 ln/S1`                                                                                                               |
+| **deleteAttn**         | `deleteAttn INDEX ln/LESSON_NUMBER` <br> e.g., `deleteAttn 1 ln/S1`                                                                                                   |
+| **addAssignment**      | `addAssignment assgn/ASSIGNMENT_TITLE` <br> e.g., `addAssignment assgn/Project`                                                                                       |   
 
 
 --------------------------------------------------------------------------------------------------------------------
