@@ -26,39 +26,40 @@ import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
-import seedu.address.testutil.ModuleBuilder;
+import seedu.address.testutil.AssignmentBuilder;
 
-public class AddModuleCommandTest {
+public class AddAssignmentCommandTest {
 
     @Test
-    public void constructor_nullModule_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddModuleCommand(null));
+    public void constructor_nullAssignment_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddAssignmentCommand(null));
     }
 
     @Test
     public void execute_moduleAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingModuleAdded modelStub = new ModelStubAcceptingModuleAdded();
-        Module validModule = new ModuleBuilder().build();
+        ModelStubAcceptingAssignmentAdded modelStub = new ModelStubAcceptingAssignmentAdded();
+        Assignment validAssignment = new AssignmentBuilder().build();
 
-        CommandResult commandResult = new AddModuleCommand(validModule).execute(modelStub);
+        CommandResult commandResult = new AddAssignmentCommand(validAssignment).execute(modelStub);
 
-        assertEquals(String.format(AddModuleCommand.MESSAGE_SUCCESS, validModule), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validModule), modelStub.modulesAdded);
+        assertEquals(String.format(AddAssignmentCommand.MESSAGE_SUCCESS, validAssignment),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validAssignment), modelStub.modulesAdded);
     }
 
     @Test
     public void equals() {
-        Module moduleCS2100 = new ModuleBuilder().build("CS2100");
-        Module moduleCS2030 = new ModuleBuilder().build("CS2030");
+        Assignment moduleCS2100 = new AssignmentBuilder().build("CS2100");
+        Assignment moduleCS2030 = new AssignmentBuilder().build("CS2030");
 
-        AddModuleCommand addCS2100 = new AddModuleCommand(moduleCS2100);
-        AddModuleCommand addCS2030 = new AddModuleCommand(moduleCS2030);
+        AddAssignmentCommand addCS2100 = new AddAssignmentCommand(moduleCS2100);
+        AddAssignmentCommand addCS2030 = new AddAssignmentCommand(moduleCS2030);
 
         // same object -> returns true
         assertTrue(addCS2100.equals(addCS2100));
 
         // same values -> returns true
-        AddModuleCommand addCS2100CommandCopy = new AddModuleCommand(moduleCS2100);
+        AddAssignmentCommand addCS2100CommandCopy = new AddAssignmentCommand(moduleCS2100);
         assertTrue(addCS2100.equals(addCS2100CommandCopy));
 
         // different types -> returns false
@@ -73,12 +74,12 @@ public class AddModuleCommandTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Module validModule = new ModuleBuilder().build();
-        AddModuleCommand addModuleCommand = new AddModuleCommand(validModule);
-        ModelStub modelStub = new ModelStubWithModule(validModule);
+        Assignment validAssignment = new AssignmentBuilder().build();
+        AddAssignmentCommand addAssignmentCommand = new AddAssignmentCommand(validAssignment);
+        ModelStub modelStub = new ModelStubWithAssignment(validAssignment);
 
-        assertThrows(CommandException.class, AddModuleCommand.MESSAGE_DUPLICATE_MODULE, (
-                ) -> addModuleCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddAssignmentCommand.MESSAGE_DUPLICATE_ASSIGNMENT, (
+                ) -> addAssignmentCommand.execute(modelStub));
     }
 
     /**
@@ -239,35 +240,35 @@ public class AddModuleCommandTest {
     /**
      * A Model stub that contains a single module.
      */
-    private class ModelStubWithModule extends ModelStub {
-        private final Module module;
+    private class ModelStubWithAssignment extends ModelStub {
+        private final Assignment module;
 
-        ModelStubWithModule(Module module) {
+        ModelStubWithAssignment(Assignment module) {
             requireNonNull(module);
             this.module = module;
         }
 
         @Override
-        public boolean hasModule(Module person) {
+        public boolean hasAssignment(Assignment person) {
             requireNonNull(person);
-            return this.module.isSameModule(person);
+            return this.module.isSameAssignment(person);
         }
     }
 
     /**
      * A Model stub that always accept the module being added.
      */
-    private class ModelStubAcceptingModuleAdded extends ModelStub {
-        final ArrayList<Module> modulesAdded = new ArrayList<>();
+    private class ModelStubAcceptingAssignmentAdded extends ModelStub {
+        final ArrayList<Assignment> modulesAdded = new ArrayList<>();
 
         @Override
-        public boolean hasModule(Module person) {
+        public boolean hasAssignment(Assignment person) {
             requireNonNull(person);
-            return modulesAdded.stream().anyMatch(person::isSameModule);
+            return modulesAdded.stream().anyMatch(person::isSameAssignment);
         }
 
         @Override
-        public void addModule(Module module) {
+        public void addAssignment(Assignment module) {
             requireNonNull(module);
             modulesAdded.add(module);
         }

@@ -26,6 +26,8 @@ public class DeleteAttendanceCommandParser implements Parser<DeleteAttendanceCom
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         DeleteAttendanceCommand.MESSAGE_USAGE));
         }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ATTENDANCE);
+
         Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
         Tag toAdd = ParserUtil.parseTag(argMultimap.getValue(PREFIX_ATTENDANCE).get());
 

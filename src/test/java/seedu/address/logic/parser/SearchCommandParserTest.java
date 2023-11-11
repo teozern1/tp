@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.ATTN_LESSON_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_DESC_CS2100;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_DESC_CS2101;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TUTORIAL_GROUP_DESC_TG01;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CS2100;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -76,6 +77,12 @@ public class SearchCommandParserTest {
     public void parse_preambleNotEmptyError() {
         assertParseFailure(parser, " dummy text", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 SearchCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_tooManyNamesError() {
+        assertParseFailure(parser, NAME_DESC_AMY + NAME_DESC_BOB,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_ERROR_TOO_MANY_NAMES));
     }
 
     @Test

@@ -17,6 +17,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentNumber;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutorial.Tutorial;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -75,7 +76,6 @@ public class ParserUtil {
      * @throws ParseException if the given {@code studentNumber} is invalid.
      */
     public static StudentNumber parseStudentNumber(String studentNumber) throws ParseException {
-        requireNonNull(studentNumber);
         String trimmedStudentNumber = studentNumber.trim();
         if (!StudentNumber.isValidStudentNumber(trimmedStudentNumber)) {
             throw new ParseException(StudentNumber.MESSAGE_CONSTRAINTS);
@@ -90,7 +90,6 @@ public class ParserUtil {
      * @throws ParseException if the given {@code telegram} is invalid.
      */
     public static Telegram parseTelegram(String telegram) throws ParseException {
-        requireNonNull(telegram);
         String trimmedTelegram = telegram.trim();
         if (!Telegram.isValidTelegram(trimmedTelegram)) {
             throw new ParseException(Telegram.MESSAGE_CONSTRAINTS);
@@ -148,7 +147,7 @@ public class ParserUtil {
      */
     public static Module parseModule(String moduleCode) throws ParseException {
         requireNonNull(moduleCode);
-        String trimmedModuleCode = moduleCode.trim();
+        String trimmedModuleCode = moduleCode.trim().toUpperCase();
         if (!Module.isValidModule(trimmedModuleCode)) {
             throw new ParseException(Module.MESSAGE_CONSTRAINTS);
         }
@@ -159,9 +158,12 @@ public class ParserUtil {
      * Parses a {@code String tutorialName} by trimming leading and trailing whitespaces.
      * @return The tutorialName.
      */
-    public static String parseTutorialName(String tutorialName) {
+    public static String parseTutorialName(String tutorialName) throws ParseException {
         requireNonNull(tutorialName);
         String trimmedName = tutorialName.trim();
+        if (!Tutorial.isValidTutName(trimmedName)) {
+            throw new ParseException(Tutorial.MESSAGE_CONSTRAINTS);
+        }
         return trimmedName;
     }
 
@@ -184,6 +186,9 @@ public class ParserUtil {
     public static Title parseTitle(String title) throws ParseException {
         requireNonNull(title);
         String trimmedTitle = title.trim();
+        if (!Title.isValidTitle(trimmedTitle)) {
+            throw new ParseException(Title.MESSAGE_CONSTRAINTS);
+        }
         return new Title(trimmedTitle);
     }
 

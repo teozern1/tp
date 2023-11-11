@@ -178,9 +178,6 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB,
                 expectedMessage);
 
-        // missing address prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB,
-                expectedMessage);
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB,
@@ -229,5 +226,20 @@ public class AddCommandParserTest {
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + STUDENT_NUMBER_DESC_BOB
                 + TELEGRAM_DESC_BOB,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void optional_fields_success() {
+        Person expectedPerson = new PersonBuilder(BOB).withTelegram("PlaceholderTelegramHandle").build();
+        // no telegram handle
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + STUDENT_NUMBER_DESC_BOB,
+                new AddCommand(expectedPerson));
+
+        Person noStudentNumber = new PersonBuilder(BOB).withStudentNumber("PlaceholderStudentNumber").build();
+        //no student number
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + TELEGRAM_DESC_BOB,
+                new AddCommand(noStudentNumber));
     }
 }

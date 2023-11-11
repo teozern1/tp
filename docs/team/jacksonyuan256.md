@@ -12,7 +12,9 @@ It is written in Java, and has about 10 kLoC.
 Given below are my contributions to the project.
 
 * **New Feature**:
-    * To be added
+    * Added the module model and loading/saving it in the storage.
+    * Added the ability to add/delete modules with addModule and deleteModule.
+    * Added the ability to add/delete attendance for people through the use of tags.
 
 * **Code contributed**: [RepoSense link]()
 
@@ -29,7 +31,9 @@ Given below are my contributions to the project.
     * User Guide:
         * To be added
     * Developer Guide:
-        * To be added
+        * Manual testing for adding modules
+        * Modified the UML diagram for storage
+        * Some use cases
 
 * **Community**:
     * To be added

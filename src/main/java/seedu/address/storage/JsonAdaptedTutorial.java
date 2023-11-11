@@ -44,6 +44,9 @@ public class JsonAdaptedTutorial {
      */
     public Tutorial toModelType() throws IllegalValueException {
         final Module module = new Module(moduleCode);
+        if (!Tutorial.isValidTutName(this.tutName)) {
+            throw new IllegalValueException(Tutorial.MESSAGE_CONSTRAINTS);
+        }
         return new Tutorial(module, tutName, time);
     }
 
