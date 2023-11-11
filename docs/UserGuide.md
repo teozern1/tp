@@ -359,6 +359,7 @@ Format: `deleteAttn INDEX ln/LESSON_NUMBER`
 Example: `deleteAttn 1 ln/S1`
 
 ### Adding an assignment `addAssignment`
+
 Adds a new assignment to the system. Fails if the name given is blank. Currently, TAssistant only supports
 addition of assignments to the system, however, editing and removing functionality will be
 implemented in the future.
