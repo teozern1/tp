@@ -233,21 +233,20 @@ tutorial to a person and the corresponding module should they not have it.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                                                     | So that I can…​                                                               |
-|----------|---------|------------------------------------------------------------------|-------------------------------------------------------------------------------|
-| `* * *`  | user    | search for professors for a module                               | quickly search for the professor that is conducting the module I am TAing for |
-| `* * *`  | user    | search for all my students in a module                           | manage them more easily                                                       |
-| `* * *`  | user    | read information about students, modules and classes from a file | keep any students added or closed even after closing the program              |
-| `* * *`  | user    | view my students school email and telegram handle                | contact them if needed                                                        |
-| `* * *`  | user    | sign up as a TA of module(s)                                     | manage what modules I am part of                                              |
-| `* * *`  | user    | add and delete lessons                                           | it is easier for me to organise my schedule.                                  |
-| `* * *`  | user    | filter students by class and module                              | make preparations based on upcoming classes, like marking their work          |
-| `* * *`  | user    | add and remove students to classes	                              | it is easier for me to organise my schedule.                                  |
-| `* * * ` | user   | add an assignment to the database                                | keep track of the assignments to be marked                                    |
-| `* *`    | user    | edit the information of students                                 | rectify any mistakes made for personal information and grades.                |
-| `* *`    | user    | view my professors' email in the same mod                        | easily reach out to them for updates or help.                                 |
-| `* *`    | user    | edit the classes I teach                                         | it does not conflict with any of my other classes.                            |
-| `* *`    | user    | export the attendance list as a pdf                              | submit it to the people in charge                                             |
+| Priority | As a …​ | I want to …​                                                       | So that I can…​                                                               |
+|----------|---------|--------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| `* * *`  | user    | search for all my students in a module                             | manage them more easily                                                       |
+| `* * *`  | user    | read information about students, modules and tutorials from a file | keep any students added or closed even after closing the program              |
+| `* * *`  | user    | view my students school email and telegram handle                  | contact them if needed                                                        |
+| `* * *`  | user    | sign up as a TA of module(s)                                       | manage what modules I am part of                                              |
+| `* * *`  | user    | add and delete lessons                                             | it is easier for me to organise my schedule.                                  |
+| `* * *`  | user    | filter students by tutorial and module                             | make preparations based on upcoming classes, like marking their work          |
+| `* * *`  | user    | add and remove students to tutorials                               | it is easier for me to organise my schedule.                                  |
+| `* * * ` | user    | add an assignment to the database                                  | keep track of the assignments to be marked                                    |
+| `* *`    | user    | edit the information of students                                   | rectify any mistakes made for personal information and grades.                |
+| `* *`    | user    | view my professors' email in the same mod                          | easily reach out to them for updates or help.                                 |
+| `* *`    | user    | edit the classes I teach                                           | it does not conflict with any of my other classes.                            |
+| `* *`    | user    | export the attendance list as a pdf                                | submit it to the people in charge                                             |
 
 
 ### Use cases
@@ -267,18 +266,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The module does not exist.
 
-
-  * 3a1. TAssistant shows an error message informing the user.
-
+  * 2a1. System shows an error message informing the user.
 
   Use case ends.
 
 * 3a. The module exists, but no one is part of the module.
 
-    * 3a1. No one is displayed.
-    * 3a2. The display states that "No users are found".
+  * 3a1. No one is displayed.
+  * 3a2. The display states that "No users are found".
 
-    Use case ends.
+  Use case ends.
 
 **Use case: Deleting a module**
 
@@ -293,7 +290,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The user gives a non-integer index, negative index, or omits it.
 
-    * 1a1. System shows an error message informing the user that they need to specify an integer index.
+  * 1a1. System shows an error message informing the user that they need to specify an integer index.
 
   Use case ends.
 
@@ -305,8 +302,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. There are people in the address book that are part of the module.
 
-    * 2a1. System deletes the modules (and related tutorials, if any) from everyone in the address book.
-    * 2a2. System deletes the module.
+  * 2a1. System deletes the modules (and related tutorials, if any) from everyone in the address book.
+  * 2a2. System deletes the module.
 
   Use case ends.
 
@@ -515,14 +512,6 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `addAssignment assgn/`  
       Expected: No assignment is added to the assignment list. An error message is shown in the status message.
 
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Planned Enhancements**
@@ -531,3 +520,5 @@ testers are expected to do more *exploratory* testing.
 error message. We intend to change this so that the commands when used on a user that already has the given
 module/tutorial will now give the error message `User already has the given module` or
 `User already has the given tutorial` respectively in the output box.
+2. Only addition of assignments is available as of now. We intend to implement it so that editing, removal and searching for assignments 
+will be possible in the future. Also, integration with the respective tutorials and modules should also be able to be done.
