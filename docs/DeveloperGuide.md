@@ -27,7 +27,9 @@
     * [Glossary](#glossary)
 - **[Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)**
     * [Launch and shutdown](#launch-and-shutdown)
-    * [Delete a person](#deleting-a-person)
+    * [Deleting a person](#deleting-a-person)
+    * [Adding modules](#adding-modules)
+    * [Recording attendance](#recording-attendance)
     * [Adding tutorials](#adding-tutorials)
     * [Saving data](#saving-data)
 
@@ -167,7 +169,7 @@ This is exposed to the outside as a `ReadOnlyUserPref` objects.
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="diagrams/NewStorageClassDiagram.png" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -231,26 +233,28 @@ tutorial to a person and the corresponding module should they not have it.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                                                        | So that I can…​                                                               |
-|----------|---------|---------------------------------------------------------------------|-------------------------------------------------------------------------------|
-| `* * *`  | user    | search for professors for a module                                  | quickly search for the professor that is conducting the module I am TAing for |
-| `* * *`  | user    | search for all my students in a module                              | manage them more easily                                                       |
-| `* * *`  | user    | read information about students, modules and tutorials from a file  | keep any students added or closed even after closing the program              |
-| `* * *`  | user    | view my students school email and telegram handle                   | contact them if needed                                                        |
-| `* * *`  | user    | sign up as a TA of module(s)                                        | manage what modules I am part of                                              |
-| `* * *`  | user    | add and delete lessons                                              | it is easier for me to organise my schedule.                                  |
-| `* * *`  | user    | filter students by tutorials and module                             | make preparations based on upcoming classes, like marking their work          |
-| `* * *`  | user    | add and remove students to tutorials	                               | it is easier for me to organise my schedule.                                  |
-| `* *`    | user    | edit the information of students                                    | rectify any mistakes made for personal information and grades.                |
-| `* *`    | user    | view my professors' email in the same mod                           | easily reach out to them for updates or help.                                 |
-| `* *`    | user    | edit the tutorials I teach                                          | it does not conflict with any of my other tutorials.                          |
-| `* *`    | user    | export the attendance list as a pdf                                 | submit it to the people in charge                                             |
+| Priority | As a …​ | I want to …​                                                     | So that I can…​                                                               |
+|----------|---------|------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| `* * *`  | user    | search for professors for a module                               | quickly search for the professor that is conducting the module I am TAing for |
+| `* * *`  | user    | search for all my students in a module                           | manage them more easily                                                       |
+| `* * *`  | user    | read information about students, modules and classes from a file | keep any students added or closed even after closing the program              |
+| `* * *`  | user    | view my students school email and telegram handle                | contact them if needed                                                        |
+| `* * *`  | user    | sign up as a TA of module(s)                                     | manage what modules I am part of                                              |
+| `* * *`  | user    | add and delete lessons                                           | it is easier for me to organise my schedule.                                  |
+| `* * *`  | user    | filter students by class and module                              | make preparations based on upcoming classes, like marking their work          |
+| `* * *`  | user    | add and remove students to classes	                              | it is easier for me to organise my schedule.                                  |
+| `* * * ` | user   | add an assignment to the database                                | keep track of the assignments to be marked                                    |
+| `* *`    | user    | edit the information of students                                 | rectify any mistakes made for personal information and grades.                |
+| `* *`    | user    | view my professors' email in the same mod                        | easily reach out to them for updates or help.                                 |
+| `* *`    | user    | edit the classes I teach                                         | it does not conflict with any of my other classes.                            |
+| `* *`    | user    | export the attendance list as a pdf                              | submit it to the people in charge                                             |
+
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TAssistant` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Search for a student within a module**
+**Use case: Searching for a student within a module**
 
 **MSS**
 
@@ -263,7 +267,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The module does not exist.
 
-  * 2a1. AddressBook shows an error message informing the user.
+
+  * 3a1. TAssistant shows an error message informing the user.
+
 
   Use case ends.
 
@@ -272,20 +278,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. No one is displayed.
     * 3a2. The display states that "No users are found".
 
-      Use case ends.
+    Use case ends.
 
-**Use case: Records attendance for a student**
-
-**MSS**
-
-1. User specifies the INDEX of the person and the lesson for which the person is attending.
-2. System updates the displayed tags of the person.
-
-**Use case: Delete tutorial**
+**Use case: Deleting a module**
 
 **MSS**
 
-1. User requests to delete a tutorial and provides it's index.
+1. User requests to delete a module and provides its index.
+2. System deletes the module.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user gives a non-integer index, negative index, or omits it.
+
+    * 1a1. System shows an error message informing the user that they need to specify an integer index.
+
+  Use case ends.
+
+* 1b. The index given is higher than the number of modules the user has.
+
+  * 1b1. System shows an error message informing the user the module cannot be found.
+
+  Use case ends.
+
+* 2a. There are people in the address book that are part of the module.
+
+    * 2a1. System deletes the modules (and related tutorials, if any) from everyone in the address book.
+    * 2a2. System deletes the module.
+
+  Use case ends.
+
+
+**Use case: Deleting a tutorial**
+
+**MSS**
+
+1. User requests to delete a tutorial and provides its index.
 2. System deletes the tutorial.
 
     Use case ends.
@@ -311,6 +341,54 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use case: Recording attendance for a person**
+
+**MSS**
+
+1. User requests to take attendance, specifying the index of the person and the lesson name.
+2. System updates the displayed tags of the person.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user gives a non-integer index, negative index, or omits it.
+
+    * 1a1. System shows an error message informing the user that they need to specify an integer index.
+
+  Use case ends.
+
+* 1b. The index given is higher than the number of persons in the list.
+
+    * 1b1. System shows an error message informing the user the person cannot be found.
+
+  Use case ends.
+
+* 2a. The given lesson name already exists.
+
+    * 2a1. System shows an error message informing the user it is a duplicate.
+
+  Use case ends.
+
+**Use case: Adding assignment to the database**
+
+**MSS**
+
+1. User requests to add an assignment to the database
+2. System updates to show the added assignment
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The assignment's title is not supplied by the user.
+
+  Use case ends.
+
+* 2a. Error message is shown informing the user of te correct usage of the command.
+
+  Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -322,6 +400,7 @@ should be able to accomplish most of the tasks faster using commands than using 
 6.  The product is meant for a single Teaching Assistant that makes all changes to the AddressBook themselves.
 7.  Data will be stored in a .json file to allow for advanced users to manipulate the data directly.
 8.  The product does not require the Internet to operate.
+
 
 ### Glossary
 
@@ -375,6 +454,21 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+### Adding Modules
+
+1. Adding a module
+   1. Prerequisites: None.
+
+   1. Test case: `addModule m/CS21OO`<br>
+      Expected: The module is added to the module list and it should show up on the GUI. 
+      The displayed name on the GUI will always be capitalised.
+
+   1. Test case: `addModule m/DTXK323000`<br>
+      Expected: No module is added. Error details shown in the status message. Module list remains the same.
+
+   1. Other incorrect delete commands to try: `addModule m/`, `addModule m/HSA` <br>
+      Expected: Similar to previous.
+   
 ### Adding Tutorials
 
 1. Adding a tutorial
@@ -383,7 +477,7 @@ testers are expected to do more *exploratory* testing.
    created before the tests.
 
    1. Test case: `addTutorial m/CS2103 tn/T10 tt/Mon 6PM`<br>
-          Expected: Details of the tutorial added to the tutorial list. Details of the added tutorial shown in the status message.
+       Expected: Details of the tutorial added to the tutorial list. Details of the added tutorial shown in the status message.
 
    1. Test case: `addTutorial m/CS2103 tn/ tt/Mon 6PM`<br>
        Expected: No tutorial is added. Error details regarding empty tutorial name shown in the status message.
@@ -392,6 +486,34 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect commands to try: `addTutorial `, `addTutorial randomString`, `addTutorial tn/T10 tt/Mon 6PM` <br>
         Expected: No tutorial is added. Error details regarding invalid command format shown in the status message.
       Tutorial list remains the same.
+
+### Recording attendance
+
+1. Recording attendance for a person
+    1. Prerequisites: At least one person must exist in the displayed list.
+
+    1. Test case: `attn 1 ln/S1`<br>
+       Expected: A tag with the description "S1" should appear on the first person on the list. 
+       A message should be displayed indicating that the attendance was successfully taken.
+
+    1. Test case: `attn 1 ln/$$TEXT`<br>
+       Expected: An error message should be displayed indicating that the tag name must be alphanumeric.
+   
+    1. Test case: `attn -2 ln/S1`<br>
+       Expected: An error message should be displayed indicating that the INDEX must be an unsigned integer.
+
+    1. Other incorrect delete commands to try: `attn 1 ln/`, `attn 2 ln/09%^&` <br>
+       Expected: Similar to previous.
+
+### Adding an assignment
+
+1. Adding an assignment which has a title
+
+   1. Test case: `addAssignment assgn/Assignment 1`  
+      Expected: A new assignment with the title `Assignment 1` appears in the assignment list panel on the right side of the GUI.
+    
+   1. Test case: `addAssignment assgn/`  
+      Expected: No assignment is added to the assignment list. An error message is shown in the status message.
 
 ### Saving data
 
