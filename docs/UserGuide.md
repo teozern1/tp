@@ -115,12 +115,8 @@ Format: `help`
 
 Adds a person to TASsistant.
 
-<<<<<<< HEAD
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [s/STUDENT_NUMBER] [tele/TELEGRAM_HANDLE]`
 * Currently, the telegram handle is unrestricted, however, restrictions such as having the handle only start withh `@` will be implemented in the future.
-=======
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [s/STUDENT_NUMBER] [tele/TELEGRAM_HANDLE] [t/TAG]…​`
->>>>>>> cc09db979758fffc00d3c5b58d22a26d427a85e3
 
 **Tip:** A person can have any number of tags (including 0)
 </box>
