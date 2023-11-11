@@ -283,9 +283,17 @@ CS1000, if the module CS1000 exists and the person at the top in the current lis
 
 ### Adding a tutorial to a given module: `addTutorial`
 
-Adds a tutorial with a specific tutorial name to a given module. Different modules can have different tutorials
-with the same name. Will give an error message if the module does not exist or a tutorial with the same name has already
-been made for the module.
+Adds a tutorial with a specific tutorial name and time to a given module. 
+Note that:
+- Different modules can have different tutorials with the same name. 
+- Tutorial time
+  - should follow `E ha` format stated in [java api](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/format/DateTimeFormatter.html)
+  - is **not** case-sensitive.
+  - e.g. `Mon 6PM`, `Mon 6pm`, `mon 6PM`, `Monday 6PM` are all valid, but `Mon 0PM` is not valid.
+- Will give an error message if:
+  1. The module does not exist;
+  2. Tutorial with the same name has already been made for the module;
+  3. TUTORIAL_TIME is invalid.
 
 Format: `addTutorial m/MODULE_NAME tn/TUTORIAL_NAME tt/TUTORIAL_TIME`
 

@@ -3,7 +3,6 @@ package seedu.address.model.tutorial;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import seedu.address.model.module.Module;
@@ -13,8 +12,7 @@ import seedu.address.model.module.Module;
  */
 public class Tutorial {
     /* Fields */
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("E ha");
-    public static final String TIME_FORMAT_REGEX = "\\d?\\d[AP]M";
+    public static final String TIME_FORMAT_REGEX = "\\b([1-9]|1[0-2])[APap][Mm]";
     public static final String MESSAGE_CONSTRAINTS = "Tutorial name cannot be empty";
     private Module module;
     private String tutName;
@@ -127,32 +125,53 @@ public class Tutorial {
     }
 
     /**
-     * checks if a string is in correct time format
-     * @param time the string that is being checked
-     * @return boolean value of the result
+     * reformat time to expected format
+     * if time is in correct time format.
+     * @param time the time to be reformatted.
+     * @return the time in expected format
+     * @throws IllegalArgumentException if time is not in correct format
      */
-    public static boolean isTimeFormat(String time) {
+    public static String reformat(String time) {
         String[] dateTimeParts = time.split(" ");
+        if (dateTimeParts.length != 2) {
+            throw new IllegalArgumentException("incorrect format");
+        }
+
         String dayPart = dateTimeParts[0];
         String timePart = dateTimeParts[1];
 
-        // checks if dayPart is in correct format
-        if (!DayOfWeek.contains(dayPart)) {
-            return false;
-        // checks if timePart is in correct format
-        } else if (!timePart.matches(Tutorial.TIME_FORMAT_REGEX)) {
-            return false;
+        // checks if time is in correct format
+        if (!DayOfWeek.contains(dayPart) || !timePart.matches(Tutorial.TIME_FORMAT_REGEX)) {
+            throw new IllegalArgumentException("incorrect format");
         }
 
-        return true;
+        StringBuffer res = new StringBuffer();
+        res.append(dayPart.substring(0, 1).toUpperCase());
+        res.append(dayPart.substring(1, 3).toLowerCase() + " ");
+        res.append(timePart.toUpperCase());
+
+        return res.toString();
     }
 
     private enum DayOfWeek {
-        Mon, Tue, Wed, Thu, Fri, Sat, Sun;
+        Mon("Monday"),
+        Tue("Tuesday"),
+        Wed("Wednesday"),
+        Thu("Thursday"),
+        Fri("Friday"),
+        Sat("Saturday"),
+        Sun("Sunday");
+
+        public final String fullName;
+        DayOfWeek(String fullName) {
+            this.fullName = fullName;
+        }
 
         public static boolean contains(String value) {
             for (DayOfWeek day : values()) {
                 if (day.name().equalsIgnoreCase(value)) {
+                    return true;
+                } else if (day.fullName.equalsIgnoreCase(value)) {
                     return true;
                 }
             }

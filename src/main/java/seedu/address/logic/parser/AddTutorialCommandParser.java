@@ -39,8 +39,9 @@ public class AddTutorialCommandParser implements Parser<AddTutorialCommand> {
         String tutorialName = ParserUtil.parseTutorialName(argMultimap.getValue(PREFIX_TUTORIAL_NAME).get());
         String tutorialTime = ParserUtil.parseTutorialTime(argMultimap.getValue(PREFIX_TUTORIAL_TIME).get());
 
-
-        if (!Tutorial.isTimeFormat(tutorialTime)) {
+        try {
+            tutorialTime = Tutorial.reformat(tutorialTime);
+        } catch (IllegalArgumentException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_TUTORIAL_TIME_FORMAT,
                     AddTutorialCommand.MESSAGE_USAGE));
         }

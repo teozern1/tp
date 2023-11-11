@@ -19,6 +19,13 @@ public class AddTutorialCommandParserTest {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddTutorialCommand.MESSAGE_USAGE));
     }
+    @Test
+    public void parse_validTutorialTimeFormat_returnsAddTutorialCommand() {
+        Module testModule = new Module("CS1000");
+        AddTutorialCommand expectedTutorialCommand =
+                new AddTutorialCommand(new Tutorial(testModule, "test name", "Mon 2PM"));
+        assertParseSuccess(parser, " m/CS1000 tn/test name tt/Mon 2PM", expectedTutorialCommand);
+    }
 
     // Boundary value for tutorial names. (accepts any non-null string)
     @Test
@@ -33,13 +40,9 @@ public class AddTutorialCommandParserTest {
                 new AddTutorialCommand(new Tutorial(testModule, "test name", "test time"));
         assertParseFailure(parser, " m/CS1000 tn/test name tt/test time",
                 String.format(MESSAGE_INVALID_TUTORIAL_TIME_FORMAT, AddTutorialCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_validTutorialTimeFormat_returnsAddTutorialCommand() {
-        Module testModule = new Module("CS1000");
-        AddTutorialCommand expectedTutorialCommand =
-                new AddTutorialCommand(new Tutorial(testModule, "test name", "Mon 2PM"));
-        assertParseSuccess(parser, " m/CS1000 tn/test name tt/Mon 2PM", expectedTutorialCommand);
+        assertParseFailure(parser, " m/CS1000 tn/test name tt/Mon 0PM",
+                String.format(MESSAGE_INVALID_TUTORIAL_TIME_FORMAT, AddTutorialCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " m/CS1000 tn/test name tt/Mon 13PM",
+                String.format(MESSAGE_INVALID_TUTORIAL_TIME_FORMAT, AddTutorialCommand.MESSAGE_USAGE));
     }
 }
