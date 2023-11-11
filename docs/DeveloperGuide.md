@@ -232,21 +232,20 @@ tutorial to a person and the corresponding module should they not have it.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                                                     | So that I can…​                                                               |
-|----------|---------|------------------------------------------------------------------|-------------------------------------------------------------------------------|
-| `* * *`  | user    | search for professors for a module                               | quickly search for the professor that is conducting the module I am TAing for |
-| `* * *`  | user    | search for all my students in a module                           | manage them more easily                                                       |
-| `* * *`  | user    | read information about students, modules and classes from a file | keep any students added or closed even after closing the program              |
-| `* * *`  | user    | view my students school email and telegram handle                | contact them if needed                                                        |
-| `* * *`  | user    | sign up as a TA of module(s)                                     | manage what modules I am part of                                              |
-| `* * *`  | user    | add and delete lessons                                           | it is easier for me to organise my schedule.                                  |
-| `* * *`  | user    | filter students by class and module                              | make preparations based on upcoming classes, like marking their work          |
-| `* * *`  | user    | add and remove students to classes	                              | it is easier for me to organise my schedule.                                  |
-| `* * * ` | user   | add an assignment to the database                                | keep track of the assignments to be marked                                    |
-| `* *`    | user    | edit the information of students                                 | rectify any mistakes made for personal information and grades.                |
-| `* *`    | user    | view my professors' email in the same mod                        | easily reach out to them for updates or help.                                 |
-| `* *`    | user    | edit the classes I teach                                         | it does not conflict with any of my other classes.                            |
-| `* *`    | user    | export the attendance list as a pdf                              | submit it to the people in charge                                             |
+| Priority | As a …​ | I want to …​                                                       | So that I can…​                                                               |
+|----------|---------|--------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| `* * *`  | user    | search for all my students in a module                             | manage them more easily                                                       |
+| `* * *`  | user    | read information about students, modules and tutorials from a file | keep any students added or closed even after closing the program              |
+| `* * *`  | user    | view my students school email and telegram handle                  | contact them if needed                                                        |
+| `* * *`  | user    | sign up as a TA of module(s)                                       | manage what modules I am part of                                              |
+| `* * *`  | user    | add and delete lessons                                             | it is easier for me to organise my schedule.                                  |
+| `* * *`  | user    | filter students by tutorial and module                             | make preparations based on upcoming classes, like marking their work          |
+| `* * *`  | user    | add and remove students to tutorials                               | it is easier for me to organise my schedule.                                  |
+| `* * * ` | user    | add an assignment to the database                                  | keep track of the assignments to be marked                                    |
+| `* *`    | user    | edit the information of students                                   | rectify any mistakes made for personal information and grades.                |
+| `* *`    | user    | view my professors' email in the same mod                          | easily reach out to them for updates or help.                                 |
+| `* *`    | user    | edit the classes I teach                                           | it does not conflict with any of my other classes.                            |
+| `* *`    | user    | export the attendance list as a pdf                                | submit it to the people in charge                                             |
 
 
 ### Use cases
