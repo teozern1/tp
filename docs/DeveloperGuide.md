@@ -171,7 +171,7 @@ This is exposed to the outside as a `ReadOnlyUserPref` objects.
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="diagrams/NewStorageClassDiagram.png" width="550" />
+<img src="images/NewStorageClassDiagram.png" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
