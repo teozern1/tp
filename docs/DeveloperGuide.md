@@ -517,6 +517,14 @@ testers are expected to do more *exploratory* testing.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
+1. Implementation of student number. The challenges faces were making sense of the codebase and how the AB3 system works.
+   Another challenge faced was integrating the student number with the UI. At this point I (@teozern1) did not know how to debug
+   the app properly using the debugger and thus using the GUI was the only way I knew. The next few problems faced were
+   from doing checkstyles which were solved pretty quickly. However, the implementation of the telegram handle was a lot 
+   easier due to learning from my past mistakes. 
+2. 
+
+   
 
 --------------------------------------------------------------------------------------------------------------------
 
