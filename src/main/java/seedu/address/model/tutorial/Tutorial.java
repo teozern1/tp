@@ -1,7 +1,6 @@
 package seedu.address.model.tutorial;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Objects;
 
@@ -13,7 +12,6 @@ import seedu.address.model.module.Module;
 public class Tutorial {
     /* Fields */
     public static final String TIME_FORMAT_REGEX = "\\b([1-9]|1[0-2])[APap][Mm]";
-    public static final String MESSAGE_CONSTRAINTS = "Tutorial name cannot be empty";
     private Module module;
     private String tutName;
     private String time;
@@ -30,7 +28,6 @@ public class Tutorial {
     public Tutorial(Module module, String tutName) {
         requireNonNull(module);
         requireNonNull(tutName);
-        checkArgument(isValidTutName(tutName), MESSAGE_CONSTRAINTS);
         this.module = module;
         this.tutName = tutName;
     }
@@ -45,18 +42,9 @@ public class Tutorial {
         requireNonNull(module);
         requireNonNull(tutName);
         requireNonNull(time);
-        checkArgument(isValidTutName(tutName), MESSAGE_CONSTRAINTS);
         this.module = module;
         this.tutName = tutName;
         this.time = time;
-    }
-
-    /**
-     * Returns if a given string is a valid tutorial name
-     * @param test A tutorial name to be tested.
-     */
-    public static boolean isValidTutName(String test) {
-        return !("".equals(test));
     }
 
     /* Methods */

@@ -535,5 +535,8 @@ module/tutorial will now give the error message `User already has the given modu
 2. The addModule and addTutorial commands currently do not have a hard limit on the length of a module name or tutorial name.
 As such, we intend to change this such that any input exceeding a reasonable length will give an error message `Module name is too long!` or
 `Tutorial name is too long!`.
-3. Only addition of assignments is available as of now. We intend to implement it so that editing, removal and searching for assignments 
+3. The addTutorial command accepts an empty string as tutorial name. We believe this is an invalid input that does not
+provide much value to users, so we intend to change this so trying to make a tutorial with an empty tutorial name
+now returns `Tutorial name cannot be empty!`
+4. Only addition of assignments is available as of now. We intend to implement it so that editing, removal and searching for assignments 
 will be possible in the future. Also, integration with the respective tutorials and modules should also be able to be done.
