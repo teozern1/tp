@@ -6,11 +6,24 @@ pageNav: 3
 
 # **TAssistant User Guide**
 
+## **Table of Contents**
+
+- **[Introduction](#introduction)**
+- **[Quick Start](#quick-start)**
+- **[Layout](#layout)**
+- **[Features](#features)**
+- **[Command summary](#command-summary)**
+- **[Known issues](#known-issues)**
+- **[Glossary](#glossary)**
+- **[FAQ](#faq)**
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Introduction**
 
 TAssistant is a desktop app for Teaching Assistants (TAs) in NUS School of Computing who are taking
-multiple modules and tutorials with a large class size. It aims to help TAs track information more 
-easily about the students and professors involved in tutoring. 
+multiple modules and tutorials with a large class size. It aims to help TAs track information more
+easily about the students and professors involved in tutoring.
 
 If you are experienced in using a Command Line Interface (CLI) and can type quickly, you will be able to
 handle contact organisation faster than GUI apps.
@@ -26,19 +39,6 @@ Here are some symbols used throughout this user guide:
 | :information_source: | Important things you should take note of |
 | :bulb:               | Useful information                       |
 | :exclamation:        | Warning                                  |
-
-<div style="page-break-after: always;"></div>
-
-<h2>Table of Contents</h2>
-
-- **[Introduction](#introduction)**
-- **[Quick Start](#quick-start)**
-- **[Layout](#layout)**
-- **[Features](#features)**
-- **[Command summary](#command-summary)**
-- **[Known issues](#known-issues)**
-- **[Glossary](#glossary)**
-- **[FAQ](#faq)**
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -346,9 +346,9 @@ Example: `removeFromTutorial 1 m/CS2103T tn/T11`
 
 Records a person's attendance and displays the change by adding a tag on the GUI.
 The index refers to the position of the person as displayed in the GUI.
-The LESSON_NUMBER must be alphanumeric.
+The lesson number must be alphanumeric.
 
-An error is thrown if the LESSON_NUMBER already exists.
+An error is thrown if the lesson number already exists.
 Further prompts are given for incorrect inputs.
 
 Format: `attn INDEX ln/LESSON_NUMBER`
@@ -359,7 +359,7 @@ Example: `attn 1 ln/S1`
 
 Deletes a person's attendance and displays the change by removing the tag on the GUI.
 The index refers to the position of the person as displayed in the GUI.
-The LESSON_NUMBER must be alphanumeric.
+The lesson number must be alphanumeric.
 
 Only tags added using `attn` can be deleted with this command.
 
