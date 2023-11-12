@@ -27,8 +27,10 @@ public class UniqueModuleListTest {
     @Test
     public void equals() {
         UniqueModuleList test = new UniqueModuleList();
+        UniqueModuleList other = new UniqueModuleList();
 
         assertTrue(test.equals(test));
+        assertTrue(test.equals(other));
         assertFalse(test.equals(1));
         assertFalse(test.equals(null));
     }
