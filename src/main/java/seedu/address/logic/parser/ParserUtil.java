@@ -161,9 +161,6 @@ public class ParserUtil {
     public static String parseTutorialName(String tutorialName) throws ParseException {
         requireNonNull(tutorialName);
         String trimmedName = tutorialName.trim();
-        if (!Tutorial.isValidTutName(trimmedName)) {
-            throw new ParseException(Tutorial.MESSAGE_CONSTRAINTS);
-        }
         return trimmedName;
     }
 
