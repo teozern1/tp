@@ -230,7 +230,7 @@ Hence, it is recommended to take a backup of the file before editing it.
 ### Adding a module to TAssistant: `addModule`
 
 Adds the module to TAssistant, displaying it on the GUI.
-The module name must consist of only alphanumeric characters, between 5 - 8 characters.
+The module name must consist of at least 5 characters, which must be alphanumeric.
 Modules must be added one at a time.
 
 The output for module name inputs "cs2100" and "CS2100" will be the same as the module
