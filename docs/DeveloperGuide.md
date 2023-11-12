@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+layout: default.md
+title: "Developer Guide"
+pageNav: 3
 ---
 
 # TAssistant Developer Guide
@@ -201,7 +201,7 @@ To better enable advanced users, the app automatically performs actions to maint
 than force the user to type additional commands to maintain it. For example, the AddToTutorial command adds a
 tutorial to a person and the corresponding module should they not have it.
 
-<img src="images/ModelTutorialInteractionActivityDiagram.png" width="550" />
+<img src="images/ModelTutorialInteractionActivityDiagram.png" width="519" />
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -517,24 +517,23 @@ testers are expected to do more *exploratory* testing.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
-1. Implementation of student number. The challenges faces were making sense of the codebase and how the AB3 system works.
-   Another challenge faced was integrating the student number with the UI. At this point I (@teozern1) did not know how to debug
-   the app properly using the debugger and thus using the GUI was the only way I knew. The next few problems faced were
-   from doing checkstyles which were solved pretty quickly. However, the implementation of the telegram handle was a lot 
-   easier due to learning from my past mistakes. 
-2. 
-
-   
+1. This project required the addition of two new models, one for Module and one for Tutorial, which required
+understanding and creating multiple new files in each of the four components, UI, Logic, Model & Storage.
+2. Zern: When implementing student number into the program, I faced challenges making sense of the codebase,
+how AB3 works and integrating the student number with the UI. This was compounded by the fact that at the time I 
+did not know how to debug the app properly using the debugger and thus using the GUI was the only way I knew. Even after solving the
+above issues, it took significant effort to ensure my code aligned with the coding standard.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Planned Enhancements**
 
-1. Currently, the addToModule and addToTutorial command, when used on a user that already has the given module, does not give an
+1. Currently, the addToModule and addToTutorial command, when used on a user that already has the given module or tutorial, does not give an
 error message. We intend to change this so that the commands when used on a user that already has the given
 module/tutorial will now give the error message `User already has the given module` or
 `User already has the given tutorial` respectively in the output box.
-2. The addModule command currently does not have a hard limit on the length of a module name. As such, we intend to change this
-such that any input exceeding a reasonable length will give an error message `Module name is too long!`.
+2. The addModule and addTutorial commands currently do not have a hard limit on the length of a module name or tutorial name.
+As such, we intend to change this such that any input exceeding a reasonable length will give an error message `Module name is too long!` or
+`Tutorial name is too long!`.
 3. Only addition of assignments is available as of now. We intend to implement it so that editing, removal and searching for assignments 
 will be possible in the future. Also, integration with the respective tutorials and modules should also be able to be done.
