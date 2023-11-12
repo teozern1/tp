@@ -6,6 +6,8 @@ pageNav: 3
 
 # **TAssistant User Guide**
 
+## Introduction
+
 TAssistant is a desktop app for Teaching Assistants (TAs) in NUS School of Computing who are taking
 multiple modules and tutorials with a large class size. It aims to help TAs track information more 
 easily about the students and professors involved in tutoring. 
@@ -27,7 +29,7 @@ Here are some symbols used throughout this user guide:
 
 <h2>Table of Contents</h2>
 
-- **[Introduction](#tassistant-user-guide)**
+- **[Introduction](#introduction)**
 - **[Quick Start](#quick-start)**
 - **[Layout](#layout)**
 - **[Features](#features)**
@@ -63,6 +65,8 @@ Here are some symbols used throughout this user guide:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Layout**
 
 ![layout image](images/GUI.png)
@@ -75,10 +79,12 @@ output box will be empty, but after executing a command, successful or otherwise
 telling you that it doesn't recognise your command via an "Invalid command" message, will appear.
 5. Person List: The list of people TAssistant is showing you. When launching the program, his will be everyone
 TAssistant has data on, but you may filter the list of people with commands like
-[find](#locating-persons-by-name-find) and [search](#search--search).
+[find](#locating-persons-by-name-find) and [search](#searching-for-persons--search).
 6. Assignment List: The list of assignments you have.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Features**
 
@@ -222,10 +228,8 @@ TAssistant data are saved in the hard disk automatically after any command that 
 TAssistant data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`.
 Advanced users are welcome to update data directly by editing that data file.
 
-**Caution:**
-If your changes to the data file makes its format invalid, TAssistant will discard all data and start with an empty data file at the next run. 
+:exclamation: If your changes to the data file makes its format invalid, TAssistant will discard all data and start with an empty data file at the next run. 
 Hence, it is recommended to take a backup of the file before editing it.
-</box>
 
 ### Adding a module to TAssistant: `addModule`
 
@@ -248,7 +252,7 @@ Example: `addModule m/CS2100`
 Deletes the module from TAssistant and the GUI will change to reflect this.
 The index refers to the position of the module displayed on the GUI.
 
-Any related tutorials on the GUI as well as modules/tutorials on persons 
+:exclamation: Any related tutorials on the GUI as well as modules/tutorials on persons 
 will also be deleted. As such, please use this command with discretion.
 
 Will give an error message if the module does not exist in TAssistant,
@@ -378,6 +382,8 @@ Example: `addAssignment assgn/Assignment 1`
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, 
@@ -385,6 +391,8 @@ Example: `addAssignment assgn/Assignment 1`
    To resolve this, delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
@@ -413,6 +421,8 @@ Example: `addAssignment assgn/Assignment 1`
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
@@ -422,6 +432,8 @@ Example: `addAssignment assgn/Assignment 1`
 but also laboratories, recitations and any form of lesson that includes a TA.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **FAQ**
 
