@@ -519,10 +519,6 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix: Effort**
 1. This project required the addition of two new models, one for Module and one for Tutorial, which required
 understanding and creating multiple new files in each of the four components, UI, Logic, Model & Storage.
-2. Zern: When implementing student number into the program, I faced challenges making sense of the codebase,
-how AB3 works and integrating the student number with the UI. This was compounded by the fact that at the time I 
-did not know how to debug the app properly using the debugger and thus using the GUI was the only way I knew. Even after solving the
-above issues, it took significant effort to ensure my code aligned with the coding standard.
 
 --------------------------------------------------------------------------------------------------------------------
 
