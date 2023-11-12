@@ -6,7 +6,7 @@ pageNav: 3
 
 # **TAssistant User Guide**
 
-## Introduction
+## **Introduction**
 
 TAssistant is a desktop app for Teaching Assistants (TAs) in NUS School of Computing who are taking
 multiple modules and tutorials with a large class size. It aims to help TAs track information more 
@@ -27,6 +27,8 @@ Here are some symbols used throughout this user guide:
 | :bulb:               | Useful information                       |
 | :exclamation:        | Warning                                  |
 
+<div style="page-break-after: always;"></div>
+
 <h2>Table of Contents</h2>
 
 - **[Introduction](#introduction)**
@@ -39,6 +41,8 @@ Here are some symbols used throughout this user guide:
 - **[FAQ](#faq)**
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Quick start**
 
@@ -60,6 +64,7 @@ Here are some symbols used throughout this user guide:
     * `clear` : Deletes all contacts.
 
     * `exit` : Exits the app.
+
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -432,8 +437,6 @@ Example: `addAssignment assgn/Assignment 1`
 but also laboratories, recitations and any form of lesson that includes a TA.
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ## **FAQ**
 
