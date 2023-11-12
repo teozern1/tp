@@ -244,7 +244,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user    | add and delete lessons                                             | it is easier for me to organise my schedule.                                  |
 | `* * *`  | user    | filter students by tutorial and module                             | make preparations based on upcoming classes, like marking their work          |
 | `* * *`  | user    | add and remove students to tutorials                               | it is easier for me to organise my schedule.                                  |
-| `* * * ` | user    | add an assignment to the database                                  | keep track of the assignments to be marked                                    |
+| `* * *` | user    | add an assignment to the database                                  | keep track of the assignments to be marked                                    |
 | `* *`    | user    | edit the information of students                                   | rectify any mistakes made for personal information and grades.                |
 | `* *`    | user    | view my professors' email in the same mod                          | easily reach out to them for updates or help.                                 |
 | `* *`    | user    | edit the classes I teach                                           | it does not conflict with any of my other classes.                            |
