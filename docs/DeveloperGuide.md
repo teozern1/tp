@@ -540,3 +540,5 @@ provide much value to users, so we intend to change this so trying to make a tut
 now returns `Tutorial name cannot be empty!`
 4. Only addition of assignments is available as of now. We intend to implement it so that editing, removal and searching for assignments 
 will be possible in the future. Also, integration with the respective tutorials and modules should also be able to be done.
+5. The addToTutorial and removeFromTutorial commands currently simply show the person they edit after success, with
+`Edited Person: (person details)`. We intend to change this so that they show `Tutorial added` or `Tutorial deleted` respectively.
