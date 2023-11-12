@@ -171,7 +171,7 @@ This is exposed to the outside as a `ReadOnlyUserPref` objects.
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="diagrams/NewStorageClassDiagram.png" width="550" />
+<img src="images/NewStorageClassDiagram.png" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -244,7 +244,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user    | add and delete lessons                                             | it is easier for me to organise my schedule.                                  |
 | `* * *`  | user    | filter students by tutorial and module                             | make preparations based on upcoming classes, like marking their work          |
 | `* * *`  | user    | add and remove students to tutorials                               | it is easier for me to organise my schedule.                                  |
-| `* * * ` | user    | add an assignment to the database                                  | keep track of the assignments to be marked                                    |
+| `* * *` | user    | add an assignment to the database                                  | keep track of the assignments to be marked                                    |
 | `* *`    | user    | edit the information of students                                   | rectify any mistakes made for personal information and grades.                |
 | `* *`    | user    | view my professors' email in the same mod                          | easily reach out to them for updates or help.                                 |
 | `* *`    | user    | edit the classes I teach                                           | it does not conflict with any of my other classes.                            |
@@ -564,3 +564,5 @@ now returns `Tutorial name cannot be empty!`
 4. Only addition of assignments is available as of now. We intend to implement it so that editing, removal and searching for assignments 
 will be possible in the future. Also, integration with the respective tutorials and modules should also be able to be done.
 5. Splitting each person in the contact book into various roles (e.g. Professor, Student) is also planned for a later date.
+6. The addToTutorial and removeFromTutorial commands currently simply show the person they edit after success, with
+`Edited Person: (person details)`. We intend to change this so that they show `Tutorial added` or `Tutorial deleted` respectively.
