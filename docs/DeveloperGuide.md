@@ -462,7 +462,7 @@ testers are expected to do more *exploratory* testing.
       Expected: The module is added to the module list and it should show up on the GUI. 
       The displayed name on the GUI will always be capitalised.
 
-   1. Test case: `addModule m/DTXK323000`<br>
+   1. Test case: `addModule m/DTX3`<br>
       Expected: No module is added. Error details shown in the status message. Module list remains the same.
 
    1. Other incorrect delete commands to try: `addModule m/`, `addModule m/HSA` <br>
@@ -526,5 +526,7 @@ testers are expected to do more *exploratory* testing.
 error message. We intend to change this so that the commands when used on a user that already has the given
 module/tutorial will now give the error message `User already has the given module` or
 `User already has the given tutorial` respectively in the output box.
-2. Only addition of assignments is available as of now. We intend to implement it so that editing, removal and searching for assignments 
+2. The addModule command currently does not have a hard limit on the length of a module name. As such, we intend to change this
+such that any input exceeding a reasonable length will give an error message `Module name is too long!`.
+3. Only addition of assignments is available as of now. We intend to implement it so that editing, removal and searching for assignments 
 will be possible in the future. Also, integration with the respective tutorials and modules should also be able to be done.
