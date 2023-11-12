@@ -453,6 +453,33 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+
+### Searching for specific users
+
+1. Searching for a person given a name
+    1. At least one person with the given name must exist.
+
+    2. Test case: `search n/NAME`<br>
+   
+    3. Expected: Returns all people with the given name.
+
+2. Searching for a person given a module
+   1. At least one person with the given module must exist.
+   
+   2. Test case: `search m/CS2100`<br>
+   
+   3. Expected: Returns all people who are taking `MODULE`
+
+3. Searching for a person given a tutorial group.
+   1. The given module has a tutorial group with the given name.
+   
+   2. There is at least one person with the given tutorial group.
+   
+   3. Test case: `search m/MODULE t/TUTORIAL`<br>
+   
+   4. Expected: Returns all people who are taking tutorial `TUTORIAL` in module `MODULE`.
+
+    
 ### Adding Modules
 
 1. Adding a module
@@ -536,3 +563,4 @@ provide much value to users, so we intend to change this so trying to make a tut
 now returns `Tutorial name cannot be empty!`
 4. Only addition of assignments is available as of now. We intend to implement it so that editing, removal and searching for assignments 
 will be possible in the future. Also, integration with the respective tutorials and modules should also be able to be done.
+5. Splitting each person in the contact book into various roles (e.g. Professor, Student) is also planned for a later date.
