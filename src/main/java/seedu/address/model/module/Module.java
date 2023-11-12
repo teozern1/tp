@@ -9,10 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Module {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Module codes should only contain alphanumeric characters and it should be 5 to 8 characters";
+            "Module codes should only contain alphanumeric characters and it should be at least 5 characters";
     public static final String VALIDATION_REGEX = "[a-zA-Z0-9]*";
-    public static final int VALIDATION_MIN_LENGTH = 5;
-    public static final int VALIDATION_MAX_LENGTH = 8;
+    public static final int VALIDATION_LENGTH = 5;
     private final String moduleCode;
 
     /**
@@ -30,8 +29,7 @@ public class Module {
      * @param test A module code to be tested.
      */
     public static boolean isValidModule(String test) {
-        return test.matches(VALIDATION_REGEX) && test.length() >= VALIDATION_MIN_LENGTH
-                && test.length() <= VALIDATION_MAX_LENGTH;
+        return test.matches(VALIDATION_REGEX) && test.length() >= VALIDATION_LENGTH;
     }
 
     /**
