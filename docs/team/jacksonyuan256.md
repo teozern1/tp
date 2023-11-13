@@ -12,9 +12,9 @@ It is written in Java, and has about 10 kLoC.
 Given below are my contributions to the project.
 
 * **New Feature**:
-    * Added the module model and loading/saving it in the storage.
+    * Added the module model and loading/saving it in the storage. See [#62](https://github.com/AY2324S1-CS2103T-F12-3/tp/pull/62) and [#83](https://github.com/AY2324S1-CS2103T-F12-3/tp/pull/83).
     * Added the ability to add/delete modules with addModule and deleteModule.
-    * Added the ability to add/delete attendance for people through attn and deleteAttn.
+    * Added the ability to add/delete attendance for people through attn and deleteAttn. See [#92](https://github.com/AY2324S1-CS2103T-F12-3/tp/pull/92) and [#113](https://github.com/AY2324S1-CS2103T-F12-3/tp/pull/113).
     * Modified the GUI to display the modules added.
 
 
@@ -23,17 +23,19 @@ Given below are my contributions to the project.
 
 * **Project management**:
     * Assigned milestones to PRs and closing related issues.
+    * Gave PR reviews, such as [#85](https://github.com/AY2324S1-CS2103T-F12-3/tp/pull/85) and [#100](https://github.com/AY2324S1-CS2103T-F12-3/tp/pull/100)
 
 
 * **Contributions to team-based tasks**:
     * Set up Codecov in the team repository.
-
+  
 
 * **Documentation**:
     * User Guide:
         * Added documentation for `addModule`, `deleteModule`, `attn`, `deleteAttn`.
         * Revamped user guide to use more first-person language.
     * Developer Guide:
+        * Modified the UML diagram for storage
         * Added manual testing for adding modules and recording attendance
         * Added the following use cases for #adding-modules, #recording-attendance
-        * Modified the UML diagram for storage
+        * Added potential enhancements for adding modules under Appendix: Planned Enhancements
