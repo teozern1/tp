@@ -296,7 +296,8 @@ Adds a tutorial with a specific tutorial name and time to a given module.
 Note that:
 - Different modules can have different tutorials with the same name.
 - Tutorial time
-  - should follow `E ha` format stated in [java api](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/format/DateTimeFormatter.html)
+  - should follow `DAY_OF_THE_WEEK 12_HOUR_CLOCK_TIME` format.
+  - space between DAY_OF_THE_WEEK and 12_HOUR_CLOCK_TIME is **compulsory**.
   - is **not** case-sensitive.
   - e.g. `Mon 6PM`, `Mon 6pm`, `mon 6PM`, `Monday 6PM` are all valid, but `Mon 0PM` is not valid.
 - Will give an error message if:
