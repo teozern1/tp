@@ -63,6 +63,7 @@
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
         "deleting-a-person": "Deleting a person",
+        "searching-for-specific-users": "Searching for specific users",
         "adding-modules": "Adding Modules",
         "adding-tutorials": "Adding Tutorials",
         "recording-attendance": "Recording attendance",
@@ -113,8 +114,8 @@
       "title": "User Guide",
       "headings": {
         "tassistant-user-guide": "TAssistant User Guide",
-        "introduction": "Introduction",
         "table-of-contents": "Table of Contents",
+        "introduction": "Introduction",
         "quick-start": "Quick start",
         "layout": "Layout",
         "features": "Features",
@@ -161,11 +162,6 @@
       "headings": {
         "project-tassistant": "Project: TASsistant"
       },
-      "headingKeywords": {}
-    },
-    {
-      "src": "team/jackson.md",
-      "headings": {},
       "headingKeywords": {}
     },
     {
