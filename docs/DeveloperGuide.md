@@ -565,3 +565,5 @@ will be possible in the future. Also, integration with the respective tutorials 
 5. Splitting each person in the contact book into various roles (e.g. Professor, Student) is also planned for a later date.
 6. The addToTutorial and removeFromTutorial commands currently simply show the person they edit after success, with
 `Edited Person: (person details)`. We intend to change this so that they show `Tutorial added` or `Tutorial deleted` respectively.
+7. Currently, the attn command does not restrict the length on the lesson number provided. We intend to implement 
+some form of length requirements and produce an error message `The lesson number provided is too short/long!` when the restrictions are violated.
